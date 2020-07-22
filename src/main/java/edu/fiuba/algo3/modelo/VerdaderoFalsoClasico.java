@@ -1,44 +1,34 @@
 package edu.fiuba.algo3.modelo;
 
 public class VerdaderoFalsoClasico {
-    public String titulo;
-
-    public VerdaderoFalsoClasico(String titulo) {
-        this.titulo = titulo;
-    }
-
-    /*
-
-    private ArrayList<String> respuesta;
-    private ArrayList<String> opciones;
+    
+    private ArrayList<Opcion> opciones;
     private String pregunta;
 
-    public VerdaderoFalso(String pregunta){
-        this.respuesta = new ArrayList<String>();
-        this.opciones = new ArrayList<String>();
+    public VerdaderoFalsoClasico(String pregunta){
+        this.opciones = new ArrayList<Opcion>();
         this.pregunta = pregunta;
     }
 
-    public void agregarOpcionCorrecta(String opcion) {
-        this.respuesta.add(opcion);
-        this.agregarOpcion(opcion);
+    public void agregarOpcionCorrecta(String opcionTitulo) {
+        Opcion opcion = new Opcion(opcionTitulo, 1);
+        this.opciones.add(opcion);
     }
 
-    public void agregarOpcion(String opcion) {
-        opciones.add(opcion);
+    public void agregarOpcion(String opcionTitulo) {
+        Opcion opcion = new Opcion(opcionTitulo, 0);
+        this.opciones.add(opcion);
     }
 
-    public ArrayList<Integer> obtenerPuntaje(ArrayList<String> respuestas) {
+    public ArrayList<Integer> obtenerPuntaje(ArrayList<Opcion> respuestas) {
         ArrayList<Integer> puntajes = new ArrayList<Integer>();
         for(int i = 0; i < respuestas.size(); i++){
-            if (this.respuesta.contains(respuestas.get(i))){
-                puntajes.add(1);
-            } else {
-                puntajes.add(0);
-            }
+            puntajes.add(respuestas.get(i).getValor());
         }
         return puntajes;
     }
 
-    */
+    public ArrayList<Opcion> obtenerOpciones() {
+        return this.opciones;
+    }
 }
