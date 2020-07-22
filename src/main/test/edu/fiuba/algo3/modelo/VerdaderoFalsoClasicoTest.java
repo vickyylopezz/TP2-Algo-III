@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class VerdaderoFalsoClasicoTest {
@@ -9,7 +11,7 @@ public class VerdaderoFalsoClasicoTest {
     public void crearConTituloElArtibutoTituloDeLaPreguntaEsElMismo() {
         VerdaderoFalsoClasico pregunta = new VerdaderoFalsoClasico("¿Estamos en Algo3?");
         
-        assertEquals(pregunta.titulo, "¿Estamos en Algo3?");
+        assertEquals(pregunta.titulo(), "¿Estamos en Algo3?");
     }
 
     @Test

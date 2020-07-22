@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import java.util.ArrayList;
+
 public class VerdaderoFalsoClasico {
     
     private ArrayList<Opcion> opciones;
@@ -30,5 +32,9 @@ public class VerdaderoFalsoClasico {
 
     public ArrayList<Opcion> obtenerOpciones() {
         return this.opciones;
+    }
+
+    public String titulo() {
+        return this.pregunta;
     }
 }
