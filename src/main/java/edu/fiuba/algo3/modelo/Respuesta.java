@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Respuesta {
     protected Pregunta pregunta;
     protected Jugador jugador;
-    protected ArrayList<Opcion> opcionesElegidas;
+    protected ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
 
     public Respuesta(Pregunta pregunta, Jugador jugador) {
         this.pregunta = pregunta;
@@ -18,8 +18,8 @@ public class Respuesta {
 
     public Integer puntaje() {
         Integer puntaje = 0;
-        for(int i = 0; i < opcionesElegidas.size(); i++){
-            puntaje += opcionesElegidas.get(i).getValor();
+        for (Opcion opcionesElegida : opcionesElegidas) {
+            puntaje += opcionesElegida.getValor();
         }
         return puntaje;
     }
