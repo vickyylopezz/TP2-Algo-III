@@ -9,15 +9,15 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class VerdaderoFalsoTest {
     @Test
     public void CreacionDeVerdaderoFalsoIndicandoRespuestaCorrecta() {
-        Pregunta preguntavf = new VerdaderoFalso("¿Estamos en Algoritmos y programcion 3?");
-        preguntavf.agregarRespuestaCorrecta("Verdadero");
+        VerdaderoFalso preguntavf = new VerdaderoFalso("¿Estamos en Algoritmos y programcion 3?");
+        preguntavf.agregarOpcionCorrecta("Verdadero");
         preguntavf.agregarOpcion("Falso");
 
     }
     @Test
     public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() {
-        Pregunta preguntavf = new VerdaderoFalso("¿Estamos en Algoritmos y programcion 3?");
-        preguntavf.agregarRespuestaCorrecta("Verdadero");
+        VerdaderoFalso preguntavf = new VerdaderoFalso("¿Estamos en Algoritmos y programcion 3?");
+        preguntavf.agregarOpcionCorrecta("Verdadero");
         preguntavf.agregarOpcion("Falso");
 
         ArrayList<String> respuestas = new ArrayList<String>();
