@@ -5,11 +5,11 @@ import java.util.ArrayList;
 public class VerdaderoFalsoClasico {
 
     private ArrayList<Opcion> opciones;
-    private String pregunta;
+    private String titulo;
 
     public VerdaderoFalsoClasico(String pregunta){
         this.opciones = new ArrayList<Opcion>();
-        this.pregunta = pregunta;
+        this.titulo = pregunta;
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) {
@@ -32,5 +32,9 @@ public class VerdaderoFalsoClasico {
 
     public ArrayList<Opcion> obtenerOpciones() {
         return this.opciones;
+    }
+
+    public String titulo() {
+        return this.titulo;
     }
 }
