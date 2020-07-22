@@ -12,7 +12,8 @@ public class VerdaderoFalsoClasicoTest {
         VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?");
         preguntavf.agregarOpcionCorrecta("Verdadero");
         preguntavf.agregarOpcion("Falso");
-
+        
+        assertEquals("¿Estamos en Algoritmos y programcion 3?", preguntavf.titulo());
     }
     @Test
     public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() {
