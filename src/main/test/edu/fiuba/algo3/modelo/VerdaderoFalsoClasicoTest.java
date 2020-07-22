@@ -8,28 +8,20 @@ public class VerdaderoFalsoClasicoTest {
     @Test
     public void crearConTituloElArtibutoTituloDeLaPreguntaEsElMismo() {
         VerdaderoFalsoClasico pregunta = new VerdaderoFalsoClasico("¿Estamos en Algo3?");
-
+        
         assertEquals(pregunta.titulo, "¿Estamos en Algo3?");
-    }
-
-    /*
-    @Test
-    public void CreacionDeVerdaderoFalsoIndicandoRespuestaCorrecta() {
-        VerdaderoFalso preguntavf = new VerdaderoFalso("¿Estamos en Algoritmos y programcion 3?");
-        preguntavf.agregarOpcionCorrecta("Verdadero");
-        preguntavf.agregarOpcion("Falso");
-
     }
 
     @Test
     public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() {
-        VerdaderoFalso preguntavf = new VerdaderoFalso("¿Estamos en Algoritmos y programcion 3?");
+        VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?");
         preguntavf.agregarOpcionCorrecta("Verdadero");
         preguntavf.agregarOpcion("Falso");
 
-        ArrayList<String> respuestas = new ArrayList<String>();
-        respuestas.add("Verdadero");
-        respuestas.add("Falso");
+        ArrayList<Opcion> respuestas = new ArrayList<Opcion>();
+        ArrayList<Opcion> opciones = preguntavf.obtenerOpciones();
+        respuestas.add(opciones.get(0));
+        respuestas.add(opciones.get(1));
 
         ArrayList<Integer> esperado = new ArrayList<Integer>();
         esperado.add(1);
@@ -37,5 +29,4 @@ public class VerdaderoFalsoClasicoTest {
 
         assertEquals(esperado, preguntavf.obtenerPuntaje(respuestas));
     }
-    */
 }
