@@ -13,6 +13,7 @@ public class Respuesta {
     }
 
     public void agregarOpcion(Opcion opcion) {
+
         this.opcionesElegidas.add(opcion);
     }
 

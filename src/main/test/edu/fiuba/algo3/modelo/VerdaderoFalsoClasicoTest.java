@@ -30,6 +30,6 @@ public class VerdaderoFalsoClasicoTest {
         esperado.add(1);
         esperado.add(0);
 
-        assertEquals(esperado, preguntavf.obtenerPuntaje(respuestas));
+        assertEquals(esperado, preguntavf.obtenerPuntajes(respuestas));
     }
 }

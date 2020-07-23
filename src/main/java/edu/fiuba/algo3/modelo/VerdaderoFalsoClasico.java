@@ -22,10 +22,10 @@ public class VerdaderoFalsoClasico {
         this.opciones.add(opcion);
     }
 
-    public ArrayList<Integer> obtenerPuntaje(ArrayList<Opcion> respuestas) {
+    public ArrayList<Integer> obtenerPuntajes(ArrayList<Opcion> todasLasRespuestas) {
         ArrayList<Integer> puntajes = new ArrayList<Integer>();
-        for(int i = 0; i < respuestas.size(); i++){
-            puntajes.add(respuestas.get(i).getValor());
+        for(Opcion respuestaPorJugador : todasLasRespuestas){
+            puntajes.add(respuestaPorJugador.getValor());
         }
         return puntajes;
     }
