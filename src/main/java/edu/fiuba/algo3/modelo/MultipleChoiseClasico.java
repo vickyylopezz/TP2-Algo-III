@@ -18,27 +18,27 @@ public class MultipleChoiseClasico implements Pregunta {
         this.segundos = segundos;
     }
 
-    public String ObtenerTitulo() {
+    public String obtenerTitulo() {
         return this.titulo;
     }
 
-    public ArrayList<Opcion> ObtenerOpciones() {
+    public ArrayList<Opcion> obtenerOpciones() {
         return this.opciones;
     }
 
-    public void AgregarOpcion(String titulo) {
+    public void agregarOpcionIncorrecta(String titulo) {
         Opcion opcion = new Opcion(titulo, 0);
         this.opciones.add(opcion);
     }
 
-    public void AgregarOpcionCorrecta(String titulo) {
+    public void agregarOpcionCorrecta(String titulo) {
         Opcion opcion = new Opcion(titulo, 1);
         this.opciones.add(opcion);
         this.opcionesCorrectas++;
     }
 
     @Override
-    public Integer PuntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError {
+    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError {
         if (opciones == null) { return 0; }
 
         int opcionesCorrectas = 0;
@@ -63,7 +63,18 @@ public class MultipleChoiseClasico implements Pregunta {
     }
 
     @Override
-    public void Iniciar(Jugador jugador) throws PreguntaError {
+    public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> respuestas) throws PreguntaError {
+        ArrayList<Integer> puntajes = new ArrayList<>();
+
+        for (Respuesta respuesta: respuestas) {
+            puntajes.add(this.puntajeConOpciones(respuesta.opcionesElegidas));
+        }
+
+        return puntajes;
+    }
+
+    @Override
+    public void iniciar(Jugador jugador) throws PreguntaError {
         if (jugador == null) {
             throw new PreguntaError("Jugador nulo");
         }
@@ -74,7 +85,7 @@ public class MultipleChoiseClasico implements Pregunta {
     }
 
     @Override
-    public void SeleccionarOpcion(Opcion opcion) throws PreguntaError {
+    public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
         if (this.respuestaActual == null) {
             throw new PreguntaError("No se Inicio el jugador");
         }
@@ -85,7 +96,7 @@ public class MultipleChoiseClasico implements Pregunta {
     }
 
     @Override
-    public Respuesta Confirmar() {
+    public Respuesta confirmar() {
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
         return resultado;

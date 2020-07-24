@@ -11,7 +11,7 @@ public class MultipleChoiseClasicoTest {
     public void creacionMultipleChoiseConTituloObtenerTituloLoDevuelve() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 5);
 
-        assertEquals("¿Estamos en Algo 3?", pregunta.ObtenerTitulo());
+        assertEquals("¿Estamos en Algo 3?", pregunta.obtenerTitulo());
     }
 
     @Test
@@ -36,17 +36,17 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void obtenerOpcionesSinHaberAgregadoOpcionesDevuelveArrayVacio() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertTrue(opciones.isEmpty());
     }
 
     @Test
-    public void agregarOpcionGuardaLaOpcionEnLaPregunta() throws MultipleChoiseError {
+    public void agregarOpcionIncorrectaGuardaLaOpcionEnLaPregunta() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcion("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("Si papa, Obiousli");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertEquals(1, opciones.size());
 
@@ -56,11 +56,11 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    public void agregarOpcionGuardaLaOpcionEnLaPreguntaConValorCero() throws MultipleChoiseError {
+    public void agregarOpcionIncorrectaGuardaLaOpcionEnLaPreguntaConValorCero() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcion("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("Si papa, Obiousli");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         Opcion unicaOpcion = opciones.get(0);
 
@@ -70,11 +70,11 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void agregarVariasOpcionesGuardaTodasLasOpcionesEnLaPregunta() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcion("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionIncorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertEquals(3, opciones.size());
     }
@@ -82,9 +82,9 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void agregarOpcionCorrectaGuardaLaOpcionEnLaPregunta() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertEquals(1, opciones.size());
 
@@ -96,9 +96,9 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void agregarOpcionCorrectaGuardaLaOpcionEnLaPreguntaConValorCero() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         Opcion unicaOpcion = opciones.get(0);
 
@@ -108,11 +108,11 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void agregarVariasOpcionesCorrectasGuardaTodasLasOpcionesEnLaPregunta() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcionCorrecta("No lo se Rick");
-        pregunta.AgregarOpcionCorrecta("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionCorrecta("No lo se Rick");
+        pregunta.agregarOpcionCorrecta("Mentira, yo estoy en Derecho");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertEquals(3, opciones.size());
     }
@@ -120,11 +120,11 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void agregarVariasOpcionesCorrectasEIncorrectasGuardaTodasLasOpcionesEnLaPregunta() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcionCorrecta("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionCorrecta("Mentira, yo estoy en Derecho");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertEquals(3, opciones.size());
     }
@@ -133,100 +133,100 @@ public class MultipleChoiseClasicoTest {
     public void iniciarSinJugadorLanzaPreguntaError() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
 
-        assertThrows(PreguntaError.class, () -> pregunta.Iniciar(null));
+        assertThrows(PreguntaError.class, () -> pregunta.iniciar(null));
     }
 
     @Test
     public void iniciarConJugadorTeHabilitaASeleccionarPregunta() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
-        assertThrows(PreguntaError.class, ()-> pregunta.SeleccionarOpcion(opciones.get(0)));
+        assertThrows(PreguntaError.class, ()-> pregunta.seleccionarOpcion(opciones.get(0)));
 
         Jugador carlos = new Jugador("Carlos");
-        pregunta.Iniciar(carlos);
+        pregunta.iniciar(carlos);
 
-        assertDoesNotThrow(()-> pregunta.SeleccionarOpcion(opciones.get(0)));
+        assertDoesNotThrow(()-> pregunta.seleccionarOpcion(opciones.get(0)));
     }
 
     @Test
     public void iniciarDosVecesLanzaPreguntaError() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
 
         Jugador carlos = new Jugador("Carlos");
         Jugador maria = new Jugador("Maria");
 
-        pregunta.Iniciar(carlos);
+        pregunta.iniciar(carlos);
 
-        assertThrows(PreguntaError.class, ()-> pregunta.Iniciar(maria));
+        assertThrows(PreguntaError.class, ()-> pregunta.iniciar(maria));
     }
 
     @Test
     public void seleccionarOpcionConOpcionNoGuardadaEnLaPreguntaLanzaPreguntaError() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
 
         Jugador carlos = new Jugador("Carlos");
-        pregunta.Iniciar(carlos);
+        pregunta.iniciar(carlos);
 
         Opcion opcion = new Opcion("Opcion frula", 10000);
 
-        assertThrows(PreguntaError.class, ()-> pregunta.SeleccionarOpcion(opcion));
+        assertThrows(PreguntaError.class, ()-> pregunta.seleccionarOpcion(opcion));
     }
 
     @Test
     public void seleccionarOpcionConOpcionNulaLanzaPreguntaError() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
 
         Jugador carlos = new Jugador("Carlos");
-        pregunta.Iniciar(carlos);
+        pregunta.iniciar(carlos);
 
-        assertThrows(PreguntaError.class, ()-> pregunta.SeleccionarOpcion(null));
+        assertThrows(PreguntaError.class, ()-> pregunta.seleccionarOpcion(null));
     }
 
     @Test
     public void confirmarHabilitaPoderVolverAIniciarLaRespuesta() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
 
         Jugador carlos = new Jugador("Carlos");
         Jugador maria = new Jugador("Maria");
 
-        pregunta.Iniciar(carlos);
-        pregunta.Confirmar();
+        pregunta.iniciar(carlos);
+        pregunta.confirmar();
 
-        assertDoesNotThrow(()-> pregunta.Iniciar(maria));
+        assertDoesNotThrow(()-> pregunta.iniciar(maria));
     }
 
     @Test
     public void confirmarDevuelveUnaRespuestaConLasOpcionesSeleccionadas() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         Jugador carlos = new Jugador("Carlos");
-        pregunta.Iniciar(carlos);
+        pregunta.iniciar(carlos);
 
-        pregunta.SeleccionarOpcion(opciones.get(0));
+        pregunta.seleccionarOpcion(opciones.get(0));
 
-        Respuesta respuesta = pregunta.Confirmar();
+        Respuesta respuesta = pregunta.confirmar();
 
         ArrayList<Opcion> opcionesRespuesta = respuesta.opcionesElegidas;
 
@@ -240,22 +240,22 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void seleccionarVariasRespuestasSeInsertanEnLaRespuesta() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
-        pregunta.AgregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
-        pregunta.AgregarOpcion("Que se Yo, ando por ahi");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
+        pregunta.agregarOpcionIncorrecta("Que se Yo, ando por ahi");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         Jugador carlos = new Jugador("Carlos");
-        pregunta.Iniciar(carlos);
+        pregunta.iniciar(carlos);
 
-        pregunta.SeleccionarOpcion(opciones.get(0));
-        pregunta.SeleccionarOpcion(opciones.get(1));
-        pregunta.SeleccionarOpcion(opciones.get(3));
+        pregunta.seleccionarOpcion(opciones.get(0));
+        pregunta.seleccionarOpcion(opciones.get(1));
+        pregunta.seleccionarOpcion(opciones.get(3));
 
-        Respuesta respuesta = pregunta.Confirmar();
+        Respuesta respuesta = pregunta.confirmar();
         ArrayList<Opcion> opcionesRespuesta = respuesta.opcionesElegidas;
 
         assertEquals(3, opcionesRespuesta.size());
@@ -267,50 +267,50 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void puntajeConOpcionesNulasElPuntajeEsCero() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
-        pregunta.AgregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
-        pregunta.AgregarOpcion("Que se Yo, ando por ahi");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
+        pregunta.agregarOpcionIncorrecta("Que se Yo, ando por ahi");
 
-        assertEquals(0, pregunta.PuntajeConOpciones(null));
+        assertEquals(0, pregunta.puntajeConOpciones(null));
     }
 
     @Test
     public void puntajeConOpcionesNoGuardadasEnLaPreguntaLanzaPreguntaError() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
-        pregunta.AgregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
-        pregunta.AgregarOpcion("Que se Yo, ando por ahi");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
+        pregunta.agregarOpcionIncorrecta("Que se Yo, ando por ahi");
 
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(new Opcion("Yo soy re frula hermano", 30000000));
 
-        assertThrows(PreguntaError.class, ()-> pregunta.PuntajeConOpciones(opciones));
+        assertThrows(PreguntaError.class, ()-> pregunta.puntajeConOpciones(opciones));
     }
 
     @Test
     public void puntajeSeleccionadoTodasLasOpcionesCorrectasPuntajeUno() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
-        pregunta.AgregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
-        pregunta.AgregarOpcion("Que se Yo, ando por ahi");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
+        pregunta.agregarOpcionIncorrecta("Que se Yo, ando por ahi");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         Jugador carlos = new Jugador("Carlos");
-        pregunta.Iniciar(carlos);
+        pregunta.iniciar(carlos);
 
-        pregunta.SeleccionarOpcion(opciones.get(0));
-        pregunta.SeleccionarOpcion(opciones.get(3));
+        pregunta.seleccionarOpcion(opciones.get(0));
+        pregunta.seleccionarOpcion(opciones.get(3));
 
-        Respuesta respuesta = pregunta.Confirmar();
+        Respuesta respuesta = pregunta.confirmar();
 
-        Integer puntaje = pregunta.PuntajeConOpciones(respuesta.opcionesElegidas);
+        Integer puntaje = pregunta.puntajeConOpciones(respuesta.opcionesElegidas);
 
         assertEquals(1, puntaje);
     }
@@ -318,24 +318,24 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void puntajeSeleccionandoTodasLasOpcionesCorrectasYUnaIncorrectaDevuelveCero() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
-        pregunta.AgregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
-        pregunta.AgregarOpcion("Que se Yo, ando por ahi");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
+        pregunta.agregarOpcionIncorrecta("Que se Yo, ando por ahi");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         Jugador carlos = new Jugador("Carlos");
-        pregunta.Iniciar(carlos);
+        pregunta.iniciar(carlos);
 
-        pregunta.SeleccionarOpcion(opciones.get(0));
-        pregunta.SeleccionarOpcion(opciones.get(3));
-        pregunta.SeleccionarOpcion(opciones.get(2));
+        pregunta.seleccionarOpcion(opciones.get(0));
+        pregunta.seleccionarOpcion(opciones.get(3));
+        pregunta.seleccionarOpcion(opciones.get(2));
 
-        Respuesta respuesta = pregunta.Confirmar();
+        Respuesta respuesta = pregunta.confirmar();
 
-        Integer puntaje = pregunta.PuntajeConOpciones(respuesta.opcionesElegidas);
+        Integer puntaje = pregunta.puntajeConOpciones(respuesta.opcionesElegidas);
 
         assertEquals(0, puntaje);
     }
@@ -343,22 +343,22 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void puntajeSeleccionandoUnaSolaOpcionCorrectaDevueveCero() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
-        pregunta.AgregarOpcionCorrecta("Si papa, Obiousli");
-        pregunta.AgregarOpcion("No lo se Rick");
-        pregunta.AgregarOpcion("Mentira, yo estoy en Derecho");
-        pregunta.AgregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
-        pregunta.AgregarOpcion("Que se Yo, ando por ahi");
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
+        pregunta.agregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
+        pregunta.agregarOpcionIncorrecta("Que se Yo, ando por ahi");
 
-        ArrayList<Opcion> opciones = pregunta.ObtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         Jugador carlos = new Jugador("Carlos");
-        pregunta.Iniciar(carlos);
+        pregunta.iniciar(carlos);
 
-        pregunta.SeleccionarOpcion(opciones.get(0));
+        pregunta.seleccionarOpcion(opciones.get(0));
 
-        Respuesta respuesta = pregunta.Confirmar();
+        Respuesta respuesta = pregunta.confirmar();
 
-        Integer puntaje = pregunta.PuntajeConOpciones(respuesta.opcionesElegidas);
+        Integer puntaje = pregunta.puntajeConOpciones(respuesta.opcionesElegidas);
 
         assertEquals(0, puntaje);
     }
