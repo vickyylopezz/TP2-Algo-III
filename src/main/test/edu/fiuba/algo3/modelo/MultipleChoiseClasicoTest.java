@@ -567,7 +567,7 @@ public class MultipleChoiseClasicoTest {
 
     // Test puntajeConRespuestas
     @Test
-    void puntajeConRespuestasPasandoleNullLanzaPreguntaError() throws MultipleChoiseError, PreguntaError {
+    public void puntajeConRespuestasPasandoleNullLanzaPreguntaError() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
@@ -577,7 +577,7 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    void puntajeConRespuestasPasandoleArrayVacioDevuelveArrayVacio() throws MultipleChoiseError, PreguntaError {
+    public void puntajeConRespuestasPasandoleArrayVacioDevuelveArrayVacio() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
@@ -590,7 +590,7 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    void puntajeConRespuestasPasandoleArrayConUnaRespuestaDevuelveElPuntajeCorrecto() throws MultipleChoiseError, PreguntaError {
+    public void puntajeConRespuestasPasandoleArrayConUnaRespuestaDevuelveElPuntajeCorrecto() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
@@ -615,7 +615,7 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    void puntajeConRespuestasPasandoleArrayConVariasRespuestasDevuelveElPuntajeCorrectoOrdenado() throws MultipleChoiseError, PreguntaError {
+    public void puntajeConRespuestasPasandoleArrayConVariasRespuestasDevuelveElPuntajeCorrectoOrdenado() throws MultipleChoiseError, PreguntaError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
