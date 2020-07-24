@@ -1,8 +1,5 @@
 [![Build Status](https://travis-ci.org/vickyylopezz/TP2-Algo-iii.svg?branch=master)](https://travis-ci.org/vickyylopezz/TP2-Algo-iii)
-
 [![codecov](https://codecov.io/gh/vickyylopezz/TP2-Algo-iii/branch/master/graph/badge.svg)](https://codecov.io/gh/vickyylopezz/TP2-Algo-iii)
-
-
 
 
 # TP2 Algoritmos 3: Kahoot
