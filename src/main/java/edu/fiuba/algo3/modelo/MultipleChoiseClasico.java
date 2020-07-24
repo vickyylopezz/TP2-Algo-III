@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MultipleChoiseClasico implements Pregunta {
     private String titulo;
@@ -8,6 +9,7 @@ public class MultipleChoiseClasico implements Pregunta {
     private Integer opcionesCorrectas = 0;
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private Respuesta respuestaActual = null;
+    private Date inicioRespuestaActual = null;
 
     public MultipleChoiseClasico(String titulo, Integer segundos) throws MultipleChoiseError {
         if (segundos < 0) {
@@ -22,21 +24,32 @@ public class MultipleChoiseClasico implements Pregunta {
         return this.titulo;
     }
 
+    public Integer obtenerSegundos() { return this.segundos; }
+
     public ArrayList<Opcion> obtenerOpciones() {
         return this.opciones;
     }
 
-    public void agregarOpcionIncorrecta(String titulo) {
+    public void agregarOpcionIncorrecta(String titulo) throws PreguntaError {
+        if (this.opciones.size() == 5) {
+            throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
+        }
+
         Opcion opcion = new Opcion(titulo, 0);
         this.opciones.add(opcion);
     }
 
-    public void agregarOpcionCorrecta(String titulo) {
+    public void agregarOpcionCorrecta(String titulo) throws PreguntaError {
+        if (this.opciones.size() == 5) {
+            throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
+        }
+
         Opcion opcion = new Opcion(titulo, 1);
         this.opciones.add(opcion);
         this.opcionesCorrectas++;
     }
 
+    // Implementacion interface Pregunta
     @Override
     public Integer puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError {
         if (opciones == null) { return 0; }
@@ -64,6 +77,10 @@ public class MultipleChoiseClasico implements Pregunta {
 
     @Override
     public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> respuestas) throws PreguntaError {
+        if (respuestas == null) {
+            throw new PreguntaError("parametro respuestas no puede ser null");
+        }
+
         ArrayList<Integer> puntajes = new ArrayList<>();
 
         for (Respuesta respuesta: respuestas) {
@@ -75,6 +92,9 @@ public class MultipleChoiseClasico implements Pregunta {
 
     @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
+        if (this.opciones.size() < 2) {
+            throw new PreguntaError("Cantidad de opciones guardadas invalida");
+        }
         if (jugador == null) {
             throw new PreguntaError("Jugador nulo");
         }
@@ -82,6 +102,7 @@ public class MultipleChoiseClasico implements Pregunta {
             throw new PreguntaError("No se ha cerrado el ultimo jugador");
         }
         this.respuestaActual = new Respuesta(this, jugador);
+        this.inicioRespuestaActual = new Date();
     }
 
     @Override
@@ -91,6 +112,10 @@ public class MultipleChoiseClasico implements Pregunta {
         }
         if (!this.opciones.contains(opcion)) {
             throw new PreguntaError("La opcion no se encuentra guardada");
+        }
+        long segundosTranscurridos = (new Date().getTime() - this.inicioRespuestaActual.getTime());
+        if (segundosTranscurridos >= this.segundos * 1000) {
+            throw new PreguntaError("Tiempo de respuesta excedido");
         }
         this.respuestaActual.agregarOpcion(opcion);
     }
