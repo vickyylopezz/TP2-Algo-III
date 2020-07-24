@@ -96,7 +96,10 @@ public class MultipleChoiseClasico implements Pregunta {
     }
 
     @Override
-    public Respuesta confirmar() {
+    public Respuesta confirmar()  throws PreguntaError {
+        if (this.respuestaActual == null) {
+            throw new PreguntaError("No se Inicio el jugador");
+        }
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
         return resultado;

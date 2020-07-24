@@ -132,8 +132,35 @@ public class MultipleChoiseClasicoTest {
     @Test
     public void iniciarSinJugadorLanzaPreguntaError() throws MultipleChoiseError {
         MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
 
         assertThrows(PreguntaError.class, () -> pregunta.iniciar(null));
+    }
+
+    @Test
+    public void seleccionarSinIniciarLanzaPreguntaError() throws MultipleChoiseError {
+        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        assertThrows(PreguntaError.class, () -> pregunta.seleccionarOpcion(opciones.get(0)));
+    }
+
+    @Test
+    public void confirmarSinIniciarLanzaPreguntaError() throws MultipleChoiseError {
+        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
+        pregunta.agregarOpcionIncorrecta("No lo se Rick");
+        pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        assertThrows(PreguntaError.class, pregunta::confirmar);
     }
 
     @Test
