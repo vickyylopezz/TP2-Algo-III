@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 public class Jugador {
     private String nombre;
+    private Integer puntajeTotal;
     private ArrayList<Respuesta> respuestas;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.respuestas = new ArrayList<>();
+        this.puntajeTotal = 0;
     }
 
     public String Nombre() {
@@ -26,9 +28,12 @@ public class Jugador {
         this.respuestas.add(respuesta);
     }
 
+    public void sumarPuntaje(Integer puntaje) {
+
+        this.puntajeTotal = this.puntajeTotal + puntaje;
+    }
+
     public Integer PuntajeTotal() {
-        Integer resultado = 0;
-        for (Respuesta respuesta : this.respuestas) resultado += respuesta.puntaje();
-        return resultado;
+        return this.puntajeTotal;
     }
 }
