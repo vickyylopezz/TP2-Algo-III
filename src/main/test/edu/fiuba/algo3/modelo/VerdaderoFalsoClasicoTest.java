@@ -5,13 +5,14 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
 
 public class VerdaderoFalsoClasicoTest {
     @Test
     public void CreacionDeVerdaderoFalsoIndicandoRespuestaCorrecta() {
         VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?");
         preguntavf.agregarOpcionCorrecta("Verdadero");
-        preguntavf.agregarOpcion("Falso");
+        preguntavf.agregarOpcionIncorrecta("Falso");
         
         assertEquals("¿Estamos en Algoritmos y programcion 3?", preguntavf.titulo());
     }
@@ -19,17 +20,24 @@ public class VerdaderoFalsoClasicoTest {
     public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() {
         VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?");
         preguntavf.agregarOpcionCorrecta("Verdadero");
-        preguntavf.agregarOpcion("Falso");
+        preguntavf.agregarOpcionIncorrecta("Falso");
 
-        ArrayList<Opcion> respuestas = new ArrayList<Opcion>();
+        Jugador jugador = mock(Jugador.class);
+
+        ArrayList<Respuesta> respuestas = new ArrayList<Respuesta>();
+        Respuesta respuestaJugador1 = new Respuesta(preguntavf, jugador);
+        Respuesta respuestaJugador2 = new Respuesta(preguntavf, jugador);
         ArrayList<Opcion> opciones = preguntavf.obtenerOpciones();
-        respuestas.add(opciones.get(0));
-        respuestas.add(opciones.get(1));
+        respuestaJugador1.agregarOpcion(opciones.get(0));
+        respuestaJugador2.agregarOpcion(opciones.get(1));
+        respuestas.add(respuestaJugador1);
+        respuestas.add(respuestaJugador2);
 
         ArrayList<Integer> esperado = new ArrayList<Integer>();
         esperado.add(1);
         esperado.add(0);
 
-        assertEquals(esperado, preguntavf.obtenerPuntajes(respuestas));
+        assertEquals(esperado, preguntavf.puntajeConRespuestas(respuestas));
     }
 }
+
