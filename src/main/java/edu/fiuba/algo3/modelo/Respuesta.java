@@ -12,8 +12,10 @@ public class Respuesta {
         this.jugador = jugador;
     }
 
-    public void agregarOpcion(Opcion opcion) {
-
+    public void agregarOpcion(Opcion opcion) throws RespuestaError {
+        if (this.opcionesElegidas.contains(opcion)){
+            throw new RespuestaError(opcion.toString() + "ya fue elegida");
+        }
         this.opcionesElegidas.add(opcion);
     }
 

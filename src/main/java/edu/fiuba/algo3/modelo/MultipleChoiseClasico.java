@@ -106,7 +106,7 @@ public class MultipleChoiseClasico implements Pregunta {
     }
 
     @Override
-    public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
+    public void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError {
         if (this.respuestaActual == null) {
             throw new PreguntaError("No se Inicio el jugador");
         }

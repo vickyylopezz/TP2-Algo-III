@@ -15,7 +15,7 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeCorrectamente() throws PreguntaError {
+    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeCorrectamente() throws PreguntaError, RespuestaError {
         VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
 
         Jugador jugador = new Jugador("Paula");
@@ -28,7 +28,7 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeIncorrectamente() throws PreguntaError {
+    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeIncorrectamente() throws PreguntaError, RespuestaError {
         VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
 
         Jugador jugador = new Jugador("Paula");
@@ -41,7 +41,7 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosAJugadores() throws PreguntaError {
+    public void VerdaderoFalsoAsignaPuntosAJugadores() throws PreguntaError, RespuestaError {
         VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();

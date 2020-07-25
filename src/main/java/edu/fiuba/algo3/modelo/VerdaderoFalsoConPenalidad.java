@@ -46,7 +46,7 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
     }
 
     @Override
-    public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
+    public void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError {
         this.respuestaActual.agregarOpcion(opcion);
     }
 

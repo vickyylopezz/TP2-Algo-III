@@ -13,15 +13,15 @@ public class Jugador {
         this.puntajeTotal = 0;
     }
 
-    public String Nombre() {
+    public String nombre() {
         return this.nombre;
     }
 
-    public ArrayList<Respuesta> ObtenerRespuestas() {
+    public ArrayList<Respuesta> obtenerRespuestas() {
         return this.respuestas;
     }
 
-    public void AgregarRespuesta(Respuesta respuesta) throws JugadorError {
+    public void agregarRespuesta(Respuesta respuesta) throws JugadorError {
         if (this.respuestas.contains(respuesta)) {
             throw new JugadorError(respuesta.toString() + " ya se encuentra en las respuestas");
         }
@@ -33,7 +33,7 @@ public class Jugador {
         this.puntajeTotal = this.puntajeTotal + puntaje;
     }
 
-    public Integer PuntajeTotal() {
+    public Integer puntajeTotal() {
         return this.puntajeTotal;
     }
 }
