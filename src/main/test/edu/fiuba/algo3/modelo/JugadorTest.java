@@ -101,7 +101,8 @@ public class JugadorTest {
     @Test
     public void calcularPuntajeTotalConVariasRespuestaDevuelveElPuntajeCorrecto() {
         Jugador carlos = new Jugador("Carlos");
-
+        VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?");
+        
         Opcion opcion1 = new Opcion("Verdadero", 1);
         Respuesta respuesta1 = new Respuesta(null, null);
         respuesta1.agregarOpcion(opcion1);
@@ -121,8 +122,7 @@ public class JugadorTest {
         } catch (JugadorError jugadorError) {
             jugadorError.printStackTrace();
         }
-
-        VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?");
+        
         ArrayList<Respuesta> respuestaArrayList = new ArrayList<Respuesta>();
         for (Respuesta respuesta : carlos.ObtenerRespuestas()){
             respuestaArrayList.add(respuesta);
