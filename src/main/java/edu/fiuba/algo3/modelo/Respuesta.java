@@ -24,4 +24,8 @@ public class Respuesta {
         }
         return puntaje;
     }
+    
+    public ArrayList<Opcion> obtenerOpcionesElegidas() {
+        return this.opcionesElegidas;
+    }
 }
