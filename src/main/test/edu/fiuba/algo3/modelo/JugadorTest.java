@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class JugadorTest {
     @Test
@@ -88,10 +90,12 @@ public class JugadorTest {
         } catch (JugadorError jugadorError) {
             jugadorError.printStackTrace();
         }
+        VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?");
+        ArrayList<Respuesta> respuestaArrayList = new ArrayList<Respuesta>();
+        respuestaArrayList.add(respuesta);
+        ArrayList<Integer> puntaje = preguntaVF.obtenerPuntajes(respuestaArrayList);
 
-        Integer puntaje = carlos.PuntajeTotal();
-
-        assertEquals(1, puntaje);
+        assertEquals(1, puntaje.get(0));
     }
 
     @Test
@@ -116,6 +120,15 @@ public class JugadorTest {
             carlos.AgregarRespuesta(respuesta3);
         } catch (JugadorError jugadorError) {
             jugadorError.printStackTrace();
+        }
+
+        VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?");
+        ArrayList<Respuesta> respuestaArrayList = new ArrayList<Respuesta>();
+        for (Respuesta respuesta : carlos.ObtenerRespuestas()){
+            respuestaArrayList.add(respuesta);
+            ArrayList<Integer> puntaje = preguntaVF.obtenerPuntajes(respuestaArrayList);
+            carlos.sumarPuntaje(puntaje.get(0));
+            respuestaArrayList.clear();
         }
 
         Integer puntaje = carlos.PuntajeTotal();
