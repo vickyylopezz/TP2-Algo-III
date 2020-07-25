@@ -11,9 +11,9 @@ public class MultipleChoiseClasico implements Pregunta {
     private Respuesta respuestaActual = null;
     private Date inicioRespuestaActual = null;
 
-    public MultipleChoiseClasico(String titulo, Integer segundos) throws MultipleChoiseError {
+    public MultipleChoiseClasico(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0) {
-            throw new MultipleChoiseError("Segundo de pregunta negativo");
+            throw new PreguntaError("Segundo de pregunta negativo");
         }
 
         this.titulo = titulo;
