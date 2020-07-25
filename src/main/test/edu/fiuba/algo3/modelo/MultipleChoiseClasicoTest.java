@@ -565,6 +565,7 @@ public class MultipleChoiseClasicoTest {
         assertEquals(0, puntaje);
     }
 
+    /*
     // Test puntajeConRespuestas
     @Test
     public void puntajeConRespuestasPasandoleNullLanzaPreguntaError() throws PreguntaError {
@@ -643,4 +644,5 @@ public class MultipleChoiseClasicoTest {
         assertEquals(0, puntajes.get(1));
         assertEquals(0, puntajes.get(2));
     }
+    */
 }

@@ -75,6 +75,7 @@ public class MultipleChoiseClasico implements Pregunta {
         return resultado;
     }
 
+    /*
     @Override
     public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> respuestas) throws PreguntaError {
         if (respuestas == null) {
@@ -89,6 +90,7 @@ public class MultipleChoiseClasico implements Pregunta {
 
         return puntajes;
     }
+    */
 
     @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
