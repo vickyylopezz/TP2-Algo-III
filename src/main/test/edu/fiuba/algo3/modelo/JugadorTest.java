@@ -93,7 +93,7 @@ public class JugadorTest {
         VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?");
         ArrayList<Respuesta> respuestaArrayList = new ArrayList<Respuesta>();
         respuestaArrayList.add(respuesta);
-        ArrayList<Integer> puntaje = preguntaVF.obtenerPuntajes(respuestaArrayList);
+        ArrayList<Integer> puntaje = preguntaVF.puntajeConRespuestas(respuestaArrayList);
 
         assertEquals(1, puntaje.get(0));
     }
@@ -126,7 +126,7 @@ public class JugadorTest {
         ArrayList<Respuesta> respuestaArrayList = new ArrayList<Respuesta>();
         for (Respuesta respuesta : carlos.ObtenerRespuestas()){
             respuestaArrayList.add(respuesta);
-            ArrayList<Integer> puntaje = preguntaVF.obtenerPuntajes(respuestaArrayList);
+            ArrayList<Integer> puntaje = preguntaVF.puntajeConRespuestas(respuestaArrayList);
             carlos.sumarPuntaje(puntaje.get(0));
             respuestaArrayList.clear();
         }
