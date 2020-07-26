@@ -26,9 +26,9 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
         return this.opciones;
     }
 
-    @Override //Falta implementarla
+    @Override
     public Integer puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError {
-        return null;
+        return opciones.get(0).getValor();
     }
 
     @Override
@@ -47,11 +47,17 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
 
     @Override
     public void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError {
+        if(respuestaActual.obtenerOpcionesElegidas().size() >= 1){
+            throw new PreguntaError("Solo puede elegir una opcion");
+        }
         this.respuestaActual.agregarOpcion(opcion);
     }
 
     @Override
     public Respuesta confirmar() throws PreguntaError {
+        if(respuestaActual == null){
+            throw new PreguntaError("No se ha iniciado la pregunta");
+        }
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
         return resultado;

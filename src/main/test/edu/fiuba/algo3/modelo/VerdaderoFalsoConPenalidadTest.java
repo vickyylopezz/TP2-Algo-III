@@ -9,9 +9,13 @@ public class VerdaderoFalsoConPenalidadTest {
 
     @Test
     public void VerdaderoFalsoPuedeCrearseIndicándolecualEsLaRespuestaCorrecta() throws PreguntaError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
+        VerdaderoFalsoConPenalidad pregunta1 = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
 
-        assertEquals(pregunta.obtenerOpciones().size(),2);
+        assertEquals(pregunta1.obtenerOpciones().size(),2);
+
+        VerdaderoFalsoConPenalidad pregunta2 = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",false);
+
+        assertEquals(pregunta2.obtenerOpciones().size(),2);
     }
 
     @Test
@@ -37,7 +41,12 @@ public class VerdaderoFalsoConPenalidadTest {
         pregunta.seleccionarOpcion(opciones.get(1));
         Respuesta respuesta = pregunta.confirmar();
 
-        assertEquals(respuesta.puntaje(),-1);
+        ArrayList<Respuesta> respuestas = new ArrayList<Respuesta>();
+        respuestas.add(respuesta);
+
+        ArrayList<Integer> puntajes = new ArrayList<Integer>();
+        puntajes = pregunta.puntajeConRespuestas(respuestas);
+        assertEquals(puntajes.get(0),-1);
     }
 
     @Test
@@ -46,20 +55,24 @@ public class VerdaderoFalsoConPenalidadTest {
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
-        ArrayList<Respuesta> respuestas = new ArrayList<Respuesta>();
         Jugador paula = new Jugador("Paula");
         pregunta.iniciar(paula);
         pregunta.seleccionarOpcion(opciones.get(0));
-        respuestas.add(pregunta.confirmar());
-
+        Respuesta respuestaPaula = pregunta.confirmar();
 
         Jugador marta = new Jugador("Marta");
         pregunta.iniciar(marta);
         pregunta.seleccionarOpcion(opciones.get(1));
-        respuestas.add(pregunta.confirmar());
+        Respuesta respuestaMarta = pregunta.confirmar();
 
-        assertEquals(respuestas.get(0).puntaje(),1);
-        assertEquals(respuestas.get(1).puntaje(),-1);
+        ArrayList<Respuesta> respuestas = new ArrayList<Respuesta>();
+        respuestas.add(respuestaPaula);
+        respuestas.add(respuestaMarta);
+
+        ArrayList<Integer> puntajes = new ArrayList<Integer>();
+        puntajes = pregunta.puntajeConRespuestas(respuestas);
+        assertEquals(puntajes.get(0),1);
+        assertEquals(puntajes.get(1),-1);
     }
 
     @Test
@@ -69,4 +82,39 @@ public class VerdaderoFalsoConPenalidadTest {
         assertEquals(true, pregunta instanceof Pregunta);
     }
 
+    @Test
+    public void UnJugadorIntentaElegirDosOpcionesDeVerdaderoFalsoYLanzaExcepcion() throws PreguntaError, RespuestaError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",false);
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        Jugador paula = new Jugador("Paula");
+        pregunta.iniciar(paula);
+        pregunta.seleccionarOpcion(opciones.get(0));
+
+        assertThrows(PreguntaError.class, ()-> pregunta.seleccionarOpcion(opciones.get(1)) );
+
+    }
+
+    @Test
+    public void UnJugadorIntentaElegirDosVecesLaMismaOpcionLanzaExcepcion() throws PreguntaError, RespuestaError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",false);
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        Jugador paula = new Jugador("Paula");
+        pregunta.iniciar(paula);
+        pregunta.seleccionarOpcion(opciones.get(0));
+
+        assertThrows(PreguntaError.class, ()-> pregunta.seleccionarOpcion(opciones.get(1)) );
+
+    }
+
+    @Test
+    public void IntentarConfirmarUnaPreguntaSinIniciarlaLanzaExcepcion(){
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",false);
+
+        assertThrows(PreguntaError.class, ()-> pregunta.confirmar() );
+
+    }
 }
