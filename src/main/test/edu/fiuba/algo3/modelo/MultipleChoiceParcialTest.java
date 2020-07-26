@@ -5,10 +5,10 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 
-public class MultipleChoiseParcialTest {
+public class MultipleChoiceParcialTest {
     @Test
     public void CreacionDeMultipleChoiseParcialIndicandoRespuestaCorrecta(){
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?");
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?");
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
         preguntaMCP.agregarOpcionIncorrecta("Fernando");
@@ -19,7 +19,7 @@ public class MultipleChoiseParcialTest {
 
     @Test
     public void MultipleChoiseParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws RespuestaError {
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?");
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?");
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
         preguntaMCP.agregarOpcionIncorrecta("Fernando");
@@ -31,7 +31,7 @@ public class MultipleChoiseParcialTest {
         Respuesta respuestaJugador1 = new Respuesta(pregunta, jugador);
         Respuesta respuestaJugador2 = new Respuesta(pregunta, jugador);
         Respuesta respuestaJugador3 = new Respuesta(pregunta, jugador);
-        ArrayList<Respuesta> todasLasRespuestas = new ArrayList<>();
+        ArrayList<Respuesta> todasLasRespuestas = new ArrayList<Respuesta>();
         ArrayList<Opcion> opciones = preguntaMCP.obtenerOpciones();
 
         respuestaJugador1.agregarOpcion(opciones.get(0));
@@ -44,7 +44,7 @@ public class MultipleChoiseParcialTest {
         todasLasRespuestas.add(respuestaJugador2);
         todasLasRespuestas.add(respuestaJugador3);
 
-        ArrayList<Integer> esperado = new ArrayList<>();
+        ArrayList<Integer> esperado = new ArrayList<Integer>();
         esperado.add(2);
         esperado.add(0);
         esperado.add(1);

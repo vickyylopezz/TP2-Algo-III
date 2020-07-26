@@ -7,51 +7,51 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class MultipleChoiseClasicoTest {
+public class MultipleChoiceClasicoTest {
     //
     // --------------------------- Test unitarios ---------------------------
     //
 
     // Test implementacion
     @Test
-    public void multipleChoiseClasicoImplementaInterfacePregunta() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+    public void multipleChoiceClasicoImplementaInterfacePregunta() throws PreguntaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
 
         assertTrue(pregunta instanceof Pregunta);
     }
 
     // Test constructor
     @Test
-    public void creacionMultipleChoiseConSegundosNegativosLanzaMultipleChoiseError() {
-        assertThrows(PreguntaError.class, () -> new MultipleChoiseClasico("¿Estamos en Algo 3?", -1));
+    public void creacionMultipleChoiceConSegundosNegativosLanzaMultipleChoiceError() {
+        assertThrows(PreguntaError.class, () -> new MultipleChoiceClasico("¿Estamos en Algo 3?", -1));
     }
 
     @Test
-    public void creacionMultipleChoiseConSegundosCeroNoLanzaMultipleChoiseError() {
+    public void creacionMultipleChoiceConSegundosCeroNoLanzaMultipleChoiceError() {
         assertDoesNotThrow(() -> {
-            new MultipleChoiseClasico("¿Estamos en Algo 3?", 0);
+            new MultipleChoiceClasico("¿Estamos en Algo 3?", 0);
         });
     }
 
     @Test
-    public void creacionMultipleChoiseConSegundosMayoresACeroNoLanzaMultipleChoiseError() {
+    public void creacionMultipleChoiceConSegundosMayoresACeroNoLanzaMultipleChoiceError() {
         assertDoesNotThrow(() -> {
-            new MultipleChoiseClasico("¿Estamos en Algo 3?", 5);
+            new MultipleChoiceClasico("¿Estamos en Algo 3?", 5);
         });
     }
 
     // Test obtenerTitulo
     @Test
-    public void creacionMultipleChoiseConTituloObtenerTituloLoDevuelve() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 5);
+    public void creacionMultipleChoiceConTituloObtenerTituloLoDevuelve() throws PreguntaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 5);
 
         assertEquals("¿Estamos en Algo 3?", pregunta.obtenerTitulo());
     }
 
     // Test obtenerSegundos
     @Test
-    public void creacionMultipleChoiseConSegunosObtenerSegunosLoDevuelve() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 5);
+    public void creacionMultipleChoiceConSegundosObtenerSegundosLoDevuelve() throws PreguntaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 5);
 
         assertEquals(5, pregunta.obtenerSegundos());
     }
@@ -59,15 +59,15 @@ public class MultipleChoiseClasicoTest {
     // Test obtenerOpciones
     @Test
     public void obtenerOpcionesSinHaberAgregadoOpcionesDevuelveArrayVacio() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertTrue(opciones.isEmpty());
     }
 
     @Test
-    public void obtenerOpcionesLasDevuelveTodasLasOpcionesAgregadas() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+    public void obtenerOpcionesDevuelveTodasLasOpcionesAgregadas() throws PreguntaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -80,8 +80,8 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    public void obtenerOpcionesLasDevuelveEnElOrdenDeGuardado() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+    public void obtenerOpcionesLasDevuelveEnElOrdenGuardado() throws PreguntaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -100,7 +100,7 @@ public class MultipleChoiseClasicoTest {
     // Test agregarOpcionIncorrecta
     @Test
     public void agregarOpcionIncorrectaGuardaLaOpcionEnLaPregunta() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionIncorrecta("Si papa, Obiousli");
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
@@ -114,7 +114,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void agregarOpcionIncorrectaGuardaLaOpcionEnLaPreguntaConValorCero() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionIncorrecta("Si papa, Obiousli");
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
@@ -126,7 +126,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void agregarVariasOpcionesIncorrectasGuardaTodasLasOpcionesEnLaPregunta() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionIncorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -138,7 +138,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void agregarMasDeCincoOpcionesIncorrectasLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionIncorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -151,7 +151,7 @@ public class MultipleChoiseClasicoTest {
     // Test agregarOpcionCorrecta
     @Test
     public void agregarOpcionCorrectaGuardaLaOpcionEnLaPregunta() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
@@ -165,7 +165,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void agregarOpcionCorrectaGuardaLaOpcionEnLaPreguntaConValorUno() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
@@ -177,7 +177,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void agregarVariasOpcionesCorrectasGuardaTodasLasOpcionesEnLaPregunta() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionCorrecta("No lo se Rick");
         pregunta.agregarOpcionCorrecta("Mentira, yo estoy en Derecho");
@@ -189,7 +189,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void agregarMasDeCincoOpcionesCorrectasLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionCorrecta("No lo se Rick");
         pregunta.agregarOpcionCorrecta("Mentira, yo estoy en Derecho");
@@ -202,7 +202,7 @@ public class MultipleChoiseClasicoTest {
     // Test agregarOpcionesCorrecta y agregarOpcionesIncorrecta
     @Test
     public void agregarVariasOpcionesCorrectasEIncorrectasGuardaTodasLasOpcionesEnLaPregunta() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionCorrecta("Mentira, yo no estoy en Derecho");
@@ -215,7 +215,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void agregarMasDeCincoOpcionesSextaOpcionCorrectaLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionIncorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionCorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -227,7 +227,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void agregarMasDeCincoOpcionesSextaOpcionIncorrectaLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionIncorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionCorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -240,14 +240,14 @@ public class MultipleChoiseClasicoTest {
     // Test iniciar
     @Test
     public void iniciarSinOpcionesLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
 
         assertThrows(PreguntaError.class, () -> pregunta.iniciar(new Jugador("Maria")));
     }
 
     @Test
     public void iniciarConUnaOpcionLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
 
         assertThrows(PreguntaError.class, () -> pregunta.iniciar(new Jugador("Maria")));
@@ -255,7 +255,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void iniciarSinJugadorLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -264,8 +264,8 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    public void iniciarDosVecesLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+    public void iniciarDosVecesLanzaPreguntaError() throws PreguntaError, RespuestaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -279,8 +279,8 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    public void iniciarConJugadorTeHabilitaASeleccionarPregunta() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+    public void iniciarConJugadorTeHabilitaASeleccionarPregunta() throws PreguntaError, RespuestaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -298,7 +298,7 @@ public class MultipleChoiseClasicoTest {
     // Test seleccionar
     @Test
     public void seleccionarSinIniciarLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -309,8 +309,8 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    public void seleccionarOpcionConOpcionNoGuardadaEnLaPreguntaLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+    public void seleccionarOpcionConOpcionNoGuardadaEnLaPreguntaLanzaPreguntaError() throws PreguntaError, RespuestaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -324,8 +324,8 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    public void seleccionarOpcionConOpcionNulaLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+    public void seleccionarOpcionConOpcionNulaLanzaPreguntaError() throws PreguntaError, RespuestaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -337,10 +337,10 @@ public class MultipleChoiseClasicoTest {
     }
 
     //@Test //activar solamente cuando se requiera probar el tiempo de respuesta
-    public void seleccionarConElMismoTiempoDeRespuestaLanzaPreguntaError() throws PreguntaError {
+    public void seleccionarConElMismoTiempoDeRespuestaLanzaPreguntaError() throws PreguntaError, RespuestaError {
         int segundos = 1; //
 
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", segundos);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", segundos);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -361,10 +361,10 @@ public class MultipleChoiseClasicoTest {
     }
 
     //@Test //activar solamente cuando se requiera probar el tiempo de respuesta
-    public void seleccionarPasandoElTiempoDeRespuestaLanzaPreguntaError() throws PreguntaError {
+    public void seleccionarPasandoElTiempoDeRespuestaLanzaPreguntaError() throws PreguntaError, RespuestaError {
         int segundos = 1; //
 
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", segundos);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", segundos);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -386,7 +386,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void seleccionarVariasRespuestasSeInsertanEnLaRespuesta() throws PreguntaError, RespuestaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -414,7 +414,7 @@ public class MultipleChoiseClasicoTest {
     // Test confirmar
     @Test
     public void confirmarSinIniciarLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -425,8 +425,8 @@ public class MultipleChoiseClasicoTest {
     }
 
     @Test
-    public void confirmarHabilitaPoderVolverAIniciarLaRespuesta() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+    public void confirmarHabilitaPoderVolverAIniciarLaRespuesta() throws PreguntaError, RespuestaError {
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -442,7 +442,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void confirmarDevuelveUnaRespuestaConLasOpcionesSeleccionadas() throws PreguntaError, RespuestaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -468,7 +468,7 @@ public class MultipleChoiseClasicoTest {
     // Test puntajeConOpciones
     @Test
     public void puntajeConOpcionesNulasElPuntajeEsCero() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -480,7 +480,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void puntajeConOpcionesNoGuardadasEnLaPreguntaLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -495,7 +495,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void puntajeSeleccionandoTodasLasOpcionesCorrectasPuntajeUno() throws PreguntaError, RespuestaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -519,7 +519,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void puntajeSeleccionandoTodasLasOpcionesCorrectasYUnaIncorrectaDevuelveCero() throws PreguntaError, RespuestaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -544,7 +544,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void puntajeSeleccionandoUnaSolaOpcionCorrectaDevueveCero() throws PreguntaError, RespuestaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -568,7 +568,7 @@ public class MultipleChoiseClasicoTest {
     // Test puntajeConRespuestas
     @Test
     public void puntajeConRespuestasPasandoleNullLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -578,7 +578,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void puntajeConRespuestasPasandoleArrayVacioDevuelveArrayVacio() throws PreguntaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -591,7 +591,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void puntajeConRespuestasPasandoleArrayConUnaRespuestaDevuelveElPuntajeCorrecto() throws PreguntaError, RespuestaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
@@ -616,7 +616,7 @@ public class MultipleChoiseClasicoTest {
 
     @Test
     public void puntajeConRespuestasPasandoleArrayConVariasRespuestasDevuelveElPuntajeCorrectoOrdenado() throws PreguntaError, RespuestaError {
-        MultipleChoiseClasico pregunta = new MultipleChoiseClasico("¿Estamos en Algo 3?", 3);
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 3);
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");

@@ -27,7 +27,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarRespuestaGuardaLaRespuestaEnElJugador() throws JugadorError {
+    public void agregarRespuestaGuardaLaRespuestaEnElJugador() throws JugadorError, RespuestaError {
         Jugador carlos = new Jugador("Carlos");
         Respuesta respuesta = new Respuesta(null, null);
 
@@ -39,7 +39,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarDosVecesLaMismaRespuestaLanzaExcepcionRespuestasIgualesError() throws JugadorError {
+    public void agregarDosVecesLaMismaRespuestaLanzaExcepcionRespuestasIgualesError() throws JugadorError, RespuestaError {
         Jugador carlos = new Jugador("Carlos");
         Respuesta respuesta = new Respuesta(null, null);
 
@@ -49,7 +49,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarVariasRespuestasSeGuardanTodas() throws JugadorError {
+    public void agregarVariasRespuestasSeGuardanTodas() throws JugadorError, RespuestaError {
         Jugador carlos = new Jugador("Carlos");
         Respuesta respuesta1 = new Respuesta(null, null);
         Respuesta respuesta2 = new Respuesta(null, null);
