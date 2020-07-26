@@ -5,23 +5,24 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 
 public class RespuestaTest {
     @Test
     public void seCreaRespuestaIndicandoPreguntaYJugador() {
-        PreguntaMock preguntaMock = new PreguntaMock();
+        Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = new Jugador("Juan");
-        Respuesta respuesta = new Respuesta(preguntaMock,jugador);
+        Respuesta respuesta = new Respuesta(pregunta,jugador);
 
         assertEquals(jugador,respuesta.jugador);
-        assertEquals(preguntaMock,respuesta.pregunta);
+        assertEquals(pregunta,respuesta.pregunta);
     }
 
     @Test
     public void seCreaRespuestaYListaDeOpcionesElgidasEstaVacia() {
-        PreguntaMock preguntaMock = new PreguntaMock();
+        Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = new Jugador("Juan");
-        Respuesta respuesta = new Respuesta(preguntaMock,jugador);
+        Respuesta respuesta = new Respuesta(pregunta,jugador);
 
         ArrayList<Opcion> opcionesElegidas = respuesta.obtenerOpcionesElegidas();
 
@@ -30,9 +31,9 @@ public class RespuestaTest {
 
     @Test
     public void seAgregaUnaOpcionAListaDeOpcionesElegidasYSuTamanioEsUno() throws RespuestaError {
-        PreguntaMock preguntaMock = new PreguntaMock();
+        Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = new Jugador("Juan");
-        Respuesta respuesta = new Respuesta(preguntaMock,jugador);
+        Respuesta respuesta = new Respuesta(pregunta,jugador);
 
         Opcion opcion = new Opcion("Si",0);
         respuesta.agregarOpcion(opcion);
@@ -44,9 +45,9 @@ public class RespuestaTest {
 
     @Test
     public void seAgregaDosOpcionesIgualesAListaDeOpcionesElegidasYSeLanzaExcepcion() throws RespuestaError {
-        PreguntaMock preguntaMock = new PreguntaMock();
+        Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = new Jugador("Juan");
-        Respuesta respuesta = new Respuesta(preguntaMock, jugador);
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
 
         Opcion opcion = new Opcion("Si",0);
         respuesta.agregarOpcion(opcion);
