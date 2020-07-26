@@ -6,10 +6,10 @@ import java.util.Date;
 public class MultipleChoiseClasico implements Pregunta {
     private String titulo;
     private Integer segundos;
-    private Integer opcionesCorrectas = 0;
-    private ArrayList<Opcion> opciones = new ArrayList<>();
-    private Respuesta respuestaActual = null;
-    private Date inicioRespuestaActual = null;
+    private Integer opcionesCorrectas;
+    private ArrayList<Opcion> opciones;
+    private Respuesta respuestaActual;
+    private Date inicioRespuestaActual;
 
     public MultipleChoiseClasico(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0) {
@@ -18,6 +18,10 @@ public class MultipleChoiseClasico implements Pregunta {
 
         this.titulo = titulo;
         this.segundos = segundos;
+        this.opcionesCorrectas = 0;
+        this.opciones = new ArrayList<>();
+        this.respuestaActual = null;
+        this.inicioRespuestaActual = null;
     }
 
     public String obtenerTitulo() {
