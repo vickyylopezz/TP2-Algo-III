@@ -6,7 +6,7 @@ import java.util.Date;
 public class MultipleChoiseClasico implements Pregunta {
     private String titulo;
     private Integer segundos;
-    private Integer opcionesCorrectas;
+    private Integer puntajeCorrecto;
     private ArrayList<Opcion> opciones;
     private Respuesta respuestaActual;
     private Date inicioRespuestaActual;
@@ -18,7 +18,7 @@ public class MultipleChoiseClasico implements Pregunta {
 
         this.titulo = titulo;
         this.segundos = segundos;
-        this.opcionesCorrectas = 0;
+        this.puntajeCorrecto = 0;
         this.opciones = new ArrayList<>();
         this.respuestaActual = null;
         this.inicioRespuestaActual = null;
@@ -50,7 +50,7 @@ public class MultipleChoiseClasico implements Pregunta {
 
         Opcion opcion = new Opcion(titulo, 1);
         this.opciones.add(opcion);
-        this.opcionesCorrectas++;
+        this.puntajeCorrecto++;
     }
 
     // Implementacion interface Pregunta
@@ -64,19 +64,16 @@ public class MultipleChoiseClasico implements Pregunta {
             if (!this.opciones.contains(opcion)) {
                 throw new PreguntaError(opcion.toString() + ", no se encuentra guardada");
             }
-            if (opcion.getValor() == 0) {
-                return 0;
-            } else {
-                opcionesCorrectas++;
-            }
+            // Como el valor correcto de la opcion es 1 y el incorrecto
+            // es cero solamente incrementa 1 cuando es correcta la opcion.
+            opcionesCorrectas += opcion.getValor();
         }
 
-        int resultado = 0;
-        if (opcionesCorrectas == this.opcionesCorrectas) {
-            resultado = 1;
-        }
+        boolean mismaCantidadDeOpciones = opciones.size() == opcionesCorrectas;
+        boolean puntajeTotalCorrecto = this.puntajeCorrecto == opcionesCorrectas;
+        boolean todasOpcionesCorrecta = mismaCantidadDeOpciones && puntajeTotalCorrecto;
 
-        return resultado;
+        return todasOpcionesCorrecta ? 1 : 0;
     }
 
     @Override
@@ -129,6 +126,7 @@ public class MultipleChoiseClasico implements Pregunta {
         if (this.respuestaActual == null) {
             throw new PreguntaError("No se Inicio el jugador");
         }
+
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
         return resultado;
