@@ -17,14 +17,14 @@ public class VerdaderoFalsoClasicoTest {
         assertEquals("¿Estamos en Algoritmos y programcion 3?", preguntavf.titulo());
     }
     @Test
-    public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() {
+    public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws RespuestaError {
         VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?");
         preguntavf.agregarOpcionCorrecta("Verdadero");
         preguntavf.agregarOpcionIncorrecta("Falso");
 
         Jugador jugador = mock(Jugador.class);
 
-        ArrayList<Respuesta> respuestas = new ArrayList<Respuesta>();
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
         Respuesta respuestaJugador1 = new Respuesta(preguntavf, jugador);
         Respuesta respuestaJugador2 = new Respuesta(preguntavf, jugador);
         ArrayList<Opcion> opciones = preguntavf.obtenerOpciones();
@@ -33,7 +33,7 @@ public class VerdaderoFalsoClasicoTest {
         respuestas.add(respuestaJugador1);
         respuestas.add(respuestaJugador2);
 
-        ArrayList<Integer> esperado = new ArrayList<Integer>();
+        ArrayList<Integer> esperado = new ArrayList<>();
         esperado.add(1);
         esperado.add(0);
 

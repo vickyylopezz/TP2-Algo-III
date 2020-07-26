@@ -9,7 +9,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
     private Respuesta respuestaActual;
 
     public VerdaderoFalsoClasico(String pregunta){
-        this.opciones = new ArrayList<Opcion>();
+        this.opciones = new ArrayList<>();
         this.titulo = pregunta;
     }
 
@@ -24,7 +24,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
     }
 
     public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> todasLasRespuestas) {
-        ArrayList<Integer> puntajes = new ArrayList<Integer>();
+        ArrayList<Integer> puntajes = new ArrayList<>();
         for(Respuesta respuestaPorJugador : todasLasRespuestas){
             for (Opcion opcion : respuestaPorJugador.obtenerOpcionesElegidas()){
                 puntajes.add(opcion.getValor());
@@ -34,22 +34,22 @@ public class VerdaderoFalsoClasico implements Pregunta {
     }
 
     @Override
-    public void iniciar(Jugador jugador) throws PreguntaError {
+    public void iniciar(Jugador jugador) {
         this.respuestaActual = new Respuesta(this, jugador);
     }
 
     @Override
-    public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
+    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
         this.respuestaActual.agregarOpcion(opcion);
     }
 
     @Override
-    public Respuesta confirmar() throws PreguntaError {
+    public Respuesta confirmar() {
         return this.respuestaActual;
     }
 
     @Override
-    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError{
+    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) {
         return 1;
     }
 

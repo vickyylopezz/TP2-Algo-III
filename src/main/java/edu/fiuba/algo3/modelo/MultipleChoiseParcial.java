@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class MultipleChoiseParcial implements Pregunta {
 
     private String titulo;
-    private ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+    private ArrayList<Opcion> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
 
     public MultipleChoiseParcial(String titulo){
@@ -31,9 +31,9 @@ public class MultipleChoiseParcial implements Pregunta {
     }
 
     public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> todasLasRespuestas) {
-        ArrayList<Integer> puntajesPorJugador = new ArrayList<Integer>();
+        ArrayList<Integer> puntajesPorJugador = new ArrayList<>();
         for (Respuesta respuestaDeCadaJugador : todasLasRespuestas){
-            Integer puntajeParcial = 0;
+            int puntajeParcial = 0;
             for (Opcion opcionElegida : respuestaDeCadaJugador.obtenerOpcionesElegidas()){
                 puntajeParcial = puntajeParcial + opcionElegida.getValor();
             }
@@ -47,22 +47,22 @@ public class MultipleChoiseParcial implements Pregunta {
     }
 
     @Override
-    public void iniciar(Jugador jugador) throws PreguntaError {
+    public void iniciar(Jugador jugador) {
         this.respuestaActual = new Respuesta(this, jugador);
     }
 
     @Override
-    public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
+    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
         this.respuestaActual.agregarOpcion(opcion);
     }
 
     @Override
-    public Respuesta confirmar() throws PreguntaError {
+    public Respuesta confirmar() {
         return this.respuestaActual;
     }
 
     @Override
-    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError{
+    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) {
         return 1;
     }
 }
