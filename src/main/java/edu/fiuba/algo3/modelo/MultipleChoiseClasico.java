@@ -9,6 +9,9 @@ public class MultipleChoiseClasico implements Pregunta {
     private Integer puntajeCorrecto;
     private ArrayList<Opcion> opciones;
     private Respuesta respuestaActual;
+
+    // posible refactorizactorizacion mover el inicio de cada
+    // respuesta a la misma respuesta.
     private Date inicioRespuestaActual;
 
     public MultipleChoiseClasico(String titulo, Integer segundos) throws PreguntaError {
@@ -129,6 +132,7 @@ public class MultipleChoiseClasico implements Pregunta {
 
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
+        this.inicioRespuestaActual = null;
         return resultado;
     }
 }
