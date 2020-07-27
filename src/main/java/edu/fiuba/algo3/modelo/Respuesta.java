@@ -19,15 +19,11 @@ public class Respuesta {
         this.opcionesElegidas.add(opcion);
     }
 
-    public Integer puntaje() {
-        Integer puntaje = 0;
-        for (Opcion opcionesElegida : opcionesElegidas) {
-            puntaje += opcionesElegida.getValor();
-        }
-        return puntaje;
-    }
-    
     public ArrayList<Opcion> obtenerOpcionesElegidas() {
-        return this.opcionesElegidas;
+        return new ArrayList<Opcion>(this.opcionesElegidas);
+    }
+
+    public Integer obtenerPuntaje(){
+        return this.pregunta.puntajeConOpciones(this.opcionesElegidas);
     }
 }
