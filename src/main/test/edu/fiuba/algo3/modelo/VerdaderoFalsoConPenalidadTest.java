@@ -28,7 +28,7 @@ public class VerdaderoFalsoConPenalidadTest {
         pregunta.seleccionarOpcion(opciones.get(0));
         Respuesta respuesta = pregunta.confirmar();
 
-        assertEquals(respuesta.puntaje(),1);
+        assertEquals(respuesta.obtenerPuntaje(),1);
     }
 
     @Test

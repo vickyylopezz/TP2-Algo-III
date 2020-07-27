@@ -20,10 +20,10 @@ public class Respuesta {
     }
 
     public ArrayList<Opcion> obtenerOpcionesElegidas() {
-        return new ArrayList<Opcion>(this.opcionesElegidas);
+        return new ArrayList<>(this.opcionesElegidas);
     }
 
-    public Integer obtenerPuntaje(){
+    public Integer obtenerPuntaje() throws PreguntaError {
         return this.pregunta.puntajeConOpciones(this.opcionesElegidas);
     }
 }
