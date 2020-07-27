@@ -41,7 +41,7 @@ public class VerdaderoFalsoConPenalidadTest {
         pregunta.seleccionarOpcion(opciones.get(1));
         Respuesta respuesta = pregunta.confirmar();
 
-        ArrayList<Respuesta> respuestas = new ArrayList<Respuesta>();
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
         respuestas.add(respuesta);
 
         ArrayList<Integer> puntajes = pregunta.puntajeConRespuestas(respuestas);
@@ -64,21 +64,13 @@ public class VerdaderoFalsoConPenalidadTest {
         pregunta.seleccionarOpcion(opciones.get(1));
         Respuesta respuestaMarta = pregunta.confirmar();
 
-        ArrayList<Respuesta> respuestas = new ArrayList<Respuesta>();
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
         respuestas.add(respuestaPaula);
         respuestas.add(respuestaMarta);
 
-        ArrayList<Integer> puntajes = new ArrayList<Integer>();
-        puntajes = pregunta.puntajeConRespuestas(respuestas);
+        ArrayList<Integer> puntajes = pregunta.puntajeConRespuestas(respuestas);
         assertEquals(puntajes.get(0),1);
         assertEquals(puntajes.get(1),-1);
-    }
-
-    @Test
-    public void VerdaderoFalsoConPenalidadImplementaInterfacePregunta(){
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
-
-        assertEquals(true, pregunta instanceof Pregunta);
     }
 
     @Test
@@ -113,7 +105,7 @@ public class VerdaderoFalsoConPenalidadTest {
     public void IntentarConfirmarUnaPreguntaSinIniciarlaLanzaExcepcion(){
         VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",false);
 
-        assertThrows(PreguntaError.class, ()-> pregunta.confirmar() );
+        assertThrows(PreguntaError.class, pregunta::confirmar);
 
     }
 
@@ -168,7 +160,7 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void IniciarPreguntaSinJugadorLanzaExcepcion() throws PreguntaError {
+    public void IniciarPreguntaSinJugadorLanzaExcepcion() {
         VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
 
         assertThrows(PreguntaError.class, ()->pregunta.iniciar(null));
