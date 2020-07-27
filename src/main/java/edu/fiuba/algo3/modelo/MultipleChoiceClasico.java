@@ -3,7 +3,7 @@ package edu.fiuba.algo3.modelo;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MultipleChoiseClasico implements Pregunta {
+public class MultipleChoiceClasico implements Pregunta {
     private String titulo;
     private Integer segundos;
     private Integer puntajeCorrecto;
@@ -14,7 +14,7 @@ public class MultipleChoiseClasico implements Pregunta {
     // respuesta a la misma respuesta.
     private Date inicioRespuestaActual;
 
-    public MultipleChoiseClasico(String titulo, Integer segundos) throws PreguntaError {
+    public MultipleChoiceClasico(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0) {
             throw new PreguntaError("Segundo de pregunta negativo");
         }

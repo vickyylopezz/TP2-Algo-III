@@ -2,13 +2,13 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
-public class MultipleChoiseParcial implements Pregunta {
+public class MultipleChoiceParcial implements Pregunta {
 
     private String titulo;
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
 
-    public MultipleChoiseParcial(String titulo){
+    public MultipleChoiceParcial(String titulo){
         this.titulo = titulo;
     }
 
