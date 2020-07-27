@@ -1,68 +1,82 @@
 package edu.fiuba.algo3.modelo;
 
+import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
 
-public class MultipleChoiceParcial implements Pregunta {
+public class MultipleChoiseParcialTest {
 
-    private String titulo;
-    private ArrayList<Opcion> opciones = new ArrayList<>();
-    private Respuesta respuestaActual;
-
-    public MultipleChoiceParcial(String titulo){
-        this.titulo = titulo;
+    @Test
+    public void CreacionDeMultipleChoiseConSegundosNegativosLanzaPreguntaError(){
+        assertThrows(PreguntaError.class, () -> new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", -1));
     }
 
-    public void agregarOpcionCorrecta(String opcionTitulo) {
-        Opcion opcion = new Opcion(opcionTitulo, 1);
-        this.opciones.add(opcion);
+    @Test
+    public void CreacionDeMultipleChoiseParcialIndicandoRespuestaCorrecta() throws PreguntaError {
+        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
+        preguntaMCP.agregarOpcionCorrecta("Francisco");
+        preguntaMCP.agregarOpcionCorrecta("Victoria");
+        preguntaMCP.agregarOpcionIncorrecta("Fernando");
+        preguntaMCP.agregarOpcionIncorrecta("Catalina");
+
+        assertEquals("¿Quienes son integrantes del grupo PM3?", preguntaMCP.titulo());
+        assertEquals(4, preguntaMCP.obtenerOpciones().size());
     }
 
-    public void agregarOpcionIncorrecta(String opcionTitulo) {
-        Opcion opcion = new Opcion(opcionTitulo, 0);
-        this.opciones.add(opcion);
+    @Test
+    public void obtenerOpcionesDevuelveTodasLasOpcionesAgregadas() throws PreguntaError {
+        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
+        preguntaMCP.agregarOpcionCorrecta("Francisco");
+        preguntaMCP.agregarOpcionCorrecta("Victoria");
+        preguntaMCP.agregarOpcionIncorrecta("Fernando");
+        preguntaMCP.agregarOpcionIncorrecta("Catalina");
+
+        ArrayList<Opcion> opciones = preguntaMCP.obtenerOpciones();
+
+        assertEquals(4, opciones.size());
     }
 
-    public String titulo() {
-        return this.titulo;
+    @Test
+    public void MultipleChoiseParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError {
+        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
+        preguntaMCP.agregarOpcionCorrecta("Francisco");
+        preguntaMCP.agregarOpcionCorrecta("Victoria");
+        preguntaMCP.agregarOpcionIncorrecta("Fernando");
+        preguntaMCP.agregarOpcionIncorrecta("Catalina");
+
+        Jugador jugador = mock(Jugador.class);
+
+        Respuesta respuestaJugador1 = new Respuesta(preguntaMCP, jugador);
+        Respuesta respuestaJugador2 = new Respuesta(preguntaMCP, jugador);
+        Respuesta respuestaJugador3 = new Respuesta(preguntaMCP, jugador);
+        ArrayList<Opcion> opciones = preguntaMCP.obtenerOpciones();
+
+        respuestaJugador1.agregarOpcion(opciones.get(0));
+        respuestaJugador1.agregarOpcion(opciones.get(1));
+        respuestaJugador2.agregarOpcion(opciones.get(0));
+        respuestaJugador2.agregarOpcion(opciones.get(2));
+        respuestaJugador3.agregarOpcion(opciones.get(1));
+
+        Integer esperadoJugador1 = 2;
+        Integer esperadoJugador2 = 0;
+        Integer esperadoJugador3 = 1;
+
+        assertEquals(esperadoJugador1, respuestaJugador1.obtenerPuntaje());
+        assertEquals(esperadoJugador2, respuestaJugador2.obtenerPuntaje());
+        assertEquals(esperadoJugador3, respuestaJugador3.obtenerPuntaje());
     }
 
-    public ArrayList<Opcion> obtenerOpciones() {
-        return this.opciones;
-    }
+    @Test
+    public void AgregarMasDeCincoOpcionesLanzaUnPreguntaError() throws PreguntaError {
+        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
+        preguntaMCP.agregarOpcionCorrecta("Francisco");
+        preguntaMCP.agregarOpcionCorrecta("Victoria");
+        preguntaMCP.agregarOpcionIncorrecta("Fernando");
+        preguntaMCP.agregarOpcionIncorrecta("Catalina");
+        preguntaMCP.agregarOpcionCorrecta("Juan");
 
-    public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> todasLasRespuestas) {
-        ArrayList<Integer> puntajesPorJugador = new ArrayList<>();
-        for (Respuesta respuestaDeCadaJugador : todasLasRespuestas){
-            int puntajeParcial = 0;
-            for (Opcion opcionElegida : respuestaDeCadaJugador.obtenerOpcionesElegidas()){
-                puntajeParcial = puntajeParcial + opcionElegida.getValor();
-            }
-            if (puntajeParcial != (respuestaDeCadaJugador.obtenerOpcionesElegidas()).size()) {
-                puntajesPorJugador.add(0);
-            } else {
-                puntajesPorJugador.add(puntajeParcial);
-            }
-        }
-        return puntajesPorJugador;
-    }
-
-    @Override
-    public void iniciar(Jugador jugador) {
-        this.respuestaActual = new Respuesta(this, jugador);
-    }
-
-    @Override
-    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
-        this.respuestaActual.agregarOpcion(opcion);
-    }
-
-    @Override
-    public Respuesta confirmar() {
-        return this.respuestaActual;
-    }
-
-    @Override
-    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) {
-        return 1;
+        assertThrows(PreguntaError.class, () -> preguntaMCP.agregarOpcionIncorrecta("Nicanor"));
     }
 }
