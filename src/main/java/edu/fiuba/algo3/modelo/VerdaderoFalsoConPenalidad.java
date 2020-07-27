@@ -29,13 +29,13 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
     }
 
     @Override
-    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError {
+    public Integer puntajeConOpciones(ArrayList<Opcion> opciones)  {
         return opciones.get(0).getValor();
     }
 
     @Override
     public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> respuestas) throws PreguntaError {
-        ArrayList<Integer> puntajes = new ArrayList<Integer>();
+        ArrayList<Integer> puntajes = new ArrayList<>();
         for (Respuesta respuesta: respuestas) {
             puntajes.add(this.puntajeConOpciones(respuesta.opcionesElegidas));
         }
@@ -55,6 +55,9 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
 
     @Override
     public void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError {
+        if(respuestaActual == null){
+            throw new PreguntaError("No se ha iniciado el jugador");
+        }
         if(respuestaActual.obtenerOpcionesElegidas().size() >= 1){
             throw new PreguntaError("Solo puede elegir una opcion");
         }

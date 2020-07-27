@@ -201,4 +201,13 @@ public class VerdaderoFalsoConPenalidadTest {
 
         assertThrows(PreguntaError.class, ()-> pregunta.iniciar(jugador));
     }
+
+    @Test
+    public void NoSePuedeSeleccionarUnaOpcionSinHaberIniciado(){
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        assertThrows(PreguntaError.class, ()->pregunta.seleccionarOpcion(opciones.get(1)));
+    }
+
 }
