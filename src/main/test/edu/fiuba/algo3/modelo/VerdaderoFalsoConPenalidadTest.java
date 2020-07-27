@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VerdaderoFalsoConPenalidadTest {
 
     @Test
-    public void VerdaderoFalsoPuedeCrearseIndicándolecualEsLaRespuestaCorrecta() throws PreguntaError {
+    public void VerdaderoFalsoPuedeCrearseIndicandolecualEsLaRespuestaCorrecta() {
         VerdaderoFalsoConPenalidad pregunta1 = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
 
         assertEquals(pregunta1.obtenerOpciones().size(),2);
@@ -44,8 +44,7 @@ public class VerdaderoFalsoConPenalidadTest {
         ArrayList<Respuesta> respuestas = new ArrayList<Respuesta>();
         respuestas.add(respuesta);
 
-        ArrayList<Integer> puntajes = new ArrayList<Integer>();
-        puntajes = pregunta.puntajeConRespuestas(respuestas);
+        ArrayList<Integer> puntajes = pregunta.puntajeConRespuestas(respuestas);
         assertEquals(puntajes.get(0),-1);
     }
 
@@ -116,5 +115,98 @@ public class VerdaderoFalsoConPenalidadTest {
 
         assertThrows(PreguntaError.class, ()-> pregunta.confirmar() );
 
+    }
+
+    @Test
+    public void CreacionVerdaderoFalsoObtenerTituloDevuelveElTitulo(){
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
+
+        assertEquals("¿Estamos en el año 2020?",pregunta.obtenerTitulo());
+    }
+
+    @Test
+    public void OpcionVerdaderoFalsoMarcadaComoCorrectaValeUnoYFalsoMenosUno(){
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        assertEquals("Verdadero",opciones.get(0).getTitulo());
+        assertEquals(1,opciones.get(0).getValor());
+
+        assertEquals("Falso",opciones.get(1).getTitulo());
+        assertEquals(-1,opciones.get(1).getValor());
+    }
+
+    @Test
+    public void OpcionVerdaderoMarcadaComoIncorrectaValeMenosUnoYFalsoUno(){
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?",false);
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        assertEquals("Verdadero",opciones.get(0).getTitulo());
+        assertEquals(-1,opciones.get(0).getValor());
+
+        assertEquals("Falso",opciones.get(1).getTitulo());
+        assertEquals(1,opciones.get(1).getValor());
+
+    }
+
+    @Test
+    public void JugadorRespondePeroNoConfirmaOtroJugadorNoPuedeResponder() throws PreguntaError, RespuestaError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?",false);
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        Jugador pedro = new Jugador("Pedro");
+        Jugador marcos = new Jugador("Marcos");
+
+        pregunta.iniciar(pedro);
+        pregunta.seleccionarOpcion(opciones.get(0));
+
+        assertThrows(PreguntaError.class, ()-> pregunta.iniciar(marcos));
+
+    }
+
+    @Test
+    public void IniciarPreguntaSinJugadorLanzaExcepcion() throws PreguntaError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
+
+        assertThrows(PreguntaError.class, ()->pregunta.iniciar(null));
+    }
+
+    @Test
+    public void IniciarDosVecesSinConfirmarLanzaExcepcion() throws PreguntaError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
+        Jugador jugador = new Jugador("Paula");
+
+        pregunta.iniciar(jugador);
+
+        assertThrows(PreguntaError.class, ()-> pregunta.iniciar(jugador));
+    }
+
+    @Test
+    public void AlCrearseLaPreguntaPrimeroSeGuardaLaOpcionVerdaderoYDespuesFalsoSinImportarCualEsLaCorrecta(){
+        VerdaderoFalsoConPenalidad pregunta1 = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
+
+        ArrayList<Opcion> opciones1 = pregunta1.obtenerOpciones();
+
+        assertEquals("Verdadero", opciones1.get(0).getTitulo());
+        assertEquals("Falso", opciones1.get(1).getTitulo());
+
+        VerdaderoFalsoConPenalidad pregunta2 = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?",false);
+
+        ArrayList<Opcion> opciones2 = pregunta2.obtenerOpciones();
+
+        assertEquals("Verdadero", opciones2.get(0).getTitulo());
+        assertEquals("Falso", opciones2.get(1).getTitulo());
+    }
+
+    @Test
+    public void SoloSePuedeIniciarUnaVezSinConfirmar() throws PreguntaError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?",false);
+        Jugador jugador = new Jugador("Carlos");
+        pregunta.iniciar(jugador);
+
+        assertThrows(PreguntaError.class, ()-> pregunta.iniciar(jugador));
     }
 }
