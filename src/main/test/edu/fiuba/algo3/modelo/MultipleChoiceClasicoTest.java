@@ -403,7 +403,7 @@ public class MultipleChoiceClasicoTest {
         pregunta.seleccionarOpcion(opciones.get(3));
 
         Respuesta respuesta = pregunta.confirmar();
-        ArrayList<Opcion> opcionesRespuesta = respuesta.opcionesElegidas;
+        ArrayList<Opcion> opcionesRespuesta = respuesta.obtenerOpcionesElegidas();
 
         assertEquals(3, opcionesRespuesta.size());
         assertEquals("Si papa, Obiousli", opcionesRespuesta.get(0).getTitulo());
@@ -456,7 +456,7 @@ public class MultipleChoiceClasicoTest {
 
         Respuesta respuesta = pregunta.confirmar();
 
-        ArrayList<Opcion> opcionesRespuesta = respuesta.opcionesElegidas;
+        ArrayList<Opcion> opcionesRespuesta = respuesta.obtenerOpcionesElegidas();
 
         assertEquals(1, opcionesRespuesta.size());
 
@@ -512,7 +512,7 @@ public class MultipleChoiceClasicoTest {
 
         Respuesta respuesta = pregunta.confirmar();
 
-        Integer puntaje = pregunta.puntajeConOpciones(respuesta.opcionesElegidas);
+        Integer puntaje = respuesta.obtenerPuntaje();
 
         assertEquals(1, puntaje);
     }
@@ -537,7 +537,7 @@ public class MultipleChoiceClasicoTest {
 
         Respuesta respuesta = pregunta.confirmar();
 
-        Integer puntaje = pregunta.puntajeConOpciones(respuesta.opcionesElegidas);
+        Integer puntaje = respuesta.obtenerPuntaje();
 
         assertEquals(0, puntaje);
     }
@@ -560,7 +560,7 @@ public class MultipleChoiceClasicoTest {
 
         Respuesta respuesta = pregunta.confirmar();
 
-        Integer puntaje = pregunta.puntajeConOpciones(respuesta.opcionesElegidas);
+        Integer puntaje = respuesta.obtenerPuntaje();
 
         assertEquals(0, puntaje);
     }
