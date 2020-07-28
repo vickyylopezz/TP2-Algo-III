@@ -10,7 +10,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 * **Integrante 1** - [Juan Ignacio Coronel](https://github.com/hoffme)
 * **Integrante 2** - [Celeste Dituro](https://github.com/celedituro)
-* **Integrante 3** - [Francisco Manuel Florit](https://github.com/floritfran)
+* **Integrante 3** - [Francisco Florit](https://github.com/floritfran)
 * **Integrante 4** - [Victoria Abril Lopez](https://github.com/vickyylopezz)
 * **Integrante 5** - [Alejandro Vargas](https://github.com/alevargas-gif)
 
