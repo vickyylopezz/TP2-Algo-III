@@ -79,4 +79,12 @@ public class MultipleChoiceParcialTest {
 
         assertThrows(PreguntaError.class, () -> preguntaMCP.agregarOpcionIncorrecta("Nicanor"));
     }
+
+    @Test
+    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PreguntaError {
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Cuál es el apellido de nuestro corrector?", 15);
+        ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+
+        assertEquals(0, preguntaMCP.puntajeConOpciones(opciones));
+    }
 }
