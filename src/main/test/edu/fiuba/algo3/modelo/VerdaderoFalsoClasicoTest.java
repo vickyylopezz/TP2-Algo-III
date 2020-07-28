@@ -31,13 +31,14 @@ public class VerdaderoFalsoClasicoTest {
         preguntavf.agregarOpcionIncorrecta("Falso");
 
         Jugador jugador = mock(Jugador.class);
-
-        ArrayList<Respuesta> respuestas = new ArrayList<Respuesta>();
-        Respuesta respuestaJugador1 = new Respuesta(preguntavf, jugador);
-        Respuesta respuestaJugador2 = new Respuesta(preguntavf, jugador);
         ArrayList<Opcion> opciones = preguntavf.obtenerOpciones();
-        respuestaJugador1.agregarOpcion(opciones.get(0));
-        respuestaJugador2.agregarOpcion(opciones.get(1));
+
+        preguntavf.iniciar(jugador);
+        preguntavf.seleccionarOpcion(opciones.get(0));
+        Respuesta respuestaJugador1 = preguntavf.confirmar();
+        preguntavf.iniciar(jugador);
+        preguntavf.seleccionarOpcion(opciones.get(1));
+        Respuesta respuestaJugador2 = preguntavf.confirmar();
 
         Integer esperadoJugador1 = 1;
         Integer esperadoJugador2 = 0;
@@ -69,6 +70,57 @@ public class VerdaderoFalsoClasicoTest {
         preguntavf.agregarOpcionIncorrecta("Falso");
 
         assertThrows(PreguntaError.class, () -> preguntavf.agregarOpcionCorrecta("True"));
+    }
+
+    @Test
+    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PreguntaError {
+        VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?", 15);
+        ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+
+        assertEquals(0, preguntavf.puntajeConOpciones(opciones));
+    }
+
+    @Test
+    public void IniciarVerdaderoFalsoClasicoConUnaSolaOpcionLanzaPreguntaError() throws PreguntaError {
+        VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?", 15);
+        preguntavf.agregarOpcionCorrecta("Verdadero");
+        Jugador jugador = mock(Jugador.class);
+
+        assertThrows(PreguntaError.class, () -> preguntavf.iniciar(jugador));
+    }
+
+    @Test
+    public void IniciarVerdaderoFalsoClasicoSinUnJugadorLanzaPreguntaError() throws PreguntaError {
+        VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?", 15);
+        preguntavf.agregarOpcionCorrecta("Verdadero");
+        preguntavf.agregarOpcionIncorrecta("Falso");
+
+        assertThrows(PreguntaError.class, () -> preguntavf.iniciar(null));
+    }
+
+    @Test
+    public void IniciarVerdaderoFalsoClasicoSinConfirmarLaRespuestaDelAnteriorJugadorLanzaPreguntaError() throws PreguntaError {
+        VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?", 15);
+        preguntavf.agregarOpcionCorrecta("Verdadero");
+        preguntavf.agregarOpcionIncorrecta("Falso");
+        Jugador jugador1 = mock(Jugador.class);
+        Jugador jugador2 = mock(Jugador.class);
+
+        preguntavf.iniciar(jugador1);
+        assertThrows(PreguntaError.class, () -> preguntavf.iniciar(jugador2));
+    }
+
+    @Test
+    public void AgregarDosVecesLaMismaOpcionALaRespuestaLanzaPreguntaError() throws PreguntaError {
+        VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?", 15);
+        preguntavf.agregarOpcionCorrecta("Verdadero");
+        preguntavf.agregarOpcionIncorrecta("Falso");
+        Jugador jugador = mock(Jugador.class);
+        ArrayList<Opcion> opciones = preguntavf.obtenerOpciones();
+
+        preguntavf.iniciar(jugador);
+        preguntavf.seleccionarOpcion(opciones.get(0));
+        assertThrows(PreguntaError.class, () -> preguntavf.seleccionarOpcion(opciones.get(0)));
     }
 }
 

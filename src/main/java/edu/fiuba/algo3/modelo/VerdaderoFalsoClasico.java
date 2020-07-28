@@ -40,14 +40,6 @@ public class VerdaderoFalsoClasico implements Pregunta {
         this.opcionesIncorrectas++;
     }
 
-    public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> todasLasRespuestas) {
-        ArrayList<Integer> puntajes = new ArrayList<Integer>();
-        for(Respuesta respuestaPorJugador : todasLasRespuestas){
-
-        }
-        return puntajes;
-    }
-
     @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
         if (this.opciones.size() < 2) {
