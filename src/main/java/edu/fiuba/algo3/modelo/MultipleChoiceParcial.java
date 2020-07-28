@@ -1,82 +1,84 @@
 package edu.fiuba.algo3.modelo;
 
-import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
 
-public class MultipleChoiseParcialTest {
+public class MultipleChoiseParcial implements Pregunta {
 
-    @Test
-    public void CreacionDeMultipleChoiseConSegundosNegativosLanzaPreguntaError(){
-        assertThrows(PreguntaError.class, () -> new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", -1));
+    private String titulo;
+    private ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+    private Respuesta respuestaActual;
+    private Integer segundos;
+
+    public MultipleChoiseParcial(String titulo, Integer segundos) throws PreguntaError {
+        if (segundos < 0){
+            throw new PreguntaError("Los segundos no pueden ser negativos");
+        }
+        this.segundos = segundos;
+        this.titulo = titulo;
     }
 
-    @Test
-    public void CreacionDeMultipleChoiseParcialIndicandoRespuestaCorrecta() throws PreguntaError {
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
-        preguntaMCP.agregarOpcionCorrecta("Francisco");
-        preguntaMCP.agregarOpcionCorrecta("Victoria");
-        preguntaMCP.agregarOpcionIncorrecta("Fernando");
-        preguntaMCP.agregarOpcionIncorrecta("Catalina");
-
-        assertEquals("¿Quienes son integrantes del grupo PM3?", preguntaMCP.titulo());
-        assertEquals(4, preguntaMCP.obtenerOpciones().size());
+    public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
+        if (this.opciones.size() == 5){
+            throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
+        }
+        Opcion opcion = new Opcion(opcionTitulo, 1);
+        this.opciones.add(opcion);
     }
 
-    @Test
-    public void obtenerOpcionesDevuelveTodasLasOpcionesAgregadas() throws PreguntaError {
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
-        preguntaMCP.agregarOpcionCorrecta("Francisco");
-        preguntaMCP.agregarOpcionCorrecta("Victoria");
-        preguntaMCP.agregarOpcionIncorrecta("Fernando");
-        preguntaMCP.agregarOpcionIncorrecta("Catalina");
-
-        ArrayList<Opcion> opciones = preguntaMCP.obtenerOpciones();
-
-        assertEquals(4, opciones.size());
+    public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
+        if (this.opciones.size() == 5){
+            throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
+        }
+        Opcion opcion = new Opcion(opcionTitulo, 0);
+        this.opciones.add(opcion);
     }
 
-    @Test
-    public void MultipleChoiseParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError {
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
-        preguntaMCP.agregarOpcionCorrecta("Francisco");
-        preguntaMCP.agregarOpcionCorrecta("Victoria");
-        preguntaMCP.agregarOpcionIncorrecta("Fernando");
-        preguntaMCP.agregarOpcionIncorrecta("Catalina");
-
-        Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuestaJugador1 = new Respuesta(preguntaMCP, jugador);
-        Respuesta respuestaJugador2 = new Respuesta(preguntaMCP, jugador);
-        Respuesta respuestaJugador3 = new Respuesta(preguntaMCP, jugador);
-        ArrayList<Opcion> opciones = preguntaMCP.obtenerOpciones();
-
-        respuestaJugador1.agregarOpcion(opciones.get(0));
-        respuestaJugador1.agregarOpcion(opciones.get(1));
-        respuestaJugador2.agregarOpcion(opciones.get(0));
-        respuestaJugador2.agregarOpcion(opciones.get(2));
-        respuestaJugador3.agregarOpcion(opciones.get(1));
-
-        Integer esperadoJugador1 = 2;
-        Integer esperadoJugador2 = 0;
-        Integer esperadoJugador3 = 1;
-
-        assertEquals(esperadoJugador1, respuestaJugador1.obtenerPuntaje());
-        assertEquals(esperadoJugador2, respuestaJugador2.obtenerPuntaje());
-        assertEquals(esperadoJugador3, respuestaJugador3.obtenerPuntaje());
+    public String titulo() {
+        return this.titulo;
     }
 
-    @Test
-    public void AgregarMasDeCincoOpcionesLanzaUnPreguntaError() throws PreguntaError {
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
-        preguntaMCP.agregarOpcionCorrecta("Francisco");
-        preguntaMCP.agregarOpcionCorrecta("Victoria");
-        preguntaMCP.agregarOpcionIncorrecta("Fernando");
-        preguntaMCP.agregarOpcionIncorrecta("Catalina");
-        preguntaMCP.agregarOpcionCorrecta("Juan");
+    public ArrayList<Opcion> obtenerOpciones() {
+        return this.opciones;
+    }
 
-        assertThrows(PreguntaError.class, () -> preguntaMCP.agregarOpcionIncorrecta("Nicanor"));
+    @Override
+    public void iniciar(Jugador jugador) throws PreguntaError {
+        if (this.opciones.size() < 2) {
+            throw new PreguntaError("Cantidad de opciones guardadas invalida");
+        }
+        if (jugador == null) {
+            throw new PreguntaError("Jugador nulo");
+        }
+        if (this.respuestaActual != null) {
+            throw new PreguntaError("No se ha cerrado el ultimo jugador");
+        }
+        this.respuestaActual = new Respuesta(this, jugador);
+    }
+
+    @Override
+    public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
+        this.respuestaActual.agregarOpcion(opcion);
+    }
+
+    @Override
+    public Respuesta confirmar() throws PreguntaError {
+        Respuesta resultado = this.respuestaActual;
+        this.respuestaActual = null;
+        return resultado;
+    }
+
+    @Override
+    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) {
+        if (opciones.size() == 0){
+            return 0;
+        }
+        Integer puntajeParcial = 0;
+        for (Opcion opcion : opciones){
+            puntajeParcial = puntajeParcial + opcion.getValor();
+        }
+        if (puntajeParcial != opciones.size()) {
+            return 0;
+        }
+        return puntajeParcial;
     }
 }
