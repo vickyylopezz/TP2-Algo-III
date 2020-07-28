@@ -39,7 +39,7 @@ public class MultipleChoiceParcialTest {
     }
 
     @Test
-    public void MultipleChoiseParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError {
+    public void MultipleChoiseParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError, RespuestaError {
         MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?", 15);
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
