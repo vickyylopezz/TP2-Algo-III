@@ -77,12 +77,12 @@ public class JugadorTest {
     }
 
     @Test
-    public void calcularPuntajeTotalConUnaRespuestaDevuelveElPuntajeCorrecto() throws RespuestaError {
+    public void calcularPuntajeTotalConUnaRespuestaDevuelveElPuntajeCorrecto() throws RespuestaError, PreguntaError {
         Jugador carlos = new Jugador("Carlos");
         VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?", 15);
 
         Opcion opcion = new Opcion("Verdadero", 1);
-        Respuesta respuesta = new Respuesta(preguntavf, null);
+        Respuesta respuesta = new Respuesta(preguntaVF, null);
         respuesta.agregarOpcion(opcion);
 
         try {
@@ -97,20 +97,20 @@ public class JugadorTest {
     }
 
     @Test
-    public void calcularPuntajeTotalConVariasRespuestaDevuelveElPuntajeCorrecto() throws RespuestaError {
+    public void calcularPuntajeTotalConVariasRespuestaDevuelveElPuntajeCorrecto() throws RespuestaError, PreguntaError {
         Jugador carlos = new Jugador("Carlos");
         VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?", 15);
 
         Opcion opcion1 = new Opcion("Verdadero", 1);
-        Respuesta respuesta1 = new Respuesta(preguntavf, null);
+        Respuesta respuesta1 = new Respuesta(preguntaVF, null);
         respuesta1.agregarOpcion(opcion1);
 
         Opcion opcion2 = new Opcion("Verdadero", -3);
-        Respuesta respuesta2 = new Respuesta(preguntavf, null);
+        Respuesta respuesta2 = new Respuesta(preguntaVF, null);
         respuesta2.agregarOpcion(opcion2);
 
         Opcion opcion3 = new Opcion("Verdadero", 5);
-        Respuesta respuesta3 = new Respuesta(preguntavf, null);
+        Respuesta respuesta3 = new Respuesta(preguntaVF, null);
         respuesta3.agregarOpcion(opcion3);
 
         try {
