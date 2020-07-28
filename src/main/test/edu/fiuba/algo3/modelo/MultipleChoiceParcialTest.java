@@ -6,16 +6,16 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
-public class MultipleChoiseParcialTest {
+public class MultipleChoiceParcialTest {
 
     @Test
     public void CreacionDeMultipleChoiseConSegundosNegativosLanzaPreguntaError(){
-        assertThrows(PreguntaError.class, () -> new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", -1));
+        assertThrows(PreguntaError.class, () -> new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?", -1));
     }
 
     @Test
     public void CreacionDeMultipleChoiseParcialIndicandoRespuestaCorrecta() throws PreguntaError {
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?", 15);
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
         preguntaMCP.agregarOpcionIncorrecta("Fernando");
@@ -27,7 +27,7 @@ public class MultipleChoiseParcialTest {
 
     @Test
     public void obtenerOpcionesDevuelveTodasLasOpcionesAgregadas() throws PreguntaError {
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?", 15);
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
         preguntaMCP.agregarOpcionIncorrecta("Fernando");
@@ -39,8 +39,8 @@ public class MultipleChoiseParcialTest {
     }
 
     @Test
-    public void MultipleChoiseParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError {
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
+    public void MultipleChoiseParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError, RespuestaError {
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?", 15);
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
         preguntaMCP.agregarOpcionIncorrecta("Fernando");
@@ -70,7 +70,7 @@ public class MultipleChoiseParcialTest {
 
     @Test
     public void AgregarMasDeCincoOpcionesLanzaUnPreguntaError() throws PreguntaError {
-        MultipleChoiseParcial preguntaMCP = new MultipleChoiseParcial("¿Quienes son integrantes del grupo PM3?", 15);
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?", 15);
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
         preguntaMCP.agregarOpcionIncorrecta("Fernando");

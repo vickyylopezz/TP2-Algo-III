@@ -77,11 +77,12 @@ public class JugadorTest {
     }
 
     @Test
-    public void calcularPuntajeTotalConUnaRespuestaDevuelveElPuntajeCorrecto() throws RespuestaError {
+    public void calcularPuntajeTotalConUnaRespuestaDevuelveElPuntajeCorrecto() throws RespuestaError, PreguntaError {
         Jugador carlos = new Jugador("Carlos");
+        VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?", 15);
 
         Opcion opcion = new Opcion("Verdadero", 1);
-        Respuesta respuesta = new Respuesta(null, null);
+        Respuesta respuesta = new Respuesta(preguntaVF, null);
         respuesta.agregarOpcion(opcion);
 
         try {
@@ -89,28 +90,27 @@ public class JugadorTest {
         } catch (JugadorError jugadorError) {
             jugadorError.printStackTrace();
         }
-        VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?");
-        ArrayList<Respuesta> respuestaArrayList = new ArrayList<>();
-        respuestaArrayList.add(respuesta);
-        ArrayList<Integer> puntaje = preguntaVF.puntajeConRespuestas(respuestaArrayList);
+        
+        Integer puntaje = respuesta.obtenerPuntaje();
 
-        assertEquals(1, puntaje.get(0));
+        assertEquals(1, puntaje);
     }
 
     @Test
-    public void calcularPuntajeTotalConVariasRespuestaDevuelveElPuntajeCorrecto() throws RespuestaError {
+    public void calcularPuntajeTotalConVariasRespuestaDevuelveElPuntajeCorrecto() throws RespuestaError, PreguntaError {
         Jugador carlos = new Jugador("Carlos");
+        VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?", 15);
 
         Opcion opcion1 = new Opcion("Verdadero", 1);
-        Respuesta respuesta1 = new Respuesta(null, null);
+        Respuesta respuesta1 = new Respuesta(preguntaVF, null);
         respuesta1.agregarOpcion(opcion1);
 
         Opcion opcion2 = new Opcion("Verdadero", -3);
-        Respuesta respuesta2 = new Respuesta(null, null);
+        Respuesta respuesta2 = new Respuesta(preguntaVF, null);
         respuesta2.agregarOpcion(opcion2);
 
         Opcion opcion3 = new Opcion("Verdadero", 5);
-        Respuesta respuesta3 = new Respuesta(null, null);
+        Respuesta respuesta3 = new Respuesta(preguntaVF, null);
         respuesta3.agregarOpcion(opcion3);
 
         try {
@@ -121,13 +121,9 @@ public class JugadorTest {
             jugadorError.printStackTrace();
         }
 
-        VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?");
-        ArrayList<Respuesta> respuestaArrayList = new ArrayList<>();
         for (Respuesta respuesta : carlos.obtenerRespuestas()){
-            respuestaArrayList.add(respuesta);
-            ArrayList<Integer> puntaje = preguntaVF.puntajeConRespuestas(respuestaArrayList);
-            carlos.sumarPuntaje(puntaje.get(0));
-            respuestaArrayList.clear();
+            Integer puntajePorRespuesta = respuesta.obtenerPuntaje();
+            carlos.sumarPuntaje(puntajePorRespuesta);
         }
 
         Integer puntaje = carlos.puntajeTotal();

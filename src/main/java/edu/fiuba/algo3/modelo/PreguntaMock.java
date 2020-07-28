@@ -10,11 +10,6 @@ public class PreguntaMock implements Pregunta{
     }
 
     @Override
-    public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> respuestas) throws PreguntaError {
-        return null;
-    }
-
-    @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
 
     }
@@ -27,5 +22,5 @@ public class PreguntaMock implements Pregunta{
     @Override
     public Respuesta confirmar() throws PreguntaError {
         return null;
-    };
+    }
 }

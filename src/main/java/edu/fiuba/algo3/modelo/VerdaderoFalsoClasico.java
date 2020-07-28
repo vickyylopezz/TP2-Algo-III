@@ -28,7 +28,6 @@ public class VerdaderoFalsoClasico implements Pregunta {
         }
         Opcion opcion = new Opcion(opcionTitulo, 1);
         this.opciones.add(opcion);
-        this.opcionesCorrectas++;
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
@@ -37,7 +36,6 @@ public class VerdaderoFalsoClasico implements Pregunta {
         }
         Opcion opcion = new Opcion(opcionTitulo, 0);
         this.opciones.add(opcion);
-        this.opcionesIncorrectas++;
     }
 
     public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> todasLasRespuestas) {
@@ -64,7 +62,11 @@ public class VerdaderoFalsoClasico implements Pregunta {
 
     @Override
     public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
-        this.respuestaActual.agregarOpcion(opcion);
+        try {
+            this.respuestaActual.agregarOpcion(opcion);
+        } catch (RespuestaError respuestaError) {
+            throw new PreguntaError("No se puede agregar la opcion: " + respuestaError.getMessage());
+        }
     }
 
     @Override

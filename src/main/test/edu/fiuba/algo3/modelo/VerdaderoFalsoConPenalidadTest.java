@@ -41,11 +41,8 @@ public class VerdaderoFalsoConPenalidadTest {
         pregunta.seleccionarOpcion(opciones.get(1));
         Respuesta respuesta = pregunta.confirmar();
 
-        ArrayList<Respuesta> respuestas = new ArrayList<>();
-        respuestas.add(respuesta);
-
-        ArrayList<Integer> puntajes = pregunta.puntajeConRespuestas(respuestas);
-        assertEquals(puntajes.get(0),-1);
+        //ArrayList<Integer> puntajes = pregunta.puntajeConRespuestas(respuestas);
+        assertEquals(respuesta.obtenerPuntaje(),-1);
     }
 
     @Test
@@ -68,9 +65,8 @@ public class VerdaderoFalsoConPenalidadTest {
         respuestas.add(respuestaPaula);
         respuestas.add(respuestaMarta);
 
-        ArrayList<Integer> puntajes = pregunta.puntajeConRespuestas(respuestas);
-        assertEquals(puntajes.get(0),1);
-        assertEquals(puntajes.get(1),-1);
+        assertEquals(respuestas.get(0).obtenerPuntaje(),1);
+        assertEquals(respuestas.get(1).obtenerPuntaje(),-1);
     }
 
     @Test

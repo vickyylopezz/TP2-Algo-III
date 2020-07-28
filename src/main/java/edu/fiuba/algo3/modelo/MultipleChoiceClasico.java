@@ -80,21 +80,6 @@ public class MultipleChoiceClasico implements Pregunta {
     }
 
     @Override
-    public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> respuestas) throws PreguntaError {
-        if (respuestas == null) {
-            throw new PreguntaError("parametro respuestas no puede ser null");
-        }
-
-        ArrayList<Integer> puntajes = new ArrayList<>();
-
-        for (Respuesta respuesta: respuestas) {
-            puntajes.add(this.puntajeConOpciones(respuesta.opcionesElegidas));
-        }
-
-        return puntajes;
-    }
-
-    @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
         if (this.opciones.size() < 2) {
             throw new PreguntaError("Cantidad de opciones guardadas invalida");

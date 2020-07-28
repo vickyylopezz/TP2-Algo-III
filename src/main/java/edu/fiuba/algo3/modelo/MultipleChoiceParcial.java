@@ -2,14 +2,14 @@ package edu.fiuba.algo3.modelo;
 
 import java.util.ArrayList;
 
-public class MultipleChoiseParcial implements Pregunta {
+public class MultipleChoiceParcial implements Pregunta {
 
     private String titulo;
-    private ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+    private ArrayList<Opcion> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
     private Integer segundos;
 
-    public MultipleChoiseParcial(String titulo, Integer segundos) throws PreguntaError {
+    public MultipleChoiceParcial(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0){
             throw new PreguntaError("Los segundos no pueden ser negativos");
         }
@@ -56,7 +56,7 @@ public class MultipleChoiseParcial implements Pregunta {
     }
 
     @Override
-    public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
+    public void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError {
         this.respuestaActual.agregarOpcion(opcion);
     }
 
