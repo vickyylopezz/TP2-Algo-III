@@ -34,15 +34,6 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
     }
 
     @Override
-    public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> respuestas) throws PreguntaError {
-        ArrayList<Integer> puntajes = new ArrayList<>();
-        for (Respuesta respuesta: respuestas) {
-            puntajes.add(this.puntajeConOpciones(respuesta.opcionesElegidas));
-        }
-        return puntajes;
-    }
-
-    @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
         if(jugador == null){
             throw new PreguntaError("No existe el jugador");
