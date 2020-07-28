@@ -5,52 +5,81 @@ import java.util.ArrayList;
 public class VerdaderoFalsoClasico implements Pregunta {
 
     private ArrayList<Opcion> opciones;
+    private Integer opcionesCorrectas;
+    private Integer opcionesIncorrectas;
     private String titulo;
     private Respuesta respuestaActual;
+    private Integer segundos;
 
-    public VerdaderoFalsoClasico(String pregunta){
-        this.opciones = new ArrayList<>();
+    public VerdaderoFalsoClasico(String pregunta, Integer segundos) throws PreguntaError {
+        if (segundos < 0){
+            throw new PreguntaError("Los segundos no pueden ser negativos");
+        }
+        this.opciones = new ArrayList<Opcion>();
+        this.opcionesCorrectas = 0;
+        this.opcionesIncorrectas = 0;
         this.titulo = pregunta;
+        this.segundos = segundos;
     }
 
-    public void agregarOpcionCorrecta(String opcionTitulo) {
+    public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
+        if (opcionesCorrectas > 0){
+            throw new PreguntaError("Ya existe una opcion correcta");
+        }
         Opcion opcion = new Opcion(opcionTitulo, 1);
         this.opciones.add(opcion);
+        this.opcionesCorrectas++;
     }
 
-    public void agregarOpcionIncorrecta(String opcionTitulo) {
+    public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
+        if (opcionesIncorrectas > 0){
+            throw new PreguntaError("Ya existe una opcion correcta");
+        }
         Opcion opcion = new Opcion(opcionTitulo, 0);
         this.opciones.add(opcion);
+        this.opcionesIncorrectas++;
     }
 
     public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> todasLasRespuestas) {
-        ArrayList<Integer> puntajes = new ArrayList<>();
+        ArrayList<Integer> puntajes = new ArrayList<Integer>();
         for(Respuesta respuestaPorJugador : todasLasRespuestas){
-            for (Opcion opcion : respuestaPorJugador.obtenerOpcionesElegidas()){
-                puntajes.add(opcion.getValor());
-            }
+
         }
         return puntajes;
     }
 
     @Override
-    public void iniciar(Jugador jugador) {
+    public void iniciar(Jugador jugador) throws PreguntaError {
+        if (this.opciones.size() < 2) {
+            throw new PreguntaError("Cantidad de opciones guardadas invalida");
+        }
+        if (jugador == null) {
+            throw new PreguntaError("Jugador nulo");
+        }
+        if (this.respuestaActual != null) {
+            throw new PreguntaError("No se ha cerrado el ultimo jugador");
+        }
         this.respuestaActual = new Respuesta(this, jugador);
     }
 
     @Override
-    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
+    public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
         this.respuestaActual.agregarOpcion(opcion);
     }
 
     @Override
-    public Respuesta confirmar() {
-        return this.respuestaActual;
+    public Respuesta confirmar() throws PreguntaError {
+        Respuesta resultado = this.respuestaActual;
+        this.respuestaActual = null;
+        return resultado;
     }
 
     @Override
     public Integer puntajeConOpciones(ArrayList<Opcion> opciones) {
-        return 1;
+        if (opciones.size() == 0){
+            return 0;
+        }
+        return (opciones.get(0)).getValor();
     }
 
     public ArrayList<Opcion> obtenerOpciones() {
