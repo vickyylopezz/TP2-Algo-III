@@ -47,17 +47,21 @@ public class MultipleChoiceParcialTest {
         preguntaMCP.agregarOpcionIncorrecta("Catalina");
 
         Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuestaJugador1 = new Respuesta(preguntaMCP, jugador);
-        Respuesta respuestaJugador2 = new Respuesta(preguntaMCP, jugador);
-        Respuesta respuestaJugador3 = new Respuesta(preguntaMCP, jugador);
         ArrayList<Opcion> opciones = preguntaMCP.obtenerOpciones();
 
-        respuestaJugador1.agregarOpcion(opciones.get(0));
-        respuestaJugador1.agregarOpcion(opciones.get(1));
-        respuestaJugador2.agregarOpcion(opciones.get(0));
-        respuestaJugador2.agregarOpcion(opciones.get(2));
-        respuestaJugador3.agregarOpcion(opciones.get(1));
+        preguntaMCP.iniciar(jugador);
+        preguntaMCP.seleccionarOpcion(opciones.get(0));
+        preguntaMCP.seleccionarOpcion(opciones.get(1));
+        Respuesta respuestaJugador1 = preguntaMCP.confirmar();
+
+        preguntaMCP.iniciar(jugador);
+        preguntaMCP.seleccionarOpcion(opciones.get(0));
+        preguntaMCP.seleccionarOpcion(opciones.get(2));
+        Respuesta respuestaJugador2 = preguntaMCP.confirmar();
+
+        preguntaMCP.iniciar(jugador);
+        preguntaMCP.seleccionarOpcion(opciones.get(1));
+        Respuesta respuestaJugador3 = preguntaMCP.confirmar();
 
         Integer esperadoJugador1 = 2;
         Integer esperadoJugador2 = 0;
@@ -86,5 +90,36 @@ public class MultipleChoiceParcialTest {
         ArrayList<Opcion> opciones = new ArrayList<Opcion>();
 
         assertEquals(0, preguntaMCP.puntajeConOpciones(opciones));
+    }
+
+    @Test
+    public void IniciarMultipleChoiceParcialConMenosDeDosOpcionesLanzaPreguntaError() throws PreguntaError {
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Cuál es el apellido de nuestro corrector?", 15);
+        preguntaMCP.agregarOpcionIncorrecta("Jirafales");
+        Jugador jugador = mock(Jugador.class);
+
+        assertThrows(PreguntaError.class, () -> preguntaMCP.iniciar(jugador));
+    }
+
+    @Test
+    public void IniciarMultipleChoiceParcialSinUnJugadorLanzaPreguntaError() throws PreguntaError {
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Cuál es el apellido de nuestro corrector?", 15);
+        preguntaMCP.agregarOpcionIncorrecta("Jirafales");
+        preguntaMCP.agregarOpcionIncorrecta("Peña");
+        preguntaMCP.agregarOpcionCorrecta("Rodríguez");
+
+        assertThrows(PreguntaError.class, () -> preguntaMCP.iniciar(null));
+    }
+
+    @Test
+    public void IniciarMultipleChoiceParcialSinConfirmarLaRespuestaAnteriorLanzaPreguntaError() throws PreguntaError {
+        MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Cuál es el apellido de nuestro corrector?", 15);
+        preguntaMCP.agregarOpcionIncorrecta("Jirafales");
+        preguntaMCP.agregarOpcionIncorrecta("Peña");
+        preguntaMCP.agregarOpcionCorrecta("Rodríguez");
+        Jugador jugador = mock(Jugador.class);
+        preguntaMCP.iniciar(jugador);
+
+        assertThrows(PreguntaError.class, () -> preguntaMCP.iniciar(jugador));
     }
 }
