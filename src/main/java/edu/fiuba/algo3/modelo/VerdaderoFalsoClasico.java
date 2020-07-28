@@ -28,6 +28,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
         }
         Opcion opcion = new Opcion(opcionTitulo, 1);
         this.opciones.add(opcion);
+        this.opcionesCorrectas++;
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
@@ -36,6 +37,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
         }
         Opcion opcion = new Opcion(opcionTitulo, 0);
         this.opciones.add(opcion);
+        this.opcionesIncorrectas++;
     }
 
     public ArrayList<Integer> puntajeConRespuestas(ArrayList<Respuesta> todasLasRespuestas) {
