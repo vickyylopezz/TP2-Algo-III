@@ -64,7 +64,11 @@ public class VerdaderoFalsoClasico implements Pregunta {
 
     @Override
     public void seleccionarOpcion(Opcion opcion) throws PreguntaError {
-        this.respuestaActual.agregarOpcion(opcion);
+        try {
+            this.respuestaActual.agregarOpcion(opcion);
+        } catch (RespuestaError respuestaError) {
+            throw new PreguntaError("No se puede agregar la opcion: " + respuestaError.getMessage());
+        }
     }
 
     @Override
