@@ -82,6 +82,7 @@ public class MultipleChoiceParcialTest {
         preguntaMCP.agregarOpcionCorrecta("Juan");
 
         assertThrows(PreguntaError.class, () -> preguntaMCP.agregarOpcionIncorrecta("Nicanor"));
+        assertThrows(PreguntaError.class, () -> preguntaMCP.agregarOpcionCorrecta("Celeste"));
     }
 
     @Test
