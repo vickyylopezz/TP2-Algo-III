@@ -4,9 +4,8 @@ import java.util.ArrayList;
 
 public class VerdaderoFalsoClasico implements Pregunta {
 
-    private ArrayList<Opcion> opciones;
-    private Integer opcionesCorrectas;
-    private Integer opcionesIncorrectas;
+    private Opcion opcionCorrecta;
+    private Opcion opcionIncorrecta;
     private String titulo;
     private Respuesta respuestaActual;
     private Integer segundos;
@@ -15,34 +14,31 @@ public class VerdaderoFalsoClasico implements Pregunta {
         if (segundos < 0){
             throw new PreguntaError("Los segundos no pueden ser negativos");
         }
-        this.opciones = new ArrayList<Opcion>();
-        this.opcionesCorrectas = 0;
-        this.opcionesIncorrectas = 0;
+        this.opcionCorrecta = null;
+        this.opcionIncorrecta = null;
         this.titulo = pregunta;
         this.segundos = segundos;
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
-        if (opcionesCorrectas > 0){
+        if (this.opcionCorrecta != null){
             throw new PreguntaError("Ya existe una opcion correcta");
         }
         Opcion opcion = new Opcion(opcionTitulo, 1);
-        this.opciones.add(opcion);
-        this.opcionesCorrectas++;
+        this.opcionCorrecta = opcion;
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
-        if (opcionesIncorrectas > 0){
+        if (this.opcionIncorrecta != null){
             throw new PreguntaError("Ya existe una opcion correcta");
         }
         Opcion opcion = new Opcion(opcionTitulo, 0);
-        this.opciones.add(opcion);
-        this.opcionesIncorrectas++;
+        this.opcionIncorrecta = opcion;
     }
 
     @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
-        if (this.opciones.size() < 2) {
+        if (this.opcionCorrecta == null || this.opcionIncorrecta == null) {
             throw new PreguntaError("Cantidad de opciones guardadas invalida");
         }
         if (jugador == null) {
@@ -79,7 +75,10 @@ public class VerdaderoFalsoClasico implements Pregunta {
     }
 
     public ArrayList<Opcion> obtenerOpciones() {
-        return this.opciones;
+        ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+        opciones.add(this.opcionCorrecta);
+        opciones.add(this.opcionIncorrecta);
+        return opciones;
     }
 
     public String titulo() {
