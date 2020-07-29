@@ -1,13 +1,15 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.Composite.Punto;
+
 public class Opcion {
 
     private String titulo;
-    private Integer valor;
+    private Punto valor;
 
-    public Opcion(String titulo,Integer valor){
+    public Opcion(String titulo, Punto punto){
         this.titulo = titulo;
-        this.valor = valor;
+        this.valor = punto;
     }
 
     public String getTitulo(){
@@ -15,6 +17,6 @@ public class Opcion {
     }
 
     public Integer getValor(){
-        return this.valor;
+        return this.valor.getValor();
     }
 }
