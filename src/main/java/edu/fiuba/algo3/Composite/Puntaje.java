@@ -10,7 +10,7 @@ public class Puntaje implements Punto {
         puntos.add(new PuntoNulo());
     }
 
-    void agregarPunto(Punto punto){
+    public void agregarPunto(Punto punto){
         this.puntos.add(punto);
     }
 
