@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.Composite.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -29,7 +30,8 @@ public class JugadorTest {
     @Test
     public void agregarRespuestaGuardaLaRespuestaEnElJugador() throws JugadorError, RespuestaError {
         Jugador carlos = new Jugador("Carlos");
-        Respuesta respuesta = new Respuesta(null, null);
+
+        Respuesta respuesta = mock(Respuesta.class);
 
         carlos.agregarRespuesta(respuesta);
 
@@ -41,7 +43,8 @@ public class JugadorTest {
     @Test
     public void agregarDosVecesLaMismaRespuestaLanzaExcepcionRespuestasIgualesError() throws JugadorError, RespuestaError {
         Jugador carlos = new Jugador("Carlos");
-        Respuesta respuesta = new Respuesta(null, null);
+
+        Respuesta respuesta = mock(Respuesta.class);
 
         carlos.agregarRespuesta(respuesta);
 
@@ -51,9 +54,9 @@ public class JugadorTest {
     @Test
     public void agregarVariasRespuestasSeGuardanTodas() throws JugadorError, RespuestaError {
         Jugador carlos = new Jugador("Carlos");
-        Respuesta respuesta1 = new Respuesta(null, null);
-        Respuesta respuesta2 = new Respuesta(null, null);
-        Respuesta respuesta3 = new Respuesta(null, null);
+        Respuesta respuesta1 = mock(Respuesta.class);
+        Respuesta respuesta2 = mock(Respuesta.class);
+        Respuesta respuesta3 = mock(Respuesta.class);
 
         carlos.agregarRespuesta(respuesta1);
         carlos.agregarRespuesta(respuesta2);
@@ -71,9 +74,9 @@ public class JugadorTest {
     public void calcularPuntajeTotalSinRespuestasEsCero() {
         Jugador carlos = new Jugador("Carlos");
 
-        Integer puntaje = carlos.puntajeTotal();
+        Punto puntaje = carlos.puntajeTotal();
 
-        assertEquals(puntaje, 0);
+        assertEquals(puntaje.getValor(), 0);
     }
 
     @Test
@@ -81,8 +84,8 @@ public class JugadorTest {
         Jugador carlos = new Jugador("Carlos");
         VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?", 15);
 
-        Opcion opcion = new Opcion("Verdadero", 1);
-        Respuesta respuesta = new Respuesta(preguntaVF, null);
+        Opcion opcion = new Opcion("Verdadero", new PuntoPositivo());
+        Respuesta respuesta = mock(Respuesta.class);
         respuesta.agregarOpcion(opcion);
 
         try {
@@ -90,10 +93,10 @@ public class JugadorTest {
         } catch (JugadorError jugadorError) {
             jugadorError.printStackTrace();
         }
-        
-        Integer puntaje = respuesta.obtenerPuntaje();
 
-        assertEquals(1, puntaje);
+        Punto puntaje = respuesta.obtenerPuntaje();
+
+        assertEquals(1, puntaje.getValor());
     }
 
     @Test
@@ -101,16 +104,16 @@ public class JugadorTest {
         Jugador carlos = new Jugador("Carlos");
         VerdaderoFalsoClasico preguntaVF = new VerdaderoFalsoClasico("¿Tu nombre empieza con la letra C?", 15);
 
-        Opcion opcion1 = new Opcion("Verdadero", 1);
-        Respuesta respuesta1 = new Respuesta(preguntaVF, null);
+        Opcion opcion1 = new Opcion("Verdadero", new PuntoPositivo());
+        Respuesta respuesta1 = mock(Respuesta.class);
         respuesta1.agregarOpcion(opcion1);
 
-        Opcion opcion2 = new Opcion("Verdadero", -3);
-        Respuesta respuesta2 = new Respuesta(preguntaVF, null);
+        Opcion opcion2 = new Opcion("Verdadero", new PuntoNegativo());
+        Respuesta respuesta2 = mock(Respuesta.class);
         respuesta2.agregarOpcion(opcion2);
 
-        Opcion opcion3 = new Opcion("Verdadero", 5);
-        Respuesta respuesta3 = new Respuesta(preguntaVF, null);
+        Opcion opcion3 = new Opcion("Verdadero", new PuntoPositivo());
+        Respuesta respuesta3 = mock(Respuesta.class);
         respuesta3.agregarOpcion(opcion3);
 
         try {
@@ -122,12 +125,11 @@ public class JugadorTest {
         }
 
         for (Respuesta respuesta : carlos.obtenerRespuestas()){
-            Integer puntajePorRespuesta = respuesta.obtenerPuntaje();
-            carlos.sumarPuntaje(puntajePorRespuesta);
+            carlos.sumarPuntaje(respuesta.obtenerPuntaje());
         }
 
-        Integer puntaje = carlos.puntajeTotal();
+        Punto puntaje = carlos.puntajeTotal();
 
-        assertEquals(3, puntaje);
+        assertEquals(3, puntaje.getValor());
     }
 }

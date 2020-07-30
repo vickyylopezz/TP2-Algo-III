@@ -1,16 +1,19 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.Composite.Puntaje;
+import edu.fiuba.algo3.Composite.Punto;
+
 import java.util.ArrayList;
 
 public class Jugador {
     private String nombre;
-    private Integer puntajeTotal;
+    private Puntaje puntaje;
     private ArrayList<Respuesta> respuestas;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
         this.respuestas = new ArrayList<>();
-        this.puntajeTotal = 0;
+        this.puntaje = new Puntaje();
     }
 
     public String nombre() {
@@ -28,12 +31,11 @@ public class Jugador {
         this.respuestas.add(respuesta);
     }
 
-    public void sumarPuntaje(Integer puntaje) {
-
-        this.puntajeTotal = this.puntajeTotal + puntaje;
+    public void sumarPuntaje(Punto punto) {
+        this.puntaje.agregarPunto(punto);
     }
 
-    public Integer puntajeTotal() {
-        return this.puntajeTotal;
+    public Punto puntajeTotal() {
+        return this.puntaje;
     }
 }
