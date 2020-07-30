@@ -16,7 +16,5 @@ public class Opcion {
         return this.titulo;
     }
 
-    public Integer getValor(){
-        return this.valor.getValor();
-    }
+    public Punto getValor(){ return this.valor; }
 }
