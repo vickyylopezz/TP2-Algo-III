@@ -32,7 +32,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
         if (opcionIncorrecta != null){
-            throw new PreguntaError("Ya existe una opcion correcta");
+            throw new PreguntaError("Ya existe una opcion incorrecta");
         }
         Opcion opcion = new Opcion(opcionTitulo, new PuntoNulo());
         this.opcionIncorrecta = opcion;
