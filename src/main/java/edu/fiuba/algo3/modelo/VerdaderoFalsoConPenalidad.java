@@ -1,5 +1,9 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.Composite.Punto;
+import edu.fiuba.algo3.Composite.PuntoNegativo;
+import edu.fiuba.algo3.Composite.PuntoPositivo;
+
 import java.util.ArrayList;
 
 public class VerdaderoFalsoConPenalidad implements Pregunta {
@@ -10,13 +14,13 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
     public VerdaderoFalsoConPenalidad(String titulo,boolean VerdaderoCorrecta){
         this.titulo = titulo;
         if(VerdaderoCorrecta){
-            Opcion opcionVerdadero = new Opcion("Verdadero", 1);
-            Opcion opcionFalso = new Opcion("Falso", -1);
+            Opcion opcionVerdadero = new Opcion("Verdadero", new PuntoPositivo());
+            Opcion opcionFalso = new Opcion("Falso", new PuntoNegativo());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
         }else{
-            Opcion opcionVerdadero = new Opcion("Verdadero", -1);
-            Opcion opcionFalso = new Opcion("Falso", 1);
+            Opcion opcionVerdadero = new Opcion("Verdadero", new PuntoNegativo());
+            Opcion opcionFalso = new Opcion("Falso", new PuntoPositivo());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
         }
@@ -29,7 +33,7 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
     }
 
     @Override
-    public Integer puntajeConOpciones(ArrayList<Opcion> opciones)  {
+    public Punto puntajeConOpciones(ArrayList<Opcion> opciones)  {
         return opciones.get(0).getValor();
     }
 
