@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.Composite.Punto;
+
 import java.util.ArrayList;
 
 public class Respuesta {
@@ -23,7 +25,7 @@ public class Respuesta {
         return new ArrayList<>(this.opcionesElegidas);
     }
 
-    public Integer obtenerPuntaje() throws PreguntaError {
+    public Punto obtenerPuntaje() throws PreguntaError {
         return this.pregunta.puntajeConOpciones(this.opcionesElegidas);
     }
 }

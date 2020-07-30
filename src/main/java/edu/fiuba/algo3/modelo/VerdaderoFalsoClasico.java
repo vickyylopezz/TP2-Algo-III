@@ -1,12 +1,13 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.Composite;
+
+import edu.fiuba.algo3.modelo.*;
 
 import java.util.ArrayList;
 
 public class VerdaderoFalsoClasico implements Pregunta {
 
-    private ArrayList<Opcion> opciones;
-    private Integer opcionesCorrectas;
-    private Integer opcionesIncorrectas;
+    private Opcion opcionCorrecta;
+    private Opcion opcionIncorrecta;
     private String titulo;
     private Respuesta respuestaActual;
     private Integer segundos;
@@ -15,34 +16,31 @@ public class VerdaderoFalsoClasico implements Pregunta {
         if (segundos < 0){
             throw new PreguntaError("Los segundos no pueden ser negativos");
         }
-        this.opciones = new ArrayList<Opcion>();
-        this.opcionesCorrectas = 0;
-        this.opcionesIncorrectas = 0;
+        this.opcionCorrecta = null;
+        this.opcionIncorrecta = null;
         this.titulo = pregunta;
         this.segundos = segundos;
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
-        if (opcionesCorrectas > 0){
+        if (opcionCorrecta != null){
             throw new PreguntaError("Ya existe una opcion correcta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, 1);
-        this.opciones.add(opcion);
-        this.opcionesCorrectas++;
+        Opcion opcion = new Opcion(opcionTitulo, new PuntoPositivo());
+        this.opcionCorrecta = opcion;
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
-        if (opcionesIncorrectas > 0){
+        if (opcionIncorrecta != null){
             throw new PreguntaError("Ya existe una opcion correcta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, 0);
-        this.opciones.add(opcion);
-        this.opcionesIncorrectas++;
+        Opcion opcion = new Opcion(opcionTitulo, new PuntoNulo());
+        this.opcionIncorrecta = opcion;
     }
 
     @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
-        if (this.opciones.size() < 2) {
+        if (this.opcionCorrecta == null || this.opcionIncorrecta == null) {
             throw new PreguntaError("Cantidad de opciones guardadas invalida");
         }
         if (jugador == null) {
@@ -71,15 +69,18 @@ public class VerdaderoFalsoClasico implements Pregunta {
     }
 
     @Override
-    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) {
+    public Punto puntajeConOpciones(ArrayList<Opcion> opciones) {
         if (opciones.size() == 0){
-            return 0;
+            return new PuntoNulo();
         }
-        return (opciones.get(0)).getValor();
+        return opciones.get(0).getValor();
     }
 
     public ArrayList<Opcion> obtenerOpciones() {
-        return this.opciones;
+        ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+        opciones.add(this.opcionCorrecta);
+        opciones.add(this.opcionIncorrecta);
+        return opciones;
     }
 
     public String titulo() {
