@@ -68,55 +68,45 @@ public class SegundoTest {
         assertEquals(-35, segRes.valor());
     }
 
-    /*
-    @Test
-    public void restarMSEntreDosMilisegundosDevuelveUnMilisegundoConLaResta() {
-        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
-        MiliSegundo msDocientos = MiliSegundo.crearConLiteral(200L);
-
-        MiliSegundo ms = msQinientos.restarMS(msDocientos);
-
-        assertEquals(300L, ms.valor());
-    }
-
     @Test
     public void sumarConUnTiempoDevuelveUnTiempo() {
-        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
-        Tiempo tiempo = MiliSegundo.crearConLiteral(200L);
+        Segundo seg1 = Segundo.crearConLiteral(50L);
+        Tiempo tiempo = Segundo.crearConLiteral(-20L);
 
-        Tiempo resultado = msQinientos.sumar(tiempo);
-        MiliSegundo resultadoMs = resultado.miliSegundos();
+        Tiempo resultado = seg1.sumar(tiempo);
+        Segundo resultadoSeg = resultado.segundos();
 
-        assertEquals(700L, resultadoMs.valor());
+        assertEquals(30L, resultadoSeg.valor());
     }
 
     @Test
     public void restarConUnTiempoDevuelveUnTiempo() {
-        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
-        Tiempo tiempo = MiliSegundo.crearConLiteral(200L);
+        Segundo seg1 = Segundo.crearConLiteral(50L);
+        Tiempo tiempo = Segundo.crearConLiteral(-20L);
 
-        Tiempo resultado = msQinientos.restar(tiempo);
-        MiliSegundo resultadoMs = resultado.miliSegundos();
+        Tiempo resultado = seg1.restar(tiempo);
+        Segundo resultadoSeg = resultado.segundos();
 
-        assertEquals(300L, resultadoMs.valor());
+        assertEquals(70L, resultadoSeg.valor());
     }
 
     @Test
-    public void milisegundosSeDevuelveASiMismo() {
-        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
-        Tiempo tiempoMsQuinientos = msQinientos;
+    public void milisegundosSeDevuelveLosSegundosEnMiliSegundos() {
+        Segundo seg = Segundo.crearConLiteral(5L);
+        Tiempo tiempo = seg;
 
-        assertEquals(msQinientos, tiempoMsQuinientos.miliSegundos());
+        MiliSegundo res = tiempo.miliSegundos();
+
+        assertEquals(5000, res.valor());
     }
 
     @Test
-    public void segundosSeDevuelveSegundosConValorEquvalienteEnSegundos() {
-        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
-        Tiempo tiempoMsQuinientos = msQinientos;
+    public void segundosSeDevuelveASiMismo() {
+        Segundo seg = Segundo.crearConLiteral(5L);
+        Tiempo tiempo = seg;
 
-        Segundo segundos = tiempoMsQuinientos.segundos();
+        Segundo res = tiempo.segundos();
 
-        //assertEquals(0.5, segundos.valor());
+        assertEquals(5, res.valor());
     }
-    */
 }

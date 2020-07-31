@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.util.tiempo;
 
 import java.util.Date;
 
-public class Segundo {
+public class Segundo implements Tiempo {
 
     private final MiliSegundo ms;
 
@@ -32,5 +32,27 @@ public class Segundo {
     public Segundo restarSE(Segundo otroSegundo) {
         MiliSegundo ms = this.ms.restarMS(otroSegundo.ms);
         return new Segundo(ms);
+    }
+
+    @Override
+    public Tiempo sumar(Tiempo otroTiempo) {
+        MiliSegundo ms = this.ms.sumarMS(otroTiempo.miliSegundos());
+        return new Segundo(ms);
+    }
+
+    @Override
+    public Tiempo restar(Tiempo otroTiempo) {
+        MiliSegundo ms = this.ms.restarMS(otroTiempo.miliSegundos());
+        return new Segundo(ms);
+    }
+
+    @Override
+    public Segundo segundos() {
+        return this;
+    }
+
+    @Override
+    public MiliSegundo miliSegundos() {
+        return new MiliSegundo(this.ms.valor());
     }
 }
