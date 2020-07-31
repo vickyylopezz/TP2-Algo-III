@@ -35,4 +35,24 @@ public class MiliSegundoTest {
         MiliSegundo ms = MiliSegundo.crearConFecha(fecha);
         assertEquals(fecha.getTime(), ms.valor());
     }
+
+    @Test
+    public void sumarMSEntreDosMilisegundosDevuelveUnMilisegundoConLaSuma() {
+        MiliSegundo msMil = MiliSegundo.crearConLiteral(1000L);
+        MiliSegundo msCuarenta = MiliSegundo.crearConLiteral(40L);
+
+        MiliSegundo ms = msMil.sumarMS(msCuarenta);
+
+        assertEquals(1040L, ms.valor());
+    }
+
+    @Test
+    public void restarMSEntreDosMilisegundosDevuelveUnMilisegundoConLaResta() {
+        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
+        MiliSegundo msDocientos = MiliSegundo.crearConLiteral(200L);
+
+        MiliSegundo ms = msQinientos.restarMS(msDocientos);
+
+        assertEquals(300L, ms.valor());
+    }
 }

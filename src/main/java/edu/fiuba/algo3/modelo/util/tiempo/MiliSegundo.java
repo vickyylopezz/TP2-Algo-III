@@ -6,9 +6,7 @@ public class MiliSegundo {
 
     private final Long valor;
 
-    private MiliSegundo(Long valor) {
-        this.valor = valor;
-    }
+    private MiliSegundo(Long valor) { this.valor = valor; }
 
     public static MiliSegundo crearConLiteral(long valor) {
         return new MiliSegundo(valor);
@@ -18,7 +16,15 @@ public class MiliSegundo {
         return new MiliSegundo(fecha.getTime());
     }
 
-    public Long valor() {
-        return this.valor;
+    public Long valor() { return this.valor; }
+
+    public MiliSegundo sumarMS(MiliSegundo otroMilisegundo) {
+        Long valor = this.valor + otroMilisegundo.valor;
+        return new MiliSegundo(valor);
+    }
+
+    public MiliSegundo restarMS(MiliSegundo otroMilisegundo) {
+        Long valor = this.valor - otroMilisegundo.valor;
+        return new MiliSegundo(valor);
     }
 }
