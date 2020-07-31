@@ -128,7 +128,7 @@ public class MultipleChoiceClasicoTest {
 
         Opcion unicaOpcion = opciones.get(0);
 
-        assertEquals(0, unicaOpcion.obtenerPunto());
+        assertEquals(0, unicaOpcion.obtenerPunto().getValor());
     }
 
     @Test
@@ -179,7 +179,7 @@ public class MultipleChoiceClasicoTest {
 
         Opcion unicaOpcion = opciones.get(0);
 
-        assertEquals(1, unicaOpcion.obtenerPunto());
+        assertEquals(1, unicaOpcion.obtenerPunto().getValor());
     }
 
     @Test
@@ -480,7 +480,7 @@ public class MultipleChoiceClasicoTest {
         pregunta.agregarOpcionCorrecta("No, Yo no estoy en Derecho, En Fiuba");
         pregunta.agregarOpcionIncorrecta("Que se Yo, ando por ahi");
 
-        assertEquals(0, pregunta.puntajeConOpciones(null));
+        assertEquals(0, pregunta.puntajeConOpciones(null).getValor());
     }
 
     @Test
