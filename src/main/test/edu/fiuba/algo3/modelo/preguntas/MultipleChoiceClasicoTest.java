@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -323,7 +325,7 @@ public class MultipleChoiceClasicoTest {
         Jugador carlos = new Jugador("Carlos");
         pregunta.iniciar(carlos);
 
-        Opcion opcion = new Opcion("Opcion frula", 10000);
+        Opcion opcion = new Opcion("Opcion frula", new PuntoPositivo());
 
         assertThrows(PreguntaError.class, ()-> pregunta.seleccionarOpcion(opcion));
     }
@@ -424,8 +426,6 @@ public class MultipleChoiceClasicoTest {
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
         pregunta.agregarOpcionIncorrecta("Mentira, yo estoy en Derecho");
 
-        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
-
         assertThrows(PreguntaError.class, pregunta::confirmar);
     }
 
@@ -493,7 +493,7 @@ public class MultipleChoiceClasicoTest {
         pregunta.agregarOpcionIncorrecta("Que se Yo, ando por ahi");
 
         ArrayList<Opcion> opciones = new ArrayList<>();
-        opciones.add(new Opcion("Yo soy re frula hermano", 30000000));
+        opciones.add(new Opcion("Yo soy re frula hermano", new PuntoPositivo()));
 
         assertThrows(PreguntaError.class, ()-> pregunta.puntajeConOpciones(opciones));
     }
@@ -517,9 +517,9 @@ public class MultipleChoiceClasicoTest {
 
         Respuesta respuesta = pregunta.confirmar();
 
-        Integer puntaje = respuesta.obtenerPuntaje();
+        Punto puntaje = respuesta.obtenerPuntaje();
 
-        assertEquals(1, puntaje);
+        assertEquals(1, puntaje.getValor());
     }
 
     @Test
@@ -542,9 +542,9 @@ public class MultipleChoiceClasicoTest {
 
         Respuesta respuesta = pregunta.confirmar();
 
-        Integer puntaje = respuesta.obtenerPuntaje();
+        Punto puntaje = respuesta.obtenerPuntaje();
 
-        assertEquals(0, puntaje);
+        assertEquals(0, puntaje.getValor());
     }
 
     @Test
@@ -565,8 +565,8 @@ public class MultipleChoiceClasicoTest {
 
         Respuesta respuesta = pregunta.confirmar();
 
-        Integer puntaje = respuesta.obtenerPuntaje();
+        Punto puntaje = respuesta.obtenerPuntaje();
 
-        assertEquals(0, puntaje);
+        assertEquals(0, puntaje.getValor());
     }
 }

@@ -5,6 +5,9 @@ import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
+import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,7 +51,7 @@ public class MultipleChoiceClasico implements Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new Opcion(titulo, 0);
+        Opcion opcion = new Opcion(titulo, new PuntoNulo());
         this.opciones.add(opcion);
     }
 
@@ -57,15 +60,15 @@ public class MultipleChoiceClasico implements Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new Opcion(titulo, 1);
+        Opcion opcion = new Opcion(titulo, new PuntoPositivo());
         this.opciones.add(opcion);
         this.puntajeCorrecto++;
     }
 
     // Implementacion interface Pregunta
     @Override
-    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError {
-        if (opciones == null) { return 0; }
+    public Punto puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError {
+        if (opciones == null) { return new PuntoNulo(); }
 
         int opcionesCorrectas = 0;
 
@@ -75,14 +78,14 @@ public class MultipleChoiceClasico implements Pregunta {
             }
             // Como el valor correcto de la opcion es 1 y el incorrecto
             // es cero solamente incrementa 1 cuando es correcta la opcion.
-            opcionesCorrectas += opcion.obtenerPunto();
+            opcionesCorrectas += opcion.obtenerPunto().getValor();
         }
 
         boolean mismaCantidadDeOpciones = opciones.size() == opcionesCorrectas;
         boolean puntajeTotalCorrecto = this.puntajeCorrecto == opcionesCorrectas;
         boolean todasOpcionesCorrecta = mismaCantidadDeOpciones && puntajeTotalCorrecto;
 
-        return todasOpcionesCorrecta ? 1 : 0;
+        return todasOpcionesCorrecta ? new PuntoPositivo() : new PuntoNulo();
     }
 
     @Override
