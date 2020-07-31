@@ -81,7 +81,7 @@ public class MultipleChoiceConPenalidad implements Pregunta {
         }
         Puntaje puntajeParcial = new Puntaje();
         for (Opcion opcion : opciones){
-            puntajeParcial.agregarPunto(opcion.getValor());
+            puntajeParcial.agregarPunto(opcion.obtenerPunto());
         }
         return puntajeParcial;
     }

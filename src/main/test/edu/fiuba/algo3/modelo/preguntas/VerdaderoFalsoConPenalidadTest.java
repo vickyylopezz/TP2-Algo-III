@@ -5,7 +5,6 @@ import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.preguntas.VerdaderoFalsoConPenalidad;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
@@ -124,11 +123,11 @@ public class VerdaderoFalsoConPenalidadTest {
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
-        assertEquals("Verdadero",opciones.get(0).getTitulo());
-        assertEquals(1,opciones.get(0).getValor());
+        assertEquals("Verdadero",opciones.get(0).obtenerTitulo());
+        assertEquals(1,opciones.get(0).obtenerPunto());
 
-        assertEquals("Falso",opciones.get(1).getTitulo());
-        assertEquals(-1,opciones.get(1).getValor());
+        assertEquals("Falso",opciones.get(1).obtenerTitulo());
+        assertEquals(-1,opciones.get(1).obtenerPunto());
     }
 
     @Test
@@ -137,11 +136,11 @@ public class VerdaderoFalsoConPenalidadTest {
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
-        assertEquals("Verdadero",opciones.get(0).getTitulo());
-        assertEquals(-1,opciones.get(0).getValor());
+        assertEquals("Verdadero",opciones.get(0).obtenerTitulo());
+        assertEquals(-1,opciones.get(0).obtenerPunto());
 
-        assertEquals("Falso",opciones.get(1).getTitulo());
-        assertEquals(1,opciones.get(1).getValor());
+        assertEquals("Falso",opciones.get(1).obtenerTitulo());
+        assertEquals(1,opciones.get(1).obtenerPunto());
 
     }
 
@@ -184,15 +183,15 @@ public class VerdaderoFalsoConPenalidadTest {
 
         ArrayList<Opcion> opciones1 = pregunta1.obtenerOpciones();
 
-        assertEquals("Verdadero", opciones1.get(0).getTitulo());
-        assertEquals("Falso", opciones1.get(1).getTitulo());
+        assertEquals("Verdadero", opciones1.get(0).obtenerTitulo());
+        assertEquals("Falso", opciones1.get(1).obtenerTitulo());
 
         VerdaderoFalsoConPenalidad pregunta2 = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?",false);
 
         ArrayList<Opcion> opciones2 = pregunta2.obtenerOpciones();
 
-        assertEquals("Verdadero", opciones2.get(0).getTitulo());
-        assertEquals("Falso", opciones2.get(1).getTitulo());
+        assertEquals("Verdadero", opciones2.get(0).obtenerTitulo());
+        assertEquals("Falso", opciones2.get(1).obtenerTitulo());
     }
 
     @Test

@@ -39,7 +39,7 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
 
     @Override
     public Punto puntajeConOpciones(ArrayList<Opcion> opciones)  {
-        return opciones.get(0).getValor();
+        return opciones.get(0).obtenerPunto();
     }
 
     @Override

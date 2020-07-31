@@ -5,8 +5,6 @@ import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.preguntas.MultipleChoiceClasico;
-import edu.fiuba.algo3.modelo.preguntas.Pregunta;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -97,11 +95,11 @@ public class MultipleChoiceClasicoTest {
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
-        assertEquals("Si papa, Obiousli", opciones.get(0).getTitulo());
-        assertEquals("No lo se Rick", opciones.get(1).getTitulo());
-        assertEquals("Mentira, yo estoy en Derecho", opciones.get(2).getTitulo());
-        assertEquals("No, Yo no estoy en Derecho, En Fiuba", opciones.get(3).getTitulo());
-        assertEquals("Que se Yo, ando por ahi", opciones.get(4).getTitulo());
+        assertEquals("Si papa, Obiousli", opciones.get(0).obtenerTitulo());
+        assertEquals("No lo se Rick", opciones.get(1).obtenerTitulo());
+        assertEquals("Mentira, yo estoy en Derecho", opciones.get(2).obtenerTitulo());
+        assertEquals("No, Yo no estoy en Derecho, En Fiuba", opciones.get(3).obtenerTitulo());
+        assertEquals("Que se Yo, ando por ahi", opciones.get(4).obtenerTitulo());
     }
 
     // Test agregarOpcionIncorrecta
@@ -116,7 +114,7 @@ public class MultipleChoiceClasicoTest {
 
         Opcion unicaOpcion = opciones.get(0);
 
-        assertEquals("Si papa, Obiousli", unicaOpcion.getTitulo());
+        assertEquals("Si papa, Obiousli", unicaOpcion.obtenerTitulo());
     }
 
     @Test
@@ -128,7 +126,7 @@ public class MultipleChoiceClasicoTest {
 
         Opcion unicaOpcion = opciones.get(0);
 
-        assertEquals(0, unicaOpcion.getValor());
+        assertEquals(0, unicaOpcion.obtenerPunto());
     }
 
     @Test
@@ -167,7 +165,7 @@ public class MultipleChoiceClasicoTest {
 
         Opcion unicaOpcion = opciones.get(0);
 
-        assertEquals("Si papa, Obiousli", unicaOpcion.getTitulo());
+        assertEquals("Si papa, Obiousli", unicaOpcion.obtenerTitulo());
     }
 
     @Test
@@ -179,7 +177,7 @@ public class MultipleChoiceClasicoTest {
 
         Opcion unicaOpcion = opciones.get(0);
 
-        assertEquals(1, unicaOpcion.getValor());
+        assertEquals(1, unicaOpcion.obtenerPunto());
     }
 
     @Test
@@ -413,9 +411,9 @@ public class MultipleChoiceClasicoTest {
         ArrayList<Opcion> opcionesRespuesta = respuesta.obtenerOpcionesElegidas();
 
         assertEquals(3, opcionesRespuesta.size());
-        assertEquals("Si papa, Obiousli", opcionesRespuesta.get(0).getTitulo());
-        assertEquals("No lo se Rick", opcionesRespuesta.get(1).getTitulo());
-        assertEquals("No, Yo no estoy en Derecho, En Fiuba", opcionesRespuesta.get(2).getTitulo());
+        assertEquals("Si papa, Obiousli", opcionesRespuesta.get(0).obtenerTitulo());
+        assertEquals("No lo se Rick", opcionesRespuesta.get(1).obtenerTitulo());
+        assertEquals("No, Yo no estoy en Derecho, En Fiuba", opcionesRespuesta.get(2).obtenerTitulo());
     }
 
     // Test confirmar
@@ -469,7 +467,7 @@ public class MultipleChoiceClasicoTest {
 
         Opcion opcionSeleccionada = opcionesRespuesta.get(0);
 
-        assertEquals("Si papa, Obiousli", opcionSeleccionada.getTitulo());
+        assertEquals("Si papa, Obiousli", opcionSeleccionada.obtenerTitulo());
     }
 
     // Test puntajeConOpciones

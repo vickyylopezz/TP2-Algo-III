@@ -80,7 +80,7 @@ public class MultipleChoiceParcial implements Pregunta {
         }
         Integer puntajeParcial = 0;
         for (Opcion opcion : opciones){
-            puntajeParcial = puntajeParcial + opcion.getValor();
+            puntajeParcial = puntajeParcial + opcion.obtenerPunto();
         }
         if (puntajeParcial != opciones.size()) {
             return 0;

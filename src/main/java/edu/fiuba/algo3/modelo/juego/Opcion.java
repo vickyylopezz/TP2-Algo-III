@@ -4,17 +4,15 @@ import edu.fiuba.algo3.modelo.util.punto.Punto;
 
 public class Opcion {
 
-    private String titulo;
-    private Punto valor;
+    private final String titulo;
+    private final Punto punto;
 
     public Opcion(String titulo, Punto punto){
         this.titulo = titulo;
-        this.valor = punto;
+        this.punto = punto;
     }
 
-    public String getTitulo(){
-        return this.titulo;
-    }
+    public String obtenerTitulo(){ return this.titulo; }
 
-    public Punto getValor(){ return this.valor; }
+    public Punto obtenerPunto(){ return this.punto; }
 }

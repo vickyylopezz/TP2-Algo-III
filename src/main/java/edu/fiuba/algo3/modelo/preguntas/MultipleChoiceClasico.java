@@ -75,7 +75,7 @@ public class MultipleChoiceClasico implements Pregunta {
             }
             // Como el valor correcto de la opcion es 1 y el incorrecto
             // es cero solamente incrementa 1 cuando es correcta la opcion.
-            opcionesCorrectas += opcion.getValor();
+            opcionesCorrectas += opcion.obtenerPunto();
         }
 
         boolean mismaCantidadDeOpciones = opciones.size() == opcionesCorrectas;

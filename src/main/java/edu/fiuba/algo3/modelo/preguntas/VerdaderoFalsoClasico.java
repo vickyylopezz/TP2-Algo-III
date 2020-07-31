@@ -80,7 +80,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
         if (opciones.size() == 0){
             return new PuntoNulo();
         }
-        return opciones.get(0).getValor();
+        return opciones.get(0).obtenerPunto();
     }
 
     public ArrayList<Opcion> obtenerOpciones() {
