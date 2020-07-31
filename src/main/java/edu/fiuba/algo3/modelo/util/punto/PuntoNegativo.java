@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.Composite;
+package edu.fiuba.algo3.modelo.util.punto;
 //Hoja
 public class PuntoNegativo implements Punto {
     private Integer valor = -1;

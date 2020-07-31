@@ -1,8 +1,13 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.preguntas;
 
-import edu.fiuba.algo3.Composite.Punto;
-import edu.fiuba.algo3.Composite.PuntoNegativo;
-import edu.fiuba.algo3.Composite.PuntoPositivo;
+import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
+import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 
 import java.util.ArrayList;
 

@@ -1,15 +1,22 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.preguntas;
+
+import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.util.punto.*;
 
 import java.util.ArrayList;
 
-public class MultipleChoiceParcial implements Pregunta {
+public class MultipleChoiceConPenalidad implements Pregunta {
 
     private String titulo;
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
     private Integer segundos;
 
-    public MultipleChoiceParcial(String titulo, Integer segundos) throws PreguntaError {
+    public MultipleChoiceConPenalidad(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0){
             throw new PreguntaError("Los segundos no pueden ser negativos");
         }
@@ -21,7 +28,7 @@ public class MultipleChoiceParcial implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, 1);
+        Opcion opcion = new Opcion(opcionTitulo, new PuntoPositivo());
         this.opciones.add(opcion);
     }
 
@@ -29,7 +36,7 @@ public class MultipleChoiceParcial implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, 0);
+        Opcion opcion = new Opcion(opcionTitulo, new PuntoNegativo());
         this.opciones.add(opcion);
     }
 
@@ -68,16 +75,13 @@ public class MultipleChoiceParcial implements Pregunta {
     }
 
     @Override
-    public Integer puntajeConOpciones(ArrayList<Opcion> opciones) {
+    public Punto puntajeConOpciones(ArrayList<Opcion> opciones) {
         if (opciones.size() == 0){
-            return 0;
+            return new PuntoNulo();
         }
-        Integer puntajeParcial = 0;
+        Puntaje puntajeParcial = new Puntaje();
         for (Opcion opcion : opciones){
-            puntajeParcial = puntajeParcial + opcion.getValor();
-        }
-        if (puntajeParcial != opciones.size()) {
-            return 0;
+            puntajeParcial.agregarPunto(opcion.getValor());
         }
         return puntajeParcial;
     }

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.Composite;
+package edu.fiuba.algo3.modelo.util.punto;
 //Componente
 public interface Punto {
     Integer getValor();
