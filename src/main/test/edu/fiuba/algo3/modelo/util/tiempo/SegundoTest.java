@@ -47,17 +47,28 @@ public class SegundoTest {
 
         assertEquals(fecha.getTime() / 1000, seg.valor());
     }
-    /*
+
     @Test
-    public void sumarMSEntreDosMilisegundosDevuelveUnMilisegundoConLaSuma() {
-        MiliSegundo msMil = MiliSegundo.crearConLiteral(1000L);
-        MiliSegundo msCuarenta = MiliSegundo.crearConLiteral(40L);
+    public void sumarSEEntreDosSegundosDevuelveUnSegundoConLaSuma() {
+        Segundo seg1 = Segundo.crearConLiteral(5L);
+        Segundo seg2 = Segundo.crearConLiteral(40L);
 
-        MiliSegundo ms = msMil.sumarMS(msCuarenta);
+        Segundo segRes = seg1.sumarSE(seg2);
 
-        assertEquals(1040L, ms.valor());
+        assertEquals(45, segRes.valor());
     }
 
+    @Test
+    public void restarSEEntreDosSegundosDevuelveUnSegundoConLaResta() {
+        Segundo seg1 = Segundo.crearConLiteral(5L);
+        Segundo seg2 = Segundo.crearConLiteral(40L);
+
+        Segundo segRes = seg1.restarSE(seg2);
+
+        assertEquals(-35, segRes.valor());
+    }
+
+    /*
     @Test
     public void restarMSEntreDosMilisegundosDevuelveUnMilisegundoConLaResta() {
         MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);

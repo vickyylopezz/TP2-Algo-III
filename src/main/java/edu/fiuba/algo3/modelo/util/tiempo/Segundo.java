@@ -23,4 +23,14 @@ public class Segundo {
     public float valor() {
         return this.ms.valor() / 1000;
     }
+
+    public Segundo sumarSE(Segundo otroSegundo) {
+        MiliSegundo ms = this.ms.sumarMS(otroSegundo.ms);
+        return new Segundo(ms);
+    }
+
+    public Segundo restarSE(Segundo otroSegundo) {
+        MiliSegundo ms = this.ms.restarMS(otroSegundo.ms);
+        return new Segundo(ms);
+    }
 }
