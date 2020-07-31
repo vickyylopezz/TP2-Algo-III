@@ -5,6 +5,8 @@ import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
+import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
@@ -33,7 +35,7 @@ public class VerdaderoFalsoConPenalidadTest {
         pregunta.seleccionarOpcion(opciones.get(0));
         Respuesta respuesta = pregunta.confirmar();
 
-        assertEquals(respuesta.obtenerPuntaje(),1);
+        assertEquals(respuesta.obtenerPuntaje().getValor(),1);
     }
 
     @Test
@@ -46,8 +48,7 @@ public class VerdaderoFalsoConPenalidadTest {
         pregunta.seleccionarOpcion(opciones.get(1));
         Respuesta respuesta = pregunta.confirmar();
 
-        //ArrayList<Integer> puntajes = pregunta.puntajeConRespuestas(respuestas);
-        assertEquals(respuesta.obtenerPuntaje(),-1);
+        assertEquals(respuesta.obtenerPuntaje().getValor(),-1);
     }
 
     @Test
@@ -70,8 +71,8 @@ public class VerdaderoFalsoConPenalidadTest {
         respuestas.add(respuestaPaula);
         respuestas.add(respuestaMarta);
 
-        assertEquals(respuestas.get(0).obtenerPuntaje(),1);
-        assertEquals(respuestas.get(1).obtenerPuntaje(),-1);
+        assertEquals(respuestas.get(0).obtenerPuntaje().getValor(),1);
+        assertEquals(respuestas.get(1).obtenerPuntaje().getValor(),-1);
     }
 
     @Test
@@ -124,10 +125,10 @@ public class VerdaderoFalsoConPenalidadTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertEquals("Verdadero",opciones.get(0).obtenerTitulo());
-        assertEquals(1,opciones.get(0).obtenerPunto());
+        assertEquals(1,opciones.get(0).obtenerPunto().getValor());
 
         assertEquals("Falso",opciones.get(1).obtenerTitulo());
-        assertEquals(-1,opciones.get(1).obtenerPunto());
+        assertEquals(-1,opciones.get(1).obtenerPunto().getValor());
     }
 
     @Test
@@ -137,10 +138,10 @@ public class VerdaderoFalsoConPenalidadTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertEquals("Verdadero",opciones.get(0).obtenerTitulo());
-        assertEquals(-1,opciones.get(0).obtenerPunto());
+        assertEquals(-1,opciones.get(0).obtenerPunto().getValor());
 
         assertEquals("Falso",opciones.get(1).obtenerTitulo());
-        assertEquals(1,opciones.get(1).obtenerPunto());
+        assertEquals(1,opciones.get(1).obtenerPunto().getValor());
 
     }
 
