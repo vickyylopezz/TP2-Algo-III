@@ -1,22 +1,26 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
+import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class OpcionTest {
     @Test
-    public void GetTituloDevuelveElTituloDeLaOpcion(){
-        Opcion opcion = new Opcion("Una opcion",10);
-
-        assertEquals("Una opcion",opcion.getTitulo());
+    public void ObtenerTituloDevuelveElTituloDeLaOpcion(){
+        Opcion opcion = new Opcion("Una opcion", new PuntoPositivo());
+        assertEquals("Una opcion",opcion.obtenerTitulo());
     }
 
     @Test
-    public void GetValoroDevuelveElValorDeLaOpcion(){
-        Opcion opcion = new Opcion("Otra opcion",10);
+    public void ObtenerPuntoDevuelveElPuntoDeLaOpcion(){
+        Punto puntoPositivo = new PuntoPositivo();
 
-        assertEquals(10,opcion.getValor());
+        Opcion opcion = new Opcion("Otra opcion", puntoPositivo);
+
+        assertEquals(puntoPositivo ,opcion.obtenerPunto());
     }
 }
