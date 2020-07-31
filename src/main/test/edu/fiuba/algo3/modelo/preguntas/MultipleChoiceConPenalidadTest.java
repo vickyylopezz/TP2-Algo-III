@@ -17,12 +17,12 @@ import static org.mockito.Mockito.mock;
 public class MultipleChoiceConPenalidadTest {
 
     @Test
-    public void CreacionDeMultipleChoiseConSegundosNegativosLanzaPreguntaError(){
+    public void CreacionDeMultipleChoiceConSegundosNegativosLanzaPreguntaError(){
         assertThrows(PreguntaError.class, () -> new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?", -1));
     }
 
     @Test
-    public void CreacionDeMultipleChoiseParcialIndicandoRespuestaCorrecta() throws PreguntaError {
+    public void CreacionDeMultipleChoiceConPenalidadIndicandoRespuestaCorrecta() throws PreguntaError {
         MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?", 15);
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
@@ -47,7 +47,7 @@ public class MultipleChoiceConPenalidadTest {
     }
 
     @Test
-    public void MultipleChoiseConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError, RespuestaError {
+    public void MultipleChoiceConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError, RespuestaError {
         MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?", 15);
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
