@@ -6,11 +6,7 @@ public class MiliSegundo implements Tiempo {
 
     private final Long valor;
 
-    private MiliSegundo(Long valor) { this.valor = valor; }
-
-    public static MiliSegundo crearConLiteral(long valor) {
-        return new MiliSegundo(valor);
-    }
+    public MiliSegundo(Long valor) { this.valor = valor; }
 
     public static MiliSegundo crearConFecha(Date fecha) {
         return new MiliSegundo(fecha.getTime());
@@ -40,8 +36,7 @@ public class MiliSegundo implements Tiempo {
 
     @Override
     public Segundo segundos() {
-        // return Segundo.crearConMS(this);
-        return null;
+        return new Segundo(this);
     }
 
     @Override
