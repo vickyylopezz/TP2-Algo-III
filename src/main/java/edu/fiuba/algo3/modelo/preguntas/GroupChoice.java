@@ -62,6 +62,9 @@ public class GroupChoice implements Pregunta{
     }
 
     public void agregarOpcion(Grupo grupo, String titulo) throws PreguntaError {
+        if(opciones.size() == 6){
+            throw new PreguntaError("Cantidad maxima de opciones alcanzada");
+        }
         OpcionGroupChoice opcion = new OpcionGroupChoice(titulo,new PuntoNulo(),grupo);
         grupo.agregarOpcion(opcion);
         opciones.add(opcion);
