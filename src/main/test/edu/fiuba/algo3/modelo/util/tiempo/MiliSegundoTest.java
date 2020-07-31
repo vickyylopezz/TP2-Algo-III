@@ -55,4 +55,44 @@ public class MiliSegundoTest {
 
         assertEquals(300L, ms.valor());
     }
+
+    @Test
+    public void sumarConUnTiempoDevuelveUnTiempo() {
+        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
+        Tiempo tiempo = MiliSegundo.crearConLiteral(200L);
+
+        Tiempo resultado = msQinientos.sumar(tiempo);
+        MiliSegundo resultadoMs = resultado.miliSegundos();
+
+        assertEquals(700L, resultadoMs.valor());
+    }
+
+    @Test
+    public void restarConUnTiempoDevuelveUnTiempo() {
+        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
+        Tiempo tiempo = MiliSegundo.crearConLiteral(200L);
+
+        Tiempo resultado = msQinientos.restar(tiempo);
+        MiliSegundo resultadoMs = resultado.miliSegundos();
+
+        assertEquals(300L, resultadoMs.valor());
+    }
+
+    @Test
+    public void milisegundosSeDevuelveASiMismo() {
+        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
+        Tiempo tiempoMsQuinientos = msQinientos;
+
+        assertEquals(msQinientos, tiempoMsQuinientos.miliSegundos());
+    }
+
+    @Test
+    public void segundosSeDevuelveSegundosConValorEquvalienteEnSegundos() {
+        MiliSegundo msQinientos = MiliSegundo.crearConLiteral(500L);
+        Tiempo tiempoMsQuinientos = msQinientos;
+
+        Segundo segundos = tiempoMsQuinientos.segundos();
+
+        assertEquals(0.5, segundos.valor());
+    }
 }
