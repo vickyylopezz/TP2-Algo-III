@@ -20,7 +20,7 @@ public class MultipleChoiceParcialTest {
     }
 
     @Test
-    public void CreacionDeMultipleChoiseParcialIndicandoRespuestaCorrecta() throws PreguntaError {
+    public void CreacionDeMultipleChoiceParcialIndicandoRespuestaCorrecta() throws PreguntaError {
         MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?", 15);
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
@@ -45,7 +45,7 @@ public class MultipleChoiceParcialTest {
     }
 
     @Test
-    public void MultipleChoiseParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError, RespuestaError {
+    public void MultipleChoiceParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError, RespuestaError {
         MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?", 15);
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
@@ -73,9 +73,9 @@ public class MultipleChoiceParcialTest {
         Integer esperadoJugador2 = 0;
         Integer esperadoJugador3 = 1;
 
-        assertEquals(esperadoJugador1, respuestaJugador1.obtenerPuntaje());
-        assertEquals(esperadoJugador2, respuestaJugador2.obtenerPuntaje());
-        assertEquals(esperadoJugador3, respuestaJugador3.obtenerPuntaje());
+        assertEquals(esperadoJugador1, respuestaJugador1.obtenerPuntaje().getValor());
+        assertEquals(esperadoJugador2, respuestaJugador2.obtenerPuntaje().getValor());
+        assertEquals(esperadoJugador3, respuestaJugador3.obtenerPuntaje().getValor());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class MultipleChoiceParcialTest {
         MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Cuál es el apellido de nuestro corrector?", 15);
         ArrayList<Opcion> opciones = new ArrayList<Opcion>();
 
-        assertEquals(0, preguntaMCP.puntajeConOpciones(opciones));
+        assertEquals(0, preguntaMCP.puntajeConOpciones(opciones).getValor());
     }
 
     @Test
