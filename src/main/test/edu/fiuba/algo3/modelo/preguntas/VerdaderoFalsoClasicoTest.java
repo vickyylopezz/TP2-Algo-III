@@ -48,8 +48,8 @@ public class VerdaderoFalsoClasicoTest {
         Integer esperadoJugador1 = 1;
         Integer esperadoJugador2 = 0;
 
-        assertEquals(esperadoJugador1, respuestaJugador1.obtenerPuntaje());
-        assertEquals(esperadoJugador2, respuestaJugador2.obtenerPuntaje());
+        assertEquals(esperadoJugador1, respuestaJugador1.obtenerPuntaje().getValor());
+        assertEquals(esperadoJugador2, respuestaJugador2.obtenerPuntaje().getValor());
     }
 
     @Test
@@ -82,7 +82,7 @@ public class VerdaderoFalsoClasicoTest {
         VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?", 15);
         ArrayList<Opcion> opciones = new ArrayList<Opcion>();
 
-        assertEquals(0, preguntavf.puntajeConOpciones(opciones));
+        assertEquals(0, preguntavf.puntajeConOpciones(opciones).getValor());
     }
 
     @Test
