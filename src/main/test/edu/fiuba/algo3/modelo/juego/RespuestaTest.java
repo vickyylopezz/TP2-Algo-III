@@ -46,7 +46,7 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion = new Opcion("Si", new PuntoPositivo());
+        Opcion opcion = new OpcionClasica("Si", new PuntoPositivo());
         respuesta.agregarOpcion(opcion);
 
         ArrayList<Opcion> opcionesElegidas = respuesta.obtenerOpcionesElegidas();
@@ -61,7 +61,7 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion = new Opcion("Si", new PuntoPositivo());
+        Opcion opcion = new OpcionClasica("Si", new PuntoPositivo());
         respuesta.agregarOpcion(opcion);
 
         ArrayList<Opcion> opcionesElegidas = respuesta.obtenerOpcionesElegidas();
@@ -76,7 +76,7 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion = new Opcion("Si", new PuntoNegativo());
+        Opcion opcion = new OpcionClasica("Si", new PuntoNegativo());
         respuesta.agregarOpcion(opcion);
 
         ArrayList<Opcion> opcionesElegidas = respuesta.obtenerOpcionesElegidas();
@@ -91,9 +91,9 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion1 = new Opcion("Si", new PuntoPositivo());
-        Opcion opcion2 = new Opcion("Si", new PuntoPositivo());
-        Opcion opcion3 = new Opcion("Si", new PuntoPositivo());
+        Opcion opcion1 = new OpcionClasica("Si", new PuntoPositivo());
+        Opcion opcion2 = new OpcionClasica("Si", new PuntoPositivo());
+        Opcion opcion3 = new OpcionClasica("Si", new PuntoPositivo());
 
         respuesta.agregarOpcion(opcion1);
         respuesta.agregarOpcion(opcion2);
@@ -113,9 +113,9 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion1 = new Opcion("Si", new PuntoNulo());
-        Opcion opcion2 = new Opcion("Si", new PuntoNulo());
-        Opcion opcion3 = new Opcion("Si", new PuntoNulo());
+        Opcion opcion1 = new OpcionClasica("Si", new PuntoNulo());
+        Opcion opcion2 = new OpcionClasica("Si", new PuntoNulo());
+        Opcion opcion3 = new OpcionClasica("Si", new PuntoNulo());
 
         respuesta.agregarOpcion(opcion1);
         respuesta.agregarOpcion(opcion2);
@@ -135,9 +135,9 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion1 = new Opcion("Si", new PuntoNegativo());
-        Opcion opcion2 = new Opcion("Si", new PuntoNegativo());
-        Opcion opcion3 = new Opcion("Si", new PuntoNegativo());
+        Opcion opcion1 = new OpcionClasica("Si", new PuntoNegativo());
+        Opcion opcion2 = new OpcionClasica("Si", new PuntoNegativo());
+        Opcion opcion3 = new OpcionClasica("Si", new PuntoNegativo());
 
         respuesta.agregarOpcion(opcion1);
         respuesta.agregarOpcion(opcion2);
@@ -157,9 +157,9 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion1 = new Opcion("Si", new PuntoPositivo());
-        Opcion opcion2 = new Opcion("Si", new PuntoNulo());
-        Opcion opcion3 = new Opcion("Si", new PuntoNegativo());
+        Opcion opcion1 = new OpcionClasica("Si", new PuntoPositivo());
+        Opcion opcion2 = new OpcionClasica("Si", new PuntoNulo());
+        Opcion opcion3 = new OpcionClasica("Si", new PuntoNegativo());
 
         respuesta.agregarOpcion(opcion1);
         respuesta.agregarOpcion(opcion2);
@@ -179,7 +179,7 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion = new Opcion("Si", new PuntoPositivo());
+        Opcion opcion = new OpcionClasica("Si", new PuntoPositivo());
         respuesta.agregarOpcion(opcion);
 
         assertThrows(RespuestaError.class, () -> respuesta.agregarOpcion(opcion));
@@ -192,7 +192,7 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion = new Opcion("Si", new PuntoNulo());
+        Opcion opcion = new OpcionClasica("Si", new PuntoNulo());
         respuesta.agregarOpcion(opcion);
 
         assertThrows(RespuestaError.class, () -> respuesta.agregarOpcion(opcion));
@@ -205,7 +205,7 @@ public class RespuestaTest {
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
-        Opcion opcion = new Opcion("Si", new PuntoNegativo());
+        Opcion opcion = new OpcionClasica("Si", new PuntoNegativo());
         respuesta.agregarOpcion(opcion);
 
         assertThrows(RespuestaError.class, () -> respuesta.agregarOpcion(opcion));

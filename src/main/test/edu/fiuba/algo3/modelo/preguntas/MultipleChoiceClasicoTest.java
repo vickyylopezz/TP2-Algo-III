@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.OpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
@@ -325,7 +326,7 @@ public class MultipleChoiceClasicoTest {
         Jugador carlos = new Jugador("Carlos");
         pregunta.iniciar(carlos);
 
-        Opcion opcion = new Opcion("Opcion frula", new PuntoPositivo());
+        Opcion opcion = new OpcionClasica("Opcion frula", new PuntoPositivo());
 
         assertThrows(PreguntaError.class, ()-> pregunta.seleccionarOpcion(opcion));
     }
@@ -493,7 +494,7 @@ public class MultipleChoiceClasicoTest {
         pregunta.agregarOpcionIncorrecta("Que se Yo, ando por ahi");
 
         ArrayList<Opcion> opciones = new ArrayList<>();
-        opciones.add(new Opcion("Yo soy re frula hermano", new PuntoPositivo()));
+        opciones.add(new OpcionClasica("Yo soy re frula hermano", new PuntoPositivo()));
 
         assertThrows(PreguntaError.class, ()-> pregunta.puntajeConOpciones(opciones));
     }

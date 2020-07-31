@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.OpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
@@ -51,7 +52,7 @@ public class MultipleChoiceClasico implements Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new Opcion(titulo, new PuntoNulo());
+        Opcion opcion = new OpcionClasica(titulo, new PuntoNulo());
         this.opciones.add(opcion);
     }
 
@@ -60,7 +61,7 @@ public class MultipleChoiceClasico implements Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new Opcion(titulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(titulo, new PuntoPositivo());
         this.opciones.add(opcion);
         this.puntajeCorrecto++;
     }

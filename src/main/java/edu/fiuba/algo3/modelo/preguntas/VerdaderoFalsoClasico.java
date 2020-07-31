@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.OpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
@@ -33,7 +34,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
         if (opcionCorrecta != null){
             throw new PreguntaError("Ya existe una opcion correcta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoPositivo());
         this.opcionCorrecta = opcion;
     }
 
@@ -41,7 +42,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
         if (opcionIncorrecta != null){
             throw new PreguntaError("Ya existe una opcion incorrecta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, new PuntoNulo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoNulo());
         this.opcionIncorrecta = opcion;
     }
 

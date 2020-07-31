@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.OpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 import edu.fiuba.algo3.modelo.util.punto.*;
 
@@ -28,7 +29,7 @@ public class MultipleChoiceConPenalidad implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoPositivo());
         this.opciones.add(opcion);
     }
 
@@ -36,7 +37,7 @@ public class MultipleChoiceConPenalidad implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, new PuntoNegativo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoNegativo());
         this.opciones.add(opcion);
     }
 

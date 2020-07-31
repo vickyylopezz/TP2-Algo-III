@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.OpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
@@ -19,13 +20,13 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
     public VerdaderoFalsoConPenalidad(String titulo,boolean VerdaderoCorrecta){
         this.titulo = titulo;
         if(VerdaderoCorrecta){
-            Opcion opcionVerdadero = new Opcion("Verdadero", new PuntoPositivo());
-            Opcion opcionFalso = new Opcion("Falso", new PuntoNegativo());
+            Opcion opcionVerdadero = new OpcionClasica("Verdadero", new PuntoPositivo());
+            Opcion opcionFalso = new OpcionClasica("Falso", new PuntoNegativo());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
         }else{
-            Opcion opcionVerdadero = new Opcion("Verdadero", new PuntoNegativo());
-            Opcion opcionFalso = new Opcion("Falso", new PuntoPositivo());
+            Opcion opcionVerdadero = new OpcionClasica("Verdadero", new PuntoNegativo());
+            Opcion opcionFalso = new OpcionClasica("Falso", new PuntoPositivo());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
         }
