@@ -1,13 +1,10 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.JugadaError;
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.preguntas.Pregunta;
 import edu.fiuba.algo3.modelo.util.tiempo.MiliSegundo;
 import edu.fiuba.algo3.modelo.util.tiempo.Segundo;
-import edu.fiuba.algo3.modelo.util.tiempo.Tiempo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -406,7 +403,193 @@ public class JugadaTest {
         assertTrue(opciones.contains(opcion2));
     }
 
-    // obtenerRespuestas
+    // aplicarComodin
+    @Test
+    public void aplicarComodinSinIniciarTiempoLanzaJugadaError() throws JugadaError, JugadorError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinValido = mock(Comodin.class);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinValido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        assertThrows(JugadaError.class, () -> jugada.aplicarComodin(comodinValido));
+    }
+
+    @Test
+    public void aplicarComodinConComodinNoGuardadoEnJugadorLanzaJugadorError() throws JugadaError, JugadorError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinInvalido = mock(Comodin.class);
+        Jugador jugador = mock(Jugador.class);
+        doThrow(JugadorError.class).when(jugador).validarComodin(comodinInvalido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+
+        assertThrows(JugadorError.class, () -> jugada.aplicarComodin(comodinInvalido));
+    }
+
+    @Test
+    public void aplicarComodinConComodinInvalidoPreguntaLanzaComodinError() throws JugadaError, JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinInvalido = mock(Comodin.class);
+        doThrow(ComodinError.class).when(comodinInvalido).validarPregunta(pregunta);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinInvalido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+
+        assertThrows(ComodinError.class, () -> jugada.aplicarComodin(comodinInvalido));
+    }
+
+    @Test
+    public void aplicarComodinDosVecesElMismoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinValido = mock(Comodin.class);
+        doNothing().when(comodinValido).validarPregunta(pregunta);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinValido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+        jugada.aplicarComodin(comodinValido);
+
+        assertThrows(JugadaError.class, () -> jugada.aplicarComodin(comodinValido));
+    }
+
+    @Test
+    public void aplicarComodinFinalizadoElTiempoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinValido = mock(Comodin.class);
+        doNothing().when(comodinValido).validarPregunta(pregunta);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinValido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+        jugada.finalizarTiempo();
+
+        assertThrows(JugadaError.class, () -> jugada.aplicarComodin(comodinValido));
+    }
+
+    @Test
+    public void aplicarComodinAgregaALosComodinesDevueltos() throws JugadaError, JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinValido = mock(Comodin.class);
+        doNothing().when(comodinValido).validarPregunta(pregunta);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinValido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+        jugada.aplicarComodin(comodinValido);
+        jugada.finalizarTiempo();
+
+        ArrayList<Comodin> comodines = jugada.obtenerComodinesAplicados();
+
+        assertEquals(1, comodines.size());
+        assertEquals(comodinValido, comodines.get(0));
+    }
+
+    // desaplicarComodin
+    @Test
+    public void desaplicarComodinSinIniciarTiempoLanzaJugadaError() throws JugadaError, JugadorError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinValido = mock(Comodin.class);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinValido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        assertThrows(JugadaError.class, () -> jugada.desaplicarComodin(comodinValido));
+    }
+
+    @Test
+    public void desaplicarComodinNoAplicadoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinValido = mock(Comodin.class);
+        doNothing().when(comodinValido).validarPregunta(pregunta);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinValido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+
+        assertThrows(JugadaError.class, () -> jugada.desaplicarComodin(comodinValido));
+    }
+
+    @Test
+    public void desaplicarComodinDosVecesElMismoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinValido = mock(Comodin.class);
+        doNothing().when(comodinValido).validarPregunta(pregunta);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinValido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+        jugada.aplicarComodin(comodinValido);
+
+        jugada.desaplicarComodin(comodinValido);
+
+        assertThrows(JugadaError.class, () -> jugada.desaplicarComodin(comodinValido));
+    }
+
+    @Test
+    public void desaplicarComodinFinalizadoElTiempoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinValido = mock(Comodin.class);
+        doNothing().when(comodinValido).validarPregunta(pregunta);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinValido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+        jugada.aplicarComodin(comodinValido);
+        jugada.finalizarTiempo();
+
+        assertThrows(JugadaError.class, () -> jugada.desaplicarComodin(comodinValido));
+    }
+
+    @Test
+    public void desaplicarComodinesSacaComodinDeLosComodinesAplicados() throws JugadaError, JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodin1 = mock(Comodin.class);
+        doNothing().when(comodin1).validarPregunta(pregunta);
+
+        Comodin comodin2 = mock(Comodin.class);
+        doNothing().when(comodin2).validarPregunta(pregunta);
+
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodin1);
+        doNothing().when(jugador).validarComodin(comodin2);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+        jugada.aplicarComodin(comodin1);
+        jugada.aplicarComodin(comodin2);
+        jugada.desaplicarComodin(comodin1);
+        jugada.finalizarTiempo();
+
+        ArrayList<Comodin> comodines = jugada.obtenerComodinesAplicados();
+
+        assertEquals(1, comodines.size());
+        assertEquals(comodin2, comodines.get(0));
+    }
+
+    // obtenerRespuesta
     @Test
     public void obtenerRespuestaSinFinalizarTiempoLanzaJugadaError() throws PreguntaError, JugadaError, RespuestaError {
         Opcion opcion = mock(Opcion.class);
@@ -435,5 +618,55 @@ public class JugadaTest {
 
         assertEquals(jugador, respuesta.obtenerJugador());
         assertEquals(pregunta, respuesta.obtenerPregunta());
+    }
+
+    // obtenerComodinesAplicados
+    @Test
+    public void obtenerComodinesAplicadosSinFinalizarTiempoLanzaJugadaError() throws JugadaError, ComodinError, JugadorError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinValido = mock(Comodin.class);
+        doNothing().when(comodinValido).validarPregunta(pregunta);
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinValido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+        jugada.aplicarComodin(comodinValido);
+
+        assertThrows(JugadaError.class, jugada::obtenerComodinesAplicados);
+    }
+
+    @Test
+    public void obtenerComodinesAplicadosTeDevuelveLosComodinesQueSeAplicaron() throws JugadaError, ComodinError, JugadorError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodin1 = mock(Comodin.class);
+        doNothing().when(comodin1).validarPregunta(pregunta);
+        Comodin comodin2 = mock(Comodin.class);
+        doNothing().when(comodin2).validarPregunta(pregunta);
+        Comodin comodin3 = mock(Comodin.class);
+        doNothing().when(comodin3).validarPregunta(pregunta);
+
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodin1);
+        doNothing().when(jugador).validarComodin(comodin2);
+        doNothing().when(jugador).validarComodin(comodin3);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.iniciarTiempo();
+
+        jugada.aplicarComodin(comodin1);
+        jugada.aplicarComodin(comodin3);
+
+        jugada.finalizarTiempo();
+
+        ArrayList<Comodin> comodinesAplicados = jugada.obtenerComodinesAplicados();
+
+        assertEquals(2, comodinesAplicados.size());
+
+        assertTrue(comodinesAplicados.contains(comodin1));
+        assertFalse(comodinesAplicados.contains(comodin2));
+        assertTrue(comodinesAplicados.contains(comodin3));
     }
 }

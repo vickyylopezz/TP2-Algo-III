@@ -1,14 +1,13 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.JugadaError;
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.preguntas.Pregunta;
 import edu.fiuba.algo3.modelo.util.tiempo.MiliSegundo;
 import edu.fiuba.algo3.modelo.util.tiempo.Tiempo;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 
 public class Jugada {
@@ -16,11 +15,13 @@ public class Jugada {
     private final Pregunta pregunta;
     private final Jugador jugador;
     private final Respuesta respuesta;
+    private final ArrayList<Comodin> comodines;
 
     public Jugada(Pregunta pregunta, Jugador jugador) throws JugadaError {
         if (pregunta == null) throw new JugadaError("Pregunta indefinida");
         if (jugador == null) throw new JugadaError("Jugador indefinido");
 
+        this.comodines = new ArrayList<>();
         this.pregunta = pregunta;
         this.jugador = jugador;
         this.respuesta = new Respuesta(pregunta, jugador);
@@ -93,6 +94,42 @@ public class Jugada {
         this.respuesta.sacarOpcion(opcion);
     }
 
+    public void aplicarComodin(Comodin comodin) throws JugadaError, JugadorError, ComodinError {
+        if (!this.respuesta.abierta()) {
+            throw new JugadaError("El tiempo no ha sido inicializado");
+        }
+        if (this.respuesta.cerrada()) {
+            throw new JugadaError("El tiempo ha sido finalizado");
+        }
+        this.jugador.validarComodin(comodin);
+        comodin.validarPregunta(this.pregunta);
+        if (this.comodines.contains(comodin)) {
+            throw new JugadaError("El comodin ya se encuentra aplicado");
+        }
+        this.comodines.add(comodin);
+    }
+
+    public ArrayList<Comodin> obtenerComodinesAplicados() throws JugadaError {
+        if (!this.respuesta.cerrada()) {
+            throw new JugadaError("El tiempo no ha finalizado");
+        }
+        return new ArrayList<>(this.comodines);
+    }
+
+    public void desaplicarComodin(Comodin comodin) throws JugadaError {
+        if (!this.respuesta.abierta()) {
+            throw new JugadaError("El tiempo no ha sido inicializado");
+        }
+        if (this.respuesta.cerrada()) {
+            throw new JugadaError("El tiempo ha sido finalizado");
+        }
+        if (this.comodines.contains(comodin)) {
+            this.comodines.remove(comodin);
+            return;
+        }
+        throw new JugadaError("El comodin no se encuentra aplicado");
+    }
+
     //OK tituloPregunta() -> String
     //OK tiempoPregunta() -> Tiempo
 
@@ -107,9 +144,9 @@ public class Jugada {
         //OK tiempoRestante() -> Tiempo
 
         //OK seleccionarOpcion(Opcion) -> nil
-        // deseleccionarOpcion(Opcion) -> nil
-        // aplicarComodin(Comodin) -> nil
-        // desaplicarComodin(Comodin) -> nil
+        //OK deseleccionarOpcion(Opcion) -> nil
+        //OK aplicarComodin(Comodin) -> nil
+        //OK desaplicarComodin(Comodin) -> nil
 
         // opcionesSeleccionadas() -> []Opcion
         // comodinesSeleccionados() -> []Comodin
@@ -117,5 +154,5 @@ public class Jugada {
     //OK finalizarTiempo() -> nil
 
     //OK obtenerRespuestas() -> []Respuesta
-    // obtenerComodines() -> []Comodin
+    //OK obtenerComodinesAplicados() -> []Comodin
 }
