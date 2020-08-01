@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.preguntas.Pregunta;
+import edu.fiuba.algo3.modelo.util.tiempo.Tiempo;
 
 public class Jugada {
 
@@ -15,6 +16,10 @@ public class Jugada {
         this.pregunta = pregunta;
         this.jugador = jugador;
     }
+
+    public String tituloPregunta() { return this.pregunta.obtenerTitulo(); }
+
+    public Tiempo tiempoPregunta() { return this.pregunta.obtenerTiempo(); }
 
     // tituloPregunta() -> String
     // tiempoPregunta() -> Tiempo
