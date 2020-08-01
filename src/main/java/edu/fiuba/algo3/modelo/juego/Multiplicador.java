@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 
 public class Multiplicador {
     private int factor;
@@ -19,4 +18,12 @@ public class Multiplicador {
     public int factor() {
         return this.factor;
     }
+
+    public void asignarA(Respuesta respuesta) throws ComodinError {
+        if(respuesta.pregunta().conPenalidad()){
+            throw new ComodinError("Aplicacion de comodin invalida");
+        }
+        respuesta.agregarComodin(this);
+    }
+
 }

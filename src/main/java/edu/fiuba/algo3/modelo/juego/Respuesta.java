@@ -11,6 +11,7 @@ public class Respuesta {
     protected Pregunta pregunta;
     protected Jugador jugador;
     protected ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
+    protected ArrayList<Multiplicador> comodines = new ArrayList<>();
 
     public Respuesta(Pregunta pregunta, Jugador jugador) {
         this.pregunta = pregunta;
@@ -30,5 +31,17 @@ public class Respuesta {
 
     public Punto obtenerPuntaje() throws PreguntaError {
         return this.pregunta.puntajeConOpciones(this.opcionesElegidas);
+    }
+
+    public Pregunta pregunta() {
+        return this.pregunta;
+    }
+
+    public void agregarComodin(Multiplicador multiplicador) {
+        comodines.add(multiplicador);
+    }
+
+    public ArrayList<Multiplicador> comodines() {
+        return this.comodines;
     }
 }
