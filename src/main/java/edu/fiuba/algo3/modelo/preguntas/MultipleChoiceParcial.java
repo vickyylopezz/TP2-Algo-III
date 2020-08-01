@@ -16,6 +16,7 @@ public class MultipleChoiceParcial implements Pregunta {
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
     private Integer segundos;
+    private Penalidad estadoPenalidad = new SinPenalidad();
 
     public MultipleChoiceParcial(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0){
@@ -29,7 +30,7 @@ public class MultipleChoiceParcial implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeCorrecta());
         this.opciones.add(opcion);
     }
 
@@ -37,7 +38,7 @@ public class MultipleChoiceParcial implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoNulo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeIncorrecta());
         this.opciones.add(opcion);
     }
 
@@ -82,12 +83,16 @@ public class MultipleChoiceParcial implements Pregunta {
         }
         Puntaje puntajeParcial = new Puntaje();
         for (Opcion opcion : opciones){
-            if (opcion.obtenerPunto().getValor() == (new PuntoNulo()).getValor()){
-                return new PuntoNulo();
+            if (opcion.obtenerPunto().getValor() == (this.estadoPenalidad.puntajeIncorrecta()).getValor()){
+                return this.estadoPenalidad.puntajeIncorrecta();
             }
             puntajeParcial.agregarPunto(opcion.obtenerPunto());
         }
         return puntajeParcial;
+    }
+
+    public boolean conPenalidad(){
+        return this.estadoPenalidad.conPenalidad();
     }
 
 }
