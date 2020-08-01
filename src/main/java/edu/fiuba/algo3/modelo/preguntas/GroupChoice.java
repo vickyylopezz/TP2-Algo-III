@@ -10,6 +10,7 @@ public class GroupChoice implements Pregunta{
     private final ArrayList<Grupo> grupos = new ArrayList<>();
     private final ArrayList<OpcionGroupChoice> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
+    private Penalidad estadoPenalidad = new SinPenalidad();
 
     private Punto puntajeOpcion(OpcionGroupChoice opcion){
         if(opcion.grupoCoincide()){
@@ -65,7 +66,7 @@ public class GroupChoice implements Pregunta{
         if(opciones.size() == 6){
             throw new PreguntaError("Cantidad maxima de opciones alcanzada");
         }
-        OpcionGroupChoice opcion = new OpcionGroupChoice(titulo,new PuntoNulo(),grupo);
+        OpcionGroupChoice opcion = new OpcionGroupChoice(titulo, this.estadoPenalidad.puntajeOpcionIncorrecta(),grupo);
         grupo.agregarOpcion(opcion);
         opciones.add(opcion);
 
@@ -75,5 +76,9 @@ public class GroupChoice implements Pregunta{
         opcion.agregarGrupo(grupo);
         this.seleccionarOpcion(opcion);
 
+    }
+
+    public boolean conPenalidad(){
+        return this.estadoPenalidad.conPenalidad();
     }
 }

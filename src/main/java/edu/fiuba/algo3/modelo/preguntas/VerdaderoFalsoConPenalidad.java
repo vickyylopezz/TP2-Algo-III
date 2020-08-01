@@ -16,17 +16,18 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private String titulo;
     private Respuesta respuestaActual = null;
+    private Penalidad estadoPenalidad = new ConPenalidad();
 
     public VerdaderoFalsoConPenalidad(String titulo,boolean VerdaderoCorrecta){
         this.titulo = titulo;
         if(VerdaderoCorrecta){
-            Opcion opcionVerdadero = new OpcionClasica("Verdadero", new PuntoPositivo());
-            Opcion opcionFalso = new OpcionClasica("Falso", new PuntoNegativo());
+            Opcion opcionVerdadero = new OpcionClasica("Verdadero", this.estadoPenalidad.puntajeOpcionCorrecta());
+            Opcion opcionFalso = new OpcionClasica("Falso", this.estadoPenalidad.puntajeOpcionIncorrecta());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
         }else{
-            Opcion opcionVerdadero = new OpcionClasica("Verdadero", new PuntoNegativo());
-            Opcion opcionFalso = new OpcionClasica("Falso", new PuntoPositivo());
+            Opcion opcionVerdadero = new OpcionClasica("Verdadero", this.estadoPenalidad.puntajeOpcionIncorrecta());
+            Opcion opcionFalso = new OpcionClasica("Falso", this.estadoPenalidad.puntajeOpcionCorrecta());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
         }
@@ -75,4 +76,7 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
         return resultado;
     }
 
+    public boolean conPenalidad(){
+        return this.estadoPenalidad.conPenalidad();
+    }
 }

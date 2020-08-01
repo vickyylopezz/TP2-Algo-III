@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
 import edu.fiuba.algo3.modelo.juego.OpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
@@ -23,6 +24,7 @@ public class MultipleChoiceClasico implements Pregunta {
     // posible refactorizactorizacion mover el inicio de cada
     // respuesta a la misma respuesta.
     private Date inicioRespuestaActual;
+    private Penalidad estadoPenalidad = new SinPenalidad();
 
     public MultipleChoiceClasico(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0) {
@@ -52,7 +54,7 @@ public class MultipleChoiceClasico implements Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new OpcionClasica(titulo, new PuntoNulo());
+        Opcion opcion = new OpcionClasica(titulo, this.estadoPenalidad.puntajeOpcionIncorrecta());
         this.opciones.add(opcion);
     }
 
@@ -61,7 +63,7 @@ public class MultipleChoiceClasico implements Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new OpcionClasica(titulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(titulo, this.estadoPenalidad.puntajeOpcionCorrecta());
         this.opciones.add(opcion);
         this.puntajeCorrecto++;
     }
@@ -71,7 +73,7 @@ public class MultipleChoiceClasico implements Pregunta {
     public Punto puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError {
         if (opciones == null) { return new PuntoNulo(); }
 
-        int opcionesCorrectas = 0;
+        Puntaje puntosObtenidos = new Puntaje();
 
         for (Opcion opcion: opciones) {
             if (!this.opciones.contains(opcion)) {
@@ -79,11 +81,11 @@ public class MultipleChoiceClasico implements Pregunta {
             }
             // Como el valor correcto de la opcion es 1 y el incorrecto
             // es cero solamente incrementa 1 cuando es correcta la opcion.
-            opcionesCorrectas += opcion.obtenerPunto().getValor();
+            puntosObtenidos.agregarPunto(opcion.obtenerPunto());
         }
 
-        boolean mismaCantidadDeOpciones = opciones.size() == opcionesCorrectas;
-        boolean puntajeTotalCorrecto = this.puntajeCorrecto == opcionesCorrectas;
+        boolean mismaCantidadDeOpciones = opciones.size() == puntosObtenidos.getValor();
+        boolean puntajeTotalCorrecto = this.puntajeCorrecto == puntosObtenidos.getValor();
         boolean todasOpcionesCorrecta = mismaCantidadDeOpciones && puntajeTotalCorrecto;
 
         return todasOpcionesCorrecta ? new PuntoPositivo() : new PuntoNulo();
@@ -129,5 +131,9 @@ public class MultipleChoiceClasico implements Pregunta {
         this.respuestaActual = null;
         this.inicioRespuestaActual = null;
         return resultado;
+    }
+
+    public boolean conPenalidad(){
+        return this.estadoPenalidad.conPenalidad();
     }
 }

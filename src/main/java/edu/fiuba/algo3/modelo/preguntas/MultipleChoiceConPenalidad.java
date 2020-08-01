@@ -16,6 +16,7 @@ public class MultipleChoiceConPenalidad implements Pregunta {
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
     private Integer segundos;
+    private Penalidad estadoPenalidad = new ConPenalidad();
 
     public MultipleChoiceConPenalidad(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0){
@@ -29,7 +30,7 @@ public class MultipleChoiceConPenalidad implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeOpcionCorrecta());
         this.opciones.add(opcion);
     }
 
@@ -37,7 +38,7 @@ public class MultipleChoiceConPenalidad implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoNegativo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeOpcionIncorrecta());
         this.opciones.add(opcion);
     }
 
@@ -85,5 +86,9 @@ public class MultipleChoiceConPenalidad implements Pregunta {
             puntajeParcial.agregarPunto(opcion.obtenerPunto());
         }
         return puntajeParcial;
+    }
+
+    public boolean conPenalidad(){
+        return this.estadoPenalidad.conPenalidad();
     }
 }

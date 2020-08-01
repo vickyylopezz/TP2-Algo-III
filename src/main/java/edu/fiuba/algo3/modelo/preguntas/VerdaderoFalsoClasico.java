@@ -19,6 +19,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
     private String titulo;
     private Respuesta respuestaActual;
     private Integer segundos;
+    private Penalidad estadoPenalidad;
 
     public VerdaderoFalsoClasico(String pregunta, Integer segundos) throws PreguntaError {
         if (segundos < 0){
@@ -28,13 +29,14 @@ public class VerdaderoFalsoClasico implements Pregunta {
         this.opcionIncorrecta = null;
         this.titulo = pregunta;
         this.segundos = segundos;
+        this.estadoPenalidad = new SinPenalidad();
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
         if (opcionCorrecta != null){
             throw new PreguntaError("Ya existe una opcion correcta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeOpcionCorrecta());
         this.opcionCorrecta = opcion;
     }
 
@@ -42,7 +44,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
         if (opcionIncorrecta != null){
             throw new PreguntaError("Ya existe una opcion incorrecta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoNulo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeOpcionIncorrecta());
         this.opcionIncorrecta = opcion;
     }
 
@@ -93,5 +95,9 @@ public class VerdaderoFalsoClasico implements Pregunta {
 
     public String titulo() {
         return this.titulo;
+    }
+
+    public boolean conPenalidad(){
+        return this.estadoPenalidad.conPenalidad();
     }
 }
