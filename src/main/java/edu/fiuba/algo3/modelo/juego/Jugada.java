@@ -94,7 +94,7 @@ public class Jugada {
         this.respuesta.sacarOpcion(opcion);
     }
 
-    public void aplicarComodin(Comodin comodin) throws JugadaError, JugadorError, ComodinError {
+    public void seleccionarComodin(Comodin comodin) throws JugadaError, JugadorError, ComodinError {
         if (!this.respuesta.abierta()) {
             throw new JugadaError("El tiempo no ha sido inicializado");
         }
@@ -109,14 +109,14 @@ public class Jugada {
         this.comodines.add(comodin);
     }
 
-    public ArrayList<Comodin> obtenerComodinesAplicados() throws JugadaError {
+    public ArrayList<Comodin> comodinesSeleccionados() throws JugadaError {
         if (!this.respuesta.cerrada()) {
             throw new JugadaError("El tiempo no ha finalizado");
         }
         return new ArrayList<>(this.comodines);
     }
 
-    public void desaplicarComodin(Comodin comodin) throws JugadaError {
+    public void deseleccionarComodin(Comodin comodin) throws JugadaError {
         if (!this.respuesta.abierta()) {
             throw new JugadaError("El tiempo no ha sido inicializado");
         }
@@ -145,14 +145,13 @@ public class Jugada {
 
         //OK seleccionarOpcion(Opcion) -> nil
         //OK deseleccionarOpcion(Opcion) -> nil
-        //OK aplicarComodin(Comodin) -> nil
-        //OK desaplicarComodin(Comodin) -> nil
+        //OK seleccionarComodin(Comodin) -> nil
+        //OK deseleccionarComodin(Comodin) -> nil
 
         // opcionesSeleccionadas() -> []Opcion
-        // comodinesSeleccionados() -> []Comodin
+        //OK comodinesSeleccionados() -> []Comodin
 
     //OK finalizarTiempo() -> nil
 
     //OK obtenerRespuestas() -> []Respuesta
-    //OK obtenerComodinesAplicados() -> []Comodin
 }

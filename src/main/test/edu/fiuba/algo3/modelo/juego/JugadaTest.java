@@ -403,9 +403,9 @@ public class JugadaTest {
         assertTrue(opciones.contains(opcion2));
     }
 
-    // aplicarComodin
+    // seleccionarComodin
     @Test
-    public void aplicarComodinSinIniciarTiempoLanzaJugadaError() throws JugadaError, JugadorError {
+    public void seleccionarComodinSinIniciarTiempoLanzaJugadaError() throws JugadaError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinValido = mock(Comodin.class);
@@ -414,11 +414,11 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
 
-        assertThrows(JugadaError.class, () -> jugada.aplicarComodin(comodinValido));
+        assertThrows(JugadaError.class, () -> jugada.seleccionarComodin(comodinValido));
     }
 
     @Test
-    public void aplicarComodinConComodinNoGuardadoEnJugadorLanzaJugadorError() throws JugadaError, JugadorError {
+    public void seleccionarComodinConComodinNoGuardadoEnJugadorLanzaJugadorError() throws JugadaError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinInvalido = mock(Comodin.class);
@@ -428,11 +428,11 @@ public class JugadaTest {
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
 
-        assertThrows(JugadorError.class, () -> jugada.aplicarComodin(comodinInvalido));
+        assertThrows(JugadorError.class, () -> jugada.seleccionarComodin(comodinInvalido));
     }
 
     @Test
-    public void aplicarComodinConComodinInvalidoPreguntaLanzaComodinError() throws JugadaError, JugadorError, ComodinError {
+    public void seleccionarComodinConComodinInvalidoPreguntaLanzaComodinError() throws JugadaError, JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinInvalido = mock(Comodin.class);
@@ -443,11 +443,11 @@ public class JugadaTest {
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
 
-        assertThrows(ComodinError.class, () -> jugada.aplicarComodin(comodinInvalido));
+        assertThrows(ComodinError.class, () -> jugada.seleccionarComodin(comodinInvalido));
     }
 
     @Test
-    public void aplicarComodinDosVecesElMismoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+    public void seleccionarComodinDosVecesElMismoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinValido = mock(Comodin.class);
@@ -457,13 +457,13 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
-        jugada.aplicarComodin(comodinValido);
+        jugada.seleccionarComodin(comodinValido);
 
-        assertThrows(JugadaError.class, () -> jugada.aplicarComodin(comodinValido));
+        assertThrows(JugadaError.class, () -> jugada.seleccionarComodin(comodinValido));
     }
 
     @Test
-    public void aplicarComodinFinalizadoElTiempoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+    public void seleccionarComodinFinalizadoElTiempoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinValido = mock(Comodin.class);
@@ -475,11 +475,11 @@ public class JugadaTest {
         jugada.iniciarTiempo();
         jugada.finalizarTiempo();
 
-        assertThrows(JugadaError.class, () -> jugada.aplicarComodin(comodinValido));
+        assertThrows(JugadaError.class, () -> jugada.seleccionarComodin(comodinValido));
     }
 
     @Test
-    public void aplicarComodinAgregaALosComodinesDevueltos() throws JugadaError, JugadorError, ComodinError {
+    public void seleccionarComodinAgregaALosComodinesDevueltos() throws JugadaError, JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinValido = mock(Comodin.class);
@@ -489,18 +489,18 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
-        jugada.aplicarComodin(comodinValido);
+        jugada.seleccionarComodin(comodinValido);
         jugada.finalizarTiempo();
 
-        ArrayList<Comodin> comodines = jugada.obtenerComodinesAplicados();
+        ArrayList<Comodin> comodines = jugada.comodinesSeleccionados();
 
         assertEquals(1, comodines.size());
         assertEquals(comodinValido, comodines.get(0));
     }
 
-    // desaplicarComodin
+    // deseleccionarComodin
     @Test
-    public void desaplicarComodinSinIniciarTiempoLanzaJugadaError() throws JugadaError, JugadorError {
+    public void deseleccionarComodinSinIniciarTiempoLanzaJugadaError() throws JugadaError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinValido = mock(Comodin.class);
@@ -509,11 +509,11 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
 
-        assertThrows(JugadaError.class, () -> jugada.desaplicarComodin(comodinValido));
+        assertThrows(JugadaError.class, () -> jugada.deseleccionarComodin(comodinValido));
     }
 
     @Test
-    public void desaplicarComodinNoAplicadoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+    public void deseleccionarComodinNoAplicadoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinValido = mock(Comodin.class);
@@ -524,11 +524,11 @@ public class JugadaTest {
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
 
-        assertThrows(JugadaError.class, () -> jugada.desaplicarComodin(comodinValido));
+        assertThrows(JugadaError.class, () -> jugada.deseleccionarComodin(comodinValido));
     }
 
     @Test
-    public void desaplicarComodinDosVecesElMismoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+    public void deseleccionarComodinDosVecesElMismoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinValido = mock(Comodin.class);
@@ -538,15 +538,15 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
-        jugada.aplicarComodin(comodinValido);
+        jugada.seleccionarComodin(comodinValido);
 
-        jugada.desaplicarComodin(comodinValido);
+        jugada.deseleccionarComodin(comodinValido);
 
-        assertThrows(JugadaError.class, () -> jugada.desaplicarComodin(comodinValido));
+        assertThrows(JugadaError.class, () -> jugada.deseleccionarComodin(comodinValido));
     }
 
     @Test
-    public void desaplicarComodinFinalizadoElTiempoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
+    public void deseleccionarComodinFinalizadoElTiempoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinValido = mock(Comodin.class);
@@ -556,14 +556,14 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
-        jugada.aplicarComodin(comodinValido);
+        jugada.seleccionarComodin(comodinValido);
         jugada.finalizarTiempo();
 
-        assertThrows(JugadaError.class, () -> jugada.desaplicarComodin(comodinValido));
+        assertThrows(JugadaError.class, () -> jugada.deseleccionarComodin(comodinValido));
     }
 
     @Test
-    public void desaplicarComodinesSacaComodinDeLosComodinesAplicados() throws JugadaError, JugadorError, ComodinError {
+    public void deseleccionarComodinesSacaComodinDeLosComodinesAplicados() throws JugadaError, JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodin1 = mock(Comodin.class);
@@ -578,12 +578,12 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
-        jugada.aplicarComodin(comodin1);
-        jugada.aplicarComodin(comodin2);
-        jugada.desaplicarComodin(comodin1);
+        jugada.seleccionarComodin(comodin1);
+        jugada.seleccionarComodin(comodin2);
+        jugada.deseleccionarComodin(comodin1);
         jugada.finalizarTiempo();
 
-        ArrayList<Comodin> comodines = jugada.obtenerComodinesAplicados();
+        ArrayList<Comodin> comodines = jugada.comodinesSeleccionados();
 
         assertEquals(1, comodines.size());
         assertEquals(comodin2, comodines.get(0));
@@ -620,9 +620,9 @@ public class JugadaTest {
         assertEquals(pregunta, respuesta.obtenerPregunta());
     }
 
-    // obtenerComodinesAplicados
+    // comodinesSeleccionados
     @Test
-    public void obtenerComodinesAplicadosSinFinalizarTiempoLanzaJugadaError() throws JugadaError, ComodinError, JugadorError {
+    public void comodinesSeleccionadosSinFinalizarTiempoLanzaJugadaError() throws JugadaError, ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodinValido = mock(Comodin.class);
@@ -632,13 +632,13 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
-        jugada.aplicarComodin(comodinValido);
+        jugada.seleccionarComodin(comodinValido);
 
-        assertThrows(JugadaError.class, jugada::obtenerComodinesAplicados);
+        assertThrows(JugadaError.class, jugada::comodinesSeleccionados);
     }
 
     @Test
-    public void obtenerComodinesAplicadosTeDevuelveLosComodinesQueSeAplicaron() throws JugadaError, ComodinError, JugadorError {
+    public void comodinesSeleccionadosTeDevuelveLosComodinesQueSeAplicaron() throws JugadaError, ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodin1 = mock(Comodin.class);
@@ -656,12 +656,12 @@ public class JugadaTest {
         Jugada jugada = new Jugada(pregunta, jugador);
         jugada.iniciarTiempo();
 
-        jugada.aplicarComodin(comodin1);
-        jugada.aplicarComodin(comodin3);
+        jugada.seleccionarComodin(comodin1);
+        jugada.seleccionarComodin(comodin3);
 
         jugada.finalizarTiempo();
 
-        ArrayList<Comodin> comodinesAplicados = jugada.obtenerComodinesAplicados();
+        ArrayList<Comodin> comodinesAplicados = jugada.comodinesSeleccionados();
 
         assertEquals(2, comodinesAplicados.size());
 
@@ -669,4 +669,6 @@ public class JugadaTest {
         assertFalse(comodinesAplicados.contains(comodin2));
         assertTrue(comodinesAplicados.contains(comodin3));
     }
+
+
 }
