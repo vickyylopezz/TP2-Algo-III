@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.util.punto.*;
 
 import java.util.ArrayList;
 
-public class MultipleChoiceConPenalidad implements Pregunta {
+public class MultipleChoiceConPenalidad extends Pregunta {
 
     private String titulo;
     private ArrayList<Opcion> opciones = new ArrayList<>();
@@ -63,12 +63,12 @@ public class MultipleChoiceConPenalidad implements Pregunta {
     }
 
     @Override
-    public void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError {
+    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
         this.respuestaActual.agregarOpcion(opcion);
     }
 
     @Override
-    public Respuesta confirmar() throws PreguntaError {
+    public Respuesta confirmar() {
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
         return resultado;
@@ -84,5 +84,9 @@ public class MultipleChoiceConPenalidad implements Pregunta {
             puntajeParcial.agregarPunto(opcion.obtenerPunto());
         }
         return puntajeParcial;
+    }
+
+    public boolean conPenalidad() {
+        return true;
     }
 }

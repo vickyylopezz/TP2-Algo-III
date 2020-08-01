@@ -9,7 +9,7 @@ import edu.fiuba.algo3.modelo.util.punto.*;
 
 import java.util.ArrayList;
 
-public class MultipleChoiceParcial implements Pregunta {
+public class MultipleChoiceParcial extends Pregunta {
 
     private String titulo;
     private ArrayList<Opcion> opciones = new ArrayList<>();
@@ -63,12 +63,12 @@ public class MultipleChoiceParcial implements Pregunta {
     }
 
     @Override
-    public void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError {
+    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
         this.respuestaActual.agregarOpcion(opcion);
     }
 
     @Override
-    public Respuesta confirmar() throws PreguntaError {
+    public Respuesta confirmar() {
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
         return resultado;
@@ -81,7 +81,7 @@ public class MultipleChoiceParcial implements Pregunta {
         }
         Puntaje puntajeParcial = new Puntaje();
         for (Opcion opcion : opciones){
-            if (opcion.obtenerPunto().getValor() == (new PuntoNulo()).getValor()){
+            if (opcion.obtenerPunto().getValor().equals(new PuntoNulo().getValor())){
                 return new PuntoNulo();
             }
             puntajeParcial.agregarPunto(opcion.obtenerPunto());
@@ -89,4 +89,7 @@ public class MultipleChoiceParcial implements Pregunta {
         return puntajeParcial;
     }
 
+    public boolean conPenalidad() {
+        return false;
+    }
 }

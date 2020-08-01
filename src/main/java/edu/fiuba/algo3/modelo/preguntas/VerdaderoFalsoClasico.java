@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 
 import java.util.ArrayList;
 
-public class VerdaderoFalsoClasico implements Pregunta {
+public class VerdaderoFalsoClasico extends Pregunta {
 
     private Opcion opcionCorrecta;
     private Opcion opcionIncorrecta;
@@ -33,16 +33,14 @@ public class VerdaderoFalsoClasico implements Pregunta {
         if (opcionCorrecta != null){
             throw new PreguntaError("Ya existe una opcion correcta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, new PuntoPositivo());
-        this.opcionCorrecta = opcion;
+        this.opcionCorrecta = new Opcion(opcionTitulo, new PuntoPositivo());
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
         if (opcionIncorrecta != null){
             throw new PreguntaError("Ya existe una opcion incorrecta");
         }
-        Opcion opcion = new Opcion(opcionTitulo, new PuntoNulo());
-        this.opcionIncorrecta = opcion;
+        this.opcionIncorrecta = new Opcion(opcionTitulo, new PuntoNulo());
     }
 
     @Override
@@ -69,7 +67,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
     }
 
     @Override
-    public Respuesta confirmar() throws PreguntaError {
+    public Respuesta confirmar() {
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
         return resultado;
@@ -84,7 +82,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
     }
 
     public ArrayList<Opcion> obtenerOpciones() {
-        ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+        ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(this.opcionCorrecta);
         opciones.add(this.opcionIncorrecta);
         return opciones;
@@ -92,5 +90,9 @@ public class VerdaderoFalsoClasico implements Pregunta {
 
     public String titulo() {
         return this.titulo;
+    }
+
+    public boolean conPenalidad() {
+        return false;
     }
 }

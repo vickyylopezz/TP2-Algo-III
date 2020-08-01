@@ -9,9 +9,10 @@ import edu.fiuba.algo3.modelo.util.punto.Punto;
 
 import java.util.ArrayList;
 
-public interface Pregunta {
-    Punto puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError;
-    void iniciar(Jugador jugador) throws PreguntaError;
-    void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError;
-    Respuesta confirmar() throws PreguntaError;
+public abstract class Pregunta {
+    public abstract Punto puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError;
+    abstract void iniciar(Jugador jugador) throws PreguntaError;
+    abstract void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError;
+    abstract Respuesta confirmar() throws PreguntaError;
+    public abstract boolean conPenalidad();
 }

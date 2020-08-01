@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 
 import java.util.ArrayList;
 
-public class VerdaderoFalsoConPenalidad implements Pregunta {
+public class VerdaderoFalsoConPenalidad extends Pregunta {
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private String titulo;
     private Respuesta respuestaActual = null;
@@ -74,4 +74,7 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
         return resultado;
     }
 
+    public boolean conPenalidad() {
+        return true;
+    }
 }
