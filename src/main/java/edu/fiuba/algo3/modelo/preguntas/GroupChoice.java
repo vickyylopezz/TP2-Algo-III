@@ -10,6 +10,7 @@ public class GroupChoice implements Pregunta{
     private final ArrayList<Grupo> grupos = new ArrayList<>();
     private final ArrayList<OpcionGroupChoice> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
+    private Penalidad estadoPenalidad = new SinPenalidad();
 
     private Punto puntajeOpcion(OpcionGroupChoice opcion){
         if(opcion.grupoCoincide()){
