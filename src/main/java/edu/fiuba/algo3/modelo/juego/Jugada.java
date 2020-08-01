@@ -109,10 +109,7 @@ public class Jugada {
         this.comodines.add(comodin);
     }
 
-    public ArrayList<Comodin> comodinesSeleccionados() throws JugadaError {
-        if (!this.respuesta.cerrada()) {
-            throw new JugadaError("El tiempo no ha finalizado");
-        }
+    public ArrayList<Comodin> comodinesSeleccionados() {
         return new ArrayList<>(this.comodines);
     }
 
@@ -130,28 +127,29 @@ public class Jugada {
         throw new JugadaError("El comodin no se encuentra aplicado");
     }
 
-    //OK tituloPregunta() -> String
-    //OK tiempoPregunta() -> Tiempo
+    public ArrayList<Opcion> opcionesSeleccionadas() {
+        return this.respuesta.obtenerOpcionesElegidas();
+    }
 
-    //OK opciones() -> []Opcion
-    // opcionesValidas() -> []Opcion
-    //OK comodines() -> []Comodin
-    // comodinesValidos() -> []Comodin
+    public ArrayList<Opcion> opcionesValidas() throws JugadaError {
+        if (this.respuesta.cerrada()) {
+            throw new JugadaError("El tiempo ha sido finalizado");
+        }
+        ArrayList<Opcion> todasOpciones = this.opciones();
+        for (Opcion opcion: this.opcionesSeleccionadas()) {
+            todasOpciones.remove(opcion);
+        }
+        return todasOpciones;
+    }
 
-    //OK iniciarTiempo() -> nil
-
-        //OK tiempoTranscurrido() -> Tiempo
-        //OK tiempoRestante() -> Tiempo
-
-        //OK seleccionarOpcion(Opcion) -> nil
-        //OK deseleccionarOpcion(Opcion) -> nil
-        //OK seleccionarComodin(Comodin) -> nil
-        //OK deseleccionarComodin(Comodin) -> nil
-
-        // opcionesSeleccionadas() -> []Opcion
-        //OK comodinesSeleccionados() -> []Comodin
-
-    //OK finalizarTiempo() -> nil
-
-    //OK obtenerRespuestas() -> []Respuesta
+    public ArrayList<Comodin> comodinesValidos() throws JugadaError {
+        if (this.respuesta.cerrada()) {
+            throw new JugadaError("El tiempo ha sido finalizado");
+        }
+        ArrayList<Comodin> todosComodines = this.comodines();
+        for (Comodin comodin: this.comodines) {
+            todosComodines.remove(comodin);
+        }
+        return todosComodines;
+    }
 }
