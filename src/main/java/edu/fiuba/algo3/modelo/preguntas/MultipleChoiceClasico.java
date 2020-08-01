@@ -12,7 +12,7 @@ import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MultipleChoiceClasico implements Pregunta {
+public class MultipleChoiceClasico extends Pregunta {
     private String titulo;
     private Integer segundos;
     private Integer puntajeCorrecto;
@@ -128,5 +128,9 @@ public class MultipleChoiceClasico implements Pregunta {
         this.respuestaActual = null;
         this.inicioRespuestaActual = null;
         return resultado;
+    }
+
+    public boolean conPenalidad() {
+        return false;
     }
 }
