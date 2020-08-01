@@ -14,6 +14,10 @@ public class Grupo {
         this.titulo = titulo;
     }
 
+    public String obtenerTitulo(){return this.titulo; }
+
+    public ArrayList<OpcionGroupChoice> obtenerOpciones() {return this.opciones;}
+
     public void agregarOpcion(OpcionGroupChoice opcion) {
         opciones.add(opcion);
     }

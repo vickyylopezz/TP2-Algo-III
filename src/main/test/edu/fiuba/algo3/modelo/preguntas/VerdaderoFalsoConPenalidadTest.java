@@ -196,15 +196,6 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void SoloSePuedeIniciarUnaVezSinConfirmar() throws PreguntaError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?",false);
-        Jugador jugador = new Jugador("Carlos");
-        pregunta.iniciar(jugador);
-
-        assertThrows(PreguntaError.class, ()-> pregunta.iniciar(jugador));
-    }
-
-    @Test
     public void NoSePuedeSeleccionarUnaOpcionSinHaberIniciado(){
         VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();

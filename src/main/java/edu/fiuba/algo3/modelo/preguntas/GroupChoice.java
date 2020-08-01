@@ -17,39 +17,15 @@ public class GroupChoice implements Pregunta{
         }
         return new PuntoNulo();
     }
-    @Override
-    public Punto puntajeConOpciones(ArrayList<Opcion> opcionesPuntaje){
-        Puntaje puntaje = new Puntaje();
-        for(Opcion opcion : opcionesPuntaje){
-            puntaje.agregarPunto(this.puntajeOpcion((OpcionGroupChoice) opcion));
+
+    public ArrayList<OpcionGroupChoice> obtenerOpciones() {
+        ArrayList<OpcionGroupChoice> nuevoArray = new ArrayList<>();
+        for(OpcionGroupChoice opcion : opciones){
+            OpcionGroupChoice copia = opcion.clone();
+            nuevoArray.add(copia);
         }
-        return puntaje;
+        return nuevoArray;
     }
-
-    @Override
-    public void iniciar(Jugador jugador) throws PreguntaError {
-        if(this.grupos.size() < 2){
-            throw new PreguntaError("Cantidad de grupos erronea");
-        }
-        if (jugador == null) {
-            throw new PreguntaError("No exite el Jugador");
-        }
-        this.respuestaActual = new Respuesta(this, jugador);
-    }
-
-    @Override
-    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
-        this.respuestaActual.agregarOpcion(opcion);
-    }
-
-    @Override
-    public Respuesta confirmar(){
-        Respuesta resultado = this.respuestaActual;
-        this.respuestaActual = null;
-        return resultado;
-    }
-
-    public ArrayList<OpcionGroupChoice> obtenerOpciones() {return this.opciones; }
 
     public ArrayList<Grupo> obtenerGrupos() { return this.grupos; }
 
@@ -71,9 +47,50 @@ public class GroupChoice implements Pregunta{
 
     }
 
-    public void seleccionarOpcionEnGrupo(Grupo grupo, OpcionGroupChoice opcion) throws RespuestaError {
+    public void seleccionarOpcionEnGrupo(Grupo grupo, OpcionGroupChoice opcion) throws RespuestaError, PreguntaError {
+        if(respuestaActual == null){
+            throw new PreguntaError("No se ha iniciado el jugador");
+        }
         opcion.agregarGrupo(grupo);
         this.seleccionarOpcion(opcion);
-
     }
+
+    @Override
+    public Punto puntajeConOpciones(ArrayList<Opcion> opcionesPuntaje){
+        Puntaje puntaje = new Puntaje();
+        for(Opcion opcion : opcionesPuntaje){
+            puntaje.agregarPunto(this.puntajeOpcion((OpcionGroupChoice) opcion));
+        }
+        return puntaje;
+    }
+
+    @Override
+    public void iniciar(Jugador jugador) throws PreguntaError {
+        if(this.grupos.size() < 2){
+            throw new PreguntaError("Cantidad de grupos erronea");
+        }
+        if (jugador == null) {
+            throw new PreguntaError("No existe el Jugador");
+        }
+        if(this.respuestaActual != null){
+            throw new PreguntaError("Debe confirmar antes de iniciar con otro jugador");
+        }
+        this.respuestaActual = new Respuesta(this, jugador);
+    }
+
+    @Override
+    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
+        this.respuestaActual.agregarOpcion(opcion);
+    }
+
+    @Override
+    public Respuesta confirmar() throws PreguntaError {
+        if(respuestaActual == null){
+            throw new PreguntaError("No se ha iniciado la pregunta");
+        }
+        Respuesta resultado = this.respuestaActual;
+        this.respuestaActual = null;
+        return resultado;
+    }
+
 }
