@@ -66,7 +66,7 @@ public class GroupChoice implements Pregunta{
         if(opciones.size() == 6){
             throw new PreguntaError("Cantidad maxima de opciones alcanzada");
         }
-        OpcionGroupChoice opcion = new OpcionGroupChoice(titulo, this.estadoPenalidad.puntajeOpcionIncorrecta(),grupo);
+        OpcionGroupChoice opcion = new OpcionGroupChoice(titulo, this.estadoPenalidad.puntajeIncorrecta(),grupo);
         grupo.agregarOpcion(opcion);
         opciones.add(opcion);
 

@@ -54,7 +54,7 @@ public class MultipleChoiceClasico implements Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new OpcionClasica(titulo, this.estadoPenalidad.puntajeOpcionIncorrecta());
+        Opcion opcion = new OpcionClasica(titulo, this.estadoPenalidad.puntajeIncorrecta());
         this.opciones.add(opcion);
     }
 
@@ -63,7 +63,7 @@ public class MultipleChoiceClasico implements Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new OpcionClasica(titulo, this.estadoPenalidad.puntajeOpcionCorrecta());
+        Opcion opcion = new OpcionClasica(titulo, this.estadoPenalidad.puntajeCorrecta());
         this.opciones.add(opcion);
         this.puntajeCorrecto++;
     }

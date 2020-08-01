@@ -21,13 +21,13 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
     public VerdaderoFalsoConPenalidad(String titulo,boolean VerdaderoCorrecta){
         this.titulo = titulo;
         if(VerdaderoCorrecta){
-            Opcion opcionVerdadero = new OpcionClasica("Verdadero", this.estadoPenalidad.puntajeOpcionCorrecta());
-            Opcion opcionFalso = new OpcionClasica("Falso", this.estadoPenalidad.puntajeOpcionIncorrecta());
+            Opcion opcionVerdadero = new OpcionClasica("Verdadero", this.estadoPenalidad.puntajeCorrecta());
+            Opcion opcionFalso = new OpcionClasica("Falso", this.estadoPenalidad.puntajeIncorrecta());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
         }else{
-            Opcion opcionVerdadero = new OpcionClasica("Verdadero", this.estadoPenalidad.puntajeOpcionIncorrecta());
-            Opcion opcionFalso = new OpcionClasica("Falso", this.estadoPenalidad.puntajeOpcionCorrecta());
+            Opcion opcionVerdadero = new OpcionClasica("Verdadero", this.estadoPenalidad.puntajeIncorrecta());
+            Opcion opcionFalso = new OpcionClasica("Falso", this.estadoPenalidad.puntajeCorrecta());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
         }

@@ -30,7 +30,7 @@ public class MultipleChoiceConPenalidad implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeOpcionCorrecta());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeCorrecta());
         this.opciones.add(opcion);
     }
 
@@ -38,7 +38,7 @@ public class MultipleChoiceConPenalidad implements Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeOpcionIncorrecta());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeIncorrecta());
         this.opciones.add(opcion);
     }
 

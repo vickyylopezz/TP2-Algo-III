@@ -12,12 +12,12 @@ public class ConPenalidad implements Penalidad {
     }
 
     @Override
-    public Punto puntajeOpcionCorrecta() {
+    public Punto puntajeCorrecta() {
         return new PuntoPositivo();
     }
 
     @Override
-    public Punto puntajeOpcionIncorrecta() {
+    public Punto puntajeIncorrecta() {
         return new PuntoNegativo();
     }
 }

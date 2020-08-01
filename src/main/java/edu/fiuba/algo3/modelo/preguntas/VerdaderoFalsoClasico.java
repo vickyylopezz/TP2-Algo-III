@@ -36,7 +36,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
         if (opcionCorrecta != null){
             throw new PreguntaError("Ya existe una opcion correcta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeOpcionCorrecta());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeCorrecta());
         this.opcionCorrecta = opcion;
     }
 
@@ -44,7 +44,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
         if (opcionIncorrecta != null){
             throw new PreguntaError("Ya existe una opcion incorrecta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeOpcionIncorrecta());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.estadoPenalidad.puntajeIncorrecta());
         this.opcionIncorrecta = opcion;
     }
 
