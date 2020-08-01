@@ -82,20 +82,31 @@ public class Jugada {
         return this.respuesta;
     }
 
-    // tituloPregunta() -> String
-    // tiempoPregunta() -> Tiempo
+    public void deseleccionarOpcion(Opcion opcion) throws JugadaError, PreguntaError, RespuestaError {
+        if (!this.respuesta.abierta()) {
+            throw new JugadaError("El tiempo no ha sido inicializado");
+        }
+        if (this.respuesta.cerrada()) {
+            throw new JugadaError("El tiempo ha sido finalizado");
+        }
+        this.pregunta.validarOpcion(opcion);
+        this.respuesta.sacarOpcion(opcion);
+    }
 
-    // opciones() -> []Opcion
+    //OK tituloPregunta() -> String
+    //OK tiempoPregunta() -> Tiempo
+
+    //OK opciones() -> []Opcion
     // opcionesValidas() -> []Opcion
-    // comodines() -> []Comodin
+    //OK comodines() -> []Comodin
     // comodinesValidos() -> []Comodin
 
-    // iniciarTiempo() -> nil
+    //OK iniciarTiempo() -> nil
 
-        // tiempoTranscurrido() -> Tiempo
-        // tiempoRestante() -> Tiempo
+        //OK tiempoTranscurrido() -> Tiempo
+        //OK tiempoRestante() -> Tiempo
 
-        // seleccionarOpcion(Opcion) -> nil
+        //OK seleccionarOpcion(Opcion) -> nil
         // deseleccionarOpcion(Opcion) -> nil
         // aplicarComodin(Comodin) -> nil
         // desaplicarComodin(Comodin) -> nil
@@ -103,8 +114,8 @@ public class Jugada {
         // opcionesSeleccionadas() -> []Opcion
         // comodinesSeleccionados() -> []Comodin
 
-    // finalizarTiempo() -> nil
+    //OK finalizarTiempo() -> nil
 
-    // obtenerRespuestas() -> []Respuesta
+    //OK obtenerRespuestas() -> []Respuesta
     // obtenerComodines() -> []Comodin
 }
