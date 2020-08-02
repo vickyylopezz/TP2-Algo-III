@@ -1,8 +1,10 @@
-package edu.fiuba.algo3.modelo.juego;
+package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
+import edu.fiuba.algo3.modelo.comodines.Multiplicador;
+import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
-import edu.fiuba.algo3.modelo.preguntas.Pregunta;
+import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 
@@ -29,21 +31,22 @@ public class MultiplicadorTest {
         assertEquals(2,multiplicador.factor());
     }
 
-    /*@Test
-    public void seAplicaSobrePreguntaConPenalidadYComodinSeGuardaEnRespuesta() throws ComodinError, RespuestaError {
+    @Test
+    public void seAplicaSobrePreguntaConPenalidadYComodinSeGuardaEnJugada() throws ComodinError, RespuestaError, JugadaError {
         Pregunta pregunta = mock(Pregunta.class);
         Multiplicador multiplicador = new Multiplicador(2);
         Jugador jugador = new Jugador("JUan");
+        Jugada jugada = new Jugada(pregunta,jugador);
         Respuesta respuesta = new Respuesta(pregunta,jugador);
         Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
         respuesta.agregarOpcion(opcionCorrecta);
 
-        multiplicador.asignarA(respuesta);
+        multiplicador.asignarA(jugada);
 
-        assertEquals(1,respuesta.comodines().size());
+        assertEquals(1,jugada.comodines().size());
     }
 
-    @Test
+    /*@Test
     public void seAplicaSobrePreguntaSinPenalidadYSeLanzaExcepcion() throws ComodinError, RespuestaError {
         Pregunta pregunta = mock(Pregunta.class);
         Multiplicador multiplicador = new Multiplicador(2);
