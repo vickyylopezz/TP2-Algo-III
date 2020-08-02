@@ -21,7 +21,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
     private Integer segundos;
     private Penalidad estadoPenalidad;
 
-    public VerdaderoFalsoClasico(String pregunta, Integer segundos) throws PreguntaError {
+    public VerdaderoFalsoClasico(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0){
             throw new PreguntaError("Los segundos no pueden ser negativos");
         }
