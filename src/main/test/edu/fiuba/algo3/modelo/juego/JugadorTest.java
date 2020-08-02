@@ -10,6 +10,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class JugadorTest {
+
+    // Test unitarios
+
+    // nombre
     @Test
     public void crearJugadorConNombreLeAsignaElNombre() {
         Jugador carlos = new Jugador("Carlos");
@@ -19,6 +23,7 @@ public class JugadorTest {
         assertEquals(nombre, "Carlos");
     }
 
+    // obtenerRespuestas
     @Test
     public void jugadorInicialmenteSinRespuestas() {
         Jugador carlos = new Jugador("Carlos");
@@ -28,6 +33,28 @@ public class JugadorTest {
         assertTrue(respuestas.isEmpty());
     }
 
+    @Test
+    public void obtenerRespuestaDevuelveUnArregloCopiadoDelQueContineElJugador() throws JugadorError {
+        Respuesta respuesta1 = mock(Respuesta.class);
+        Respuesta respuesta2 = mock(Respuesta.class);
+        Respuesta respuesta3 = mock(Respuesta.class);
+
+        Jugador carlos = new Jugador("Carlos");
+        carlos.agregarRespuesta(respuesta1);
+        carlos.agregarRespuesta(respuesta2);
+        carlos.agregarRespuesta(respuesta3);
+
+        ArrayList<Respuesta> respuestas = carlos.obtenerRespuestas();
+        assertEquals(3, respuestas.size());
+
+        respuestas.remove(respuesta1);
+        assertEquals(2, respuestas.size());
+
+        ArrayList<Respuesta> respuestasJugador = carlos.obtenerRespuestas();
+        assertEquals(3, respuestasJugador.size());
+    }
+
+    // agregarRespuesta
     @Test
     public void agregarRespuestaGuardaLaRespuestaEnElJugador() throws JugadorError {
         Jugador carlos = new Jugador("Carlos");
@@ -69,6 +96,67 @@ public class JugadorTest {
         assertTrue(respuestas.contains(respuesta3));
     }
 
+    // sacarRespuesta
+    @Test
+    public void sacarRespuestaSacaLasRespuestaDeLasRespuestaDelJugados() throws JugadorError {
+        Jugador carlos = new Jugador("Carlos");
+
+        Respuesta respuesta = mock(Respuesta.class);
+
+        carlos.agregarRespuesta(respuesta);
+        carlos.sacarRespuesta(respuesta);
+
+        ArrayList<Respuesta> respuestas = carlos.obtenerRespuestas();
+        assertTrue(respuestas.isEmpty());
+    }
+
+    @Test
+    public void sacarRespuestaInvalidaLanzaJugadorError() throws JugadorError {
+        Jugador carlos = new Jugador("Carlos");
+
+        Respuesta respuesta = mock(Respuesta.class);
+        carlos.agregarRespuesta(respuesta);
+
+        Respuesta respuestaInvalida = mock(Respuesta.class);
+        assertThrows(JugadorError.class, () -> carlos.sacarRespuesta(respuestaInvalida));
+    }
+
+    @Test
+    public void sacarRespuestaDosVecesLanzaJugadorError() throws JugadorError {
+        Jugador carlos = new Jugador("Carlos");
+
+        Respuesta respuesta = mock(Respuesta.class);
+
+        carlos.agregarRespuesta(respuesta);
+        carlos.sacarRespuesta(respuesta);
+
+        assertThrows(JugadorError.class, () -> carlos.sacarRespuesta(respuesta));
+    }
+
+    @Test
+    public void sacarRespuestaSacaLaRespuestaCorrecta() throws JugadorError {
+        Jugador carlos = new Jugador("Carlos");
+
+        Respuesta respuesta1 = mock(Respuesta.class);
+        Respuesta respuesta2 = mock(Respuesta.class);
+        Respuesta respuesta3 = mock(Respuesta.class);
+
+        carlos.agregarRespuesta(respuesta1);
+        carlos.agregarRespuesta(respuesta2);
+        carlos.agregarRespuesta(respuesta3);
+
+        carlos.sacarRespuesta(respuesta2);
+
+        ArrayList<Respuesta> respuestas = carlos.obtenerRespuestas();
+
+        assertEquals(2, respuestas.size());
+        assertTrue(respuestas.contains(respuesta1));
+        assertFalse(respuestas.contains(respuesta2));
+        assertTrue(respuestas.contains(respuesta3));
+    }
+
+
+    // puntajeTotal
     @Test
     public void calcularPuntajeTotalSinRespuestasEsCero() {
         Jugador carlos = new Jugador("Carlos");
