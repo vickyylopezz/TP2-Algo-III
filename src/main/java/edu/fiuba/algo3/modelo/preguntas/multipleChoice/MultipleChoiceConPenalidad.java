@@ -1,24 +1,27 @@
-package edu.fiuba.algo3.modelo.preguntas;
+package edu.fiuba.algo3.modelo.preguntas.multipleChoice;
 
 import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.juego.Opcion;
-import edu.fiuba.algo3.modelo.juego.OpcionClasica;
+import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
+import edu.fiuba.algo3.modelo.juego.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.preguntas.penalidad.ConPenalidad;
+import edu.fiuba.algo3.modelo.preguntas.penalidad.Penalidad;
+import edu.fiuba.algo3.modelo.preguntas.Pregunta;
 import edu.fiuba.algo3.modelo.util.punto.*;
 
 import java.util.ArrayList;
 
-public class MultipleChoiceParcial implements Pregunta {
+public class MultipleChoiceConPenalidad implements Pregunta {
 
     private String titulo;
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
     private Integer segundos;
-    private Penalidad estadoPenalidad = new SinPenalidad();
+    private Penalidad estadoPenalidad = new ConPenalidad();
 
-    public MultipleChoiceParcial(String titulo, Integer segundos) throws PreguntaError {
+    public MultipleChoiceConPenalidad(String titulo, Integer segundos) throws PreguntaError {
         if (segundos < 0){
             throw new PreguntaError("Los segundos no pueden ser negativos");
         }
@@ -83,9 +86,6 @@ public class MultipleChoiceParcial implements Pregunta {
         }
         Puntaje puntajeParcial = new Puntaje();
         for (Opcion opcion : opciones){
-            if (opcion.obtenerPunto().getValor() == (this.estadoPenalidad.puntajeIncorrecta()).getValor()){
-                return this.estadoPenalidad.puntajeIncorrecta();
-            }
             puntajeParcial.agregarPunto(opcion.obtenerPunto());
         }
         return puntajeParcial;
@@ -94,5 +94,4 @@ public class MultipleChoiceParcial implements Pregunta {
     public boolean conPenalidad(){
         return this.estadoPenalidad.conPenalidad();
     }
-
 }

@@ -1,12 +1,17 @@
-package edu.fiuba.algo3.modelo.preguntas;
+package edu.fiuba.algo3.modelo.preguntas.groupChoice;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.juego.*;
+import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
+import edu.fiuba.algo3.modelo.juego.opcion.OpcionGroupChoice;
+import edu.fiuba.algo3.modelo.preguntas.penalidad.Penalidad;
+import edu.fiuba.algo3.modelo.preguntas.Pregunta;
+import edu.fiuba.algo3.modelo.preguntas.penalidad.SinPenalidad;
 import edu.fiuba.algo3.modelo.util.punto.*;
 
 import java.util.ArrayList;
 
-public class GroupChoice implements Pregunta{
+public class GroupChoice implements Pregunta {
     private final ArrayList<Grupo> grupos = new ArrayList<>();
     private final ArrayList<OpcionGroupChoice> opciones = new ArrayList<>();
     private Respuesta respuestaActual;

@@ -1,6 +1,5 @@
-package edu.fiuba.algo3.modelo.juego;
+package edu.fiuba.algo3.modelo.juego.opcion;
 
-import edu.fiuba.algo3.modelo.preguntas.Grupo;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 
 public abstract class Opcion {
