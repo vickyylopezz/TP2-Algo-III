@@ -21,7 +21,7 @@ public class ExclusividadTest {
 
     @Test
     public void seCreaExclusividadConFactorPositivoYDevuelveElFactor() throws ComodinError {
-        ExclusividadTest exclusividad = new Exclusividad(2);
+        Exclusividad exclusividad = new Exclusividad(2);
 
         assertEquals(2,exclusividad.factor());
     }
