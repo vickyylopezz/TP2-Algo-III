@@ -25,7 +25,4 @@ public class ExclusividadTest {
 
         assertEquals(2,exclusividad.factor());
     }
-
-    private int factor() {
-    }
 }
