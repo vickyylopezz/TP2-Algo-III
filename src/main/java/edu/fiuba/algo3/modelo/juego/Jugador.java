@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.juego;
 
+import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.JugadorError;
 import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
@@ -39,4 +40,5 @@ public class Jugador {
     public Punto puntajeTotal() {
         return this.puntaje;
     }
+
 }
