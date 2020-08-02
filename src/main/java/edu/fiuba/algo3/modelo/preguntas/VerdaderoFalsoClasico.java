@@ -4,14 +4,16 @@ import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.preguntas.estados.Penalidad;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 
 import java.util.ArrayList;
 
-public class VerdaderoFalsoClasico extends Pregunta {
+public abstract class VerdaderoFalsoClasico extends Pregunta {
 
     private Opcion opcionCorrecta;
     private Opcion opcionIncorrecta;
@@ -19,14 +21,15 @@ public class VerdaderoFalsoClasico extends Pregunta {
     private Respuesta respuestaActual;
     private Integer segundos;
 
-    public VerdaderoFalsoClasico(String pregunta, Integer segundos) throws PreguntaError {
+    public VerdaderoFalsoClasico(String titulo, Penalidad penalidad) throws PreguntaError {
+        super(titulo,penalidad);
         if (segundos < 0){
             throw new PreguntaError("Los segundos no pueden ser negativos");
         }
         this.opcionCorrecta = null;
         this.opcionIncorrecta = null;
-        this.titulo = pregunta;
-        this.segundos = segundos;
+        /*this.titulo = pregunta;
+        this.segundos = segundos;*/
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
@@ -43,7 +46,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
         this.opcionIncorrecta = new Opcion(opcionTitulo, new PuntoNulo());
     }
 
-    @Override
+    /*@Override
     public void iniciar(Jugador jugador) throws PreguntaError {
         if (this.opcionCorrecta == null || this.opcionIncorrecta == null) {
             throw new PreguntaError("Cantidad de opciones guardadas invalida");
@@ -71,7 +74,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
         return resultado;
-    }
+    }*/
 
     @Override
     public Punto puntajeConOpciones(ArrayList<Opcion> opciones) {
@@ -81,6 +84,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
         return opciones.get(0).obtenerPunto();
     }
 
+    @Override
     public ArrayList<Opcion> obtenerOpciones() {
         ArrayList<Opcion> opciones = new ArrayList<>();
         opciones.add(this.opcionCorrecta);
@@ -88,11 +92,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
         return opciones;
     }
 
-    public String titulo() {
+    /*public String titulo() {
         return this.titulo;
-    }
-
-    public boolean conPenalidad() {
-        return false;
-    }
+    }*/
 }
