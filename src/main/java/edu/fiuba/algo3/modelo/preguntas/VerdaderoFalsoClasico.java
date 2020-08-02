@@ -27,7 +27,7 @@ public class VerdaderoFalsoClasico implements Pregunta {
         }
         this.opcionCorrecta = null;
         this.opcionIncorrecta = null;
-        this.titulo = pregunta;
+        this.titulo = titulo;
         this.segundos = segundos;
         this.estadoPenalidad = new SinPenalidad();
     }
