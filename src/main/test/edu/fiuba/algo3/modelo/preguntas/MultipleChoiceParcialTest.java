@@ -14,7 +14,7 @@ import static org.mockito.Mockito.mock;
 
 public class MultipleChoiceParcialTest {
 
-    @Test
+    /*@Test
     public void CreacionDeMultipleChoiseConSegundosNegativosLanzaPreguntaError(){
         assertThrows(PreguntaError.class, () -> new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?", -1));
     }
@@ -128,5 +128,5 @@ public class MultipleChoiceParcialTest {
         preguntaMCP.iniciar(jugador);
 
         assertThrows(PreguntaError.class, () -> preguntaMCP.iniciar(jugador));
-    }
+    }*/
 }
