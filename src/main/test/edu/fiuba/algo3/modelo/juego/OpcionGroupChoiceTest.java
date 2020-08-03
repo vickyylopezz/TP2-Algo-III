@@ -23,27 +23,4 @@ public class OpcionGroupChoiceTest {
         assertEquals(opcion.obtenerGrupo(),grupo);
     }
 
-    /*@Test
-    public void OpcionSeAgregaGrupoIgualYdebenCoincidir(){
-        Grupo grupo = new Grupo("Mascotas");
-        OpcionGroupChoice opcion = new OpcionGroupChoice("Hola",new PuntoNulo(),grupo);
-
-        opcion.agregarGrupo(grupo);
-
-        assertTrue(opcion.grupoCoincide());
-    }*/
-
-    /*@Test
-    public void OpcionCloneClonaLaOpcion(){
-        Grupo grupo = new Grupo("Mascotas");
-        Punto punto = new PuntoPositivo();
-        OpcionGroupChoice opcion = new OpcionGroupChoice("Hola",punto,grupo);
-
-        OpcionGroupChoice copia = opcion.clone();
-
-        assertEquals(copia.obtenerTitulo(),"Hola");
-        assertEquals(copia.obtenerPunto(),punto);
-        assertEquals(copia.obtenerGrupo(),grupo);
-        assertNotEquals(opcion,copia);
-    }*/
 }
