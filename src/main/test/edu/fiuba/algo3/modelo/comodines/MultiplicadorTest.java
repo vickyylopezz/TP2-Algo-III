@@ -94,7 +94,6 @@ public class MultiplicadorTest {
     @Test
     public void seAplicaARespuestasCorrectasYSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.conPenalizacion()).thenReturn(true);
 
         Jugador jugador = mock(Jugador.class);
 
@@ -117,7 +116,6 @@ public class MultiplicadorTest {
     @Test
     public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.conPenalizacion()).thenReturn(true);
 
         Jugador jugador = mock(Jugador.class);
 
@@ -141,7 +139,6 @@ public class MultiplicadorTest {
     @Test
     public void seAplicaARespuestasIncorrectasYSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.conPenalizacion()).thenReturn(true);
 
         Jugador jugador = mock(Jugador.class);
 
