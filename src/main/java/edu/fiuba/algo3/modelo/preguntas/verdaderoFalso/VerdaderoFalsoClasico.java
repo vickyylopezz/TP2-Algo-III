@@ -6,7 +6,9 @@ import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.preguntas.estados.Penalidad;
+import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
+import edu.fiuba.algo3.modelo.juego.opcion.OpcionClasica;
+import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
@@ -15,37 +17,35 @@ import java.util.ArrayList;
 
 public class VerdaderoFalsoClasico extends Pregunta {
 
-    private Opcion opcionCorrecta;
-    private Opcion opcionIncorrecta;
-    private String titulo;
-    private Respuesta respuestaActual;
-    private Integer segundos;
-    protected ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
+    private OpcionClasica opcionCorrecta;
+    private OpcionClasica opcionIncorrecta;
+    protected ArrayList<Opcion> opciones;
+    //private Integer segundos;
 
-    public VerdaderoFalsoClasico(String titulo, Penalidad penalidad) throws PreguntaError {
-        super(titulo,penalidad);
-        if (segundos < 0){
-            throw new PreguntaError("Los segundos no pueden ser negativos");
-        }
+    public VerdaderoFalsoClasico(String titulo) throws PreguntaError {
+        super(titulo, new SinPenalidad(new CalculadorPuntajeParcial()));
         this.opcionCorrecta = null;
         this.opcionIncorrecta = null;
-        /*this.titulo = pregunta;
-        this.segundos = segundos;*/
+        /*this.segundos = segundos;
+        if (segundos < 0){
+            throw new PreguntaError("Los segundos no pueden ser negativos");
+        }*/
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
         if (opcionCorrecta != null){
             throw new PreguntaError("Ya existe una opcion correcta");
         }
-        this.opcionCorrecta = new Opcion(opcionTitulo, new PuntoPositivo());
-        this.opcionesCorrectas.add(opcionCorrecta);
+        this.opcionCorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeCorrecto());
+        opciones.add(this.opcionCorrecta)
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
         if (opcionIncorrecta != null){
             throw new PreguntaError("Ya existe una opcion incorrecta");
         }
-        this.opcionIncorrecta = new Opcion(opcionTitulo, new PuntoNulo());
+        this.opcionIncorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeIncorrecto());
+        opciones.add(this.opcionIncorrecta);
     }
 
     /*@Override
@@ -84,14 +84,6 @@ public class VerdaderoFalsoClasico extends Pregunta {
             return new PuntoNulo();
         }
         return opciones.get(0).obtenerPunto();
-    }
-
-    @Override
-    public ArrayList<Opcion> obtenerOpciones() {
-        ArrayList<Opcion> opciones = new ArrayList<>();
-        opciones.add(this.opcionCorrecta);
-        opciones.add(this.opcionIncorrecta);
-        return opciones;
     }
 
     /*public String titulo() {
