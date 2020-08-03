@@ -149,20 +149,4 @@ public class Jugada {
         }
         return todosComodines;
     }*/
-
-    public Pregunta pregunta() {
-        return this.pregunta;
-    }
-
-    public void agregarComodin(Comodin comodin) {
-        this.comodines.add(comodin);
-    }
-
-    public ArrayList<Comodin> comodines() {
-        return this.comodines;
-    }
-
-    public ArrayList<Comodin> obtenerComodines() {
-        return this.comodines;
-    }
 }

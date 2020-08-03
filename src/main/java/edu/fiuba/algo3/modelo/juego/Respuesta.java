@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.juego;
 
+import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.comodines.Multiplicador;
 import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
@@ -10,6 +12,8 @@ public class Respuesta {
     protected Pregunta pregunta;
     protected Jugador jugador;
     protected ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
+    private ArrayList<Comodin> comodines = new ArrayList<>();
+
 
     public Respuesta(Pregunta pregunta, Jugador jugador) {
         this.pregunta = pregunta;
@@ -35,4 +39,11 @@ public class Respuesta {
         return this.pregunta;
     }
 
+    public ArrayList<Comodin> comodines() {
+        return this.comodines;
+    }
+
+    public void agregarComodin(Comodin comodin) {
+        this.comodines.add(comodin);
+    }
 }
