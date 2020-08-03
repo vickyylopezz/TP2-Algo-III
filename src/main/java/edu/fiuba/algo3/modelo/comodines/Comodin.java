@@ -1,13 +1,14 @@
 package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 
 public abstract class Comodin {
     private final int factor;
-    private Jugador jugador;
+    protected Jugador jugador;
 
     public Comodin(int factor) throws ComodinError {
         if (factor == 0)  {
@@ -19,10 +20,9 @@ public abstract class Comodin {
         this.factor = factor;
     }
 
-    public int factor() {
+    public int obtenerFactor() {
         return this.factor;
     }
-    abstract void aplicarARespuesta(Respuesta respuesta) throws ComodinError;
 
     public void definirJugador(Jugador jugador) throws ComodinError {
         if(jugador == null){
@@ -36,4 +36,5 @@ public abstract class Comodin {
     }
 
     public abstract void validarPregunta(Jugada jugada) throws ComodinError;
+    abstract void aplicarARespuestas(Respuesta unaRespuesta,Respuesta otraRespuesta) throws ComodinError, RespuestaError;
 }

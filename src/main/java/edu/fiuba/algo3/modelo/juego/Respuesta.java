@@ -35,15 +35,19 @@ public class Respuesta {
         return this.pregunta.puntajeConOpciones(this.opcionesElegidas);
     }
 
-    public Pregunta pregunta() {
+    public Pregunta obtenerPregunta() {
         return this.pregunta;
     }
 
-    public ArrayList<Comodin> comodines() {
+    public ArrayList<Comodin> obtenerComodines() {
         return this.comodines;
     }
 
     public void agregarComodin(Comodin comodin) {
         this.comodines.add(comodin);
+    }
+
+    public boolean esCorrecta() {
+        return true;
     }
 }

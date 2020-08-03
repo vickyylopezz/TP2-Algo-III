@@ -12,18 +12,23 @@ public class Exclusividad extends Comodin {
     }
 
     @Override
-    public void aplicarARespuesta(Respuesta respuesta) throws ComodinError {
-        if(respuesta.pregunta().conPenalizacion()){
-            throw new ComodinError("Aplicacion de comodin invalida");
-        }
-        respuesta.agregarComodin(this);
-    }
-
-    @Override
     public void validarPregunta(Jugada jugada) throws ComodinError {
         if(jugada.obtenerPregunta().conPenalizacion()){
             throw new ComodinError("Aplicacion de comodin invalida");
         }
         jugada.agregarComodin(this);
+    }
+
+    @Override
+    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError {
+        if(!this.esAplicable(unaRespuesta,otraRespuesta)){
+            throw new ComodinError(this.toString() + "no es aplicable");
+        }
+        unaRespuesta.agregarComodin(this);
+        otraRespuesta.agregarComodin(this);
+    }
+
+    protected boolean esAplicable(Respuesta unaRespuesta, Respuesta otraRespuesta) {
+        return ((unaRespuesta.esCorrecta()) && (otraRespuesta.esCorrecta()));
     }
 }

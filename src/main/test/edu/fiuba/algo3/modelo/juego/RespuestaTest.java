@@ -42,7 +42,7 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
         Respuesta respuesta = new Respuesta(pregunta,jugador);
 
-        assertTrue(respuesta.comodines().isEmpty());
+        assertTrue(respuesta.obtenerComodines().isEmpty());
     }
 
     @Test

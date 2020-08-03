@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.*;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +33,7 @@ public class MultiplicadorTest {
     public void seCreaMultiplicadorConFactorPositivoYDevuelveElFactor() throws ComodinError {
         Multiplicador multiplicador = new Multiplicador(2);
 
-        assertEquals(2,multiplicador.factor());
+        assertEquals(2,multiplicador.obtenerFactor());
     }
 
     @Test
@@ -52,45 +53,12 @@ public class MultiplicadorTest {
         assertThrows(ComodinError.class, () -> multiplicador.definirJugador(null));
     }
 
-    /*@Test
-    public void seAplicaEnPreguntaConPenalidadYComodinSeGuardaEnRespuesta() throws ComodinError, RespuestaError, JugadaError {
+    @Test
+    public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalizacion()).thenReturn(true);
 
-        Jugador jugador = new Jugador("Juan");
-
-        Respuesta respuesta = new Respuesta(pregunta,jugador);
-        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
-        respuesta.agregarOpcion(opcionCorrecta);
-
-        Multiplicador multiplicador = new Multiplicador(2);
-        multiplicador.aplicarARespuesta(respuesta);
-
-        assertEquals(1,respuesta.comodines().size());
-    }
-
-    @Test
-    public void seAplicaEnPreguntaSinPenalidadYSeLanzaExcepcion() throws ComodinError, RespuestaError, JugadaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.conPenalizacion()).thenReturn(false);
-
-        Jugador jugador = new Jugador("Juan");
-
-        Respuesta respuesta = new Respuesta(pregunta,jugador);
-        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
-        respuesta.agregarOpcion(opcionCorrecta);
-
-        Multiplicador multiplicador = new Multiplicador(2);
-
-        assertThrows(ComodinError.class, () ->  multiplicador.aplicarARespuesta(respuesta));
-    }*/
-
-    @Test
-    public void seValidaPreguntaConPenalidadYComodinSeGuardaEnJugada() throws JugadaError, RespuestaError, ComodinError {
-        Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.conPenalizacion()).thenReturn(true);
-
-        Jugador jugador = new Jugador("Juan");
+        Jugador jugador = mock(Jugador.class);
 
         Jugada jugada = new Jugada(pregunta,jugador);
 
@@ -109,7 +77,7 @@ public class MultiplicadorTest {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalizacion()).thenReturn(false);
 
-        Jugador jugador = new Jugador("Juan");
+        Jugador jugador = mock(Jugador.class);
 
         Jugada jugada = new Jugada(pregunta,jugador);
 
@@ -120,5 +88,73 @@ public class MultiplicadorTest {
         Multiplicador multiplicador = new Multiplicador(2);
 
         assertThrows(ComodinError.class, () ->  multiplicador.validarPregunta(jugada));
+    }
+
+    @Test
+    public void seAplicaARespuestasCorrectasYSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.conPenalizacion()).thenReturn(true);
+
+        Jugador jugador = mock(Jugador.class);
+
+        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
+
+        Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
+        Respuesta otraRespuestaCorrecta = new Respuesta(pregunta,jugador);
+
+        unaRespuestaCorrecta.agregarOpcion(opcionCorrecta);
+        otraRespuestaCorrecta.agregarOpcion(opcionCorrecta);
+
+        Multiplicador multiplicador = new Multiplicador(2);
+        multiplicador.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
+
+        assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
+        assertEquals(1,otraRespuestaCorrecta.obtenerComodines().size());
+    }
+
+    @Test
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.conPenalizacion()).thenReturn(true);
+
+        Jugador jugador = mock(Jugador.class);
+
+        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
+        Opcion opcionIncorrecta = new Opcion("Mal",new PuntoNulo());
+
+        Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
+        Respuesta otraRespuestaCorrecta = new Respuesta(pregunta,jugador);
+
+        unaRespuestaCorrecta.agregarOpcion(opcionCorrecta);
+        otraRespuestaCorrecta.agregarOpcion(opcionIncorrecta);
+
+        Multiplicador multiplicador = new Multiplicador(2);
+        multiplicador.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
+
+        assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
+        assertEquals(1,otraRespuestaCorrecta.obtenerComodines().size());
+    }
+
+    @Test
+    public void seAplicaARespuestasIncorrectasYSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.conPenalizacion()).thenReturn(true);
+
+        Jugador jugador = mock(Jugador.class);
+
+        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
+        Opcion opcionIncorrecta = new Opcion("Mal",new PuntoPositivo());
+
+        Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
+        Respuesta otraRespuestaCorrecta = new Respuesta(pregunta,jugador);
+
+        unaRespuestaCorrecta.agregarOpcion(opcionCorrecta);
+        otraRespuestaCorrecta.agregarOpcion(opcionIncorrecta);
+
+        Multiplicador multiplicador = new Multiplicador(2);
+        multiplicador.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
+
+        assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
+        assertEquals(1,otraRespuestaCorrecta.obtenerComodines().size());
     }
 }
