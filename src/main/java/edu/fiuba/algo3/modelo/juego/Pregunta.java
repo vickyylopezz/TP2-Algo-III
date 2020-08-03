@@ -35,6 +35,10 @@ public abstract class Pregunta {
         return this.estado.opcionesCorrectas(this, opciones);
     }
 
+    public Integer cantidadOpcionesCorrectas() {
+        return this.estado.cantidadOpcionesCorrectas(this);
+    }
+
     public ArrayList<Opcion> obtenerOpciones(){
         return new ArrayList<>(this.opciones);
     }

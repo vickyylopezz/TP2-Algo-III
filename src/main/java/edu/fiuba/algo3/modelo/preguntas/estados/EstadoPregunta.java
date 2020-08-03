@@ -21,7 +21,18 @@ public abstract class EstadoPregunta {
     }
 
     public Boolean opcionesCorrectas(Pregunta pregunta, ArrayList<Opcion> opciones) {
-        return this.calculadorPuntaje.opcionesCorrectas(pregunta, opciones);
+        for (Opcion opcion: opciones) {
+            if (opcion.obtenerPunto().obtenerValor() != 1) return false;
+        }
+        return opciones.size() == this.cantidadOpcionesCorrectas(pregunta);
+    }
+
+    public Integer cantidadOpcionesCorrectas(Pregunta pregunta) {
+        Integer correctas = 0;
+        for (Opcion opcion: pregunta.obtenerOpciones()) {
+            if (opcion.obtenerPunto().obtenerValor() == 1) correctas++;
+        }
+        return correctas;
     }
 
     public Punto puntajeCorrecto() { return new PuntoPositivo(); }
