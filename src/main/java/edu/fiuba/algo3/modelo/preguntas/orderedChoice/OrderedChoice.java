@@ -1,30 +1,21 @@
 package edu.fiuba.algo3.modelo.preguntas.orderedChoice;
 
 import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
-import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
 import edu.fiuba.algo3.modelo.juego.opcion.OpcionClasica;
-import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.preguntas.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.penalidad.Penalidad;
-import edu.fiuba.algo3.modelo.preguntas.penalidad.SinPenalidad;
-import edu.fiuba.algo3.modelo.util.punto.Puntaje;
-import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeOrdenado;
+import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 
 import java.util.ArrayList;
 
-public class OrderedChoice implements Pregunta {
+public class OrderedChoice extends Pregunta {
+
     private String titulo;
-    private ArrayList<Opcion> opciones;
-    private Respuesta respuestaActual;
-    // private Penalidad estadoPenalidad = new SinPenalidad();
 
     public OrderedChoice(String titulo) {
-        this.titulo = titulo;
-        this.opciones = new ArrayList<>();
+        super(titulo, new SinPenalidad(new CalculadorPuntajeOrdenado()));
     }
 
     public void agregarOpcion(String opcionTitulo) throws PreguntaError {
@@ -42,6 +33,7 @@ public class OrderedChoice implements Pregunta {
         return this.opciones;
     }
 
+    /*
     @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
         if (this.opciones.size() < 2) {
@@ -80,5 +72,5 @@ public class OrderedChoice implements Pregunta {
             }
         }
         return new PuntoPositivo();
-    }
+    }*/
 }

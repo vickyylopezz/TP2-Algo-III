@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.juego;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.comodines.Multiplicador;
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -56,7 +57,7 @@ public class Jugada {
         return this.jugador.obtenerComodines();
     }*/
 
-    public void seleccionarOpcion(Opcion opcion) throws JugadaError, PreguntaError, RespuestaError {
+    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
         /*if (!this.respuesta.abierta()) {
             throw new JugadaError("El tiempo no ha sido inicializado");
         }
@@ -73,7 +74,7 @@ public class Jugada {
         this.respuesta.cerrar();
     }*/
 
-    public Respuesta obtenerRespuesta() throws JugadaError {
+    public Respuesta obtenerRespuesta() {
         /*if (!this.respuesta.cerrada()) {
             throw new JugadaError("El tiempo ha sido finalizado");
         }*/

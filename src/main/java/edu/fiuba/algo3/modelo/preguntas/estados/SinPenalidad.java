@@ -1,11 +1,12 @@
 package edu.fiuba.algo3.modelo.preguntas.estados;
 
+import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 
 public class SinPenalidad extends EstadoPregunta {
 
-    protected SinPenalidad(CalculadorPuntaje calculadorPuntaje) {
+    public SinPenalidad(CalculadorPuntaje calculadorPuntaje) {
         super(calculadorPuntaje);
     }
 

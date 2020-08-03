@@ -2,22 +2,21 @@ package edu.fiuba.algo3.modelo.preguntas.groupChoice;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
 import edu.fiuba.algo3.modelo.juego.opcion.OpcionGroupChoice;
-import edu.fiuba.algo3.modelo.preguntas.penalidad.Penalidad;
-import edu.fiuba.algo3.modelo.preguntas.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.penalidad.SinPenalidad;
-import edu.fiuba.algo3.modelo.util.punto.*;
+import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeClasico;
+import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
 
 import java.util.ArrayList;
 
-public class GroupChoice implements Pregunta {
-    private final ArrayList<Grupo> grupos = new ArrayList<>();
-    private final ArrayList<OpcionGroupChoice> opciones = new ArrayList<>();
-    private Respuesta respuestaActual;
-    private Penalidad estadoPenalidad = new SinPenalidad();
+public class GroupChoice extends Pregunta {
 
-    public ArrayList<OpcionGroupChoice> obtenerOpciones() { return this.opciones; }
+    private final ArrayList<Grupo> grupos;
+
+    protected GroupChoice(String titulo) {
+        super(titulo, new SinPenalidad(new CalculadorPuntajeClasico()));
+
+        this.grupos = new ArrayList<>();
+    }
 
     public ArrayList<Grupo> obtenerGrupos() { return this.grupos; }
 
@@ -34,15 +33,15 @@ public class GroupChoice implements Pregunta {
             throw new PreguntaError("Maximo de opciones alcanzado");
         }
         if(grupo.equals(grupos.get(0))){
-            OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,this.estadoPenalidad.puntajeIncorrecta(),grupos.get(1));
-            OpcionGroupChoice opcionCorrecta = new OpcionGroupChoice(titulo,this.estadoPenalidad.puntajeCorrecta(),grupo);
+            OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeIncorrecto(),grupos.get(1));
+            OpcionGroupChoice opcionCorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeCorrecto(),grupo);
             grupo.agregarOpcion(opcionCorrecta);
             grupos.get(1).agregarOpcion(opcionIncorrecta);
             opciones.add(opcionCorrecta);
             opciones.add(opcionIncorrecta);
         }else{
-            OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,this.estadoPenalidad.puntajeIncorrecta(),grupos.get(0));
-            OpcionGroupChoice opcionCorrecta = new OpcionGroupChoice(titulo,this.estadoPenalidad.puntajeCorrecta(),grupo);
+            OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeCorrecto(),grupos.get(0));
+            OpcionGroupChoice opcionCorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeCorrecto(),grupo);
             grupo.agregarOpcion(opcionCorrecta);
             grupos.get(0).agregarOpcion(opcionIncorrecta);
             opciones.add(opcionCorrecta);
@@ -50,6 +49,7 @@ public class GroupChoice implements Pregunta {
         }
     }
 
+    /*
     @Override
     public Punto puntajeConOpciones(ArrayList<Opcion> opcionesPuntaje){
         Puntaje puntaje = new Puntaje();
@@ -99,4 +99,5 @@ public class GroupChoice implements Pregunta {
         return this.estadoPenalidad.conPenalidad();
     }
 
+    */
 }

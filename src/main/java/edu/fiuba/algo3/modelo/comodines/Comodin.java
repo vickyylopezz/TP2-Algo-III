@@ -40,7 +40,7 @@ public abstract class Comodin {
 
     boolean esValido(Respuesta unaRespuesta) throws ComodinError {
         if(unaRespuesta == null){
-            throw new ComodinError(unaRespuesta.toString() + "invalida");
+            throw new ComodinError("Respuesta invalida");
         }
         return (this.jugador == unaRespuesta.obtenerJugador());
     }

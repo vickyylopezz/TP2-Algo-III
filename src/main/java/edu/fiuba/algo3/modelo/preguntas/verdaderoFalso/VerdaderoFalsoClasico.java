@@ -1,13 +1,13 @@
-package edu.fiuba.algo3.modelo.preguntas;
+package edu.fiuba.algo3.modelo.preguntas.verdaderoFalso;
 
 import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.juego.Opcion;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
 import edu.fiuba.algo3.modelo.juego.opcion.OpcionClasica;
+import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcial;
 import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
@@ -22,7 +22,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
     protected ArrayList<Opcion> opciones;
     //private Integer segundos;
 
-    public VerdaderoFalsoClasico(String titulo) throws PreguntaError {
+    public VerdaderoFalsoClasico(String titulo) {
         super(titulo, new SinPenalidad(new CalculadorPuntajeParcial()));
         this.opcionCorrecta = null;
         this.opcionIncorrecta = null;
@@ -37,7 +37,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
             throw new PreguntaError("Ya existe una opcion correcta");
         }
         this.opcionCorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeCorrecto());
-        opciones.add(this.opcionCorrecta)
+        opciones.add(this.opcionCorrecta);
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
