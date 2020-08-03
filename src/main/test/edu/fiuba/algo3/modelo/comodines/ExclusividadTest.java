@@ -92,7 +92,6 @@ public class ExclusividadTest {
     @Test
     public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.conPenalizacion()).thenReturn(false);
 
         Jugador jugador = mock(Jugador.class);
 
@@ -144,7 +143,6 @@ public class ExclusividadTest {
     @Test
     public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.conPenalizacion()).thenReturn(true);
 
         Jugador jugador = mock(Jugador.class);
 
