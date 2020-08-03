@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class VerdaderoFalsoConPenalidadTest {
 
-    @Test
+    /*@Test
     public void VerdaderoFalsoPuedeCrearseIndicandolecualEsLaRespuestaCorrecta() {
         VerdaderoFalsoConPenalidad pregunta1 = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?",true);
 
@@ -210,6 +210,6 @@ public class VerdaderoFalsoConPenalidadTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertThrows(PreguntaError.class, ()->pregunta.seleccionarOpcion(opciones.get(1)));
-    }
+    }*/
 
 }

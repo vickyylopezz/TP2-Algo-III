@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.juego;
 
-import edu.fiuba.algo3.modelo.preguntas.Pregunta;
+import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.comodines.Multiplicador;
 import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
@@ -11,8 +12,8 @@ public class Respuesta {
     protected Pregunta pregunta;
     protected Jugador jugador;
     protected ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
-    protected ArrayList<Multiplicador> comodines = new ArrayList<>();
-
+    private ArrayList<Comodin> comodines = new ArrayList<>();
+    
     public Respuesta(Pregunta pregunta, Jugador jugador) {
         this.pregunta = pregunta;
         this.jugador = jugador;
@@ -33,15 +34,23 @@ public class Respuesta {
         return this.pregunta.puntajeConOpciones(this.opcionesElegidas);
     }
 
-    public Pregunta pregunta() {
+    public Pregunta obtenerPregunta() {
         return this.pregunta;
     }
 
-    public void agregarComodin(Multiplicador multiplicador) {
-        comodines.add(multiplicador);
+    public ArrayList<Comodin> obtenerComodines() {
+        return this.comodines;
     }
 
-    public ArrayList<Multiplicador> comodines() {
-        return this.comodines;
+    public void agregarComodin(Comodin comodin) {
+        this.comodines.add(comodin);
+    }
+
+    public boolean esCorrecta() {
+        return(this.obtenerOpcionesElegidas() == this.pregunta.obtenerOpcionesCorrectas());
+    }
+
+    public Jugador obtenerJugador() {
+        return this.jugador;
     }
 }

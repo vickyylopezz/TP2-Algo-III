@@ -1,14 +1,11 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.comodines.Multiplicador;
 import edu.fiuba.algo3.modelo.excepciones.*;
-import edu.fiuba.algo3.modelo.preguntas.Pregunta;
-import edu.fiuba.algo3.modelo.util.tiempo.MiliSegundo;
-import edu.fiuba.algo3.modelo.util.tiempo.Tiempo;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
+import java.util.Collection;
 
 public class Jugada {
 
@@ -29,7 +26,7 @@ public class Jugada {
 
     public String tituloPregunta() { return this.pregunta.obtenerTitulo(); }
 
-    public Tiempo tiempoPregunta() { return this.pregunta.obtenerTiempo(); }
+    /*public Tiempo tiempoPregunta() { return this.pregunta.obtenerTiempo(); }
 
     public Tiempo tiempoTrancurrido() throws JugadaError {
         if (!this.respuesta.abierta()) {
@@ -49,41 +46,56 @@ public class Jugada {
 
     public Tiempo tiempoRestante() throws JugadaError {
         return this.pregunta.obtenerTiempo().restar(this.tiempoTrancurrido());
-    }
+    }*/
 
     public ArrayList<Opcion> opciones() {
         return this.pregunta.obtenerOpciones();
     }
 
-    public ArrayList<Comodin> comodines() {
+    /*public ArrayList<Comodin> comodines() {
         return this.jugador.obtenerComodines();
-    }
+    }*/
 
     public void seleccionarOpcion(Opcion opcion) throws JugadaError, PreguntaError, RespuestaError {
-        if (!this.respuesta.abierta()) {
+        /*if (!this.respuesta.abierta()) {
             throw new JugadaError("El tiempo no ha sido inicializado");
         }
         if (this.respuesta.cerrada()) {
             throw new JugadaError("El tiempo ha sido finalizado");
         }
-        this.pregunta.validarOpcion(opcion);
+        this.pregunta.validarOpcion(opcion);*/
         this.respuesta.agregarOpcion(opcion);
     }
 
-    public void finalizarTiempo() throws JugadaError {
+    /*public void finalizarTiempo() throws JugadaError {
         if (!this.respuesta.abierta()) { throw new JugadaError("Tiempo no inicializado"); }
         if (this.respuesta.cerrada()) { throw new JugadaError("Tiempo ya finalizado"); }
         this.respuesta.cerrar();
-    }
+    }*/
 
     public Respuesta obtenerRespuesta() throws JugadaError {
-        if (!this.respuesta.cerrada()) {
+        /*if (!this.respuesta.cerrada()) {
             throw new JugadaError("El tiempo ha sido finalizado");
-        }
+        }*/
         return this.respuesta;
     }
 
-    public void deseleccionarOpcion(Opcion opcion) throws JugadaError, PreguntaError, RespuestaError {
+    public Pregunta obtenerPregunta() {
+        return this.pregunta;
+    }
+
+    public void agregarComodin(Comodin comodin) throws ComodinError {
+        if(comodin == null){
+            throw new ComodinError("Comodin invalido");
+        }
+        this.comodines.add(comodin);
+    }
+
+    public ArrayList<Comodin> obtenerComodines() {
+        return this.comodines;
+    }
+
+    /*public void deseleccionarOpcion(Opcion opcion) throws JugadaError, PreguntaError, RespuestaError {
         if (!this.respuesta.abierta()) {
             throw new JugadaError("El tiempo no ha sido inicializado");
         }
@@ -95,7 +107,7 @@ public class Jugada {
     }
 
     public void seleccionarComodin(Comodin comodin) throws JugadaError, JugadorError, ComodinError {
-        if (!this.respuesta.abierta()) {
+       /* if (!this.respuesta.abierta()) {
             throw new JugadaError("El tiempo no ha sido inicializado");
         }
         if (this.respuesta.cerrada()) {
@@ -107,9 +119,9 @@ public class Jugada {
             throw new JugadaError("El comodin ya se encuentra aplicado");
         }
         this.comodines.add(comodin);
-    }
+    }*/
 
-    public ArrayList<Comodin> comodinesSeleccionados() {
+    /*public ArrayList<Comodin> comodinesSeleccionados() {
         return new ArrayList<>(this.comodines);
     }
 
@@ -140,9 +152,9 @@ public class Jugada {
             todasOpciones.remove(opcion);
         }
         return todasOpciones;
-    }
+    }*/
 
-    public ArrayList<Comodin> comodinesValidos() throws JugadaError {
+    /*public ArrayList<Comodin> comodinesValidos() throws JugadaError {
         if (this.respuesta.cerrada()) {
             throw new JugadaError("El tiempo ha sido finalizado");
         }
@@ -151,5 +163,5 @@ public class Jugada {
             todosComodines.remove(comodin);
         }
         return todosComodines;
-    }
+    }*/
 }

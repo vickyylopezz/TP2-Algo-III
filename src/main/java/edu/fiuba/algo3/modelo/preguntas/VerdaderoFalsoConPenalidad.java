@@ -4,7 +4,9 @@ import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.preguntas.estados.Penalidad;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
@@ -15,34 +17,38 @@ public class VerdaderoFalsoConPenalidad extends Pregunta {
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private String titulo;
     private Respuesta respuestaActual = null;
+    protected ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
 
-    public VerdaderoFalsoConPenalidad(String titulo,boolean VerdaderoCorrecta){
-        this.titulo = titulo;
+    public VerdaderoFalsoConPenalidad(String titulo,boolean VerdaderoCorrecta,Penalidad penalidad){
+        super(titulo,penalidad);
+        //this.titulo = titulo;
         if(VerdaderoCorrecta){
             Opcion opcionVerdadero = new Opcion("Verdadero", new PuntoPositivo());
             Opcion opcionFalso = new Opcion("Falso", new PuntoNegativo());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
+            this.opcionesCorrectas.add(opcionVerdadero);
         }else{
             Opcion opcionVerdadero = new Opcion("Verdadero", new PuntoNegativo());
             Opcion opcionFalso = new Opcion("Falso", new PuntoPositivo());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
+            this.opcionesCorrectas.add(opcionFalso);
         }
     }
 
-    public String obtenerTitulo() { return this.titulo; }
+   /* public String obtenerTitulo() { return this.titulo; }
 
     public ArrayList<Opcion> obtenerOpciones() {
         return this.opciones;
-    }
+    }*/
 
     @Override
     public Punto puntajeConOpciones(ArrayList<Opcion> opciones)  {
         return opciones.get(0).obtenerPunto();
     }
 
-    @Override
+    /*@Override
     public void iniciar(Jugador jugador) throws PreguntaError {
         if(jugador == null){
             throw new PreguntaError("No existe el jugador");
@@ -72,9 +78,6 @@ public class VerdaderoFalsoConPenalidad extends Pregunta {
         Respuesta resultado = this.respuestaActual;
         this.respuestaActual = null;
         return resultado;
-    }
+    }*/
 
-    public boolean conPenalidad() {
-        return true;
-    }
 }
