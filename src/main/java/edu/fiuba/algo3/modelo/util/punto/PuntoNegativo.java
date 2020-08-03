@@ -4,7 +4,7 @@ public class PuntoNegativo implements Punto {
     private Integer valor = -1;
 
     @Override
-    public Integer getValor() {
+    public Integer obtenerValor() {
         return this.valor;
     }
 }

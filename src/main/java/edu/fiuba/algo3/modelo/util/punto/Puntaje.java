@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 //Compuesto
 public class Puntaje implements Punto {
-    private ArrayList<Punto> puntos = new ArrayList<Punto>();
+    private ArrayList<Punto> puntos;
 
     public Puntaje() {
-        puntos.add(new PuntoNulo());
+        this.puntos = new ArrayList<>();
     }
 
     public void agregarPunto(Punto punto){
@@ -15,13 +15,9 @@ public class Puntaje implements Punto {
     }
 
     @Override
-    public Integer getValor() {
+    public Integer obtenerValor() {
         Integer puntaje = 0;
-        for (Punto punto : puntos){
-            puntaje += punto.getValor();
-        }
+        for (Punto punto : puntos) puntaje += punto.obtenerValor();
         return puntaje;
     }
-
-
 }

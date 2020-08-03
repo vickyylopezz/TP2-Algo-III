@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public abstract class Pregunta {
 
     private final String titulo;
-    private final ArrayList<Opcion> opciones = new ArrayList<>();
+    protected final ArrayList<Opcion> opciones = new ArrayList<>();
     protected final EstadoPregunta estado;
 
     protected Pregunta(String titulo, EstadoPregunta estado){

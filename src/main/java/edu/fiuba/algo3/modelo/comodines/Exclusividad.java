@@ -13,7 +13,7 @@ public class Exclusividad extends Comodin {
 
     @Override
     public void validarPregunta(Jugada jugada) throws ComodinError {
-        if(jugada.obtenerPregunta().conPenalizacion()){
+        if(jugada.obtenerPregunta().conPenalidad()){
             throw new ComodinError("Aplicacion de comodin invalida");
         }
         jugada.agregarComodin(this);

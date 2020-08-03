@@ -14,14 +14,14 @@ public class Multiplicador extends Comodin{
 
     @Override
     public void validarPregunta(Jugada jugada) throws ComodinError {
-        if (!jugada.obtenerPregunta().conPenalizacion()){
+        if (!jugada.obtenerPregunta().conPenalidad()){
             throw new ComodinError("Aplicacion de comodin invalida");
         }
         jugada.agregarComodin(this);
     }
 
     @Override
-    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError, RespuestaError {
+    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError {
         if(!this.esValido(unaRespuesta)){
             throw new ComodinError(this.toString() + "no se encuentra dentro de los comodines del jugador");
         }
@@ -34,7 +34,7 @@ public class Multiplicador extends Comodin{
 
     boolean esValido(Respuesta unaRespuesta) throws ComodinError {
         if(unaRespuesta == null){
-            throw new ComodinError(unaRespuesta.toString() + "invalida");
+            throw new ComodinError("Respuesta invalida");
         }
         return (this.jugador == unaRespuesta.obtenerJugador());
     }

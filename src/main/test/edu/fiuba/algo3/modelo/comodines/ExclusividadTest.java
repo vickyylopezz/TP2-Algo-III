@@ -17,6 +17,7 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ExclusividadTest {
+    /*
     @Test
     public void seCreaExclusividadConFactorNuloYSeLanzaExcepcion() {
 
@@ -113,7 +114,7 @@ public class ExclusividadTest {
         assertEquals(0,otraRespuestaCorrecta.obtenerComodines().size());
     }
 
-    /*@Test
+    @Test
     public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
@@ -139,7 +140,7 @@ public class ExclusividadTest {
 
         assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
         assertEquals(1,unaRespuestaIncorrecta.obtenerComodines().size());
-    }*/
+    }
 
     @Test
     public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
@@ -162,6 +163,6 @@ public class ExclusividadTest {
         assertEquals(0,unaRespuestaIncorrecta.obtenerComodines().size());
         assertEquals(0,otraRespuestaIncorrecta.obtenerComodines().size());
     }
-
+    */
 }
 

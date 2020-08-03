@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.modelo.preguntas.estados;
 
-import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
+import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 

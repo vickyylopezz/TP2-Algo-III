@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
 public class OrderedChoiceTest {
-
+    /*
     @Test
     public void CreacionDePreguntaOrderedChoice() throws PreguntaError {
         OrderedChoice pregunta = new OrderedChoice("Ordenar de menor a mayor");
@@ -176,5 +176,5 @@ public class OrderedChoiceTest {
 
         assertThrows(PreguntaError.class, () -> pregunta.iniciar(jugador));
     }
-
+    */
 }

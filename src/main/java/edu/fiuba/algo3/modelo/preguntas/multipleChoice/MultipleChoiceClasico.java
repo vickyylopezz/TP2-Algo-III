@@ -1,63 +1,26 @@
-package edu.fiuba.algo3.modelo.preguntas;
+package edu.fiuba.algo3.modelo.preguntas.multipleChoice;
 
 import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
-import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.juego.Opcion;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.preguntas.estados.Penalidad;
-import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
+import edu.fiuba.algo3.modelo.juego.opcion.OpcionClasica;
+import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeClasico;
+import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 public class MultipleChoiceClasico extends Pregunta {
-    private String titulo;
-    private Integer segundos;
-    private Integer puntajeCorrecto;
-    private ArrayList<Opcion> opciones;
-    private Respuesta respuestaActual;
-    private Integer capacidad;
-    protected ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
 
-    // posible refactorizactorizacion mover el inicio de cada
-    // respuesta a la misma respuesta.
-    private Date inicioRespuestaActual;
-
-    public MultipleChoiceClasico(String titulo, Penalidad penalidad) throws PreguntaError {
-        super(titulo,penalidad);
-        if (segundos < 0) {
-            throw new PreguntaError("Segundo de pregunta negativo");
-        }
-
-        //this.titulo = titulo;
-        //this.segundos = segundos;
-        this.puntajeCorrecto = 0;
-        this.opciones = new ArrayList<>();
-        this.respuestaActual = null;
-        this.inicioRespuestaActual = null;
-        this.capacidad = 5;
+    public MultipleChoiceClasico(String titulo) {
+        super(titulo, new SinPenalidad(new CalculadorPuntajeClasico()));
     }
 
-   /* public String obtenerTitulo() {
-        return this.titulo;
-    }
-
-    public Integer obtenerSegundos() { return this.segundos; }
-
-    public ArrayList<Opcion> obtenerOpciones() {
-        return this.opciones;
-    }
-*/
     public void agregarOpcionIncorrecta(String titulo) throws PreguntaError {
         if (this.opciones.size() == 5) {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new Opcion(titulo, new PuntoNulo());
+        Opcion opcion = new OpcionClasica(titulo, new PuntoNulo());
         this.opciones.add(opcion);
     }
 
@@ -66,11 +29,11 @@ public class MultipleChoiceClasico extends Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new Opcion(titulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(titulo, new PuntoPositivo());
         this.opciones.add(opcion);
-        this.puntajeCorrecto++;
-        this.opcionesCorrectas.add(opcion);
     }
+
+    /*
 
     // Implementacion interface Pregunta
     @Override
@@ -95,7 +58,7 @@ public class MultipleChoiceClasico extends Pregunta {
         return todasOpcionesCorrecta ? new PuntoPositivo() : new PuntoNulo();
     }
 
-   /* @Override
+   @Override
     public void iniciar(Jugador jugador) throws PreguntaError {
         if (this.opciones.size() < 2) {
             throw new PreguntaError("Cantidad de opciones guardadas invalida");

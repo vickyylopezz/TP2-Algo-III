@@ -333,7 +333,7 @@ public class JugadorTest {
 
         Punto puntaje = carlos.puntajeTotal();
 
-        assertEquals(puntaje.getValor(), 0);
+        assertEquals(puntaje.obtenerValor(), 0);
     }
 
     /*
