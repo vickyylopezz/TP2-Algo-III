@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class MultiplicadorTest {
     @Test
@@ -32,29 +33,39 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seAplicaSobrePreguntaConPenalidadYComodinSeGuardaEnJugada() throws ComodinError, RespuestaError, JugadaError {
+    public void seAplicaEnPreguntaConPenalidadYComodinSeGuardaEnJugada() throws ComodinError, RespuestaError, JugadaError {
         Pregunta pregunta = mock(Pregunta.class);
-        Multiplicador multiplicador = new Multiplicador(2);
-        Jugador jugador = new Jugador("JUan");
+        when(pregunta.conPenalizacion()).thenReturn(true);
+
+        Jugador jugador = new Jugador("Juan");
+
         Jugada jugada = new Jugada(pregunta,jugador);
+
         Respuesta respuesta = new Respuesta(pregunta,jugador);
         Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
         respuesta.agregarOpcion(opcionCorrecta);
 
+        Multiplicador multiplicador = new Multiplicador(2);
         multiplicador.asignarA(jugada);
 
         assertEquals(1,jugada.comodines().size());
     }
 
-    /*@Test
-    public void seAplicaSobrePreguntaSinPenalidadYSeLanzaExcepcion() throws ComodinError, RespuestaError {
+    @Test
+    public void seAplicaEnPreguntaSinPenalidadYSeLanzaExcepcion() throws ComodinError, RespuestaError, JugadaError {
         Pregunta pregunta = mock(Pregunta.class);
-        Multiplicador multiplicador = new Multiplicador(2);
-        Jugador jugador = new Jugador("JUan");
+        when(pregunta.conPenalizacion()).thenReturn(false);
+
+        Jugador jugador = new Jugador("Juan");
+
+        Jugada jugada = new Jugada(pregunta,jugador);
+
         Respuesta respuesta = new Respuesta(pregunta,jugador);
         Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
         respuesta.agregarOpcion(opcionCorrecta);
 
-        assertThrows(ComodinError.class, () ->  multiplicador.asignarA(respuesta));
-    }*/
+        Multiplicador multiplicador = new Multiplicador(2);
+
+        assertThrows(ComodinError.class, () ->  multiplicador.asignarA(jugada));
+    }
 }

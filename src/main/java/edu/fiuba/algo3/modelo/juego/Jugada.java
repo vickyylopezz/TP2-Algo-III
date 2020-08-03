@@ -161,4 +161,8 @@ public class Jugada {
     public ArrayList<Comodin> comodines() {
         return this.comodines;
     }
+
+    public ArrayList<Comodin> obtenerComodines() {
+        return this.comodines;
+    }
 }

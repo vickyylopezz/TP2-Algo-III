@@ -11,7 +11,7 @@ public class Exclusividad extends Comodin {
     }
 
     public void asignarA(Jugada jugada) throws ComodinError {
-        if(!jugada.pregunta().conPenalizacion()){
+        if(jugada.pregunta().conPenalizacion()){
             throw new ComodinError("Aplicacion de comodin invalida");
         }
         jugada.agregarComodin(this);
