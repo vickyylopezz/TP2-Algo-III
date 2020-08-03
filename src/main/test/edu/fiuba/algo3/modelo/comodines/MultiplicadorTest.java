@@ -39,16 +39,14 @@ public class MultiplicadorTest {
 
         Jugador jugador = new Jugador("Juan");
 
-        Jugada jugada = new Jugada(pregunta,jugador);
-
         Respuesta respuesta = new Respuesta(pregunta,jugador);
         Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
         respuesta.agregarOpcion(opcionCorrecta);
 
         Multiplicador multiplicador = new Multiplicador(2);
-        multiplicador.asignarA(jugada);
+        multiplicador.asignarA(respuesta);
 
-        assertEquals(1,jugada.comodines().size());
+        assertEquals(1,respuesta.comodines().size());
     }
 
     @Test
@@ -58,14 +56,12 @@ public class MultiplicadorTest {
 
         Jugador jugador = new Jugador("Juan");
 
-        Jugada jugada = new Jugada(pregunta,jugador);
-
         Respuesta respuesta = new Respuesta(pregunta,jugador);
         Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
         respuesta.agregarOpcion(opcionCorrecta);
 
         Multiplicador multiplicador = new Multiplicador(2);
 
-        assertThrows(ComodinError.class, () ->  multiplicador.asignarA(jugada));
+        assertThrows(ComodinError.class, () ->  multiplicador.asignarA(respuesta));
     }
 }

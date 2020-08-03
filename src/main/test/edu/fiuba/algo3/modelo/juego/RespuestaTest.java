@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.juego;
 
+import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
@@ -33,6 +34,15 @@ public class RespuestaTest {
         ArrayList<Opcion> opcionesElegidas = respuesta.obtenerOpcionesElegidas();
 
         assertTrue((opcionesElegidas).isEmpty());
+    }
+
+    @Test
+    public void seCreaYListaDeComodinesEstaVacia() throws JugadaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+        Respuesta respuesta = new Respuesta(pregunta,jugador);
+
+        assertTrue(respuesta.comodines().isEmpty());
     }
 
     @Test
