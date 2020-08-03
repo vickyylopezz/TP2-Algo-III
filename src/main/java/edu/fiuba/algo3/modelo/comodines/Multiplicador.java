@@ -11,11 +11,20 @@ public class Multiplicador extends Comodin{
         super(factor);
     }
 
-    public void asignarA(Respuesta respuesta) throws ComodinError {
-        if(!respuesta.pregunta().conPenalizacion()){
+    @Override
+    public void aplicarARespuesta(Respuesta respuesta) throws ComodinError {
+        if (!respuesta.pregunta().conPenalizacion()){
             throw new ComodinError("Aplicacion de comodin invalida");
         }
         respuesta.agregarComodin(this);
+    }
+
+    @Override
+    public void validarPregunta(Jugada jugada) throws ComodinError {
+        if (!jugada.obtenerPregunta().conPenalizacion()){
+            throw new ComodinError("Aplicacion de comodin invalida");
+        }
+        jugada.agregarComodin(this);
     }
 
 }

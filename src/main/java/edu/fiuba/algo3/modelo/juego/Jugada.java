@@ -80,6 +80,21 @@ public class Jugada {
         return this.respuesta;
     }
 
+    public Pregunta obtenerPregunta() {
+        return this.pregunta;
+    }
+
+    public void agregarComodin(Comodin comodin) throws ComodinError {
+        if(comodin == null){
+            throw new ComodinError("Comodin invalido");
+        }
+        this.comodines.add(comodin);
+    }
+
+    public ArrayList<Comodin> obtenerComodines() {
+        return this.comodines;
+    }
+
     /*public void deseleccionarOpcion(Opcion opcion) throws JugadaError, PreguntaError, RespuestaError {
         if (!this.respuesta.abierta()) {
             throw new JugadaError("El tiempo no ha sido inicializado");
