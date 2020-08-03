@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.*;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
@@ -106,6 +107,7 @@ public class MultiplicadorTest {
         otraRespuestaCorrecta.agregarOpcion(opcionCorrecta);
 
         Multiplicador multiplicador = new Multiplicador(2);
+        multiplicador.definirJugador(jugador);
         multiplicador.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
 
         assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
@@ -122,17 +124,18 @@ public class MultiplicadorTest {
         Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
         Opcion opcionIncorrecta = new Opcion("Mal",new PuntoNulo());
 
-        Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
-        Respuesta otraRespuestaCorrecta = new Respuesta(pregunta,jugador);
+        Respuesta respuestaCorrecta = new Respuesta(pregunta,jugador);
+        Respuesta respuestaIncorrecta = new Respuesta(pregunta,jugador);
 
-        unaRespuestaCorrecta.agregarOpcion(opcionCorrecta);
-        otraRespuestaCorrecta.agregarOpcion(opcionIncorrecta);
+        respuestaCorrecta.agregarOpcion(opcionCorrecta);
+        respuestaIncorrecta.agregarOpcion(opcionIncorrecta);
 
         Multiplicador multiplicador = new Multiplicador(2);
-        multiplicador.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
+        multiplicador.definirJugador(jugador);
+        multiplicador.aplicarARespuestas(respuestaCorrecta,respuestaIncorrecta);
 
-        assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
-        assertEquals(1,otraRespuestaCorrecta.obtenerComodines().size());
+        assertEquals(1,respuestaCorrecta.obtenerComodines().size());
+        assertEquals(1,respuestaIncorrecta.obtenerComodines().size());
     }
 
     @Test
@@ -142,19 +145,19 @@ public class MultiplicadorTest {
 
         Jugador jugador = mock(Jugador.class);
 
-        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
-        Opcion opcionIncorrecta = new Opcion("Mal",new PuntoPositivo());
+        Opcion opcionIncorrecta = new Opcion("Mal",new PuntoNegativo());
 
-        Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
-        Respuesta otraRespuestaCorrecta = new Respuesta(pregunta,jugador);
+        Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
+        Respuesta otraRespuestaIncorrecta = new Respuesta(pregunta,jugador);
 
-        unaRespuestaCorrecta.agregarOpcion(opcionCorrecta);
-        otraRespuestaCorrecta.agregarOpcion(opcionIncorrecta);
+        unaRespuestaIncorrecta.agregarOpcion(opcionIncorrecta);
+        otraRespuestaIncorrecta.agregarOpcion(opcionIncorrecta);
 
         Multiplicador multiplicador = new Multiplicador(2);
-        multiplicador.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
+        multiplicador.definirJugador(jugador);
+        multiplicador.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta);
 
-        assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
-        assertEquals(1,otraRespuestaCorrecta.obtenerComodines().size());
+        assertEquals(1,unaRespuestaIncorrecta.obtenerComodines().size());
+        assertEquals(1,otraRespuestaIncorrecta.obtenerComodines().size());
     }
 }

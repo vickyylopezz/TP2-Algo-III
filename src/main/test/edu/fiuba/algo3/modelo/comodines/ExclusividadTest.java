@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.*;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 
@@ -86,8 +87,8 @@ public class ExclusividadTest {
         assertThrows(ComodinError.class, () -> exclusividad.validarPregunta(jugada));
     }
 
-    /*@Test
-    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
+    @Test
+    public void seAplicaARespuestasCorrectasYSeLanzaExcepcion() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalizacion()).thenReturn(false);
 
@@ -102,10 +103,9 @@ public class ExclusividadTest {
         otraRespuestaCorrecta.agregarOpcion(opcionCorrecta);
 
         Exclusividad exclusividad = new Exclusividad(2);
-        exclusividad.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
+        exclusividad.definirJugador(jugador);
 
-        assertEquals(0,unaRespuestaCorrecta.obtenerComodines().size());
-        assertEquals(0,otraRespuestaCorrecta.obtenerComodines().size());
+        assertThrows(ComodinError.class, () ->  exclusividad.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta));
     }
 
     @Test
@@ -125,6 +125,7 @@ public class ExclusividadTest {
         unaRespuestaIncorrecta.agregarOpcion(opcionIncorrecta);
 
         Exclusividad exclusividad = new Exclusividad(2);
+        exclusividad.definirJugador(jugador);
         exclusividad.aplicarARespuestas(unaRespuestaCorrecta,unaRespuestaIncorrecta);
 
         assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
@@ -132,13 +133,13 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
+    public void seAplicaARespuestasIncorrectasYYSeLanzaExcepcion() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalizacion()).thenReturn(true);
 
         Jugador jugador = mock(Jugador.class);
 
-        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
+        Opcion opcionCorrecta = new Opcion("Bien",new PuntoNulo());
 
         Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
         Respuesta otraRespuestaIncorrecta = new Respuesta(pregunta,jugador);
@@ -147,11 +148,10 @@ public class ExclusividadTest {
         otraRespuestaIncorrecta.agregarOpcion(opcionCorrecta);
 
         Exclusividad exclusividad = new Exclusividad(2);
-        exclusividad.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta);
+        exclusividad.definirJugador(jugador);
 
-        assertEquals(0,unaRespuestaIncorrecta.obtenerComodines().size());
-        assertEquals(0,otraRespuestaIncorrecta.obtenerComodines().size());
-    }*/
+        assertThrows(ComodinError.class, () ->  exclusividad.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta));
+    }
 
 }
 

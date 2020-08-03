@@ -50,4 +50,8 @@ public class Respuesta {
     public boolean esCorrecta() {
         return true;
     }
+
+    public Jugador obtenerJugador() {
+        return this.jugador;
+    }
 }

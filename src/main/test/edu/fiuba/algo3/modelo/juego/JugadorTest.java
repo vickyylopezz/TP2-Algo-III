@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.juego;
 
+import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadorError;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import org.junit.jupiter.api.Test;
@@ -11,7 +12,7 @@ import static org.mockito.Mockito.mock;
 
 public class JugadorTest {
     @Test
-    public void crearJugadorConNombreLeAsignaElNombre() {
+    public void crearJugadorConNombreLeAsignaElNombre() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         String nombre = carlos.nombre();
@@ -20,7 +21,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void jugadorInicialmenteSinRespuestas() {
+    public void jugadorInicialmenteSinRespuestas() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         ArrayList<Respuesta> respuestas = carlos.obtenerRespuestas();
@@ -29,7 +30,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarRespuestaGuardaLaRespuestaEnElJugador() throws JugadorError {
+    public void agregarRespuestaGuardaLaRespuestaEnElJugador() throws JugadorError, ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         Respuesta respuesta = mock(Respuesta.class);
@@ -41,7 +42,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarDosVecesLaMismaRespuestaLanzaExcepcionRespuestasIgualesError() throws JugadorError {
+    public void agregarDosVecesLaMismaRespuestaLanzaExcepcionRespuestasIgualesError() throws JugadorError, ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         Respuesta respuesta = mock(Respuesta.class);
@@ -51,7 +52,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarVariasRespuestasSeGuardanTodas() throws JugadorError {
+    public void agregarVariasRespuestasSeGuardanTodas() throws JugadorError, ComodinError {
         Jugador carlos = new Jugador("Carlos");
         Respuesta respuesta1 = mock(Respuesta.class);
         Respuesta respuesta2 = mock(Respuesta.class);
@@ -70,7 +71,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void calcularPuntajeTotalSinRespuestasEsCero() {
+    public void calcularPuntajeTotalSinRespuestasEsCero() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         Punto puntaje = carlos.puntajeTotal();

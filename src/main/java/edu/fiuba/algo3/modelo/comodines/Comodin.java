@@ -37,4 +37,11 @@ public abstract class Comodin {
 
     public abstract void validarPregunta(Jugada jugada) throws ComodinError;
     abstract void aplicarARespuestas(Respuesta unaRespuesta,Respuesta otraRespuesta) throws ComodinError, RespuestaError;
+
+    boolean esValido(Respuesta unaRespuesta) throws ComodinError {
+        if(unaRespuesta == null){
+            throw new ComodinError(unaRespuesta.toString() + "invalida");
+        }
+        return (this.jugador == unaRespuesta.obtenerJugador());
+    }
 }
