@@ -929,4 +929,12 @@ public class JugadaTest {
         return a.size() == b.size();
     }*/
 
+    @Test
+    public void seCreaJugadaYListaDeComodinesEstaVacia() throws JugadaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta,jugador);
+
+        assertTrue(jugada.obtenerComodines().isEmpty());
+    }
 }
