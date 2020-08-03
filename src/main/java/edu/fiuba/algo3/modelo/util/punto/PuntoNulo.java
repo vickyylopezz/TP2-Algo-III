@@ -4,7 +4,7 @@ public class PuntoNulo implements Punto {
     private Integer valor = 0;
 
     @Override
-    public Integer getValor() {
+    public Integer obtenerValor() {
         return this.valor;
     }
 }
