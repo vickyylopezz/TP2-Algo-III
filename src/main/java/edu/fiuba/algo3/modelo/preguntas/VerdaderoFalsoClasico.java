@@ -20,6 +20,7 @@ public abstract class VerdaderoFalsoClasico extends Pregunta {
     private String titulo;
     private Respuesta respuestaActual;
     private Integer segundos;
+    protected ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
 
     public VerdaderoFalsoClasico(String titulo, Penalidad penalidad) throws PreguntaError {
         super(titulo,penalidad);
@@ -37,6 +38,7 @@ public abstract class VerdaderoFalsoClasico extends Pregunta {
             throw new PreguntaError("Ya existe una opcion correcta");
         }
         this.opcionCorrecta = new Opcion(opcionTitulo, new PuntoPositivo());
+        this.opcionesCorrectas.add(opcionCorrecta);
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {

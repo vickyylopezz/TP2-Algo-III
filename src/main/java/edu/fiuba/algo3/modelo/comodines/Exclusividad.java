@@ -21,8 +21,10 @@ public class Exclusividad extends Comodin {
 
     @Override
     void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError {
-        if(!this.esAplicable(unaRespuesta,otraRespuesta) ||
-                (!this.esAplicable(otraRespuesta,unaRespuesta))){
+        if(!this.esAplicable(unaRespuesta,otraRespuesta)){
+            throw new ComodinError(this.toString() + "no es aplicable");
+        }
+        if(!this.esAplicable(otraRespuesta,unaRespuesta)){
             throw new ComodinError(this.toString() + "no es aplicable");
         }
         unaRespuesta.agregarComodin(this);

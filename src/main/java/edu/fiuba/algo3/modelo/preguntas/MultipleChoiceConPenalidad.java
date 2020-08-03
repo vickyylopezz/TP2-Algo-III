@@ -17,6 +17,7 @@ public abstract class MultipleChoiceConPenalidad extends Pregunta {
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private Respuesta respuestaActual;
    // private Integer segundos;
+   protected ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
 
     public MultipleChoiceConPenalidad(String titulo, Penalidad penalidad) throws PreguntaError {
         super(titulo,penalidad);
@@ -33,6 +34,7 @@ public abstract class MultipleChoiceConPenalidad extends Pregunta {
         }
         Opcion opcion = new Opcion(opcionTitulo, new PuntoPositivo());
         this.opciones.add(opcion);
+        this.opcionesCorrectas.add(opcion);
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {

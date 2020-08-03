@@ -13,8 +13,7 @@ public class Respuesta {
     protected Jugador jugador;
     protected ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
     private ArrayList<Comodin> comodines = new ArrayList<>();
-
-
+    
     public Respuesta(Pregunta pregunta, Jugador jugador) {
         this.pregunta = pregunta;
         this.jugador = jugador;
@@ -48,7 +47,7 @@ public class Respuesta {
     }
 
     public boolean esCorrecta() {
-        return true;
+        return(this.obtenerOpcionesElegidas() == this.pregunta.obtenerOpcionesCorrectas());
     }
 
     public Jugador obtenerJugador() {

@@ -16,7 +16,8 @@ public abstract class Pregunta {
     private final String titulo;
     private final ArrayList<Opcion> opciones = new ArrayList<>();
     protected final Penalidad estadoPenalidad;
-   /* protected final Calculador calculadorPuntaje = null;*/
+    protected ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
+    /* protected final Calculador calculadorPuntaje = null;*/
 
     protected Pregunta(String titulo, Penalidad penalidad){
         this.titulo = titulo;
@@ -37,6 +38,10 @@ public abstract class Pregunta {
 
     public ArrayList<Opcion> obtenerOpciones(){
         return this.opciones;
+    }
+
+    public ArrayList<Opcion> obtenerOpcionesCorrectas(){
+        return this.opcionesCorrectas;
     }
 
     public boolean conPenalizacion() {

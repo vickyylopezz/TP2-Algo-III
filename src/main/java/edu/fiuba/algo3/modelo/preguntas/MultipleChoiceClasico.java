@@ -21,6 +21,7 @@ public abstract class MultipleChoiceClasico extends Pregunta {
     private ArrayList<Opcion> opciones;
     private Respuesta respuestaActual;
     private Integer capacidad;
+    protected ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
 
     // posible refactorizactorizacion mover el inicio de cada
     // respuesta a la misma respuesta.
@@ -68,6 +69,7 @@ public abstract class MultipleChoiceClasico extends Pregunta {
         Opcion opcion = new Opcion(titulo, new PuntoPositivo());
         this.opciones.add(opcion);
         this.puntajeCorrecto++;
+        this.opcionesCorrectas.add(opcion);
     }
 
     // Implementacion interface Pregunta

@@ -8,6 +8,8 @@ import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
@@ -118,6 +120,11 @@ public class ExclusividadTest {
         Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
         Opcion opcionIncorrecta = new Opcion("Bien",new PuntoNulo());
 
+        ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
+        opcionesCorrectas.add(opcionCorrecta);
+
+        when(pregunta.obtenerOpcionesCorrectas()).thenReturn(opcionesCorrectas);
+
         Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
         Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
 
@@ -129,7 +136,7 @@ public class ExclusividadTest {
         exclusividad.aplicarARespuestas(unaRespuestaCorrecta,unaRespuestaIncorrecta);
 
         assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
-        assertEquals(0,unaRespuestaIncorrecta.obtenerComodines().size());
+        assertEquals(1,unaRespuestaIncorrecta.obtenerComodines().size());
     }
 
     @Test

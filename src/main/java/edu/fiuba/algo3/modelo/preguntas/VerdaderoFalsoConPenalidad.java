@@ -17,6 +17,7 @@ public abstract class VerdaderoFalsoConPenalidad extends Pregunta {
     private ArrayList<Opcion> opciones = new ArrayList<>();
     private String titulo;
     private Respuesta respuestaActual = null;
+    protected ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
 
     public VerdaderoFalsoConPenalidad(String titulo,boolean VerdaderoCorrecta,Penalidad penalidad){
         super(titulo,penalidad);
@@ -26,11 +27,13 @@ public abstract class VerdaderoFalsoConPenalidad extends Pregunta {
             Opcion opcionFalso = new Opcion("Falso", new PuntoNegativo());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
+            this.opcionesCorrectas.add(opcionVerdadero);
         }else{
             Opcion opcionVerdadero = new Opcion("Verdadero", new PuntoNegativo());
             Opcion opcionFalso = new Opcion("Falso", new PuntoPositivo());
             this.opciones.add(opcionVerdadero);
             this.opciones.add(opcionFalso);
+            this.opcionesCorrectas.add(opcionFalso);
         }
     }
 
