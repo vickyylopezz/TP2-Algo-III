@@ -90,7 +90,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaARespuestasCorrectasYSeLanzaExcepcion() throws RespuestaError, ComodinError {
+    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalizacion()).thenReturn(false);
 
@@ -107,10 +107,13 @@ public class ExclusividadTest {
         Exclusividad exclusividad = new Exclusividad(2);
         exclusividad.definirJugador(jugador);
 
-        assertThrows(ComodinError.class, () ->  exclusividad.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta));
+        exclusividad.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
+
+        assertEquals(0,unaRespuestaCorrecta.obtenerComodines().size());
+        assertEquals(0,otraRespuestaCorrecta.obtenerComodines().size());
     }
 
-   /* @Test
+    /*@Test
     public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
@@ -139,7 +142,7 @@ public class ExclusividadTest {
     }*/
 
     @Test
-    public void seAplicaARespuestasIncorrectasYYSeLanzaExcepcion() throws RespuestaError, ComodinError {
+    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalizacion()).thenReturn(true);
 
@@ -155,8 +158,10 @@ public class ExclusividadTest {
 
         Exclusividad exclusividad = new Exclusividad(2);
         exclusividad.definirJugador(jugador);
+        exclusividad.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta);
 
-        assertThrows(ComodinError.class, () ->  exclusividad.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta));
+        assertEquals(0,unaRespuestaIncorrecta.obtenerComodines().size());
+        assertEquals(0,otraRespuestaIncorrecta.obtenerComodines().size());
     }
 
 }
