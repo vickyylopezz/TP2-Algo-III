@@ -3,10 +3,9 @@ package edu.fiuba.algo3.modelo.preguntas;
 import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.juego.Opcion;
+import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
+import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
@@ -193,15 +192,6 @@ public class VerdaderoFalsoConPenalidadTest {
 
         assertEquals("Verdadero", opciones2.get(0).obtenerTitulo());
         assertEquals("Falso", opciones2.get(1).obtenerTitulo());
-    }
-
-    @Test
-    public void SoloSePuedeIniciarUnaVezSinConfirmar() throws PreguntaError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?",false);
-        Jugador jugador = new Jugador("Carlos");
-        pregunta.iniciar(jugador);
-
-        assertThrows(PreguntaError.class, ()-> pregunta.iniciar(jugador));
     }
 
     @Test
