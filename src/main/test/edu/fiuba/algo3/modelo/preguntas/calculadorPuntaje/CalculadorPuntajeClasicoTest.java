@@ -36,6 +36,7 @@ public class CalculadorPuntajeClasicoTest {
         opcionesPregunta.add(opcion4);
 
         Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.cantidadOpcionesCorrectas()).thenReturn(2);
         when(pregunta.obtenerOpciones()).thenReturn(opcionesPregunta);
         when(pregunta.puntajeCorrecto()).thenReturn(puntoCorrecto);
         when(pregunta.puntajeIncorrecto()).thenReturn(puntoIncorreco);
@@ -74,6 +75,7 @@ public class CalculadorPuntajeClasicoTest {
         opcionesPregunta.add(opcion4);
 
         Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.cantidadOpcionesCorrectas()).thenReturn(2);
         when(pregunta.obtenerOpciones()).thenReturn(opcionesPregunta);
         when(pregunta.puntajeCorrecto()).thenReturn(puntoCorrecto);
         when(pregunta.puntajeIncorrecto()).thenReturn(puntoIncorreco);
@@ -110,6 +112,7 @@ public class CalculadorPuntajeClasicoTest {
         opcionesPregunta.add(opcion4);
 
         Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.cantidadOpcionesCorrectas()).thenReturn(2);
         when(pregunta.obtenerOpciones()).thenReturn(opcionesPregunta);
         when(pregunta.puntajeCorrecto()).thenReturn(puntoCorrecto);
         when(pregunta.puntajeIncorrecto()).thenReturn(puntoIncorreco);
