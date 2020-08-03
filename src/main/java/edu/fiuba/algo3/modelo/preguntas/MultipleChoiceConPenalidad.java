@@ -11,7 +11,7 @@ import edu.fiuba.algo3.modelo.util.punto.*;
 
 import java.util.ArrayList;
 
-public abstract class MultipleChoiceConPenalidad extends Pregunta {
+public class MultipleChoiceConPenalidad extends Pregunta {
 
     private String titulo;
     private ArrayList<Opcion> opciones = new ArrayList<>();

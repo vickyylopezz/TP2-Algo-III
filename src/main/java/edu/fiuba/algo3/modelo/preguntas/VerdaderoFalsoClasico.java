@@ -13,7 +13,7 @@ import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 
 import java.util.ArrayList;
 
-public abstract class VerdaderoFalsoClasico extends Pregunta {
+public class VerdaderoFalsoClasico extends Pregunta {
 
     private Opcion opcionCorrecta;
     private Opcion opcionIncorrecta;

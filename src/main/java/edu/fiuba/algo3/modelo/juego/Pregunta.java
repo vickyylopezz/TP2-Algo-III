@@ -24,9 +24,6 @@ public abstract class Pregunta {
         this.estadoPenalidad = penalidad;
     }
 
-    public abstract void agregarOpcionCorrecta(String titulo) throws PreguntaError;
-    public abstract void agregarOpcionIncorrecta(String titulo) throws PreguntaError;
-
     public abstract Punto puntajeConOpciones(ArrayList<Opcion> opciones) throws PreguntaError;
     //protected abstract void iniciar(Jugador jugador) throws PreguntaError;
     //public abstract void seleccionarOpcion(Opcion opcion) throws PreguntaError, RespuestaError;

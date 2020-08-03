@@ -14,7 +14,7 @@ import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import java.util.ArrayList;
 import java.util.Date;
 
-public abstract class MultipleChoiceClasico extends Pregunta {
+public class MultipleChoiceClasico extends Pregunta {
     private String titulo;
     private Integer segundos;
     private Integer puntajeCorrecto;
