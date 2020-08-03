@@ -32,11 +32,11 @@ public class GroupChoiceTest {
         ArrayList<OpcionGroupChoice> opciones = pregunta.obtenerOpciones();
 
         pregunta.iniciar(jugador);
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opciones.get(0));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opciones.get(1));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opciones.get(2));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opciones.get(3));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opciones.get(4));
+        pregunta.seleccionarOpcion(opciones.get(1));
+        pregunta.seleccionarOpcion(opciones.get(3));
+        pregunta.seleccionarOpcion(opciones.get(4));
+        pregunta.seleccionarOpcion(opciones.get(6));
+        pregunta.seleccionarOpcion(opciones.get(8));
 
         Respuesta respuesta = pregunta.confirmar();
         assertEquals(respuesta.obtenerPuntaje().getValor(),3);
@@ -73,7 +73,7 @@ public class GroupChoiceTest {
         pregunta.agregarOpcion(grupos.get(1),"Uno");
         pregunta.agregarOpcion(grupos.get(1),"Dos");
 
-        assertEquals(pregunta.obtenerOpciones().size(),5);
+        assertEquals(pregunta.obtenerOpciones().size(),10);
 
     }
 
@@ -114,21 +114,21 @@ public class GroupChoiceTest {
         Jugador pedro = new Jugador("Pedro");
         ArrayList<OpcionGroupChoice> opcionesPedro = pregunta.obtenerOpciones();
         pregunta.iniciar(pedro);
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(0));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(1));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(2));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(3));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(4));
+        pregunta.seleccionarOpcion(opcionesPedro.get(0));
+        pregunta.seleccionarOpcion(opcionesPedro.get(2));
+        pregunta.seleccionarOpcion(opcionesPedro.get(5));
+        pregunta.seleccionarOpcion(opcionesPedro.get(6));
+        pregunta.seleccionarOpcion(opcionesPedro.get(9));
         Respuesta respuestaPedro = pregunta.confirmar();
 
         Jugador carlos = new Jugador("Carlos");
         ArrayList<OpcionGroupChoice> opcionesCarlos = pregunta.obtenerOpciones();
         pregunta.iniciar(carlos);
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesCarlos.get(0));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesCarlos.get(1));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesCarlos.get(2));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesCarlos.get(3));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesCarlos.get(4));
+        pregunta.seleccionarOpcion(opcionesCarlos.get(1));
+        pregunta.seleccionarOpcion(opcionesCarlos.get(3));
+        pregunta.seleccionarOpcion(opcionesCarlos.get(4));
+        pregunta.seleccionarOpcion(opcionesCarlos.get(7));
+        pregunta.seleccionarOpcion(opcionesCarlos.get(8));
         Respuesta respuestaCarlos = pregunta.confirmar();
 
         assertEquals(respuestaPedro.obtenerPuntaje().getValor(),3);
@@ -153,13 +153,14 @@ public class GroupChoiceTest {
         Jugador jugador = new Jugador("Maxi");
         ArrayList<OpcionGroupChoice> opciones = pregunta.obtenerOpciones();
         pregunta.iniciar(jugador);
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opciones.get(0));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opciones.get(1));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opciones.get(2));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opciones.get(3));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opciones.get(4));
+        pregunta.seleccionarOpcion(opciones.get(0));
+        pregunta.seleccionarOpcion(opciones.get(2));
+        pregunta.seleccionarOpcion(opciones.get(5));
+        pregunta.seleccionarOpcion(opciones.get(6));
+        pregunta.seleccionarOpcion(opciones.get(9));
+        pregunta.seleccionarOpcion(opciones.get(4));
 
-        assertThrows(RespuestaError.class, ()-> pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opciones.get(4)));
+        assertThrows(RespuestaError.class, ()-> pregunta.seleccionarOpcion(opciones.get(1)));
     }
 
     @Test
@@ -199,7 +200,7 @@ public class GroupChoiceTest {
         Jugador jugador = new Jugador("Maxi");
         ArrayList<OpcionGroupChoice> opciones = pregunta.obtenerOpciones();
 
-        assertThrows(PreguntaError.class,()->pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opciones.get(3)));
+        assertThrows(PreguntaError.class,()->pregunta.seleccionarOpcion(opciones.get(3)));
 
     }
 
@@ -238,11 +239,11 @@ public class GroupChoiceTest {
         Jugador pedro = new Jugador("Pedro");
         ArrayList<OpcionGroupChoice> opcionesPedro = pregunta.obtenerOpciones();
         pregunta.iniciar(pedro);
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(0));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(1));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(2));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(3));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(4));
+        pregunta.seleccionarOpcion(opcionesPedro.get(0));
+        pregunta.seleccionarOpcion(opcionesPedro.get(2));
+        pregunta.seleccionarOpcion(opcionesPedro.get(5));
+        pregunta.seleccionarOpcion(opcionesPedro.get(6));
+        pregunta.seleccionarOpcion(opcionesPedro.get(9));
 
         Jugador carlos = new Jugador("Carlos");
         ArrayList<OpcionGroupChoice> opcionesCarlos = pregunta.obtenerOpciones();
@@ -267,11 +268,11 @@ public class GroupChoiceTest {
         Jugador pedro = new Jugador("Pedro");
         ArrayList<OpcionGroupChoice> opcionesPedro = pregunta.obtenerOpciones();
         pregunta.iniciar(pedro);
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(0));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(1));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(2));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(3));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(4));
+        pregunta.seleccionarOpcion(opcionesPedro.get(1));
+        pregunta.seleccionarOpcion(opcionesPedro.get(3));
+        pregunta.seleccionarOpcion(opcionesPedro.get(5));
+        pregunta.seleccionarOpcion(opcionesPedro.get(7));
+        pregunta.seleccionarOpcion(opcionesPedro.get(9));
 
         Respuesta respuesta = pregunta.confirmar();
 
@@ -298,12 +299,12 @@ public class GroupChoiceTest {
         Jugador pedro = new Jugador("Pedro");
         ArrayList<OpcionGroupChoice> opcionesPedro = pregunta.obtenerOpciones();
         pregunta.iniciar(pedro);
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(0));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(1));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(0),opcionesPedro.get(2));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(3));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(4));
-        pregunta.seleccionarOpcionEnGrupo(grupos.get(1),opcionesPedro.get(5));
+        pregunta.seleccionarOpcion(opcionesPedro.get(0));
+        pregunta.seleccionarOpcion(opcionesPedro.get(2));
+        pregunta.seleccionarOpcion(opcionesPedro.get(4));
+        pregunta.seleccionarOpcion(opcionesPedro.get(6));
+        pregunta.seleccionarOpcion(opcionesPedro.get(8));
+        pregunta.seleccionarOpcion(opcionesPedro.get(10));
 
         Respuesta respuesta = pregunta.confirmar();
 

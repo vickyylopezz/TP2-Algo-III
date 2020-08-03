@@ -17,20 +17,21 @@ public class GroupChoice implements Pregunta {
     private Respuesta respuestaActual;
     private Penalidad estadoPenalidad = new SinPenalidad();
 
-    private Punto puntajeOpcion(OpcionGroupChoice opcion){
+    /*private Punto puntajeOpcion(OpcionGroupChoice opcion){
         if(opcion.grupoCoincide()){
             return new PuntoPositivo();
         }
         return new PuntoNulo();
-    }
+    }*/
 
     public ArrayList<OpcionGroupChoice> obtenerOpciones() {
-        ArrayList<OpcionGroupChoice> nuevoArray = new ArrayList<>();
+        /*ArrayList<OpcionGroupChoice> nuevoArray = new ArrayList<>();
         for(OpcionGroupChoice opcion : opciones){
             OpcionGroupChoice copia = opcion.clone();
             nuevoArray.add(copia);
         }
-        return nuevoArray;
+        return nuevoArray;*/
+        return this.opciones;
     }
 
     public ArrayList<Grupo> obtenerGrupos() { return this.grupos; }
@@ -44,28 +45,44 @@ public class GroupChoice implements Pregunta {
     }
 
     public void agregarOpcion(Grupo grupo, String titulo) throws PreguntaError {
-        if(opciones.size() == 6){
-            throw new PreguntaError("Cantidad maxima de opciones alcanzada");
+        if(opciones.size() == 12){
+            throw new PreguntaError("Maximo de opciones alcanzado");
         }
-        OpcionGroupChoice opcion = new OpcionGroupChoice(titulo,new PuntoNulo(),grupo);
-        grupo.agregarOpcion(opcion);
-        opciones.add(opcion);
-
+        if(grupo.equals(grupos.get(0))){
+            OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,new PuntoNulo(),grupos.get(1));
+            OpcionGroupChoice opcionCorrecta = new OpcionGroupChoice(titulo,new PuntoPositivo(),grupo);
+            grupo.agregarOpcion(opcionCorrecta);
+            grupos.get(1).agregarOpcion(opcionIncorrecta);
+            opciones.add(opcionCorrecta);
+            opciones.add(opcionIncorrecta);
+        }else{
+            OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,new PuntoNulo(),grupos.get(0));
+            OpcionGroupChoice opcionCorrecta = new OpcionGroupChoice(titulo,new PuntoPositivo(),grupo);
+            grupo.agregarOpcion(opcionCorrecta);
+            grupos.get(0).agregarOpcion(opcionIncorrecta);
+            opciones.add(opcionCorrecta);
+            opciones.add(opcionIncorrecta);
+        }
     }
 
-    public void seleccionarOpcionEnGrupo(Grupo grupo, OpcionGroupChoice opcion) throws RespuestaError, PreguntaError {
+    /*public void seleccionarOpcionEnGrupo(Grupo grupo, OpcionGroupChoice opcion) throws RespuestaError, PreguntaError {
         if(respuestaActual == null){
             throw new PreguntaError("No se ha iniciado el jugador");
         }
         opcion.agregarGrupo(grupo);
         this.seleccionarOpcion(opcion);
-    }
+    }*/
 
     @Override
     public Punto puntajeConOpciones(ArrayList<Opcion> opcionesPuntaje){
-        Puntaje puntaje = new Puntaje();
+        /*Puntaje puntaje = new Puntaje();
         for(Opcion opcion : opcionesPuntaje){
             puntaje.agregarPunto(this.puntajeOpcion((OpcionGroupChoice) opcion));
+        }
+        return puntaje;*/
+        Puntaje puntaje = new Puntaje();
+        for (Opcion opcion : opcionesPuntaje){
+            puntaje.agregarPunto(opcion.obtenerPunto());
         }
         return puntaje;
     }
@@ -85,8 +102,15 @@ public class GroupChoice implements Pregunta {
     }
 
     @Override
-    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
+    public void seleccionarOpcion(Opcion opcion) throws RespuestaError, PreguntaError {
+        if(respuestaActual == null){
+            throw new PreguntaError("No se ha iniciado el jugador");
+        }
+        if (respuestaActual.obtenerOpcionesElegidas().size() == 6){
+            throw new RespuestaError("Cantidad maxima de opciones elegidas");
+        }
         this.respuestaActual.agregarOpcion(opcion);
+
     }
 
     @Override
