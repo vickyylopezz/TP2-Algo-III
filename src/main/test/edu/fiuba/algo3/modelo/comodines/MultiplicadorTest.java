@@ -4,6 +4,8 @@ import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.*;
+import edu.fiuba.algo3.modelo.juego.opcion.Opcion;
+import edu.fiuba.algo3.modelo.juego.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
@@ -57,14 +59,14 @@ public class MultiplicadorTest {
     @Test
     public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.conPenalizacion()).thenReturn(true);
+        when(pregunta.conPenalidad()).thenReturn(true);
 
         Jugador jugador = mock(Jugador.class);
 
         Jugada jugada = new Jugada(pregunta,jugador);
 
         Respuesta respuesta = new Respuesta(pregunta,jugador);
-        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
+        OpcionClasica opcionCorrecta = new OpcionClasica("Bien",new PuntoPositivo());
         respuesta.agregarOpcion(opcionCorrecta);
 
         Multiplicador multiplicador = new Multiplicador(2);
@@ -76,14 +78,14 @@ public class MultiplicadorTest {
     @Test
     public void seValidaPreguntaSinPenalidadYSeLanzaExcepcion() throws JugadaError, RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.conPenalizacion()).thenReturn(false);
+        when(pregunta.conPenalidad()).thenReturn(false);
 
         Jugador jugador = mock(Jugador.class);
 
         Jugada jugada = new Jugada(pregunta,jugador);
 
         Respuesta respuesta = new Respuesta(pregunta,jugador);
-        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
+        OpcionClasica opcionCorrecta = new OpcionClasica("Bien",new PuntoPositivo());
         respuesta.agregarOpcion(opcionCorrecta);
 
         Multiplicador multiplicador = new Multiplicador(2);
@@ -97,7 +99,7 @@ public class MultiplicadorTest {
 
         Jugador jugador = mock(Jugador.class);
 
-        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
+        OpcionClasica opcionCorrecta = new OpcionClasica("Bien", new PuntoPositivo());
 
         Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
         Respuesta otraRespuestaCorrecta = new Respuesta(pregunta,jugador);
@@ -119,8 +121,8 @@ public class MultiplicadorTest {
 
         Jugador jugador = mock(Jugador.class);
 
-        Opcion opcionCorrecta = new Opcion("Bien",new PuntoPositivo());
-        Opcion opcionIncorrecta = new Opcion("Mal",new PuntoNulo());
+        OpcionClasica opcionCorrecta = new OpcionClasica("Bien",new PuntoPositivo());
+        OpcionClasica opcionIncorrecta = new OpcionClasica("Mal",new PuntoNulo());
 
         Respuesta respuestaCorrecta = new Respuesta(pregunta,jugador);
         Respuesta respuestaIncorrecta = new Respuesta(pregunta,jugador);
@@ -142,7 +144,7 @@ public class MultiplicadorTest {
 
         Jugador jugador = mock(Jugador.class);
 
-        Opcion opcionIncorrecta = new Opcion("Mal",new PuntoNegativo());
+        OpcionClasica opcionIncorrecta = new OpcionClasica("Mal",new PuntoNegativo());
 
         Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
         Respuesta otraRespuestaIncorrecta = new Respuesta(pregunta,jugador);
