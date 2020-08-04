@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class VerdaderoFalsoConPenalidadTest {
 
@@ -108,6 +109,22 @@ public class VerdaderoFalsoConPenalidadTest {
         assertEquals("Falso",opciones.get(0).obtenerTitulo());
         assertEquals(1,opciones.get(0).obtenerPunto().obtenerValor());
 
+    }
+
+    @Test
+    public void AgregarDosOpcionesCorrectasLanzaPreguntaError() throws PreguntaError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?");
+        pregunta.agregarOpcionCorrecta("Falso");
+
+        assertThrows(PreguntaError.class, () -> pregunta.agregarOpcionCorrecta("False"));
+    }
+
+    @Test
+    public void AgregarDosOpcionesIncorrectasLanzaPreguntaError() throws PreguntaError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?");
+        pregunta.agregarOpcionIncorrecta("Verdadero");
+
+        assertThrows(PreguntaError.class, () -> pregunta.agregarOpcionIncorrecta("True"));
     }
 
 }
