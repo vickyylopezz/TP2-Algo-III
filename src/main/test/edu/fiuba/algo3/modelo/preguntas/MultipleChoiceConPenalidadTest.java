@@ -1,31 +1,35 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
+import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceConPenalidad;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
 
 public class MultipleChoiceConPenalidadTest {
 
-   /* @Test
-    public void CreacionDeMultipleChoiceConSegundosNegativosLanzaPreguntaError(){
-        assertThrows(PreguntaError.class, () -> new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?", -1));
-    }
-
     @Test
     public void CreacionDeMultipleChoiceConPenalidadIndicandoRespuestaCorrecta() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?", 15);
+        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
         preguntaMCCP.agregarOpcionIncorrecta("Fernando");
         preguntaMCCP.agregarOpcionIncorrecta("Catalina");
 
-        assertEquals("¿Quienes son integrantes del grupo PM3?", preguntaMCCP.titulo());
+        assertEquals("¿Quienes son integrantes del grupo PM3?", preguntaMCCP.obtenerTitulo());
         assertEquals(4, preguntaMCCP.obtenerOpciones().size());
     }
 
     @Test
     public void obtenerOpcionesDevuelveTodasLasOpcionesAgregadas() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?", 15);
+        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
         preguntaMCCP.agregarOpcionIncorrecta("Fernando");
@@ -38,56 +42,44 @@ public class MultipleChoiceConPenalidadTest {
 
     @Test
     public void MultipleChoiceConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError, RespuestaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?", 15);
+        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
         preguntaMCCP.agregarOpcionIncorrecta("Fernando");
         preguntaMCCP.agregarOpcionIncorrecta("Catalina");
 
         ArrayList<Opcion> opciones = preguntaMCCP.obtenerOpciones();
-        Jugador jugador1 = new Jugador("Carlos");
-        Jugador jugador2 = new Jugador("Julia");
-        Jugador jugador3 = new Jugador("Ariel");
-        Jugador jugador4 = new Jugador("Mabel");
 
-        preguntaMCCP.iniciar(jugador1);
-        preguntaMCCP.seleccionarOpcion(opciones.get(0));
-        preguntaMCCP.seleccionarOpcion(opciones.get(1));
-        Respuesta respuestaJugador1 = preguntaMCCP.confirmar();
-        jugador1.sumarPuntaje(respuestaJugador1.obtenerPuntaje());
+        ArrayList<Opcion> opcionesElegidas1 = new ArrayList<>();
+        opcionesElegidas1.add(opciones.get(0));
+        opcionesElegidas1.add(opciones.get(1));
 
-        preguntaMCCP.iniciar(jugador2);
-        preguntaMCCP.seleccionarOpcion(opciones.get(0));
-        preguntaMCCP.seleccionarOpcion(opciones.get(1));
-        preguntaMCCP.seleccionarOpcion(opciones.get(2));
-        Respuesta respuestaJugador2 = preguntaMCCP.confirmar();
-        jugador2.sumarPuntaje(respuestaJugador2.obtenerPuntaje());
+        ArrayList<Opcion> opcionesElegidas2 = new ArrayList<>();
+        opcionesElegidas2.add(opciones.get(0));
+        opcionesElegidas2.add(opciones.get(1));
+        opcionesElegidas2.add(opciones.get(2));
 
-        preguntaMCCP.iniciar(jugador3);
-        preguntaMCCP.seleccionarOpcion(opciones.get(1));
-        Respuesta respuestaJugador3 = preguntaMCCP.confirmar();
-        jugador3.sumarPuntaje(respuestaJugador3.obtenerPuntaje());
+        ArrayList<Opcion> opcionesElegidas3 = new ArrayList<>();
+        opcionesElegidas3.add(opciones.get(1));
 
-        preguntaMCCP.iniciar(jugador4);
-        preguntaMCCP.seleccionarOpcion(opciones.get(2));
-        preguntaMCCP.seleccionarOpcion(opciones.get(3));
-        Respuesta respuestaJugador4 = preguntaMCCP.confirmar();
-        jugador4.sumarPuntaje(respuestaJugador4.obtenerPuntaje());
+        ArrayList<Opcion> opcionesElegidas4 = new ArrayList<>();
+        opcionesElegidas4.add(opciones.get(2));
+        opcionesElegidas4.add(opciones.get(3));
 
         Integer esperadoJugador1 = 2;
         Integer esperadoJugador2 = 1;
         Integer esperadoJugador3 = 1;
         Integer esperadoJugador4 = -2;
 
-        assertEquals(esperadoJugador1, respuestaJugador1.obtenerPuntaje().getValor());
-        assertEquals(esperadoJugador2, respuestaJugador2.obtenerPuntaje().getValor());
-        assertEquals(esperadoJugador3, respuestaJugador3.obtenerPuntaje().getValor());
-        assertEquals(esperadoJugador4, respuestaJugador4.obtenerPuntaje().getValor());
+        assertEquals(esperadoJugador1, preguntaMCCP.puntajeConOpciones(opcionesElegidas1).obtenerValor());
+        assertEquals(esperadoJugador2, preguntaMCCP.puntajeConOpciones(opcionesElegidas2).obtenerValor());
+        assertEquals(esperadoJugador3, preguntaMCCP.puntajeConOpciones(opcionesElegidas3).obtenerValor());
+        assertEquals(esperadoJugador4, preguntaMCCP.puntajeConOpciones(opcionesElegidas4).obtenerValor());
     }
 
     @Test
     public void AgregarMasDeCincoOpcionesLanzaUnPreguntaError() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?", 15);
+        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
         preguntaMCCP.agregarOpcionIncorrecta("Fernando");
@@ -100,42 +92,11 @@ public class MultipleChoiceConPenalidadTest {
 
     @Test
     public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Cuál es el apellido de nuestro corrector?", 15);
+        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Cuál es el apellido de nuestro corrector?");
         ArrayList<Opcion> opciones = new ArrayList<Opcion>();
 
-        assertEquals(0, preguntaMCCP.puntajeConOpciones(opciones).getValor());
+        assertEquals(0, preguntaMCCP.puntajeConOpciones(opciones).obtenerValor());
     }
-
-    @Test
-    public void IniciarMultipleChoiceConPenalidadConMenosDeDosOpcionesLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Cuál es el apellido de nuestro corrector?", 15);
-        preguntaMCCP.agregarOpcionIncorrecta("Jirafales");
-        Jugador jugador = mock(Jugador.class);
-
-        assertThrows(PreguntaError.class, () -> preguntaMCCP.iniciar(jugador));
-    }
-
-    @Test
-    public void IniciarMultipleChoiceConPenalidadSinUnJugadorLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Cuál es el apellido de nuestro corrector?", 15);
-        preguntaMCCP.agregarOpcionIncorrecta("Jirafales");
-        preguntaMCCP.agregarOpcionIncorrecta("Peña");
-        preguntaMCCP.agregarOpcionCorrecta("Rodríguez");
-
-        assertThrows(PreguntaError.class, () -> preguntaMCCP.iniciar(null));
-    }
-
-    @Test
-    public void IniciarMultipleChoiceConPenalidadSinConfirmarLaRespuestaAnteriorLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Cuál es el apellido de nuestro corrector?", 15);
-        preguntaMCCP.agregarOpcionIncorrecta("Jirafales");
-        preguntaMCCP.agregarOpcionIncorrecta("Peña");
-        preguntaMCCP.agregarOpcionCorrecta("Rodríguez");
-        Jugador jugador = mock(Jugador.class);
-        preguntaMCCP.iniciar(jugador);
-
-        assertThrows(PreguntaError.class, () -> preguntaMCCP.iniciar(jugador));
-    }*/
 
 }
 
