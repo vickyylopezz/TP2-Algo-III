@@ -22,21 +22,10 @@ public class Multiplicador extends Comodin{
 
     @Override
     void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError {
-        if(!this.esValido(unaRespuesta)){
-            throw new ComodinError(this.toString() + "no se encuentra dentro de los comodines del jugador");
-        }
-        if(!this.esValido(otraRespuesta)){
-            throw new ComodinError(this.toString() + "no se encuentra dentro de los comodines del jugador");
+        if((!this.esValido(unaRespuesta)) || (!this.esValido(otraRespuesta))){
+            throw new ComodinError("Comodin invalido");
         }
         unaRespuesta.agregarComodin(this);
         otraRespuesta.agregarComodin(this);
     }
-
-    boolean esValido(Respuesta unaRespuesta) throws ComodinError {
-        if(unaRespuesta == null){
-            throw new ComodinError("Respuesta invalida");
-        }
-        return (this.jugador == unaRespuesta.obtenerJugador());
-    }
-
 }

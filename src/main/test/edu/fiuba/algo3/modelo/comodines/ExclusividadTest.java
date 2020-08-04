@@ -1,11 +1,29 @@
 package edu.fiuba.algo3.modelo.comodines;
 
+import edu.fiuba.algo3.modelo.excepciones.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.JugadaError;
+import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.juego.Jugada;
+import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
+import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
+import edu.fiuba.algo3.modelo.util.punto.Puntaje;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
+import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class ExclusividadTest {
-    /*
+
     @Test
     public void seCreaExclusividadConFactorNuloYSeLanzaExcepcion() {
 
@@ -102,7 +120,7 @@ public class ExclusividadTest {
         assertEquals(0,otraRespuestaCorrecta.obtenerComodines().size());
     }
 
-    @Test
+    /*@Test
     public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
@@ -113,8 +131,6 @@ public class ExclusividadTest {
 
         ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
         opcionesCorrectas.add(opcionCorrecta);
-
-        when(pregunta.obtenerOpcionesCorrectas()).thenReturn(opcionesCorrectas);
 
         Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
         Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
@@ -128,7 +144,7 @@ public class ExclusividadTest {
 
         assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
         assertEquals(1,unaRespuestaIncorrecta.obtenerComodines().size());
-    }
+    }*/
 
     @Test
     public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
@@ -151,6 +167,90 @@ public class ExclusividadTest {
         assertEquals(0,unaRespuestaIncorrecta.obtenerComodines().size());
         assertEquals(0,otraRespuestaIncorrecta.obtenerComodines().size());
     }
-    */
+
+    @Test
+    public void recibeUnPuntajeNuloYSeLanzaExcepcion() throws ComodinError {
+        Multiplicador multiplicador = new Multiplicador(2);
+
+        assertThrows(ComodinError.class, () ->  multiplicador.puntajeNuevo(null));
+    }
+
+    @Test
+    public void recibeUnPuntajeConPuntosNulosYDevuelvePuntajeConPuntosConValorCero() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoNulo());
+        puntaje.agregarPunto(new PuntoNulo());
+
+        Exclusividad exclusividad = new Exclusividad(2);
+        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void recibeUnPuntajeConPuntosPositivosYDevuelvePuntajeConPuntosPositivosConValorDos() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoPositivo());
+        puntaje.agregarPunto(new PuntoPositivo());
+
+        Exclusividad exclusividad = new Exclusividad(2);
+        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void recibeUnPuntajeConPuntosNegativosYDevuelvePuntajeConPuntosNegativosConValorDos() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoNegativo());
+        puntaje.agregarPunto(new PuntoNegativo());
+
+        Exclusividad exclusividad = new Exclusividad(2);
+        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void recibeUnPuntajeConUnPuntoPositivoYOtroNegativo() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoPositivo());
+        puntaje.agregarPunto(new PuntoNegativo());
+
+        Exclusividad exclusividad = new Exclusividad(2);
+        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void recibeUnPuntajeConUnPuntoPositivoYOtroNulo() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoPositivo());
+        puntaje.agregarPunto(new PuntoNulo());
+
+        Exclusividad exclusividad = new Exclusividad(2);
+        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void recibeUnPuntajeConUnPuntoNegativoYOtroNulo() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoNegativo());
+        puntaje.agregarPunto(new PuntoNulo());
+
+        Exclusividad exclusividad = new Exclusividad(2);
+        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
 }
 

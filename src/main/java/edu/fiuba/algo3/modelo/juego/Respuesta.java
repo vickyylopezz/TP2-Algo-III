@@ -46,7 +46,7 @@ public class Respuesta {
     }
 
     public boolean esCorrecta() {
-        return(this.obtenerOpcionesElegidas() == this.pregunta.obtenerOpciones());
+        return(this.pregunta.opcionesCorrectas(this.obtenerOpcionesElegidas()));
     }
 
     public Jugador obtenerJugador() {

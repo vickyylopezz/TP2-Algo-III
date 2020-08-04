@@ -5,6 +5,10 @@ import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.util.punto.Puntaje;
+import edu.fiuba.algo3.modelo.util.punto.Punto;
+
+import java.util.ArrayList;
 
 public abstract class Comodin {
     private final int factor;
@@ -43,5 +47,23 @@ public abstract class Comodin {
             throw new ComodinError("Respuesta invalida");
         }
         return (this.jugador == unaRespuesta.obtenerJugador());
+    }
+
+    public Puntaje puntajeNuevo(ArrayList<Punto> puntos) throws ComodinError {
+        if(puntos == null){
+            throw new ComodinError("Coleccion de puntos invalida");
+        }
+        Puntaje puntaje = new Puntaje();
+        for(Punto punto: puntos){
+            puntaje.agregarPunto(punto.modificarValor(this.factor));
+        }
+        return puntaje;
+    }
+
+    public Punto puntoNuevo(Punto punto) throws ComodinError {
+        if(punto == null){
+            throw new ComodinError("Punto nulo invalido");
+        }
+        return punto.modificarValor(this.factor);
     }
 }

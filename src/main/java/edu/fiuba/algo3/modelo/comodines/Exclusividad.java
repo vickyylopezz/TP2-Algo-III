@@ -21,11 +21,20 @@ public class Exclusividad extends Comodin {
 
     @Override
     void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError {
-        if(!this.esAplicable(unaRespuesta,otraRespuesta) || (!this.esAplicable(otraRespuesta,unaRespuesta))) {
-            return;
+        if((!this.esValido(unaRespuesta)) || (!this.esValido(otraRespuesta))){
+            throw new ComodinError("Comodin invalido");
         }
-        unaRespuesta.agregarComodin(this);
-        otraRespuesta.agregarComodin(this);
+        if(this.esAplicable(unaRespuesta,otraRespuesta) || (this.esAplicable(otraRespuesta,unaRespuesta))) {
+            unaRespuesta.agregarComodin(this);
+            otraRespuesta.agregarComodin(this);
+        }
+        /*if((unaRespuesta.obtenerJugador().obtenerComodines().contains(this)) &&
+        (otraRespuesta.obtenerJugador().obtenerComodines().contains(this))){
+
+            unaRespuesta.obtenerJugador().obtenerComodines().remove(this);
+            otraRespuesta.obtenerJugador().obtenerComodines().contains(this);
+         }
+        */
     }
 
     protected boolean esAplicable(Respuesta unaRespuesta, Respuesta otraRespuesta) {

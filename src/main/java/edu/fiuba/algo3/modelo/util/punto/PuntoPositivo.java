@@ -7,4 +7,9 @@ public class PuntoPositivo implements Punto {
     public Integer obtenerValor() {
         return this.valor;
     }
+
+    public Punto modificarValor(int factor){
+        this.valor *= factor;
+        return this;
+    }
 }

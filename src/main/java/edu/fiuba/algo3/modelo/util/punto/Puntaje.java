@@ -20,4 +20,13 @@ public class Puntaje implements Punto {
         for (Punto punto : puntos) puntaje += punto.obtenerValor();
         return puntaje;
     }
+
+    @Override
+    public Punto modificarValor(int factor) {
+        return null;
+    }
+
+    public ArrayList<Punto> obtenerPuntos() {
+        return this.puntos;
+    }
 }

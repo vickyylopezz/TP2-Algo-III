@@ -4,11 +4,12 @@ import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.*;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
+import edu.fiuba.algo3.modelo.util.punto.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -158,4 +159,129 @@ public class MultiplicadorTest {
         assertEquals(1,unaRespuestaIncorrecta.obtenerComodines().size());
         assertEquals(1,otraRespuestaIncorrecta.obtenerComodines().size());
     }
+
+    @Test
+    public void recibeUnPuntajeNuloYSeLanzaExcepcion() throws ComodinError {
+        Multiplicador multiplicador = new Multiplicador(2);
+
+        assertThrows(ComodinError.class, () ->  multiplicador.puntajeNuevo(null));
+    }
+
+    @Test
+    public void multiplicadorDeFactorDosRecibeUnPuntajeConPuntosNulosYDevuelvePuntajeConPuntosConValorCero() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoNulo());
+        puntaje.agregarPunto(new PuntoNulo());
+
+        Multiplicador multiplicador = new Multiplicador(2);
+        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void multiplicadorDeFactorDosRecibeUnPuntajeConPuntosPositivosYDevuelvePuntajeConPuntosPositivosConValorDos() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoPositivo());
+        puntaje.agregarPunto(new PuntoPositivo());
+
+        Multiplicador multiplicador = new Multiplicador(2);
+        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void multiplicadorDeFactorDosRecibeUnPuntajeConPuntosNegativosYDevuelvePuntajeConPuntosNegativosConValorDos() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoNegativo());
+        puntaje.agregarPunto(new PuntoNegativo());
+
+        Multiplicador multiplicador = new Multiplicador(2);
+        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void multiplicadorDeFactorTresRecibeUnPuntajeConPuntosNulosYDevuelvePuntajeConPuntosConValorCero() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoNulo());
+        puntaje.agregarPunto(new PuntoNulo());
+
+        Multiplicador multiplicador = new Multiplicador(3);
+        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void multiplicadorDeFactorTresRecibeUnPuntajeConPuntosPositivosYDevuelvePuntajeConPuntosPositivosConValorTres() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoPositivo());
+        puntaje.agregarPunto(new PuntoPositivo());
+
+        Multiplicador multiplicador = new Multiplicador(3);
+        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(3,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void multiplicadorDeFactorTresRecibeUnPuntajeConPuntosNegativosYDevuelvePuntajeConPuntosNegativosConValorTres() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoNegativo());
+        puntaje.agregarPunto(new PuntoNegativo());
+
+        Multiplicador multiplicador = new Multiplicador(3);
+        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(-3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(-3,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void multiplicadorDeFactorTresRecibeUnPuntajeConUnPuntoPositivoYOtroNegativo() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoPositivo());
+        puntaje.agregarPunto(new PuntoNegativo());
+
+        Multiplicador multiplicador = new Multiplicador(3);
+        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(-3,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void multiplicadorDeFactorTresRecibeUnPuntajeConUnPuntoPositivoYOtroNulo() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoPositivo());
+        puntaje.agregarPunto(new PuntoNulo());
+
+        Multiplicador multiplicador = new Multiplicador(3);
+        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
+    @Test
+    public void multiplicadorDeFactorTresRecibeUnPuntajeConUnPuntoNegativoYOtroNulo() throws ComodinError {
+        Puntaje puntaje = new Puntaje();
+        puntaje.agregarPunto(new PuntoNegativo());
+        puntaje.agregarPunto(new PuntoNulo());
+
+        Multiplicador multiplicador = new Multiplicador(3);
+        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+
+        assertEquals(-3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
+        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+    }
+
 }
