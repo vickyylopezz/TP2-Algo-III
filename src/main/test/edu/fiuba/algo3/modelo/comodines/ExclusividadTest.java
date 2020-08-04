@@ -69,9 +69,9 @@ public class ExclusividadTest {
         Jugada jugada = new Jugada(pregunta, jugador);
 
         Exclusividad exclusividad = new Exclusividad(2);
-        exclusividad.validarPregunta(jugada);
+        jugada.seleccionarComodin(exclusividad);
 
-        assertEquals(Comodin.class, jugada.comodinSeleccionado().getClass());
+        assertEquals(Exclusividad.class, jugada.comodinSeleccionado().getClass());
     }
 
     @Test

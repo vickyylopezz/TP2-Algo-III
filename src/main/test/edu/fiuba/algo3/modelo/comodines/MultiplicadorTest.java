@@ -64,9 +64,9 @@ public class MultiplicadorTest {
         Jugada jugada = new Jugada(pregunta,jugador);
 
         Multiplicador multiplicador = new Multiplicador(2);
-        multiplicador.validarPregunta(jugada);
+        jugada.seleccionarComodin(multiplicador);
 
-        assertEquals(Comodin.class, jugada.comodinSeleccionado().getClass());
+        assertEquals(Multiplicador.class, jugada.comodinSeleccionado().getClass());
     }
 
     @Test
