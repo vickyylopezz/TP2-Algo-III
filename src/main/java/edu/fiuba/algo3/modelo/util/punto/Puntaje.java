@@ -23,8 +23,8 @@ public class Puntaje implements Punto {
 
     @Override
     public Punto modificarValor(int factor) {
-        return null;
-    }
+        puntos.forEach(punto -> modificarValor(factor));
+        return this;}
 
     public ArrayList<Punto> obtenerPuntos() {
         return this.puntos;
