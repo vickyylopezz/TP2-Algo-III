@@ -8,15 +8,12 @@ import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParci
 import edu.fiuba.algo3.modelo.preguntas.estados.ConPenalidad;
 import edu.fiuba.algo3.modelo.util.punto.*;
 
+import java.util.ArrayList;
+
 public class MultipleChoiceConPenalidad extends Pregunta {
 
     public MultipleChoiceConPenalidad(String titulo) {
         super(titulo, new ConPenalidad(new CalculadorPuntajeParcial()));
-        /*if (segundos < 0){
-            throw new PreguntaError("Los segundos no pueden ser negativos");
-        }
-        this.segundos = segundos;
-        this.titulo = titulo;*/
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
@@ -35,14 +32,6 @@ public class MultipleChoiceConPenalidad extends Pregunta {
         this.opciones.add(opcion);
     }
 
-    /*public String titulo() {
-        return this.titulo;
-    }
-
-    public ArrayList<Opcion> obtenerOpciones() {
-        return this.opciones;
-    }
-
     @Override
     public Punto puntajeConOpciones(ArrayList<Opcion> opciones) {
         if (opciones.size() == 0){
@@ -53,5 +42,5 @@ public class MultipleChoiceConPenalidad extends Pregunta {
             puntajeParcial.agregarPunto(opcion.obtenerPunto());
         }
         return puntajeParcial;
-    }*/
+    }
 }
