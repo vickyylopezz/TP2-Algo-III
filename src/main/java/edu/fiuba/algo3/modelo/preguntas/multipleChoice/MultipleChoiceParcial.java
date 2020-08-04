@@ -20,7 +20,7 @@ public class MultipleChoiceParcial extends Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.puntajeCorrecto());
         this.opciones.add(opcion);
     }
 
@@ -28,23 +28,7 @@ public class MultipleChoiceParcial extends Pregunta {
         if (this.opciones.size() == 5){
             throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
         }
-        Opcion opcion = new OpcionClasica(opcionTitulo, new PuntoNulo());
+        Opcion opcion = new OpcionClasica(opcionTitulo, this.puntajeIncorrecto());
         this.opciones.add(opcion);
-    }
-
-
-    @Override
-    public Punto puntajeConOpciones(ArrayList<Opcion> opciones) {
-        if (opciones.size() == 0){
-            return new PuntoNulo();
-        }
-        Puntaje puntajeParcial = new Puntaje();
-        for (Opcion opcion : opciones){
-            if (opcion.obtenerPunto().obtenerValor().equals(new PuntoNulo().obtenerValor())){
-                return new PuntoNulo();
-            }
-            puntajeParcial.agregarPunto(opcion.obtenerPunto());
-        }
-        return puntajeParcial;
     }
 }

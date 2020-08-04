@@ -20,7 +20,7 @@ public class MultipleChoiceClasico extends Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new OpcionClasica(titulo, new PuntoNulo());
+        Opcion opcion = new OpcionClasica(titulo, this.puntajeIncorrecto());
         this.opciones.add(opcion);
     }
 
@@ -29,7 +29,7 @@ public class MultipleChoiceClasico extends Pregunta {
             throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
         }
 
-        Opcion opcion = new OpcionClasica(titulo, new PuntoPositivo());
+        Opcion opcion = new OpcionClasica(titulo, this.puntajeCorrecto());
         this.opciones.add(opcion);
     }
 

@@ -37,9 +37,4 @@ public class VerdaderoFalsoConPenalidad extends Pregunta {
         this.opciones.add(this.opcionIncorrecta);
     }
 
-    @Override
-    public Punto puntajeConOpciones(ArrayList<Opcion> opciones)  {
-        return opciones.get(0).obtenerPunto();
-    }
-
 }

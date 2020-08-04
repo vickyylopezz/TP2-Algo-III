@@ -39,12 +39,4 @@ public class VerdaderoFalsoClasico extends Pregunta {
         opciones.add(this.opcionIncorrecta);
     }
 
-    @Override
-    public Punto puntajeConOpciones(ArrayList<Opcion> opciones) {
-        if (opciones.size() == 0){
-            return new PuntoNulo();
-        }
-        return opciones.get(0).obtenerPunto();
-    }
-
 }
