@@ -2,8 +2,7 @@ package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.*;
-import edu.fiuba.algo3.modelo.util.tiempo.MiliSegundo;
-import edu.fiuba.algo3.modelo.util.tiempo.Segundo;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -16,7 +15,7 @@ public class JugadaTest {
     // Test unitarios
 
     // contructor
-   /* @Test
+   @Test
     public void seCreaConUnaPreguntaYUnJugador() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
@@ -24,21 +23,9 @@ public class JugadaTest {
         assertDoesNotThrow(() -> new Jugada(pregunta, jugador));
     }
 
-    @Test
-    public void seCreaConUnaPreguntaNulaLanzaExcepcionJugadaError() {
-        Jugador jugador = mock(Jugador.class);
-        assertThrows(JugadaError.class, () -> new Jugada(null, jugador));
-    }
-
-    @Test
-    public void seCreaConUnJugadorNuloLanzaExcepcionJugadaError() {
-        Pregunta pregunta = mock(Pregunta.class);
-        assertThrows(JugadaError.class, () -> new Jugada(pregunta, null));
-    }
-
     // tituloPregunta
     @Test
-    public void tituloPreguntaDevuelveElTituloDeLaPregunta() throws JugadaError {
+    public void tituloPreguntaDevuelveElTituloDeLaPregunta() {
         String titulo = "Titulo de la pregunta ok";
 
         Pregunta pregunta = mock(Pregunta.class);
@@ -50,6 +37,423 @@ public class JugadaTest {
         assertEquals(titulo, jugada.tituloPregunta());
     }
 
+    // obtenerPregunta
+    @Test
+    public void obtenerPreguntaDevuelveLaPreguntaPasadaEnElContructor() {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        assertEquals(pregunta, jugada.obtenerPregunta());
+    }
+
+    // obtenerJugador
+    @Test
+    public void obtenerJugadorDevuelveJugadorPasadoEnElContructor() {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        assertEquals(jugador, jugada.obtenerJugador());
+    }
+
+    // opciones
+    @Test
+    public void opcionesDevuelveLasOpcionesDeLaPregunta() {
+        ArrayList<Opcion> opciones = new ArrayList<>();
+
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.obtenerOpciones()).thenReturn(opciones);
+
+        Jugador jugador = mock(Jugador.class);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        assertEquals(opciones, jugada.opciones());
+    }
+
+    // comodines
+    @Test
+    public void comodinesDevuelveLosComodinesDelJugador() {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        ArrayList<Comodin> comodines = new ArrayList<>();
+        Jugador jugador = mock(Jugador.class);
+        when(jugador.obtenerComodines()).thenReturn(comodines);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        assertEquals(comodines, jugada.comodines());
+    }
+
+    // seleccionarOpcion
+    @Test
+    public void seleccionarDosVecesLaMismaOpcionLanzaRespuestaError() throws RespuestaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        Opcion opcion = mock(Opcion.class);
+        jugada.seleccionarOpcion(opcion);
+
+        assertThrows(RespuestaError.class, () -> jugada.seleccionarOpcion(opcion));
+    }
+
+    @Test
+    public void seleccionarOpcionLeAgregaLaOpcion() throws RespuestaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        Opcion opcion = mock(Opcion.class);
+        jugada.seleccionarOpcion(opcion);
+
+        ArrayList<Opcion> opciones = jugada.opcionesSeleccionadas();
+
+        assertEquals(1, opciones.size());
+        assertTrue(opciones.contains(opcion));
+    }
+
+    @Test
+    public void seleccionarVariasOpcionesLeAgregaTodasLasOpciones() throws RespuestaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+        Opcion opcion3 = mock(Opcion.class);
+
+        jugada.seleccionarOpcion(opcion1);
+        jugada.seleccionarOpcion(opcion2);
+        jugada.seleccionarOpcion(opcion3);
+
+        ArrayList<Opcion> opciones = jugada.opcionesSeleccionadas();
+
+        assertEquals(3, opciones.size());
+
+        assertTrue(opciones.contains(opcion1));
+        assertTrue(opciones.contains(opcion2));
+        assertTrue(opciones.contains(opcion3));
+    }
+
+    // deseleccionarOpcion
+    @Test
+    public void deseleccionarOpcionConOpcionInvalidaLanzaRespuestaError() {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        Opcion opcionInvalida = mock(Opcion.class);
+        assertThrows(RespuestaError.class, () -> jugada.deseleccionarOpcion(opcionInvalida));
+    }
+
+    @Test
+    public void deseleccionarDosVecesLaMismaOpcionLanzaRespuestaError() throws RespuestaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        Opcion opcion = mock(Opcion.class);
+        jugada.seleccionarOpcion(opcion);
+        jugada.deseleccionarOpcion(opcion);
+
+        assertThrows(RespuestaError.class, () -> jugada.deseleccionarOpcion(opcion));
+    }
+
+    @Test
+    public void deseleccionarOpcionSacaLaOpcionDeLaRespuesta() throws RespuestaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        Opcion opcion = mock(Opcion.class);
+
+        jugada.seleccionarOpcion(opcion);
+        jugada.deseleccionarOpcion(opcion);
+
+        ArrayList<Opcion> opciones = jugada.opcionesSeleccionadas();
+
+        assertEquals(0, opciones.size());
+        assertFalse(opciones.contains(opcion));
+    }
+
+    @Test
+    public void deseleccionarOpcionSacaLaOpcionPasadaComoParametro() throws RespuestaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+
+        jugada.seleccionarOpcion(opcion1);
+        jugada.seleccionarOpcion(opcion2);
+        jugada.deseleccionarOpcion(opcion1);
+
+        ArrayList<Opcion> opciones = jugada.opcionesSeleccionadas();
+
+        assertEquals(1, opciones.size());
+
+        assertFalse(opciones.contains(opcion1));
+        assertTrue(opciones.contains(opcion2));
+    }
+
+    // seleccionarComodin
+    @Test
+    public void seleccionarComodinConComodinNoGuardadoEnJugadorLanzaJugadorError() throws JugadorError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodinInvalido = mock(Comodin.class);
+        Jugador jugador = mock(Jugador.class);
+        doThrow(JugadorError.class).when(jugador).validarComodin(comodinInvalido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        assertThrows(JugadorError.class, () -> jugada.seleccionarComodin(comodinInvalido));
+    }
+
+    @Test
+    public void seleccionarComodinConComodinInvalidoPreguntaLanzaComodinError() throws JugadorError, ComodinError {
+        Comodin comodinInvalido = mock(Comodin.class);
+
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinInvalido);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        doThrow(ComodinError.class).when(comodinInvalido).validarPregunta(jugada);
+
+        assertThrows(ComodinError.class, () -> jugada.seleccionarComodin(comodinInvalido));
+    }
+
+    @Test
+    public void seleccionarComodinDosVecesElMismoLanzaRemplazaElNuevoPorElQueYaEstaba() throws JugadorError, ComodinError {
+        Comodin comodinAnterior = mock(Comodin.class);
+        Comodin comodinNuevo = mock(Comodin.class);
+
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodinAnterior);
+        doNothing().when(jugador).validarComodin(comodinNuevo);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        doNothing().when(comodinAnterior).validarPregunta(jugada);
+        doNothing().when(comodinNuevo).validarPregunta(jugada);
+
+        jugada.seleccionarComodin(comodinAnterior);
+        assertEquals(comodinAnterior, jugada.comodinSeleccionado());
+
+        jugada.seleccionarComodin(comodinNuevo);
+        assertEquals(comodinNuevo, jugada.comodinSeleccionado());
+    }
+
+    // opcionesSeleccionadas
+    @Test
+    public void opcionesSeleccionadasDevuelveLasOpcionesSeleccionadas() throws RespuestaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+        Opcion opcion3 = mock(Opcion.class);
+
+        jugada.seleccionarOpcion(opcion1);
+        jugada.seleccionarOpcion(opcion2);
+        jugada.deseleccionarOpcion(opcion1);
+        jugada.seleccionarOpcion(opcion3);
+
+        ArrayList<Opcion> opciones = jugada.opcionesSeleccionadas();
+
+        assertEquals(2, opciones.size());
+
+        assertFalse(opciones.contains(opcion1));
+        assertTrue(opciones.contains(opcion2));
+        assertTrue(opciones.contains(opcion3));
+    }
+
+    // comodinSeleccionado
+    @Test
+    public void comodinSeleccionadDevuelveElUltimoComodinSelecionado() throws ComodinError, JugadorError {
+        Comodin comodin1 = mock(Comodin.class);
+        Comodin comodin2 = mock(Comodin.class);
+
+        Jugador jugador = mock(Jugador.class);
+        doNothing().when(jugador).validarComodin(comodin1);
+        doNothing().when(jugador).validarComodin(comodin2);
+
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        doNothing().when(comodin1).validarPregunta(jugada);
+        doNothing().when(comodin2).validarPregunta(jugada);
+
+        jugada.seleccionarComodin(comodin1);
+        jugada.seleccionarComodin(comodin2);
+
+        Comodin comodin = jugada.comodinSeleccionado();
+
+        assertEquals(comodin, comodin2);
+    }
+
+    // opcionesValidas
+    @Test
+    public void opcionesValidasDevuelveTodasLasOpcionesAntesSeleccionarAlgunaOpcion() {
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+        Opcion opcion3 = mock(Opcion.class);
+
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.obtenerOpciones()).thenReturn(opciones);
+
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        ArrayList<Opcion> opcionesValidas = jugada.opcionesValidas();
+
+        for (Opcion opcion: opcionesValidas) {
+            assertTrue(opciones.contains(opcion));
+        }
+        assertEquals(opciones.size(), opcionesValidas.size());
+    }
+
+    @Test
+    public void opcionesValidasDevuelveTodasLasOpcionesDespuesDeSeleccionarOpcion() throws RespuestaError {
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+        Opcion opcion3 = mock(Opcion.class);
+
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.obtenerOpciones()).thenReturn(opciones);
+
+        Jugador jugador = mock(Jugador.class);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        jugada.seleccionarOpcion(opcion2);
+
+        ArrayList<Opcion> opcionesValidas = jugada.opcionesValidas();
+
+        assertTrue(opcionesValidas.contains(opcion1));
+        assertFalse(opcionesValidas.contains(opcion2));
+        assertTrue(opcionesValidas.contains(opcion3));
+    }
+
+    @Test
+    public void opcionesValidasDevuelveLasOpcionesNoSeleccionadas() throws RespuestaError {
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+        Opcion opcion3 = mock(Opcion.class);
+
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        opciones.add(opcion1);
+        opciones.add(opcion2);
+        opciones.add(opcion3);
+
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.obtenerOpciones()).thenReturn(opciones);
+
+        Jugador jugador = mock(Jugador.class);
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        jugada.seleccionarOpcion(opcion1);
+        jugada.seleccionarOpcion(opcion3);
+        jugada.deseleccionarOpcion(opcion1);
+        jugada.seleccionarOpcion(opcion2);
+
+        ArrayList<Opcion> opcionesValidas = jugada.opcionesValidas();
+
+        assertEquals(1, opcionesValidas.size());
+        assertEquals(opcion1, opcionesValidas.get(0));
+    }
+
+    // comodinesValidos
+    @Test
+    public void comodinesValidosDevuelveTodosLosComodinesAntesDeSeleccionarComodin() {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodin1 = mock(Comodin.class);
+        Comodin comodin2 = mock(Comodin.class);
+        Comodin comodin3 = mock(Comodin.class);
+
+        ArrayList<Comodin> comodines = new ArrayList<>();
+        comodines.add(comodin1);
+        comodines.add(comodin2);
+        comodines.add(comodin3);
+
+        Jugador jugador = mock(Jugador.class);
+        when(jugador.obtenerComodines()).thenReturn(comodines);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        ArrayList<Comodin> comodinesValidos = jugada.comodinesValidos();
+
+        for (Comodin comodin: comodinesValidos) {
+            assertTrue(comodines.contains(comodin));
+        }
+        assertEquals(comodines.size(), comodinesValidos.size());
+    }
+
+    @Test
+    public void comodinesValidosDevuelveTodosLosComodinesMenosElSeleccionado() throws ComodinError, JugadorError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodin1 = mock(Comodin.class);
+        Comodin comodin2 = mock(Comodin.class);
+        Comodin comodin3 = mock(Comodin.class);
+
+        ArrayList<Comodin> comodines = new ArrayList<>();
+        comodines.add(comodin1);
+        comodines.add(comodin2);
+        comodines.add(comodin3);
+
+        Jugador jugador = mock(Jugador.class);
+        when(jugador.obtenerComodines()).thenReturn(comodines);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+        jugada.seleccionarComodin(comodin3);
+
+        ArrayList<Comodin> comodinesValidos = jugada.comodinesValidos();
+
+        assertEquals(2, comodinesValidos.size());
+
+        assertTrue(comodinesValidos.contains(comodin1));
+        assertTrue(comodinesValidos.contains(comodin2));
+        assertFalse(comodinesValidos.contains(comodin3));
+    }
+
+    // obtenerRespuesta
+    @Test
+    public void obtenerRespuestaTeDevuelveLaRespuestaDeLaJugada() {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+
+        Jugada jugada = new Jugada(pregunta, jugador);
+
+        Respuesta respuesta = jugada.obtenerRespuesta();
+
+        assertEquals(jugador, respuesta.obtenerJugador());
+        assertEquals(pregunta, respuesta.obtenerPregunta());
+    }
+
+    /*
     // tiempoPregunta
     @Test
     public void tiempoPreguntaDevuelveElTiempoDisponibleParaSeleccionarOpciones() throws JugadaError {
@@ -64,27 +468,27 @@ public class JugadaTest {
         assertEquals(seg.valor(), jugada.tiempoPregunta().segundos().valor());
     }
 
-    // iniciarTiempo
+    // iniciar
     @Test
-    public void iniciarTiempoDosVecesLanzaJugadaError() throws JugadaError {
+    public void iniciarDosVecesLanzaJugadaError() throws JugadaError {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
         Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
+        jugada.iniciar();
 
-        assertThrows(JugadaError.class, jugada::iniciarTiempo);
+        assertThrows(JugadaError.class, jugada::iniciar);
     }
 
-    // finalizarTiempo
+    // finalizar
     @Test
-    public void finalizarSinHaberIniciadoTiempoLanzaJugadaError() throws JugadaError {
+    public void finalizarSinHaberIniciadoLanzaJugadaError() throws JugadaError {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
         Jugada jugada = new Jugada(pregunta, jugador);
 
-        assertThrows(JugadaError.class, jugada::finalizarTiempo);
+        assertThrows(JugadaError.class, jugada::finalizar);
     }
 
     @Test
@@ -93,11 +497,12 @@ public class JugadaTest {
         Jugador jugador = mock(Jugador.class);
 
         Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.finalizarTiempo();
+        jugada.iniciar();
+        jugada.finalizar();
 
-        assertThrows(JugadaError.class, jugada::finalizarTiempo);
+        assertThrows(JugadaError.class, jugada::finalizar);
     }
+
 
     // tiempoTranscurrido
     @Test
@@ -188,78 +593,7 @@ public class JugadaTest {
         assertTrue(variacionTiempo < maxErrorTiempo);
     }
 
-    // opciones
-    @Test
-    public void opcionesDevuelveLasOpcionesDeLaPregunta() throws JugadaError {
-        ArrayList<Opcion> opciones = new ArrayList<>();
-        Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.obtenerOpciones()).thenReturn(opciones);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-
-        assertEquals(opciones, jugada.opciones());
-    }
-
-    // comodines
-    @Test
-    public void comodinesDevuelveLosComodinesDelJugador() throws JugadaError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        ArrayList<Comodin> comodines = new ArrayList<>();
-        Jugador jugador = mock(Jugador.class);
-        when(jugador.obtenerComodines()).thenReturn(comodines);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-
-        assertEquals(comodines, jugada.comodines());
-    }
-
     // seleccionarOpcion
-    @Test
-    public void seleccionarOpcionSinIniciarTiempoLanzaJugadaError() throws JugadaError, PreguntaError {
-        Opcion opcionValida = mock(Opcion.class);
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcionValida);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-
-        assertThrows(JugadaError.class, () -> jugada.seleccionarOpcion(opcionValida));
-    }
-
-    @Test
-    public void seleccionarOpcionConOpcionInvalidaLanzaPreguntaError() throws JugadaError, PreguntaError {
-        Opcion opcionInvalida = mock(Opcion.class);
-        Pregunta pregunta = mock(Pregunta.class);
-        doThrow(PreguntaError.class).when(pregunta).validarOpcion(opcionInvalida);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-
-        assertThrows(PreguntaError.class, () -> jugada.seleccionarOpcion(opcionInvalida));
-    }
-
-    @Test
-    public void seleccionarDosVecesLaMismaOpcionLanzaRespuestaError() throws JugadaError, PreguntaError, RespuestaError {
-        Opcion opcion = mock(Opcion.class);
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-
-        jugada.seleccionarOpcion(opcion);
-
-        assertThrows(RespuestaError.class, () -> jugada.seleccionarOpcion(opcion));
-    }
-
     @Test
     public void seleccionarOpcionFinalizadoElTiempoLanzaJugadaError() throws JugadaError, PreguntaError {
         Opcion opcion = mock(Opcion.class);
@@ -276,23 +610,15 @@ public class JugadaTest {
     }
 
     @Test
-    public void seleccionarOpcionLeAgregaLaOpcionALaRespuesta() throws JugadaError, PreguntaError, RespuestaError {
-        Opcion opcion = mock(Opcion.class);
+    public void seleccionarOpcionSinIniciarLanzaJugadaError() throws JugadaError, PreguntaError {
+        Opcion opcionValida = mock(Opcion.class);
         Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion);
 
         Jugador jugador = mock(Jugador.class);
 
         Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarOpcion(opcion);
-        jugada.finalizarTiempo();
 
-        Respuesta respuesta = jugada.obtenerRespuesta();
-        ArrayList<Opcion> opciones = respuesta.obtenerOpcionesElegidas();
-
-        assertEquals(1, opciones.size());
-        assertTrue(opciones.contains(opcion));
+        assertThrows(JugadaError.class, () -> jugada.seleccionarOpcion(opcionValida));
     }
 
     // deseleccionarOpcion
@@ -307,37 +633,6 @@ public class JugadaTest {
         Jugada jugada = new Jugada(pregunta, jugador);
 
         assertThrows(JugadaError.class, () -> jugada.deseleccionarOpcion(opcionValida));
-    }
-
-    @Test
-    public void deseleccionarOpcionConOpcionInvalidaLanzaPreguntaError() throws JugadaError, PreguntaError {
-        Opcion opcionInvalida = mock(Opcion.class);
-        Pregunta pregunta = mock(Pregunta.class);
-        doThrow(PreguntaError.class).when(pregunta).validarOpcion(opcionInvalida);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-
-        assertThrows(PreguntaError.class, () -> jugada.deseleccionarOpcion(opcionInvalida));
-    }
-
-    @Test
-    public void deseleccionarDosVecesLaMismaOpcionLanzaRespuestaError() throws JugadaError, PreguntaError, RespuestaError {
-        Opcion opcion = mock(Opcion.class);
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarOpcion(opcion);
-
-        jugada.deseleccionarOpcion(opcion);
-
-        assertThrows(RespuestaError.class, () -> jugada.deseleccionarOpcion(opcion));
     }
 
     @Test
@@ -356,52 +651,6 @@ public class JugadaTest {
         assertThrows(JugadaError.class, () -> jugada.deseleccionarOpcion(opcion));
     }
 
-    @Test
-    public void deseleccionarOpcionSacaLaOpcionDeLaRespuesta() throws JugadaError, PreguntaError, RespuestaError {
-        Opcion opcion = mock(Opcion.class);
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarOpcion(opcion);
-        jugada.deseleccionarOpcion(opcion);
-        jugada.finalizarTiempo();
-
-        Respuesta respuesta = jugada.obtenerRespuesta();
-        ArrayList<Opcion> opciones = respuesta.obtenerOpcionesElegidas();
-
-        assertEquals(0, opciones.size());
-        assertFalse(opciones.contains(opcion));
-    }
-
-    @Test
-    public void deseleccionarOpcionSacaLaOpcionPasadaComoParametro() throws JugadaError, PreguntaError, RespuestaError {
-        Opcion opcion1 = mock(Opcion.class);
-        Opcion opcion2 = mock(Opcion.class);
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion1);
-        doNothing().when(pregunta).validarOpcion(opcion2);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarOpcion(opcion1);
-        jugada.seleccionarOpcion(opcion2);
-        jugada.deseleccionarOpcion(opcion1);
-        jugada.finalizarTiempo();
-
-        Respuesta respuesta = jugada.obtenerRespuesta();
-        ArrayList<Opcion> opciones = respuesta.obtenerOpcionesElegidas();
-
-        assertEquals(1, opciones.size());
-        assertFalse(opciones.contains(opcion1));
-        assertTrue(opciones.contains(opcion2));
-    }
-
     // seleccionarComodin
     @Test
     public void seleccionarComodinSinIniciarTiempoLanzaJugadaError() throws JugadaError, JugadorError {
@@ -412,51 +661,6 @@ public class JugadaTest {
         doNothing().when(jugador).validarComodin(comodinValido);
 
         Jugada jugada = new Jugada(pregunta, jugador);
-
-        assertThrows(JugadaError.class, () -> jugada.seleccionarComodin(comodinValido));
-    }
-
-    @Test
-    public void seleccionarComodinConComodinNoGuardadoEnJugadorLanzaJugadorError() throws JugadaError, JugadorError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        Comodin comodinInvalido = mock(Comodin.class);
-        Jugador jugador = mock(Jugador.class);
-        doThrow(JugadorError.class).when(jugador).validarComodin(comodinInvalido);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-
-        assertThrows(JugadorError.class, () -> jugada.seleccionarComodin(comodinInvalido));
-    }
-
-    @Test
-    public void seleccionarComodinConComodinInvalidoPreguntaLanzaComodinError() throws JugadaError, JugadorError, ComodinError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        Comodin comodinInvalido = mock(Comodin.class);
-        doThrow(ComodinError.class).when(comodinInvalido).validarPregunta(pregunta);
-        Jugador jugador = mock(Jugador.class);
-        doNothing().when(jugador).validarComodin(comodinInvalido);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-
-        assertThrows(ComodinError.class, () -> jugada.seleccionarComodin(comodinInvalido));
-    }
-
-    @Test
-    public void seleccionarComodinDosVecesElMismoLanzaJugadaError() throws JugadaError, JugadorError, ComodinError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        Comodin comodinValido = mock(Comodin.class);
-        doNothing().when(comodinValido).validarPregunta(pregunta);
-        Jugador jugador = mock(Jugador.class);
-        doNothing().when(jugador).validarComodin(comodinValido);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarComodin(comodinValido);
 
         assertThrows(JugadaError.class, () -> jugada.seleccionarComodin(comodinValido));
     }
@@ -587,354 +791,5 @@ public class JugadaTest {
         assertEquals(1, comodines.size());
         assertEquals(comodin2, comodines.get(0));
     }
-
-    // opcionesSeleccionadas
-    @Test
-    public void opcionesSeleccionadasDevuelveLasOpcionesSeleccionadas() throws JugadaError, PreguntaError, RespuestaError {
-        Opcion opcion1 = mock(Opcion.class);
-        Opcion opcion2 = mock(Opcion.class);
-        Opcion opcion3 = mock(Opcion.class);
-
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion1);
-        doNothing().when(pregunta).validarOpcion(opcion2);
-        doNothing().when(pregunta).validarOpcion(opcion3);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-
-        jugada.seleccionarOpcion(opcion1);
-        jugada.seleccionarOpcion(opcion2);
-        jugada.deseleccionarOpcion(opcion1);
-        jugada.seleccionarOpcion(opcion3);
-
-        ArrayList<Opcion> opciones = jugada.opcionesSeleccionadas();
-
-        assertEquals(2, opciones.size());
-        assertFalse(opciones.contains(opcion1));
-        assertTrue(opciones.contains(opcion2));
-        assertTrue(opciones.contains(opcion3));
-    }
-
-    // comodinesSeleccionados
-    @Test
-    public void comodinesSeleccionadosTeDevuelveLosComodinesQueSeAplicaron() throws JugadaError, ComodinError, JugadorError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        Comodin comodin1 = mock(Comodin.class);
-        doNothing().when(comodin1).validarPregunta(pregunta);
-        Comodin comodin2 = mock(Comodin.class);
-        doNothing().when(comodin2).validarPregunta(pregunta);
-        Comodin comodin3 = mock(Comodin.class);
-        doNothing().when(comodin3).validarPregunta(pregunta);
-
-        Jugador jugador = mock(Jugador.class);
-        doNothing().when(jugador).validarComodin(comodin1);
-        doNothing().when(jugador).validarComodin(comodin2);
-        doNothing().when(jugador).validarComodin(comodin3);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-
-        jugada.seleccionarComodin(comodin1);
-        jugada.seleccionarComodin(comodin3);
-
-        jugada.finalizarTiempo();
-
-        ArrayList<Comodin> comodinesAplicados = jugada.comodinesSeleccionados();
-
-        assertEquals(2, comodinesAplicados.size());
-
-        assertTrue(comodinesAplicados.contains(comodin1));
-        assertFalse(comodinesAplicados.contains(comodin2));
-        assertTrue(comodinesAplicados.contains(comodin3));
-    }
-
-    // opcionesValidas
-    @Test
-    public void opcionesValidasDevuelveTodasLasOpcionesAntesDeIniciarElTiempo() throws PreguntaError, JugadaError {
-        Opcion opcion1 = mock(Opcion.class);
-        Opcion opcion2 = mock(Opcion.class);
-        Opcion opcion3 = mock(Opcion.class);
-
-        ArrayList<Opcion> opciones = new ArrayList<>();
-        opciones.add(opcion1);
-        opciones.add(opcion2);
-        opciones.add(opcion3);
-
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion1);
-        doNothing().when(pregunta).validarOpcion(opcion2);
-        doNothing().when(pregunta).validarOpcion(opcion3);
-        when(pregunta.obtenerOpciones()).thenReturn(opciones);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-
-        ArrayList<Opcion> opcionesValidas = jugada.opcionesValidas();
-
-        assertTrue(contienenLoMismo(opciones, opcionesValidas));
-    }
-
-    @Test
-    public void opcionesValidasDevuelveTodasLasOpcionesDespuesDeIniciarElTiempo() throws PreguntaError, JugadaError {
-        Opcion opcion1 = mock(Opcion.class);
-        Opcion opcion2 = mock(Opcion.class);
-        Opcion opcion3 = mock(Opcion.class);
-
-        ArrayList<Opcion> opciones = new ArrayList<>();
-        opciones.add(opcion1);
-        opciones.add(opcion2);
-        opciones.add(opcion3);
-
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion1);
-        doNothing().when(pregunta).validarOpcion(opcion2);
-        doNothing().when(pregunta).validarOpcion(opcion3);
-        when(pregunta.obtenerOpciones()).thenReturn(opciones);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-
-        ArrayList<Opcion> opcionesValidas = jugada.opcionesValidas();
-
-        assertTrue(contienenLoMismo(opciones, opcionesValidas));
-    }
-
-    @Test
-    public void opcionesValidasDevuelveLasOpcionesNoSeleccionadasDespuesDeInicialElTiempo() throws PreguntaError, JugadaError, RespuestaError {
-        Opcion opcion1 = mock(Opcion.class);
-        Opcion opcion2 = mock(Opcion.class);
-        Opcion opcion3 = mock(Opcion.class);
-
-        ArrayList<Opcion> opciones = new ArrayList<>();
-        opciones.add(opcion1);
-        opciones.add(opcion2);
-        opciones.add(opcion3);
-
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion1);
-        doNothing().when(pregunta).validarOpcion(opcion2);
-        doNothing().when(pregunta).validarOpcion(opcion3);
-        when(pregunta.obtenerOpciones()).thenReturn(opciones);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarOpcion(opcion1);
-        jugada.seleccionarOpcion(opcion3);
-        jugada.deseleccionarOpcion(opcion1);
-        jugada.seleccionarOpcion(opcion2);
-
-        ArrayList<Opcion> opcionesValidas = jugada.opcionesValidas();
-        ArrayList<Opcion> opcionesDeseleccionadas = (ArrayList<Opcion>) opciones.clone();
-        opcionesDeseleccionadas.remove(opcion2);
-        opcionesDeseleccionadas.remove(opcion3);
-
-        System.out.println(opcionesDeseleccionadas);
-        System.out.println(opcionesValidas);
-
-        assertTrue(contienenLoMismo(opcionesDeseleccionadas, opcionesValidas));
-    }
-
-    @Test
-    public void opcionesValidasDespuesDeFinalizarTiempoLanzaPreguntaError() throws PreguntaError, JugadaError, RespuestaError {
-        Opcion opcion1 = mock(Opcion.class);
-        Opcion opcion2 = mock(Opcion.class);
-        Opcion opcion3 = mock(Opcion.class);
-
-        ArrayList<Opcion> opciones = new ArrayList<>();
-        opciones.add(opcion1);
-        opciones.add(opcion2);
-        opciones.add(opcion3);
-
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion1);
-        doNothing().when(pregunta).validarOpcion(opcion2);
-        doNothing().when(pregunta).validarOpcion(opcion3);
-        when(pregunta.obtenerOpciones()).thenReturn(opciones);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarOpcion(opcion2);
-        jugada.seleccionarOpcion(opcion1);
-        jugada.deseleccionarOpcion(opcion1);
-        jugada.finalizarTiempo();
-
-        assertThrows(JugadaError.class, jugada::opcionesValidas);
-    }
-
-    // comodinesValidos
-    @Test
-    public void comodinesValidosDevuelveTodosLosComodinesAntesDeIniciarElTiempo() throws JugadaError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        Comodin comodin1 = mock(Comodin.class);
-        Comodin comodin2 = mock(Comodin.class);
-        Comodin comodin3 = mock(Comodin.class);
-
-        ArrayList<Comodin> comodines = new ArrayList<>();
-        comodines.add(comodin1);
-        comodines.add(comodin2);
-        comodines.add(comodin3);
-
-        Jugador jugador = mock(Jugador.class);
-        when(jugador.obtenerComodines()).thenReturn(comodines);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-
-        ArrayList<Comodin> comodinesValidos = jugada.comodinesValidos();
-
-        assertTrue(contienenLoMismo(comodines, comodinesValidos));
-    }
-
-    @Test
-    public void comodinesValidosDevuelveTodosLosComodinesDespuesDeIniciarElTiempo() throws JugadaError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        Comodin comodin1 = mock(Comodin.class);
-        Comodin comodin2 = mock(Comodin.class);
-        Comodin comodin3 = mock(Comodin.class);
-
-        ArrayList<Comodin> comodines = new ArrayList<>();
-        comodines.add(comodin1);
-        comodines.add(comodin2);
-        comodines.add(comodin3);
-
-        Jugador jugador = mock(Jugador.class);
-        when(jugador.obtenerComodines()).thenReturn(comodines);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-
-        ArrayList<Comodin> comodinesValidos = jugada.comodinesValidos();
-
-        assertTrue(contienenLoMismo(comodines, comodinesValidos));
-    }
-
-    @Test
-    public void comodinesValidosDevuelveLosComodinesNoSeleccionadosDespuesDeIniciarElTiempo() throws JugadaError, JugadorError, ComodinError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        Comodin comodin1 = mock(Comodin.class);
-        doNothing().when(comodin1).validarPregunta(pregunta);
-        Comodin comodin2 = mock(Comodin.class);
-        doNothing().when(comodin2).validarPregunta(pregunta);
-        Comodin comodin3 = mock(Comodin.class);
-        doNothing().when(comodin3).validarPregunta(pregunta);
-
-        ArrayList<Comodin> comodines = new ArrayList<>();
-        comodines.add(comodin1);
-        comodines.add(comodin2);
-        comodines.add(comodin3);
-
-        Jugador jugador = mock(Jugador.class);
-        when(jugador.obtenerComodines()).thenReturn(comodines);
-        doNothing().when(jugador).validarComodin(comodin1);
-        doNothing().when(jugador).validarComodin(comodin2);
-        doNothing().when(jugador).validarComodin(comodin3);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarComodin(comodin1);
-        jugada.deseleccionarComodin(comodin1);
-        jugada.seleccionarComodin(comodin3);
-        jugada.seleccionarComodin(comodin2);
-
-        ArrayList<Comodin> comodinesValidos = jugada.comodinesValidos();
-        ArrayList<Comodin> comodinesDeseleccionados = (ArrayList<Comodin>) comodines.clone();
-        comodinesDeseleccionados.remove(comodin2);
-        comodinesDeseleccionados.remove(comodin3);
-
-        assertTrue(contienenLoMismo(comodines, comodinesValidos));
-    }
-
-    @Test
-    public void comodinesValidosAlFinalizarTiempoLanzaJugadaError() throws JugadaError, ComodinError, JugadorError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        Comodin comodin1 = mock(Comodin.class);
-        doNothing().when(comodin1).validarPregunta(pregunta);
-        Comodin comodin2 = mock(Comodin.class);
-        doNothing().when(comodin2).validarPregunta(pregunta);
-        Comodin comodin3 = mock(Comodin.class);
-        doNothing().when(comodin3).validarPregunta(pregunta);
-
-        ArrayList<Comodin> comodines = new ArrayList<>();
-        comodines.add(comodin1);
-        comodines.add(comodin2);
-        comodines.add(comodin3);
-
-        Jugador jugador = mock(Jugador.class);
-        when(jugador.obtenerComodines()).thenReturn(comodines);
-        doNothing().when(jugador).validarComodin(comodin1);
-        doNothing().when(jugador).validarComodin(comodin2);
-        doNothing().when(jugador).validarComodin(comodin3);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarComodin(comodin1);
-        jugada.deseleccionarComodin(comodin1);
-        jugada.seleccionarComodin(comodin3);
-        jugada.seleccionarComodin(comodin1);
-        jugada.finalizarTiempo();
-
-        assertThrows(JugadaError.class, jugada::comodinesValidos);
-    }
-
-
-    // obtenerRespuesta
-    @Test
-    public void obtenerRespuestaSinFinalizarTiempoLanzaJugadaError() throws PreguntaError, JugadaError, RespuestaError {
-        Opcion opcion = mock(Opcion.class);
-        Pregunta pregunta = mock(Pregunta.class);
-        doNothing().when(pregunta).validarOpcion(opcion);
-
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.seleccionarOpcion(opcion);
-
-        assertThrows(JugadaError.class, jugada::obtenerRespuesta);
-    }
-
-    @Test
-    public void obtenerRespuestaTeDevuelveLaRespuestaDeLaJugada() throws JugadaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-
-        Jugada jugada = new Jugada(pregunta, jugador);
-        jugada.iniciarTiempo();
-        jugada.finalizarTiempo();
-
-        Respuesta respuesta = jugada.obtenerRespuesta();
-
-        assertEquals(jugador, respuesta.obtenerJugador());
-        assertEquals(pregunta, respuesta.obtenerPregunta());
-    }
-
-    private boolean contienenLoMismo(ArrayList a, ArrayList b) {
-        for (Object obj: b) {
-            if (!a.contains(obj)) return false;
-        }
-        return a.size() == b.size();
-    }*/
-
-    @Test
-    public void seCreaJugadaYListaDeComodinesEstaVacia() throws JugadaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-        Jugada jugada = new Jugada(pregunta,jugador);
-
-        assertTrue(jugada.obtenerComodines().isEmpty());
-    }
+    */
 }
