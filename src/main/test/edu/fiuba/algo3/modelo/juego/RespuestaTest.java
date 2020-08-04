@@ -143,6 +143,46 @@ public class RespuestaTest {
         assertThrows(RespuestaError.class, () -> respuesta.agregarOpcion(opcion));
     }
 
+    // sacarOpcion
+    @Test
+    public void sacarOpcionConOpcionInvalidaLanzaRespuestaError() throws RespuestaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
+
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+
+        respuesta.agregarOpcion(opcion1);
+
+        assertThrows(RespuestaError.class, ()->respuesta.sacarOpcion(opcion2));
+    }
+
+    @Test
+    public void sacarOpcionSacaLaOpcionCorrectaAgregadaDeLaRespuesta() throws RespuestaError {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
+
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+
+        respuesta.agregarOpcion(opcion1);
+        respuesta.agregarOpcion(opcion2);
+
+        ArrayList<Opcion> opcionesElegidas = respuesta.opcionesElegidas();
+        assertEquals(2, opcionesElegidas.size());
+
+        respuesta.sacarOpcion(opcion2);
+
+        opcionesElegidas = respuesta.opcionesElegidas();
+
+        assertEquals(1, opcionesElegidas.size());
+        assertEquals(opcion1, opcionesElegidas.get(0));
+    }
+
     // aplicarComodin
     @Test
     public void seAplicaUnComodinAListaDeComodinesAplicadosYComodinesAplicadosLaDevuelveEnUnArreglo() throws RespuestaError {
