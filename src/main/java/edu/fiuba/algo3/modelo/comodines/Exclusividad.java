@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.JugadorError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
@@ -21,23 +22,17 @@ public class Exclusividad extends Comodin {
     }
 
     @Override
-    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError, RespuestaError {
-        if((!this.esValido(unaRespuesta)) || (!this.esValido(otraRespuesta))){
-            throw new ComodinError("Comodin invalido");
-        }
+    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws RespuestaError, JugadorError {
         if(this.esAplicable(unaRespuesta,otraRespuesta) || (this.esAplicable(otraRespuesta,unaRespuesta))) {
             unaRespuesta.aplicarComodin(this);
             otraRespuesta.aplicarComodin(this);
         }
-        /*if((unaRespuesta.obtenerJugador().obtenerComodines().contains(this)) &&
-        (otraRespuesta.obtenerJugador().obtenerComodines().contains(this))){
-
-            unaRespuesta.obtenerJugador().obtenerComodines().remove(this);
-            otraRespuesta.obtenerJugador().obtenerComodines().contains(this);
+        if(unaRespuesta.validarComodin(this) && otraRespuesta.validarComodin(this)){
+            unaRespuesta.eliminarComodin(this);
+            otraRespuesta.eliminarComodin(this);
          }
-        */
-    }
 
+    }
     protected boolean esAplicable(Respuesta unaRespuesta, Respuesta otraRespuesta) {
         return ((unaRespuesta.esCorrecta()) && (!otraRespuesta.esCorrecta()));
     }

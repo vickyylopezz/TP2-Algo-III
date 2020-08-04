@@ -2,13 +2,13 @@ package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadaError;
+import edu.fiuba.algo3.modelo.excepciones.JugadorError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
@@ -98,7 +98,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
+    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Jugador jugador = mock(Jugador.class);
@@ -121,7 +121,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError, JugadorError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -136,11 +136,11 @@ public class ExclusividadTest {
         exclusividad.aplicarARespuestas(respuestaCorrecta, respuestaIncorrecta);
 
         verify(respuestaCorrecta, times(1)).aplicarComodin(exclusividad);
-        verify(respuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
+        verify(respuestaIncorrecta, times(1)).aplicarComodin(exclusividad);
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
+    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Jugador jugador = mock(Jugador.class);
