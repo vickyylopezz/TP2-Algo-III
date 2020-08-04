@@ -39,6 +39,13 @@ public class Respuesta {
         this.opciones.add(opcion);
     }
 
+    public void sacarOpcion(Opcion opcion) throws RespuestaError {
+        if (!this.opciones.contains(opcion)) {
+            throw new RespuestaError(opcion.toString() + " no se encuentra en la respesta");
+        }
+        this.opciones.remove(opcion);
+    }
+
     public ArrayList<Comodin> comodinesAplicados() {
         return new ArrayList<>(this.comodines);
     }
@@ -52,12 +59,5 @@ public class Respuesta {
 
     public boolean esCorrecta() {
         return this.pregunta.opcionesCorrectas(this.opcionesElegidas());
-    }
-
-    public void sacarOpcion(Opcion opcion) throws RespuestaError {
-        if (!this.opciones.contains(opcion)) {
-            throw new RespuestaError(opcion.toString() + " no se encuentra en la respesta");
-        }
-        this.opciones.remove(opcion);
     }
 }
