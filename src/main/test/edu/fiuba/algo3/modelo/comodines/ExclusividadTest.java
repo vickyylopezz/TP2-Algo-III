@@ -64,11 +64,12 @@ public class ExclusividadTest {
     public void seValidaPreguntaSinPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(false);
+        Exclusividad exclusividad = new Exclusividad(2);
 
-        Jugador jugador = mock(Jugador.class);
+        Jugador jugador = new Jugador("Tomas");
+        jugador.agregarComodin(exclusividad);
         Jugada jugada = new Jugada(pregunta, jugador);
 
-        Exclusividad exclusividad = new Exclusividad(2);
         jugada.seleccionarComodin(exclusividad);
 
         assertEquals(Exclusividad.class, jugada.comodinSeleccionado().getClass());

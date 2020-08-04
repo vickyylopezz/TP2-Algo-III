@@ -59,11 +59,12 @@ public class MultiplicadorTest {
     public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(true);
+        Multiplicador multiplicador = new Multiplicador(2);
 
-        Jugador jugador = mock(Jugador.class);
+        Jugador jugador = new Jugador("Juan");
+        jugador.agregarComodin(multiplicador);
         Jugada jugada = new Jugada(pregunta,jugador);
 
-        Multiplicador multiplicador = new Multiplicador(2);
         jugada.seleccionarComodin(multiplicador);
 
         assertEquals(Multiplicador.class, jugada.comodinSeleccionado().getClass());
