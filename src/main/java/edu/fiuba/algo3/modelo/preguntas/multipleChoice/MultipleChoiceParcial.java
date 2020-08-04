@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.preguntas.multipleChoice;
 
 import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcialEstricto;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 public class MultipleChoiceParcial extends Pregunta {
 
     public MultipleChoiceParcial(String titulo) {
-        super(titulo, new ConPenalidad(new CalculadorPuntajeParcialEstricto()));
+        super(titulo, new SinPenalidad(new CalculadorPuntajeParcialEstricto()));
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
