@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class GroupChoiceTest {
 
@@ -185,6 +184,42 @@ public class GroupChoiceTest {
         opcionesElegidas.add(opciones.get(8));
 
         assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),5);
+
+    }
+
+    @Test
+    public void GroupChoiceSinPenalidadDevuelveFalseEnPenalidad(){
+        GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
+
+        assertFalse(pregunta.conPenalidad());
+    }
+
+    @Test
+    public void GroupChoiceOpcionesCorrectasSonLasAgregadas() throws PreguntaError {
+        GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
+
+        pregunta.definirGrupo("Flores");
+        pregunta.definirGrupo("Animales");
+
+        ArrayList<Grupo> grupos = pregunta.obtenerGrupos();
+        pregunta.agregarOpcion(grupos.get(0),"Margarita");
+        pregunta.agregarOpcion(grupos.get(0),"Rosa");
+        pregunta.agregarOpcion(grupos.get(0),"Jazmin");
+
+        pregunta.agregarOpcion(grupos.get(1),"Perro");
+        pregunta.agregarOpcion(grupos.get(1),"Gato");
+        pregunta.agregarOpcion(grupos.get(1),"Conejo");
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
+        opcionesCorrectas.add(opciones.get(0));
+        opcionesCorrectas.add(opciones.get(2));
+        opcionesCorrectas.add(opciones.get(4));
+        opcionesCorrectas.add(opciones.get(6));
+        opcionesCorrectas.add(opciones.get(8));
+        opcionesCorrectas.add(opciones.get(10));
+
+        assertTrue(pregunta.opcionesCorrectas(opcionesCorrectas));
 
     }
 
