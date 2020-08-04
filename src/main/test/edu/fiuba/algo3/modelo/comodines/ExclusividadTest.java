@@ -7,6 +7,7 @@ import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
@@ -16,8 +17,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
 
 public class ExclusividadTest {
 
@@ -121,25 +122,21 @@ public class ExclusividadTest {
 
     @Test
     public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
-        Pregunta pregunta = mock(Pregunta.class);
+        Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
-
-        Opcion opcionCorrecta = mock(Opcion.class);
-        Opcion opcionIncorrecta = mock(Opcion.class);
-
-        Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
-        Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
-
-        unaRespuestaCorrecta.agregarOpcion(opcionCorrecta);
-        unaRespuestaIncorrecta.agregarOpcion(opcionIncorrecta);
-
-        Exclusividad exclusividad = new Exclusividad(2);
         exclusividad.definirJugador(jugador);
-        exclusividad.aplicarARespuestas(unaRespuestaCorrecta,unaRespuestaIncorrecta);
 
-        assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
-        assertEquals(1,unaRespuestaIncorrecta.obtenerComodines().size());
+        Respuesta respuestaCorrecta = mock(Respuesta.class);
+        when(respuestaCorrecta.esCorrecta()).thenReturn(true);
+
+        Respuesta respuestaIncorrecta = mock(Respuesta.class);
+        when(respuestaIncorrecta.esCorrecta()).thenReturn(false);
+
+        exclusividad.aplicarARespuestas(respuestaCorrecta, respuestaIncorrecta);
+
+        verify(respuestaCorrecta, times(1)).aplicarComodin(exclusividad);
+        verify(respuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
     }
 
     @Test
