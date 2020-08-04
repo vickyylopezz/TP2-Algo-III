@@ -38,7 +38,7 @@ public class MultiplicadorTest {
         assertEquals(2,multiplicador.obtenerFactor());
     }
 
-    @Test
+    /*@Test
     void recibeUnJugadorYDevuelveElJugador() throws ComodinError {
         Jugador jugador = mock(Jugador.class);
 
@@ -53,7 +53,7 @@ public class MultiplicadorTest {
         Multiplicador multiplicador = new Multiplicador(2);
 
         assertThrows(ComodinError.class, () -> multiplicador.definirJugador(null));
-    }
+    }*/
 
     @Test
     public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError {
