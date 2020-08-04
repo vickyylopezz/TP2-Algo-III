@@ -21,11 +21,11 @@ public class Multiplicador extends Comodin{
     }
 
     @Override
-    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError {
+    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError, RespuestaError {
         if((!this.esValido(unaRespuesta)) || (!this.esValido(otraRespuesta))){
             throw new ComodinError("Comodin invalido");
         }
-        unaRespuesta.agregarComodin(this);
-        otraRespuesta.agregarComodin(this);
+        unaRespuesta.aplicarComodin(this);
+        otraRespuesta.aplicarComodin(this);
     }
 }

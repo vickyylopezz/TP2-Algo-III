@@ -7,15 +7,12 @@ import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -118,8 +115,8 @@ public class ExclusividadTest {
 
         exclusividad.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
 
-        assertEquals(0,unaRespuestaCorrecta.obtenerComodines().size());
-        assertEquals(0,otraRespuestaCorrecta.obtenerComodines().size());
+        assertEquals(0,unaRespuestaCorrecta.comodinesAplicados().size());
+        assertEquals(0,otraRespuestaCorrecta.comodinesAplicados().size());
     }
 
     @Test
@@ -163,8 +160,8 @@ public class ExclusividadTest {
         exclusividad.definirJugador(jugador);
         exclusividad.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta);
 
-        assertEquals(0,unaRespuestaIncorrecta.obtenerComodines().size());
-        assertEquals(0,otraRespuestaIncorrecta.obtenerComodines().size());
+        assertEquals(0,unaRespuestaIncorrecta.comodinesAplicados().size());
+        assertEquals(0,otraRespuestaIncorrecta.comodinesAplicados().size());
     }
 
     @Test
