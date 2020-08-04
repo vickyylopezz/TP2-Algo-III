@@ -69,7 +69,7 @@ public class MultiplicadorTest {
         Multiplicador multiplicador = new Multiplicador(2);
         multiplicador.validarPregunta(jugada);
 
-        assertEquals(1,jugada.obtenerComodines().size());
+        assertEquals(Comodin.class, jugada.comodinSeleccionado().getClass());
     }
 
     @Test
@@ -279,8 +279,10 @@ public class MultiplicadorTest {
         pregunta.agregarOpcionCorrecta("Veradero");
         pregunta.agregarOpcionIncorrecta("Falso");
 
+        Jugador jugador = new Jugador("Diego");
+        multiplicador.definirJugador(jugador);
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
-        Respuesta respuesta = new Respuesta(pregunta, null);
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
         respuesta.agregarOpcion(opciones.get(0));
 
         assertThrows(ComodinError.class, () -> multiplicador.aplicarARespuestas(null, respuesta));

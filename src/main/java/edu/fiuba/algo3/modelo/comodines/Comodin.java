@@ -40,7 +40,7 @@ public abstract class Comodin {
         return this.jugador;
     }
 
-    public abstract void validarPregunta(Jugada jugada) throws ComodinError;
+    public abstract void validarPregunta(Jugada jugada) throws ComodinError, JugadorError;
     abstract void aplicarARespuestas(Respuesta unaRespuesta,Respuesta otraRespuesta) throws ComodinError, RespuestaError, JugadorError;
 
     public Puntaje puntajeNuevo(ArrayList<Punto> puntos) throws ComodinError {
