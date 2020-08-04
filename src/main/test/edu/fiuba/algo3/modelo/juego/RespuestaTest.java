@@ -43,7 +43,7 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
+        //respuesta.abrir();
 
         Opcion opcion = mock(Opcion.class);
         respuesta.agregarOpcion(opcion);
@@ -76,8 +76,8 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-        respuesta.cerrar();
+        //respuesta.abrir();
+        //respuesta.cerrar();
 
         Comodin comodin = mock(Comodin.class);
         respuesta.aplicarComodin(comodin);
@@ -91,6 +91,7 @@ public class RespuestaTest {
         assertEquals(1, comodinesVerificacion.size());
     }
 
+    /*
     // abrir
     @Test
     public void abrirTeHabilitaAPoderAgregarYSacarOpciones() throws RespuestaError {
@@ -258,6 +259,7 @@ public class RespuestaTest {
 
         assertFalse(respuesta.cerrada());
     }
+    */
 
     // agregarOpcion
     @Test
@@ -266,7 +268,7 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
+        //respuesta.abrir();
 
         Opcion opcion = mock(Opcion.class);
         respuesta.agregarOpcion(opcion);
@@ -284,7 +286,7 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
+        //respuesta.abrir();
 
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
@@ -309,7 +311,7 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
+        //respuesta.abrir();
 
         Opcion opcion = mock(Opcion.class);
         respuesta.agregarOpcion(opcion);
@@ -324,7 +326,7 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
+        //respuesta.abrir();
 
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
@@ -340,7 +342,7 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
+        //respuesta.abrir();
 
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
@@ -366,8 +368,8 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-        respuesta.cerrar();
+        //respuesta.abrir();
+        //respuesta.cerrar();
 
         Comodin comodin = mock(Comodin.class);
         respuesta.aplicarComodin(comodin);
@@ -385,8 +387,8 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-        respuesta.cerrar();
+        //respuesta.abrir();
+        //respuesta.cerrar();
 
         Comodin comodin1 = mock(Comodin.class);
         Comodin comodin2 = mock(Comodin.class);
@@ -411,8 +413,8 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-        respuesta.cerrar();
+        //respuesta.abrir();
+        //respuesta.cerrar();
 
         Comodin comodin = mock(Comodin.class);
         respuesta.aplicarComodin(comodin);
@@ -438,7 +440,7 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
+        //respuesta.abrir();
 
         respuesta.agregarOpcion(opcion1);
         respuesta.agregarOpcion(opcion2);
@@ -464,7 +466,7 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
+        //respuesta.abrir();
 
         respuesta.agregarOpcion(opcion1);
         respuesta.agregarOpcion(opcion2);
