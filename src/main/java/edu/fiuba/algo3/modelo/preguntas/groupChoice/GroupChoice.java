@@ -12,7 +12,7 @@ public class GroupChoice extends Pregunta {
 
     private final ArrayList<Grupo> grupos;
 
-    protected GroupChoice(String titulo) {
+    public GroupChoice(String titulo) {
         super(titulo, new SinPenalidad(new CalculadorPuntajeClasico()));
 
         this.grupos = new ArrayList<>();
