@@ -70,8 +70,9 @@ public class ExclusividadTest {
         Jugada jugada = new Jugada(pregunta, jugador);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        OpcionClasica opcionCorrecta = new OpcionClasica("Bien", new PuntoPositivo());
-        respuesta.agregarOpcion(opcionCorrecta);
+
+        Opcion opcion = mock(Opcion.class);
+        respuesta.agregarOpcion(opcion);
 
         Exclusividad exclusividad = new Exclusividad(2);
         exclusividad.validarPregunta(jugada);
@@ -89,8 +90,9 @@ public class ExclusividadTest {
         Jugada jugada = new Jugada(pregunta, jugador);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        OpcionClasica opcionCorrecta = new OpcionClasica("Bien", new PuntoPositivo());
-        respuesta.agregarOpcion(opcionCorrecta);
+
+        Opcion opcion = mock(Opcion.class);
+        respuesta.agregarOpcion(opcion);
 
         Exclusividad exclusividad = new Exclusividad(2);
 
@@ -103,7 +105,7 @@ public class ExclusividadTest {
 
         Jugador jugador = mock(Jugador.class);
 
-        OpcionClasica opcionCorrecta = new OpcionClasica("Bien",new PuntoPositivo());
+        Opcion opcionCorrecta = mock(Opcion.class);
 
         Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
         Respuesta otraRespuestaCorrecta = new Respuesta(pregunta,jugador);
@@ -120,17 +122,14 @@ public class ExclusividadTest {
         assertEquals(0,otraRespuestaCorrecta.obtenerComodines().size());
     }
 
-    /*@Test
+    @Test
     public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Jugador jugador = mock(Jugador.class);
 
-        OpcionClasica opcionCorrecta = new OpcionClasica("Bien",new PuntoPositivo());
-        OpcionClasica opcionIncorrecta = new OpcionClasica("Mal",new PuntoNulo());
-
-        ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
-        opcionesCorrectas.add(opcionCorrecta);
+        Opcion opcionCorrecta = mock(Opcion.class);
+        Opcion opcionIncorrecta = mock(Opcion.class);
 
         Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
         Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
@@ -144,7 +143,7 @@ public class ExclusividadTest {
 
         assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
         assertEquals(1,unaRespuestaIncorrecta.obtenerComodines().size());
-    }*/
+    }
 
     @Test
     public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError {
@@ -152,7 +151,7 @@ public class ExclusividadTest {
 
         Jugador jugador = mock(Jugador.class);
 
-        OpcionClasica opcionIncorrecta = new OpcionClasica("Mal",new PuntoNulo());
+        Opcion opcionIncorrecta = mock(Opcion.class);
 
         Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
         Respuesta otraRespuestaIncorrecta = new Respuesta(pregunta,jugador);

@@ -39,8 +39,8 @@ public class MultiplicadorTest {
         assertEquals(2,multiplicador.obtenerFactor());
     }
 
-    /*@Test
-    void recibeUnJugadorYDevuelveElJugador() throws ComodinError {
+    @Test
+    public void recibeUnJugadorYDevuelveElJugador() throws ComodinError {
         Jugador jugador = mock(Jugador.class);
 
         Multiplicador multiplicador = new Multiplicador(2);
@@ -50,11 +50,11 @@ public class MultiplicadorTest {
     }
 
     @Test
-    void recibeUnJugadorNuloYSeLanzaExcepcion() throws ComodinError {
+    public void recibeUnJugadorNuloYSeLanzaExcepcion() throws ComodinError {
         Multiplicador multiplicador = new Multiplicador(2);
 
         assertThrows(ComodinError.class, () -> multiplicador.definirJugador(null));
-    }*/
+    }
 
     @Test
     public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError {
@@ -66,8 +66,8 @@ public class MultiplicadorTest {
         Jugada jugada = new Jugada(pregunta,jugador);
 
         Respuesta respuesta = new Respuesta(pregunta,jugador);
-        OpcionClasica opcionCorrecta = new OpcionClasica("Bien",new PuntoPositivo());
-        respuesta.agregarOpcion(opcionCorrecta);
+        Opcion opcion = mock(Opcion.class);
+        respuesta.agregarOpcion(opcion);
 
         Multiplicador multiplicador = new Multiplicador(2);
         multiplicador.validarPregunta(jugada);
@@ -85,8 +85,8 @@ public class MultiplicadorTest {
         Jugada jugada = new Jugada(pregunta,jugador);
 
         Respuesta respuesta = new Respuesta(pregunta,jugador);
-        OpcionClasica opcionCorrecta = new OpcionClasica("Bien",new PuntoPositivo());
-        respuesta.agregarOpcion(opcionCorrecta);
+        Opcion opcion = mock(Opcion.class);
+        respuesta.agregarOpcion(opcion);
 
         Multiplicador multiplicador = new Multiplicador(2);
 
@@ -99,10 +99,10 @@ public class MultiplicadorTest {
 
         Jugador jugador = mock(Jugador.class);
 
-        OpcionClasica opcionCorrecta = new OpcionClasica("Bien", new PuntoPositivo());
-
         Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
         Respuesta otraRespuestaCorrecta = new Respuesta(pregunta,jugador);
+
+        Opcion opcionCorrecta = mock(Opcion.class);
 
         unaRespuestaCorrecta.agregarOpcion(opcionCorrecta);
         otraRespuestaCorrecta.agregarOpcion(opcionCorrecta);
@@ -121,11 +121,11 @@ public class MultiplicadorTest {
 
         Jugador jugador = mock(Jugador.class);
 
-        OpcionClasica opcionCorrecta = new OpcionClasica("Bien",new PuntoPositivo());
-        OpcionClasica opcionIncorrecta = new OpcionClasica("Mal",new PuntoNulo());
-
         Respuesta respuestaCorrecta = new Respuesta(pregunta,jugador);
         Respuesta respuestaIncorrecta = new Respuesta(pregunta,jugador);
+
+        Opcion opcionCorrecta = mock(Opcion.class);
+        Opcion opcionIncorrecta = mock(Opcion.class);
 
         respuestaCorrecta.agregarOpcion(opcionCorrecta);
         respuestaIncorrecta.agregarOpcion(opcionIncorrecta);
@@ -144,10 +144,10 @@ public class MultiplicadorTest {
 
         Jugador jugador = mock(Jugador.class);
 
-        OpcionClasica opcionIncorrecta = new OpcionClasica("Mal",new PuntoNegativo());
-
         Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
         Respuesta otraRespuestaIncorrecta = new Respuesta(pregunta,jugador);
+
+        Opcion opcionIncorrecta = mock(Opcion.class);
 
         unaRespuestaIncorrecta.agregarOpcion(opcionIncorrecta);
         otraRespuestaIncorrecta.agregarOpcion(opcionIncorrecta);
