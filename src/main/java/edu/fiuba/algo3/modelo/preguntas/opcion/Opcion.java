@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.juego.opcion;
+package edu.fiuba.algo3.modelo.preguntas.opcion;
 
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 

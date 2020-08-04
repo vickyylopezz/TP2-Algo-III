@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas.groupChoice;
 
-import edu.fiuba.algo3.modelo.juego.opcion.OpcionGroupChoice;
+import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionGroupChoice;
 
 
 import java.util.ArrayList;
