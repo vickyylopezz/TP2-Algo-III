@@ -15,6 +15,8 @@ import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 
+import javax.sql.CommonDataSource;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -59,7 +61,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seValidaPreguntaSinPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError {
+    public void seValidaPreguntaSinPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(false);
 
@@ -69,7 +71,7 @@ public class ExclusividadTest {
         Exclusividad exclusividad = new Exclusividad(2);
         exclusividad.validarPregunta(jugada);
 
-        assertEquals(1, jugada.obtenerComodines().size());
+        assertEquals(Comodin.class, jugada.comodinSeleccionado().getClass());
     }
 
     @Test
