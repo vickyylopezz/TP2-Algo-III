@@ -25,7 +25,6 @@ public class Multiplicador extends Comodin{
         if (!jugada.obtenerPregunta().conPenalidad()){
             throw new ComodinError("Aplicacion de comodin invalida");
         }
-        jugada.seleccionarComodin(this);
     }
 
     @Override
