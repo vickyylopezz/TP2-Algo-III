@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.JugadorError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
@@ -40,14 +41,7 @@ public abstract class Comodin {
     }
 
     public abstract void validarPregunta(Jugada jugada) throws ComodinError;
-    abstract void aplicarARespuestas(Respuesta unaRespuesta,Respuesta otraRespuesta) throws ComodinError, RespuestaError;
-
-    boolean esValido(Respuesta unaRespuesta) throws ComodinError {
-        if(unaRespuesta == null){
-            throw new ComodinError("Respuesta invalida");
-        }
-        return (this.jugador == unaRespuesta.obtenerJugador());
-    }
+    abstract void aplicarARespuestas(Respuesta unaRespuesta,Respuesta otraRespuesta) throws ComodinError, RespuestaError, JugadorError;
 
     public Puntaje puntajeNuevo(ArrayList<Punto> puntos) throws ComodinError {
         if(puntos == null){

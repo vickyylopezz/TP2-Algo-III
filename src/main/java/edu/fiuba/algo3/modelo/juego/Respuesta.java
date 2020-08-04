@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.comodines.Exclusividad;
+import edu.fiuba.algo3.modelo.excepciones.JugadorError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
@@ -90,5 +92,13 @@ public class Respuesta {
 
     public boolean esCorrecta() {
         return this.pregunta.opcionesCorrectas(this.opcionesElegidas());
+    }
+
+    public boolean validarComodin(Comodin comodin) {
+        return this.jugador.obtenerComodines().contains(comodin);
+    }
+
+    public void eliminarComodin(Comodin comodin) throws JugadorError {
+        this.jugador.sacarComodin(comodin);
     }
 }

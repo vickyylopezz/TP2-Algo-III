@@ -12,6 +12,13 @@ public class Multiplicador extends Comodin{
         super(factor);
     }
 
+    boolean esValido(Respuesta unaRespuesta) throws ComodinError {
+        if(unaRespuesta == null){
+            throw new ComodinError("Respuesta invalida");
+        }
+        return (this.jugador == unaRespuesta.obtenerJugador());
+    }
+
     @Override
     public void validarPregunta(Jugada jugada) throws ComodinError {
         if (!jugada.obtenerPregunta().conPenalidad()){
