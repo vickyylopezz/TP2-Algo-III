@@ -44,7 +44,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    void recibeUnJugadorYDevuelveElJugador() throws ComodinError {
+    public void recibeUnJugadorYDevuelveElJugador() throws ComodinError {
         Jugador jugador = mock(Jugador.class);
 
         Exclusividad exclusividad = new Exclusividad(2);
@@ -54,7 +54,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    void recibeUnJugadorNuloYSeLanzaExcepcion() throws ComodinError {
+    public void recibeUnJugadorNuloYSeLanzaExcepcion() throws ComodinError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         assertThrows(ComodinError.class, () -> exclusividad.definirJugador(null));
