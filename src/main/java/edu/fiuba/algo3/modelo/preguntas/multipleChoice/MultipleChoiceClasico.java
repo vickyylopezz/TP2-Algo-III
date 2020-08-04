@@ -6,8 +6,6 @@ import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeClasico;
 import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 
 public class MultipleChoiceClasico extends Pregunta {
 
