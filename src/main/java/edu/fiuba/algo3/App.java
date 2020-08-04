@@ -1,9 +1,8 @@
 package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.eventos.BotonOpcionEventHandler;
-import edu.fiuba.algo3.modelo.Jugador;
-import edu.fiuba.algo3.modelo.MultipleChoiceParcial;
-import edu.fiuba.algo3.modelo.PreguntaError;
+import edu.fiuba.algo3.modelo.*;
+import edu.fiuba.algo3.vistas.RegistroView;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
@@ -13,23 +12,46 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 /**
  * JavaFX App
  */
 public class App extends Application {
-    Scene escena1, escena2;
+    private Stage stage;
+
+    public static void main(String[] args) throws IOException, URISyntaxException {
+        new Kahoot().leerArchivo();
+        launch(args);
+    }
 
     @Override
-    public void start(Stage stage) {
-        /* ESCENA 1: Inicio de jugadores */
-        // ETIQUETAS
+    public void start(Stage stage){
+        this.stage = stage;
+
+        Button empezar = new Button("Empezar");
+        empezar.setMinSize(220, 70);
+        empezar.setOnAction(e -> {
+            // muestro la pantalla de usuarios
+            Scene registro = pantallaDeRegistro();
+            stage.setScene(registro);
+        });
+        StackPane layout = new StackPane(empezar);
+        layout.setAlignment(Pos.CENTER);
+
+        stage.setScene(new Scene(layout,800,600));
+        stage.show();
+    }
+
+    public Scene pantallaDeRegistro(){
         Text indicadorJugador1 = new Text("Jugador 1");
         indicadorJugador1.setFont(new Font(15));
         Text indicadorJugador2 = new Text("Jugador 2");
@@ -54,17 +76,9 @@ public class App extends Application {
             jugadores.add(jugador1); jugadores.add(jugador2);
 
             try {
-                MultipleChoiceParcial pregunta = new MultipleChoiceParcial("¿Cuál es la opción correcta?", 10);
-                pregunta.agregarOpcionCorrecta("Esta si");
-                pregunta.agregarOpcionIncorrecta("Esta no");
-                pregunta.agregarOpcionIncorrecta("Casi, pero no");
-                pregunta.agregarOpcionIncorrecta("Frío");
-
-                //pregunta.agregarOpcionIncorrecta("...");
-                //pregunta.agregarOpcionIncorrecta("???");
-
-                escena2 = crearEscenaJuegoCon(pregunta, jugadores);
-                stage.setScene(escena2);
+                MultipleChoiceParcial pregunta = obtenerPregunta();
+                Scene escena = crearEscenaJuegoCon(pregunta, jugadores);
+                cambiarEscena(escena, this.stage);
             } catch (PreguntaError error) {
                 System.out.println(error);
                 System.exit(1);
@@ -95,10 +109,17 @@ public class App extends Application {
         contenidoIniciar.setAlignment(Pos.CENTER);
         contenidoIniciar.setStyle("-fx-background-color: #addcff");
 
-        escena1 = new Scene(contenidoIniciar, 800, 600);
+        return new Scene(contenidoIniciar, 800, 600);
+    }
 
-        stage.setScene(escena1);
-        stage.show();
+    public MultipleChoiceParcial obtenerPregunta() throws PreguntaError {
+        MultipleChoiceParcial pregunta = new MultipleChoiceParcial("¿Cuál es la opción correcta?", 10);
+        pregunta.agregarOpcionCorrecta("Esta si");
+        pregunta.agregarOpcionIncorrecta("Esta no");
+        pregunta.agregarOpcionIncorrecta("Casi, pero no");
+        pregunta.agregarOpcionIncorrecta("Frío");
+
+        return pregunta;
     }
 
     public Scene crearEscenaJuegoCon(MultipleChoiceParcial pregunta, ArrayList<Jugador> jugadores) {
@@ -129,7 +150,10 @@ public class App extends Application {
         return (new Scene(grillaOpciones, 800,600));
     }
 
-    public static void main(String[] args) {
-        launch(args);
+
+
+    public void cambiarEscena(Scene scene, Stage stage){
+        stage.setScene(scene);
     }
+
 }

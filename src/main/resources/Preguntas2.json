@@ -1,0 +1,59 @@
+[{"categoria":"Mythology","tipo":"multiple","pregunta":"The ancient Roman god of war was commonly known as which of the following?","opciones_correctas":["Mars"],"opciones_incorrectas":["Jupiter","Juno","Ares"]},
+
+{"categoria":"Entertainment: Video Games","tipo":"multiple","pregunta":"In the Nintendo DS game 'Ghost Trick: Phantom Detective', what is the name of the hitman seen at the start of the game?","opciones_correctas":["Nearsighted Jeego"],"opciones_incorrectas":["One Step Ahead Tengo","Missile","Cabanela"]},
+
+{"categoria":"Entertainment: Film","tipo":"multiple","pregunta":"When was the movie 'Con Air' released?","opciones_correctas":["1997"],"opciones_incorrectas":["1985","1999","1990"]},
+
+{"categoria":"Science & Nature","tipo":"VFClasico","pregunta":"The 'Gympie Stinger' is the deadliest plant in the world.","opciones_correctas":["False"],"opciones_incorrectas":["True"]},
+
+{"categoria":"Geography","tipo":"multiple","pregunta":"Which country does Austria not border?","opciones_correctas":["France"],"opciones_incorrectas":["Slovenia","Switzerland","Slovakia"]},
+
+{"categoria":"Geography","tipo":"multiple","pregunta":"What is the capital of Jamaica?","opciones_correctas":["Kingston"],"opciones_incorrectas":["San Juan","Port-au-Prince","Bridgetown"]},
+
+{"categoria":"Entertainment: Music","tipo":"multiple","pregunta":"Which song in rapper Kanye West's album 'The Life of Pablo' features Rihanna?","opciones_correctas":["Famous"],"opciones_incorrectas":["Wolves","Ultralight Beam","Highlights"]},
+
+{"categoria":"Entertainment: Board Games","tipo":"VFClasico","pregunta":"In the game 'Racko' you may pick up ANY card from the discard pile.","opciones_correctas":["False"],"opciones_incorrectas":["True"]},
+
+{"categoria":"Science: Computers","tipo":"multiple","pregunta":"If you were to code software in this language you'd only be able to tipo 0's and 1's.","opciones_correctas":["Binary"],"opciones_incorrectas":["JavaScript","C++","Python"]},
+
+{"categoria":"Science & Nature","tipo":"multiple","pregunta":"How many bones are in the human body?","opciones_correctas":["206"],"opciones_incorrectas":["203","209","200"]},
+
+{"categoria":"Entertainment: Japanese Anime & Manga","tipo":"multiple","pregunta":"In the anime, Full Metal Panic!, who is Kaname's best friend?","opciones_correctas":["Kyoko Tokiwa"],"opciones_incorrectas":["Melissa Mao","Ren Mikihara","Teletha 'Tessa' Testarossa"]},
+
+{"categoria":"Entertainment: Film","tipo":"multiple","pregunta":"In the 2010 Nightmare on Elm Street reboot, who played Freddy Kruger?","opciones_correctas":["Jackie Earle Haley"],"opciones_incorrectas":["Tyler Mane","Derek Mears","Gunnar Hansen"]},
+
+{"categoria":"Entertainment: Television","tipo":"VFClasico","pregunta":"The television show Doctor Who first aired in 1963.","opciones_correctas":["True"],"opciones_incorrectas":["False"]},
+
+{"categoria":"Entertainment: Video Games","tipo":"multiple","pregunta":"What ingredients are required to make a cake in Minecraft?","opciones_correctas":["Milk, Sugar, Egg, and Wheat"],"opciones_incorrectas":["Milk, Bread, Egg, and Wheat","Milk, Sugar Cane, Egg, and Wheat","Milk, Sugar, and Wheat"]},
+
+{"categoria":"Entertainment: Video Games","tipo":"multiple","pregunta":"In WarioWare: Smooth Moves, which one of these is NOT a Form?","opciones_correctas":["The Hotshot"],"opciones_incorrectas":["The Discard","The Elephant","The Mohawk"]},
+
+{"categoria":"Entertainment: Film","tipo":"multiple","pregunta":"In 'Jurassic World', what is the name of the dinosaur that is a genetic hybrid?","opciones_correctas":["Indominus Rex"],"opciones_incorrectas":["Mosasaurus","Pteranodon","Tyrannosaurus Rex "]},
+
+{"categoria":"General Knowledge","tipo":"multiple","pregunta":"Amsterdam Centraal station is twinned with what station?","opciones_correctas":["London Liverpool Street"],"opciones_incorrectas":["Frankfurt (Main) Hauptbahnhof","Paris Gare du Nord","Brussels Midi"]},
+
+{"categoria":"Geography","tipo":"multiple","pregunta":"What is the smallest country in South America by area?","opciones_correctas":["Suriname"],"opciones_incorrectas":["Brazil","Uruguay","Chile"]},
+
+{"categoria":"Geography","tipo":"VFPenalidad","pregunta":"Liechtenstein does not have an airport.","opciones_correctas":["True"],"opciones_incorrectas":["False"]},
+
+{"categoria":"History","tipo":"VFPenalidad","pregunta":"The Hundred Years' War was fought for more than a hundred years.","opciones_correctas":["True"],"opciones_incorrectas":["False"]},
+
+{"categoria":"Entertainment: Music","tipo":"multiple","pregunta":"Which song on Daft Punk's 'Random Access Memories' features Pharrell Williams?","opciones_correctas":["Get Lucky"],"opciones_incorrectas":["Doin' It Right","Instant Crush","The Game of Love"]},
+
+{"categoria":"Politics","tipo":"multiple","pregunta":"What is former United States President Bill Clinton's full name?","opciones_correctas":["William Jefferson Clinton"],"opciones_incorrectas":["William Roosevelt Clinton","William Truman Clinton","William Lincoln Clinton"]},
+
+{"categoria":"Entertainment: Film","tipo":"multiple","pregunta":"In 'Jurassic World', which company purchases InGen and creates Jurassic World?","opciones_correctas":["Masrani Global Corporation "],"opciones_incorrectas":["Biology Synthetics Technologies","International Genetics Incorporated","International Genetic Technologies"]},
+
+{"categoria":"Entertainment: Japanese Anime & Manga","tipo":"multiple","pregunta":"In 2013, virtual pop-star Hatsune Miku had a sponsorship with which pizza chain?","opciones_correctas":["Domino's"],"opciones_incorrectas":["Papa John's","Pizza Hut","Sabarro's"]},
+
+{"categoria":"Entertainment: Books","tipo":"multiple","pregunta":"In 'Little Women', which of the March sisters married Laurie?","opciones_correctas":["Amy"],"opciones_incorrectas":["Beth","Jo","Meg"]},
+
+{"categoria":"General Knowledge","tipo":"multiple","pregunta":"In flight systems, what does the initialism 'TCAS' stand for?","opciones_correctas":["Traffic Collision Avoidance System"],"opciones_incorrectas":["Traffic Communication Alert System","Traffic Configuration Alignment System","Traffic Call-sign Abbreviation System"]},
+
+{"categoria":"Entertainment: Film","tipo":"multiple","pregunta":"What is Lilo's last name from Lilo and Stitch?","opciones_correctas":["Pelekai"],"opciones_incorrectas":["Anoa\u02bbi","Kealoha","Ku\u02bbulei"]},
+
+{"categoria":"History","tipo":"VFPenalidad","pregunta":"Thomas Crapper was a plumber who invented the flushing toilet.","opciones_correctas":["False"],"opciones_incorrectas":["True"]},
+
+{"categoria":"Entertainment: Video Games","tipo":"multiple","pregunta":"In the 'S.T.A.L.K.E.R.' series, which of these items can't be used to lower the player's accumulated radiation?","opciones_correctas":["Radioprotectant"],"opciones_incorrectas":["Anti-rad","Medkit","Vodka"]},
+
+{"categoria":"Animals","tipo":"multiple","pregunta":"What colour is the female blackbird?","opciones_correctas":["Brown"],"opciones_incorrectas":["Black","White","Yellow"]}]
