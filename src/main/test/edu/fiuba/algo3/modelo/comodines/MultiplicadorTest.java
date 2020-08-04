@@ -268,4 +268,13 @@ public class MultiplicadorTest {
         assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
     }
 
+    @Test
+    public void aplicarComodinARespuestaNulaLanzaComodinError() throws ComodinError {
+        Multiplicador multiplicador = new Multiplicador(3);
+        Respuesta respuesta = mock(Respuesta.class);
+
+        assertThrows(ComodinError.class, () -> multiplicador.aplicarARespuestas(null, respuesta));
+        assertThrows(ComodinError.class, () -> multiplicador.aplicarARespuestas(respuesta, null));
+    }
+
 }
