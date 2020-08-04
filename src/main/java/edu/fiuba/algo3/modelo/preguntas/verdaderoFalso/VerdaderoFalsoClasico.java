@@ -15,16 +15,12 @@ public class VerdaderoFalsoClasico extends Pregunta {
 
     private OpcionClasica opcionCorrecta;
     private OpcionClasica opcionIncorrecta;
-    //private Integer segundos;
+    protected ArrayList<Opcion> opciones;
 
     public VerdaderoFalsoClasico(String titulo) {
         super(titulo, new SinPenalidad(new CalculadorPuntajeParcial()));
         this.opcionCorrecta = null;
         this.opcionIncorrecta = null;
-        /*this.segundos = segundos;
-        if (segundos < 0){
-            throw new PreguntaError("Los segundos no pueden ser negativos");
-        }*/
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
@@ -43,11 +39,4 @@ public class VerdaderoFalsoClasico extends Pregunta {
         opciones.add(this.opcionIncorrecta);
     }
 
-    @Override
-    public Punto puntajeConOpciones(ArrayList<Opcion> opciones) {
-        if (opciones.size() == 0){
-            return new PuntoNulo();
-        }
-        return opciones.get(0).obtenerPunto();
-    }
 }

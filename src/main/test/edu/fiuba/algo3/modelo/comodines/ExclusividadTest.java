@@ -64,13 +64,7 @@ public class ExclusividadTest {
         when(pregunta.conPenalidad()).thenReturn(false);
 
         Jugador jugador = mock(Jugador.class);
-
         Jugada jugada = new Jugada(pregunta, jugador);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-
-        Opcion opcion = mock(Opcion.class);
-        respuesta.agregarOpcion(opcion);
 
         Exclusividad exclusividad = new Exclusividad(2);
         exclusividad.validarPregunta(jugada);
@@ -84,13 +78,7 @@ public class ExclusividadTest {
         when(pregunta.conPenalidad()).thenReturn(true);
 
         Jugador jugador = mock(Jugador.class);
-
         Jugada jugada = new Jugada(pregunta, jugador);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-
-        Opcion opcion = mock(Opcion.class);
-        respuesta.agregarOpcion(opcion);
 
         Exclusividad exclusividad = new Exclusividad(2);
 
@@ -99,25 +87,21 @@ public class ExclusividadTest {
 
     @Test
     public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError, JugadorError {
-        Pregunta pregunta = mock(Pregunta.class);
+        Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
-
-        Opcion opcionCorrecta = mock(Opcion.class);
-
-        Respuesta unaRespuestaCorrecta = new Respuesta(pregunta,jugador);
-        Respuesta otraRespuestaCorrecta = new Respuesta(pregunta,jugador);
-
-        unaRespuestaCorrecta.agregarOpcion(opcionCorrecta);
-        otraRespuestaCorrecta.agregarOpcion(opcionCorrecta);
-
-        Exclusividad exclusividad = new Exclusividad(2);
         exclusividad.definirJugador(jugador);
 
-        exclusividad.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
+        Respuesta unaRespuestaCorrecta = mock(Respuesta.class);
+        when(unaRespuestaCorrecta.esCorrecta()).thenReturn(true);
 
-        assertEquals(0,unaRespuestaCorrecta.comodinesAplicados().size());
-        assertEquals(0,otraRespuestaCorrecta.comodinesAplicados().size());
+        Respuesta otraRespuestaCorrecta = mock(Respuesta.class);
+        when(otraRespuestaCorrecta.esCorrecta()).thenReturn(true);
+
+        exclusividad.aplicarARespuestas(unaRespuestaCorrecta, otraRespuestaCorrecta);
+
+        verify(unaRespuestaCorrecta, times(0)).aplicarComodin(exclusividad);
+        verify(otraRespuestaCorrecta, times(0)).aplicarComodin(exclusividad);
     }
 
     @Test
@@ -141,24 +125,21 @@ public class ExclusividadTest {
 
     @Test
     public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError, JugadorError {
-        Pregunta pregunta = mock(Pregunta.class);
+        Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
-
-        Opcion opcionIncorrecta = mock(Opcion.class);
-
-        Respuesta unaRespuestaIncorrecta = new Respuesta(pregunta,jugador);
-        Respuesta otraRespuestaIncorrecta = new Respuesta(pregunta,jugador);
-
-        unaRespuestaIncorrecta.agregarOpcion(opcionIncorrecta);
-        otraRespuestaIncorrecta.agregarOpcion(opcionIncorrecta);
-
-        Exclusividad exclusividad = new Exclusividad(2);
         exclusividad.definirJugador(jugador);
+
+        Respuesta unaRespuestaIncorrecta = mock(Respuesta.class);
+        when(unaRespuestaIncorrecta.esCorrecta()).thenReturn(true);
+
+        Respuesta otraRespuestaIncorrecta = mock(Respuesta.class);
+        when(otraRespuestaIncorrecta.esCorrecta()).thenReturn(true);
+
         exclusividad.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta);
 
-        assertEquals(0,unaRespuestaIncorrecta.comodinesAplicados().size());
-        assertEquals(0,otraRespuestaIncorrecta.comodinesAplicados().size());
+        verify(unaRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
+        verify(otraRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
     }
 
     @Test
