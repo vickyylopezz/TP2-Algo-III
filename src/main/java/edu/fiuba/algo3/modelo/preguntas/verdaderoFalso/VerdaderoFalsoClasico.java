@@ -15,7 +15,6 @@ public class VerdaderoFalsoClasico extends Pregunta {
 
     private OpcionClasica opcionCorrecta;
     private OpcionClasica opcionIncorrecta;
-    protected ArrayList<Opcion> opciones;
 
     public VerdaderoFalsoClasico(String titulo) {
         super(titulo, new SinPenalidad(new CalculadorPuntajeParcial()));
