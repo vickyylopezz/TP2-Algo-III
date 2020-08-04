@@ -60,4 +60,10 @@ public class Jugador {
     public void sumarPuntaje(Punto punto) { this.puntaje.agregarPunto(punto); }
 
     public Punto puntajeTotal() { return this.puntaje; }
+
+    public void validarComodin(Comodin comodin) throws JugadorError {
+        if (!this.comodines.contains(comodin)) {
+            throw new JugadorError(comodin.toString() + " no esta en el jugador");
+        }
+    }
 }

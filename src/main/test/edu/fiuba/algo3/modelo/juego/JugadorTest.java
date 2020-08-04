@@ -336,6 +336,23 @@ public class JugadorTest {
         assertEquals(puntaje.obtenerValor(), 0);
     }
 
+    // validarComodin
+    @Test
+    public void validarComodinLanzaExcepcionSiElComodinNoEstaDentroDeLosComodinesAgregados() throws JugadorError {
+        Jugador carlos = new Jugador("Carlos");
+
+        Comodin comodin1 = mock(Comodin.class);
+        Comodin comodin2 = mock(Comodin.class);
+        Comodin comodin3 = mock(Comodin.class);
+        Comodin comodin4 = mock(Comodin.class);
+
+        carlos.agregarComodin(comodin1);
+        carlos.agregarComodin(comodin2);
+        carlos.agregarComodin(comodin3);
+
+        assertThrows(JugadorError.class, ()->carlos.validarComodin(comodin4));
+    }
+
     /*
 
     Metodos desabilitados dependen de otras clases todavia
