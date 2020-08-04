@@ -3,53 +3,54 @@ package edu.fiuba.algo3.modelo.juego;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.util.punto.Punto;
 
 import java.util.ArrayList;
 
 public class Respuesta {
-    protected Pregunta pregunta;
-    protected Jugador jugador;
-    protected ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
-    private final ArrayList<Comodin> comodines = new ArrayList<>();
+
+    private final Pregunta pregunta;
+    private final Jugador jugador;
+    private final ArrayList<Opcion> opciones;
+    private final ArrayList<Comodin> comodines;
     
     public Respuesta(Pregunta pregunta, Jugador jugador) {
         this.pregunta = pregunta;
         this.jugador = jugador;
+        this.opciones = new ArrayList<>();
+        this.comodines = new ArrayList<>();
     }
 
-    public void agregarOpcion(Opcion opcion) throws RespuestaError {
-        if (this.opcionesElegidas.contains(opcion)){
-            throw new RespuestaError(opcion.toString() + "ya fue elegida");
-        }
-        this.opcionesElegidas.add(opcion);
-    }
-
-    public ArrayList<Opcion> obtenerOpcionesElegidas() {
-        return new ArrayList<>(this.opcionesElegidas);
-    }
-
-    public Punto obtenerPuntaje() {
-        return this.pregunta.puntajeConOpciones(this.opcionesElegidas);
+    public Jugador obtenerJugador() {
+        return this.jugador;
     }
 
     public Pregunta obtenerPregunta() {
         return this.pregunta;
     }
 
-    public ArrayList<Comodin> obtenerComodines() {
-        return this.comodines;
+    public ArrayList<Opcion> opcionesElegidas() {
+        return new ArrayList<>(this.opciones);
     }
 
-    public void agregarComodin(Comodin comodin) {
+    public void agregarOpcion(Opcion opcion) throws RespuestaError {
+        if (this.opciones.contains(opcion)){
+            throw new RespuestaError(opcion.toString() + "ya fue elegida");
+        }
+        this.opciones.add(opcion);
+    }
+
+    public ArrayList<Comodin> comodinesAplicados() {
+        return new ArrayList<>(this.comodines);
+    }
+
+    public void aplicarComodin(Comodin comodin) throws RespuestaError {
+        if (this.comodines.contains(comodin)){
+            throw new RespuestaError(comodin.toString() + " ya fue aplicado");
+        }
         this.comodines.add(comodin);
     }
 
     public boolean esCorrecta() {
-        return(this.pregunta.opcionesCorrectas(this.obtenerOpcionesElegidas()));
-    }
-
-    public Jugador obtenerJugador() {
-        return this.jugador;
+        return this.pregunta.opcionesCorrectas(this.opcionesElegidas());
     }
 }

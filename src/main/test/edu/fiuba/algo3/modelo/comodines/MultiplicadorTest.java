@@ -4,12 +4,9 @@ import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.util.punto.*;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -111,8 +108,8 @@ public class MultiplicadorTest {
         multiplicador.definirJugador(jugador);
         multiplicador.aplicarARespuestas(unaRespuestaCorrecta,otraRespuestaCorrecta);
 
-        assertEquals(1,unaRespuestaCorrecta.obtenerComodines().size());
-        assertEquals(1,otraRespuestaCorrecta.obtenerComodines().size());
+        assertEquals(1,unaRespuestaCorrecta.comodinesAplicados().size());
+        assertEquals(1,otraRespuestaCorrecta.comodinesAplicados().size());
     }
 
     @Test
@@ -134,8 +131,8 @@ public class MultiplicadorTest {
         multiplicador.definirJugador(jugador);
         multiplicador.aplicarARespuestas(respuestaCorrecta,respuestaIncorrecta);
 
-        assertEquals(1,respuestaCorrecta.obtenerComodines().size());
-        assertEquals(1,respuestaIncorrecta.obtenerComodines().size());
+        assertEquals(1,respuestaCorrecta.comodinesAplicados().size());
+        assertEquals(1,respuestaIncorrecta.comodinesAplicados().size());
     }
 
     @Test
@@ -156,8 +153,8 @@ public class MultiplicadorTest {
         multiplicador.definirJugador(jugador);
         multiplicador.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta);
 
-        assertEquals(1,unaRespuestaIncorrecta.obtenerComodines().size());
-        assertEquals(1,otraRespuestaIncorrecta.obtenerComodines().size());
+        assertEquals(1,unaRespuestaIncorrecta.comodinesAplicados().size());
+        assertEquals(1,otraRespuestaIncorrecta.comodinesAplicados().size());
     }
 
     @Test

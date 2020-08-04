@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 
@@ -20,13 +21,13 @@ public class Exclusividad extends Comodin {
     }
 
     @Override
-    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError {
+    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError, RespuestaError {
         if((!this.esValido(unaRespuesta)) || (!this.esValido(otraRespuesta))){
             throw new ComodinError("Comodin invalido");
         }
         if(this.esAplicable(unaRespuesta,otraRespuesta) || (this.esAplicable(otraRespuesta,unaRespuesta))) {
-            unaRespuesta.agregarComodin(this);
-            otraRespuesta.agregarComodin(this);
+            unaRespuesta.aplicarComodin(this);
+            otraRespuesta.aplicarComodin(this);
         }
         /*if((unaRespuesta.obtenerJugador().obtenerComodines().contains(this)) &&
         (otraRespuesta.obtenerJugador().obtenerComodines().contains(this))){
