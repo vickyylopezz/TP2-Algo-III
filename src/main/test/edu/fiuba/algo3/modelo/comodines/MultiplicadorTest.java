@@ -2,12 +2,16 @@ package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadaError;
+import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
+import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.util.punto.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -269,9 +273,15 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void aplicarComodinARespuestaNulaLanzaComodinError() throws ComodinError {
+    public void aplicarComodinARespuestaNulaLanzaComodinError() throws ComodinError, PreguntaError, RespuestaError {
         Multiplicador multiplicador = new Multiplicador(3);
-        Respuesta respuesta = mock(Respuesta.class);
+        VerdaderoFalsoClasico pregunta = new VerdaderoFalsoClasico("¿Estamso en 2020?");
+        pregunta.agregarOpcionCorrecta("Veradero");
+        pregunta.agregarOpcionIncorrecta("Falso");
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+        Respuesta respuesta = new Respuesta(pregunta, null);
+        respuesta.agregarOpcion(opciones.get(0));
 
         assertThrows(ComodinError.class, () -> multiplicador.aplicarARespuestas(null, respuesta));
         assertThrows(ComodinError.class, () -> multiplicador.aplicarARespuestas(respuesta, null));
