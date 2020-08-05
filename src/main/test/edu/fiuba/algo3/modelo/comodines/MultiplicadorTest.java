@@ -56,7 +56,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError, JugadorError {
+    public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(true);
         Multiplicador multiplicador = new Multiplicador(2);
@@ -71,7 +71,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seValidaPreguntaSinPenalidadYSeLanzaExcepcion() throws JugadaError, RespuestaError, ComodinError {
+    public void seValidaPreguntaSinPenalidadYSeLanzaExcepcion() throws ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(false);
 
@@ -81,6 +81,43 @@ public class MultiplicadorTest {
         Multiplicador multiplicador = new Multiplicador(2);
 
         assertThrows(ComodinError.class, () ->  multiplicador.validarPregunta(jugada));
+    }
+
+    @Test
+    public void seAplicaAUnaRespuestaConDistintoJugadorRespectoAlAsociadoConElComodinYSeLanzaExcepcion() throws ComodinError {
+        Multiplicador multiplicador = new Multiplicador(2);
+
+        Jugador unJugador = mock(Jugador.class);
+        multiplicador.definirJugador(unJugador);
+
+        Jugador otroJugador = mock(Jugador.class);
+
+        Respuesta unaRespuesta = mock(Respuesta.class);
+        when(unaRespuesta.obtenerJugador()).thenReturn(unJugador);
+
+        Respuesta otraRespuesta = mock(Respuesta.class);
+        when(otraRespuesta.obtenerJugador()).thenReturn(otroJugador);
+
+        assertThrows(ComodinError.class, () -> multiplicador.aplicarARespuestas(unaRespuesta, otraRespuesta));
+    }
+
+    @Test
+    public void seAplicaARespuestasConDistintosJugadoresRespectoElAsociadoConElComodinYSeLanzaExcepcion() throws ComodinError {
+        Multiplicador multiplicador = new Multiplicador(2);
+
+        Jugador jugador = mock(Jugador.class);
+        multiplicador.definirJugador(jugador);
+
+        Jugador unJugador = mock(Jugador.class);
+        Jugador otroJugador = mock(Jugador.class);
+
+        Respuesta unaRespuesta = mock(Respuesta.class);
+        when(unaRespuesta.obtenerJugador()).thenReturn(unJugador);
+
+        Respuesta otraRespuesta = mock(Respuesta.class);
+        when(otraRespuesta.obtenerJugador()).thenReturn(otroJugador);
+
+        assertThrows(ComodinError.class, () -> multiplicador.aplicarARespuestas(unaRespuesta, otraRespuesta));
     }
 
     @Test

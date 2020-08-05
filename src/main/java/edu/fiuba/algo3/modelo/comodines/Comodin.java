@@ -53,11 +53,4 @@ public abstract class Comodin {
         }
         return puntaje;
     }
-
-    public Punto puntoNuevo(Punto punto) throws ComodinError {
-        if(punto == null){
-            throw new ComodinError("Punto nulo invalido");
-        }
-        return punto.modificarValor(this.factor);
-    }
 }
