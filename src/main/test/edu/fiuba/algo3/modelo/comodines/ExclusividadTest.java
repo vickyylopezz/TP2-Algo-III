@@ -15,6 +15,8 @@ import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -95,9 +97,11 @@ public class ExclusividadTest {
 
         Respuesta unaRespuestaCorrecta = mock(Respuesta.class);
         when(unaRespuestaCorrecta.esCorrecta()).thenReturn(true);
+        when(unaRespuestaCorrecta.validarComodin(exclusividad)).thenReturn(true);
 
         Respuesta otraRespuestaCorrecta = mock(Respuesta.class);
         when(otraRespuestaCorrecta.esCorrecta()).thenReturn(true);
+        when(otraRespuestaCorrecta.validarComodin(exclusividad)).thenReturn(true);
 
         exclusividad.aplicarARespuestas(unaRespuestaCorrecta, otraRespuestaCorrecta);
 
@@ -114,9 +118,11 @@ public class ExclusividadTest {
 
         Respuesta respuestaCorrecta = mock(Respuesta.class);
         when(respuestaCorrecta.esCorrecta()).thenReturn(true);
+        when(respuestaCorrecta.validarComodin(exclusividad)).thenReturn(true);
 
         Respuesta respuestaIncorrecta = mock(Respuesta.class);
         when(respuestaIncorrecta.esCorrecta()).thenReturn(false);
+        when(respuestaIncorrecta.validarComodin(exclusividad)).thenReturn(true);
 
         exclusividad.aplicarARespuestas(respuestaCorrecta, respuestaIncorrecta);
 
@@ -133,9 +139,11 @@ public class ExclusividadTest {
 
         Respuesta unaRespuestaIncorrecta = mock(Respuesta.class);
         when(unaRespuestaIncorrecta.esCorrecta()).thenReturn(true);
+        when(unaRespuestaIncorrecta.validarComodin(exclusividad)).thenReturn(true);
 
         Respuesta otraRespuestaIncorrecta = mock(Respuesta.class);
         when(otraRespuestaIncorrecta.esCorrecta()).thenReturn(true);
+        when(otraRespuestaIncorrecta.validarComodin(exclusividad)).thenReturn(true);
 
         exclusividad.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta);
 

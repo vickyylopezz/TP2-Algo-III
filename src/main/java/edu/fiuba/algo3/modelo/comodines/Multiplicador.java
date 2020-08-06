@@ -6,6 +6,8 @@ import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 
+import java.util.ArrayList;
+
 public class Multiplicador extends Comodin{
     private int factor = 0;
 
@@ -13,7 +15,7 @@ public class Multiplicador extends Comodin{
         super(factor);
     }
 
-    boolean esValido(Respuesta unaRespuesta) throws ComodinError {
+    protected boolean esValido(Respuesta unaRespuesta) throws ComodinError {
         if(unaRespuesta == null){
             throw new ComodinError("Respuesta invalida");
         }
@@ -21,18 +23,31 @@ public class Multiplicador extends Comodin{
     }
 
     @Override
-    public void validarPregunta(Jugada jugada) throws ComodinError, JugadorError {
+    public void validarPregunta(Jugada jugada) throws ComodinError {
         if (!jugada.obtenerPregunta().conPenalidad()){
             throw new ComodinError("Aplicacion de comodin invalida");
         }
     }
 
     @Override
-    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError, RespuestaError {
+    public void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws ComodinError, RespuestaError {
         if((!this.esValido(unaRespuesta)) || (!this.esValido(otraRespuesta))){
             throw new ComodinError("Comodin invalido");
         }
         unaRespuesta.aplicarComodin(this);
         otraRespuesta.aplicarComodin(this);
+    }
+
+    @Override
+    public void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws ComodinError, RespuestaError{
+        for(Respuesta respuesta : respuestas){
+            if(respuesta == null){
+                throw new RespuestaError("Respuesta invalida");
+            }
+            if(!this.esValido(respuesta)){
+                throw new ComodinError("Comodin invalido");
+            }
+            respuesta.aplicarComodin(this);
+        }
     }
 }

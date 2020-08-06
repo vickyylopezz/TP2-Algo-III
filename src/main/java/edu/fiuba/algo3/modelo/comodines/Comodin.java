@@ -42,7 +42,7 @@ public abstract class Comodin {
 
     public abstract void validarPregunta(Jugada jugada) throws ComodinError, JugadorError;
     abstract void aplicarARespuestas(Respuesta unaRespuesta,Respuesta otraRespuesta) throws ComodinError, RespuestaError, JugadorError;
-
+    abstract void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws ComodinError, RespuestaError, JugadorError;
     public Puntaje puntajeNuevo(ArrayList<Punto> puntos) throws ComodinError {
         if(puntos == null){
             throw new ComodinError("Coleccion de puntos invalida");
