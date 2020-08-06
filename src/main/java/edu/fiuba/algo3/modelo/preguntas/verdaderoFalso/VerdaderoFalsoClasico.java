@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.preguntas.verdaderoFalso;
 
+import edu.fiuba.algo3.modelo.excepciones.CantidadMaximaDeOpcionesError;
+import edu.fiuba.algo3.modelo.excepciones.OpcionCorrectaYaAgregadaError;
+import edu.fiuba.algo3.modelo.excepciones.OpcionIncorrectaYaAgregadaError;
 import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
@@ -24,7 +27,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
         if (opcionCorrecta != null){
-            throw new PreguntaError("Ya existe una opcion correcta");
+            throw new OpcionCorrectaYaAgregadaError();
         }
         this.opcionCorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeCorrecto());
         opciones.add(this.opcionCorrecta);
@@ -32,7 +35,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
         if (opcionIncorrecta != null){
-            throw new PreguntaError("Ya existe una opcion incorrecta");
+            throw new OpcionIncorrectaYaAgregadaError();
         }
         this.opcionIncorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeIncorrecto());
         opciones.add(this.opcionIncorrecta);
