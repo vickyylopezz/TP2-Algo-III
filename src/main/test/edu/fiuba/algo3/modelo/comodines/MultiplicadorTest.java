@@ -1,9 +1,10 @@
 package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.util.punto.*;
 import org.junit.jupiter.api.Test;
@@ -56,7 +57,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError, JugadorError {
+    public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada()throws ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(true);
         Multiplicador multiplicador = new Multiplicador(2);
@@ -71,7 +72,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seValidaPreguntaSinPenalidadYSeLanzaExcepcion() throws JugadaError, RespuestaError, ComodinError {
+    public void seValidaPreguntaSinPenalidadYSeLanzaExcepcion() throws ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(false);
 

@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
 

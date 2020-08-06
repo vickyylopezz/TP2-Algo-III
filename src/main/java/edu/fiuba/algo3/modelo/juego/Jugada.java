@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
 import java.util.ArrayList;

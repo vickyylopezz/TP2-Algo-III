@@ -1,15 +1,12 @@
 package edu.fiuba.algo3.modelo.preguntas.multipleChoice;
 
-import edu.fiuba.algo3.modelo.excepciones.CantidadMaximaDeOpcionesError;
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcial;
 import edu.fiuba.algo3.modelo.preguntas.estados.ConPenalidad;
-import edu.fiuba.algo3.modelo.util.punto.*;
-
-import java.util.ArrayList;
 
 public class MultipleChoiceConPenalidad extends Pregunta {
 

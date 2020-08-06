@@ -1,9 +1,11 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.comodines.Exclusividad;
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.ComodinYaAplicadoError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.OpcionInexistenteError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.OpcionYaElegidaError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
 import java.util.ArrayList;
@@ -67,7 +69,7 @@ public class Respuesta {
             throw new RespuestaError("La respuesta no esta abierta");
         }*/
         if (this.opciones.contains(opcion)){
-            throw new RespuestaError(opcion.toString() + "ya fue elegida");
+            throw new OpcionYaElegidaError();
         }
         this.opciones.add(opcion);
     }
@@ -77,7 +79,7 @@ public class Respuesta {
             throw new RespuestaError("La respuesta no esta abierta");
         }*/
         if (!this.opciones.contains(opcion)) {
-            throw new RespuestaError(opcion.toString() + " no se encuentra en la respesta");
+            throw new OpcionInexistenteError();
         }
         this.opciones.remove(opcion);
     }
@@ -87,7 +89,7 @@ public class Respuesta {
             throw new RespuestaError("La respuesta no esta cerrada");
         }*/
         if (this.comodines.contains(comodin)){
-            throw new RespuestaError(comodin.toString() + " ya fue aplicado");
+            throw new ComodinYaAplicadoError();
         }
         this.comodines.add(comodin);
     }

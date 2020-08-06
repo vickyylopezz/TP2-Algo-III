@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import org.junit.jupiter.api.Test;

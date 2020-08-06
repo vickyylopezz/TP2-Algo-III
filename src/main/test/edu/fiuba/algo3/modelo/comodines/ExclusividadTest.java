@@ -1,14 +1,12 @@
 package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.JugadaError;
 import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;

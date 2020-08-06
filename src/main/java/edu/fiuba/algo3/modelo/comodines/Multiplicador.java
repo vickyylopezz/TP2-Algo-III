@@ -2,7 +2,7 @@ package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 
@@ -21,7 +21,7 @@ public class Multiplicador extends Comodin{
     }
 
     @Override
-    public void validarPregunta(Jugada jugada) throws ComodinError, JugadorError {
+    public void validarPregunta(Jugada jugada) throws ComodinError {
         if (!jugada.obtenerPregunta().conPenalidad()){
             throw new ComodinError("Aplicacion de comodin invalida");
         }

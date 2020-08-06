@@ -1,8 +1,7 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
-import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceConPenalidad;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
@@ -41,7 +40,7 @@ public class MultipleChoiceConPenalidadTest {
     }
 
     @Test
-    public void MultipleChoiceConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError, RespuestaError {
+    public void MultipleChoiceConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError {
         MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
@@ -91,9 +90,9 @@ public class MultipleChoiceConPenalidadTest {
     }
 
     @Test
-    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PreguntaError {
+    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() {
         MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Cuál es el apellido de nuestro corrector?");
-        ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+        ArrayList<Opcion> opciones = new ArrayList<>();
 
         assertEquals(0, preguntaMCCP.puntajeConOpciones(opciones).obtenerValor());
     }

@@ -1,9 +1,7 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
-import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.juego.Respuesta;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceParcial;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
@@ -42,7 +40,7 @@ public class MultipleChoiceParcialTest {
     }
 
     @Test
-    public void MultipleChoiceParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError, RespuestaError {
+    public void MultipleChoiceParcialAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError {
         MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Quienes son integrantes del grupo PM3?");
         preguntaMCP.agregarOpcionCorrecta("Francisco");
         preguntaMCP.agregarOpcionCorrecta("Victoria");
@@ -85,9 +83,9 @@ public class MultipleChoiceParcialTest {
     }
 
     @Test
-    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PreguntaError {
+    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() {
         MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Cuál es el apellido de nuestro corrector?");
-        ArrayList<Opcion> opciones = new ArrayList<Opcion>();
+        ArrayList<Opcion> opciones = new ArrayList<>();
 
         assertEquals(0, preguntaMCP.puntajeConOpciones(opciones).obtenerValor());
     }

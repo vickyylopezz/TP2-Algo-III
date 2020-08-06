@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.preguntas.groupChoice;
 
-import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeGruposError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcial;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionGroupChoice;
