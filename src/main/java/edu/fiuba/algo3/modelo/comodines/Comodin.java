@@ -44,15 +44,7 @@ public abstract class Comodin {
         this.jugador = jugador;
     }
 
-    public Puntaje puntajeNuevo(ArrayList<Punto> puntos){
-        Puntaje puntaje = new Puntaje();
-        for(Punto punto: puntos){
-            puntaje.agregarPunto(punto.modificarValor(this.factor));
-        }
-        return puntaje;
-    }
-
     public Punto aplicarComodinAPunto(Punto puntaje) {
-        return puntaje.modificarValor(this.factor);
+        return puntaje.multiplicarPorFactor(this.factor);
     }
 }
