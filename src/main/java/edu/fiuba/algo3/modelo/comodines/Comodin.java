@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.comodines;
 
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.FactorComodinNegativoError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.FactorComodinNuloError;
