@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.preguntas.multipleChoice;
 
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
@@ -15,7 +16,7 @@ public class MultipleChoiceClasico extends Pregunta {
 
     public void agregarOpcionIncorrecta(String titulo) throws PreguntaError {
         if (this.opciones.size() == 5) {
-            throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
+            throw new CantidadMaximaDeOpcionesError();
         }
 
         Opcion opcion = new OpcionClasica(titulo, this.puntajeIncorrecto());
@@ -24,7 +25,7 @@ public class MultipleChoiceClasico extends Pregunta {
 
     public void agregarOpcionCorrecta(String titulo) throws PreguntaError {
         if (this.opciones.size() == 5) {
-            throw new PreguntaError("Capacidad maxima de opciones alcanzadas");
+            throw new CantidadMaximaDeOpcionesError();
         }
 
         Opcion opcion = new OpcionClasica(titulo, this.puntajeCorrecto());

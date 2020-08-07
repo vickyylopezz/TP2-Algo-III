@@ -1,7 +1,10 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.excepciones.comodin.AplicacionDeComodinInvalidaError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorNoTieneAlComodinError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
 
@@ -218,7 +221,7 @@ public class JugadaTest {
 
         Comodin comodinInvalido = mock(Comodin.class);
         Jugador jugador = mock(Jugador.class);
-        doThrow(JugadorError.class).when(jugador).validarComodin(comodinInvalido);
+        doThrow(JugadorNoTieneAlComodinError.class).when(jugador).validarComodin(comodinInvalido);
 
         Jugada jugada = new Jugada(pregunta, jugador);
 
@@ -236,7 +239,7 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
 
-        doThrow(ComodinError.class).when(comodinInvalido).validarPregunta(jugada);
+        doThrow(AplicacionDeComodinInvalidaError.class).when(comodinInvalido).validarPregunta(jugada);
 
         assertThrows(ComodinError.class, () -> jugada.seleccionarComodin(comodinInvalido));
     }

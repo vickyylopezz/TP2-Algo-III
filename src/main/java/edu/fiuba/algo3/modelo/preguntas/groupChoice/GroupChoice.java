@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.modelo.preguntas.groupChoice;
 
-import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeGruposError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcial;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionGroupChoice;
@@ -22,15 +24,15 @@ public class GroupChoice extends Pregunta {
 
     public void definirGrupo(String titulo) throws PreguntaError {
         if(this.grupos.size() == 2){
-            throw new PreguntaError("Cantidad maxima de grupos alcanzada");
+            throw new CantidadMaximaDeGruposError();
         }
         Grupo grupo = new Grupo(titulo);
         this.grupos.add(grupo);
     }
 
-    public void agregarOpcion(Grupo grupo, String titulo) throws PreguntaError {
+    public void agregarOpcion(Grupo grupo, String titulo) throws PreguntaError{
         if(opciones.size() == 12){
-            throw new PreguntaError("Maximo de opciones alcanzado");
+            throw new CantidadMaximaDeOpcionesError();
         }
         if(grupo.equals(grupos.get(0))){
             OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeIncorrecto(),grupos.get(1));

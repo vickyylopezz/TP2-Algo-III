@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.comodines;
 
-import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.util.punto.*;
 import org.junit.jupiter.api.Test;

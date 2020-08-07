@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.comodines;
 
-import edu.fiuba.algo3.modelo.excepciones.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.AplicacionDeComodinInvalidaError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 
@@ -15,7 +16,7 @@ public class Exclusividad extends Comodin {
     @Override
     public void validarPregunta(Jugada jugada) throws ComodinError {
         if(jugada.obtenerPregunta().conPenalidad()){
-            throw new ComodinError("Aplicacion de comodin invalida");
+            throw new AplicacionDeComodinInvalidaError();
         }
     }
 
@@ -28,5 +29,6 @@ public class Exclusividad extends Comodin {
             respuestaCorrecta = respuesta;
         }
         if (respuestaCorrecta != null) respuestaCorrecta.aplicarComodin(this);
+            //respuesta.eliminarComodin(this);
     }
 }
