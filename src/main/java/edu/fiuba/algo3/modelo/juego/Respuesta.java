@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.comodines.Exclusividad;
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
 import java.util.ArrayList;
@@ -38,25 +35,15 @@ public class Respuesta {
         return new ArrayList<>(this.comodines);
     }
 
-
-    public void agregarOpcion(Opcion opcion) throws RespuestaError {
-        if (this.opciones.contains(opcion)){
-            throw new RespuestaError(opcion.toString() + "ya fue elegida");
-        }
+    public void agregarOpcion(Opcion opcion) {
+        if (opcion == null || this.opciones.contains(opcion)) return;
         this.opciones.add(opcion);
     }
 
-    public void sacarOpcion(Opcion opcion) throws RespuestaError {
-        if (!this.opciones.contains(opcion)) {
-            throw new RespuestaError(opcion.toString() + " no se encuentra en la respesta");
-        }
-        this.opciones.remove(opcion);
-    }
+    public void sacarOpcion(Opcion opcion) { this.opciones.remove(opcion); }
 
-    public void aplicarComodin(Comodin comodin) throws RespuestaError {
-        if (this.comodines.contains(comodin)){
-            throw new RespuestaError(comodin.toString() + " ya fue aplicado");
-        }
+    public void aplicarComodin(Comodin comodin) {
+        if (comodin == null || this.comodines.contains(comodin)) return;
         this.comodines.add(comodin);
     }
 

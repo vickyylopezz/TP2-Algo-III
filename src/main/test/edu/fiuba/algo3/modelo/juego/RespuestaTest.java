@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +37,7 @@ public class RespuestaTest {
     }
 
     @Test
-    public void elArregloDeOpcionesNoModificaElArregloDeOpcionesElegidas() throws RespuestaError {
+    public void elArregloDeOpcionesNoModificaElArregloDeOpcionesElegidas() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
@@ -70,7 +69,7 @@ public class RespuestaTest {
     }
 
     @Test
-    public void elArregloDeComodinesNoModificaElArregloDeComodinesElegidos() throws RespuestaError {
+    public void elArregloDeComodinesNoModificaElArregloDeComodinesElegidos() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
@@ -90,7 +89,7 @@ public class RespuestaTest {
 
     // agregarOpcion
     @Test
-    public void seAgregaUnaOpcionAListaDeOpcionesElegidasYOpcionesElegidasLaDevuelveEnUnArreglo() throws RespuestaError {
+    public void seAgregaUnaOpcionAListaDeOpcionesElegidasYOpcionesElegidasLaDevuelveEnUnArreglo() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
@@ -107,7 +106,7 @@ public class RespuestaTest {
     }
 
     @Test
-    public void seAgreganVariasOpcionesYOpcionesElegidasLasDevuelveEnOrdenQueFueronAgregadas() throws RespuestaError {
+    public void seAgreganVariasOpcionesYOpcionesElegidasLasDevuelveEnOrdenQueFueronAgregadas() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
@@ -131,21 +130,44 @@ public class RespuestaTest {
     }
 
     @Test
-    public void seAgreganDosOpcionesIgualesSeLanzaExcepcionRespuestaError() throws RespuestaError {
+    public void seAgreganDosOpcionesIgualesSoloSeGuardaUnaVez() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
         Opcion opcion = mock(Opcion.class);
+
+        respuesta.agregarOpcion(opcion);
         respuesta.agregarOpcion(opcion);
 
-        assertThrows(RespuestaError.class, () -> respuesta.agregarOpcion(opcion));
+        ArrayList<Opcion> opciones = respuesta.opcionesElegidas();
+
+        assertEquals(1, opciones.size());
+        assertTrue(opciones.contains(opcion));
+    }
+
+    @Test
+    public void seAgregaUnaOpcionNulaNoSeAgregaNada() {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
+
+        Opcion opcion = mock(Opcion.class);
+
+        respuesta.agregarOpcion(opcion);
+        respuesta.agregarOpcion(null);
+
+        ArrayList<Opcion> opciones = respuesta.opcionesElegidas();
+
+        assertEquals(1, opciones.size());
+        assertTrue(opciones.contains(opcion));
     }
 
     // sacarOpcion
     @Test
-    public void sacarOpcionConOpcionInvalidaLanzaRespuestaError() throws RespuestaError {
+    public void sacarOpcionConOpcionNoIngresadaNoHaceNada() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
@@ -155,12 +177,34 @@ public class RespuestaTest {
         Opcion opcion2 = mock(Opcion.class);
 
         respuesta.agregarOpcion(opcion1);
+        respuesta.sacarOpcion(opcion2);
 
-        assertThrows(RespuestaError.class, ()->respuesta.sacarOpcion(opcion2));
+        ArrayList<Opcion> opciones = respuesta.opcionesElegidas();
+
+        assertEquals(1, opciones.size());
+        assertTrue(opciones.contains(opcion1));
     }
 
     @Test
-    public void sacarOpcionSacaLaOpcionCorrectaAgregadaDeLaRespuesta() throws RespuestaError {
+    public void sacarOpcionConOpcionNulaNoHaceNada() {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
+
+        Opcion opcion1 = mock(Opcion.class);
+
+        respuesta.agregarOpcion(opcion1);
+        respuesta.sacarOpcion(null);
+
+        ArrayList<Opcion> opciones = respuesta.opcionesElegidas();
+
+        assertEquals(1, opciones.size());
+        assertTrue(opciones.contains(opcion1));
+    }
+
+    @Test
+    public void sacarOpcionSacaLaOpcionCorrectaAgregadaDeLaRespuesta() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
@@ -185,7 +229,7 @@ public class RespuestaTest {
 
     // aplicarComodin
     @Test
-    public void seAplicaUnComodinAListaDeComodinesAplicadosYComodinesAplicadosLaDevuelveEnUnArreglo() throws RespuestaError {
+    public void seAplicaUnComodinAListaDeComodinesAplicadosYComodinesAplicadosLaDevuelveEnUnArreglo() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
@@ -201,7 +245,7 @@ public class RespuestaTest {
     }
 
     @Test
-    public void seAplicanVariosComodinesYComodinesAplicadosLosDevuelveEnOrdenQueFueronAplicados() throws RespuestaError {
+    public void seAplicanVariosComodinesYComodinesAplicadosLosDevuelveEnOrdenQueFueronAplicados() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
@@ -225,21 +269,44 @@ public class RespuestaTest {
     }
 
     @Test
-    public void seAplicanDosComodinesIgualesSeLanzaExcepcionRespuestaError() throws RespuestaError {
+    public void seAplicanDosComodinesIgualesSoloSeAgregaUno() {
         Pregunta pregunta = mock(Pregunta.class);
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
 
         Comodin comodin = mock(Comodin.class);
+
+        respuesta.aplicarComodin(comodin);
         respuesta.aplicarComodin(comodin);
 
-        assertThrows(RespuestaError.class, () -> respuesta.aplicarComodin(comodin));
+        ArrayList<Comodin> comodines = respuesta.comodinesAplicados();
+
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
+    }
+
+    @Test
+    public void seAplicanUnComodinNuloNoSeAgrega() {
+        Pregunta pregunta = mock(Pregunta.class);
+        Jugador jugador = mock(Jugador.class);
+
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
+
+        Comodin comodin = mock(Comodin.class);
+
+        respuesta.aplicarComodin(comodin);
+        respuesta.aplicarComodin(null);
+
+        ArrayList<Comodin> comodines = respuesta.comodinesAplicados();
+
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
     }
 
     // esCorrecta
     @Test
-    public void esCorrectasDevuelveTrueSiLasOpcionesSeleccionadasSonCorrectasEnLaPregunta() throws RespuestaError {
+    public void esCorrectasDevuelveTrueSiLasOpcionesSeleccionadasSonCorrectasEnLaPregunta() {
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -264,7 +331,7 @@ public class RespuestaTest {
     }
 
     @Test
-    public void esCorrectasDevuelveFalseSiLasOpcionesSeleccionadasSonIncorrectasEnLaPregunta() throws RespuestaError {
+    public void esCorrectasDevuelveFalseSiLasOpcionesSeleccionadasSonIncorrectasEnLaPregunta() {
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
