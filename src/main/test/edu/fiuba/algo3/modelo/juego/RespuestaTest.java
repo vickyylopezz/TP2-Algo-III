@@ -2,6 +2,10 @@ package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
+import edu.fiuba.algo3.modelo.util.punto.Puntaje;
+import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
+import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -353,5 +357,141 @@ public class RespuestaTest {
         respuesta.agregarOpcion(opcion3);
 
         assertFalse(respuesta.esCorrecta());
+    }
+
+    // puntaje
+    @Test
+    public void puntajeSinOpcionesDevuelvePuntajeNulo() {
+        Punto puntoEsperado = new PuntoNulo();
+
+        ArrayList<Opcion> opcionesVacias = new ArrayList<>();
+
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.puntajeConOpciones(opcionesVacias)).thenReturn(puntoEsperado);
+
+        Jugador jugador = mock(Jugador.class);
+
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
+
+        Punto puntaje = respuesta.puntaje();
+        assertEquals(puntoEsperado, puntaje);
+    }
+
+    @Test
+    public void puntajeConOpcionesSinComodinesDevuelveLoCorrecto() {
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+        Opcion opcion3 = mock(Opcion.class);
+
+        ArrayList<Opcion> opcionesSeleccionadas = new ArrayList<>();
+        opcionesSeleccionadas.add(opcion1);
+        opcionesSeleccionadas.add(opcion2);
+        opcionesSeleccionadas.add(opcion3);
+
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.puntajeConOpciones(opcionesSeleccionadas)).thenReturn(new PuntoPositivo());
+
+        Jugador jugador = mock(Jugador.class);
+
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
+
+        respuesta.agregarOpcion(opcion1);
+        respuesta.agregarOpcion(opcion2);
+        respuesta.agregarOpcion(opcion3);
+
+        Punto puntaje = respuesta.puntaje();
+
+        Punto puntoEsperado = new PuntoPositivo();
+        assertEquals(puntoEsperado.obtenerValor(), puntaje.obtenerValor());
+    }
+
+    @Test
+    public void puntajeConOpcionesYUnComodinDevuelveLoCorrecto() {
+        Punto puntajeRespuestaSinComodines = new PuntoPositivo();
+
+        Puntaje puntajeRespuestaConComodin = new Puntaje();
+        puntajeRespuestaConComodin.agregarPunto(new PuntoPositivo());
+        puntajeRespuestaConComodin.agregarPunto(new PuntoPositivo());
+
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+        Opcion opcion3 = mock(Opcion.class);
+
+        Comodin comodin = mock(Comodin.class); // comodin que multiplica por 2 el puntaje
+        when(comodin.aplicarComodinAPunto(puntajeRespuestaSinComodines)).thenReturn(puntajeRespuestaConComodin);
+
+        ArrayList<Opcion> opcionesSeleccionadas = new ArrayList<>();
+        opcionesSeleccionadas.add(opcion1);
+        opcionesSeleccionadas.add(opcion2);
+        opcionesSeleccionadas.add(opcion3);
+
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.puntajeConOpciones(opcionesSeleccionadas)).thenReturn(puntajeRespuestaSinComodines);
+
+        Jugador jugador = mock(Jugador.class);
+
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
+
+        respuesta.agregarOpcion(opcion1);
+        respuesta.agregarOpcion(opcion2);
+        respuesta.agregarOpcion(opcion3);
+
+        respuesta.aplicarComodin(comodin);
+
+        Punto puntaje = respuesta.puntaje();
+
+        assertEquals(puntajeRespuestaConComodin, puntaje);
+    }
+
+    @Test
+    public void puntajeConOpcionesYVariosComodinesDevuelveLoCorrecto() {
+        Punto puntajeSinComodines = new PuntoPositivo();
+
+        Puntaje puntajeConComodin1 = new Puntaje();
+        for (int i = 0; i < 2; i++) puntajeConComodin1.agregarPunto(new PuntoPositivo());
+
+        Puntaje puntajeConComodin2 = new Puntaje();
+        for (int i = 0; i < 4; i++) puntajeConComodin2.agregarPunto(new PuntoPositivo());
+
+        Puntaje puntajeConComodin3 = new Puntaje();
+        for (int i = 0; i < 16; i++) puntajeConComodin3.agregarPunto(new PuntoPositivo());
+
+        Comodin comodin1 = mock(Comodin.class); // comodin que multiplica por 2 el puntaje
+        when(comodin1.aplicarComodinAPunto(puntajeSinComodines)).thenReturn(puntajeConComodin1);
+
+        Comodin comodin2 = mock(Comodin.class); // comodin que multiplica por 2 el puntaje
+        when(comodin2.aplicarComodinAPunto(puntajeConComodin1)).thenReturn(puntajeConComodin2);
+
+        Comodin comodin3 = mock(Comodin.class); // comodin que multiplica por 4 el puntaje
+        when(comodin3.aplicarComodinAPunto(puntajeConComodin2)).thenReturn(puntajeConComodin3);
+
+        Opcion opcion1 = mock(Opcion.class);
+        Opcion opcion2 = mock(Opcion.class);
+        Opcion opcion3 = mock(Opcion.class);
+
+        ArrayList<Opcion> opcionesSeleccionadas = new ArrayList<>();
+        opcionesSeleccionadas.add(opcion1);
+        opcionesSeleccionadas.add(opcion2);
+        opcionesSeleccionadas.add(opcion3);
+
+        Pregunta pregunta = mock(Pregunta.class);
+        when(pregunta.puntajeConOpciones(opcionesSeleccionadas)).thenReturn(puntajeSinComodines);
+
+        Jugador jugador = mock(Jugador.class);
+
+        // testeo
+        Respuesta respuesta = new Respuesta(pregunta, jugador);
+
+        respuesta.agregarOpcion(opcion1);
+        respuesta.agregarOpcion(opcion2);
+        respuesta.agregarOpcion(opcion3);
+
+        respuesta.aplicarComodin(comodin1);
+        respuesta.aplicarComodin(comodin2);
+        respuesta.aplicarComodin(comodin3);
+
+        Punto puntaje = respuesta.puntaje();
+
+        assertEquals(puntajeConComodin3, puntaje);
     }
 }

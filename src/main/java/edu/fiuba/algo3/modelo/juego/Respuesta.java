@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
+import edu.fiuba.algo3.modelo.util.punto.Punto;
 
 import java.util.ArrayList;
 
@@ -49,5 +50,15 @@ public class Respuesta {
 
     public boolean esCorrecta() {
         return this.pregunta.opcionesCorrectas(this.opcionesElegidas());
+    }
+
+    public Punto puntaje() {
+        Punto puntaje = this.pregunta.puntajeConOpciones(this.opciones);
+
+        for (Comodin comodin: comodines) {
+            puntaje = comodin.aplicarComodinAPunto(puntaje);
+        }
+
+        return puntaje;
     }
 }
