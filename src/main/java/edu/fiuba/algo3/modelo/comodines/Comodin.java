@@ -12,7 +12,7 @@ import edu.fiuba.algo3.modelo.util.punto.Punto;
 import java.util.ArrayList;
 
 public abstract class Comodin {
-    private final int factor;
+    protected int factor;
     protected Jugador jugador;
 
     public Comodin(int factor) throws ComodinError {
@@ -29,6 +29,14 @@ public abstract class Comodin {
         return this.factor;
     }
 
+    public Jugador obtenerJugador() {
+        return this.jugador;
+    }
+
+    public abstract void validarPregunta(Jugada jugada) throws ComodinError, JugadorError;
+
+    abstract void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws ComodinError, RespuestaError, JugadorError;
+
     public void definirJugador(Jugador jugador) throws ComodinError {
         if(jugador == null){
             throw new ComodinError("Jugador invalido");
@@ -36,21 +44,15 @@ public abstract class Comodin {
         this.jugador = jugador;
     }
 
-    public Jugador obtenerJugador() {
-        return this.jugador;
-    }
-
-    public abstract void validarPregunta(Jugada jugada) throws ComodinError, JugadorError;
-    abstract void aplicarARespuestas(Respuesta unaRespuesta,Respuesta otraRespuesta) throws ComodinError, RespuestaError, JugadorError;
-    abstract void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws ComodinError, RespuestaError, JugadorError;
-    public Puntaje puntajeNuevo(ArrayList<Punto> puntos) throws ComodinError {
-        if(puntos == null){
-            throw new ComodinError("Coleccion de puntos invalida");
-        }
+    public Puntaje puntajeNuevo(ArrayList<Punto> puntos){
         Puntaje puntaje = new Puntaje();
         for(Punto punto: puntos){
             puntaje.agregarPunto(punto.modificarValor(this.factor));
         }
         return puntaje;
+    }
+
+    public Punto aplicarComodinAPunto(Punto puntaje) {
+        return puntaje.modificarValor(this.factor);
     }
 }
