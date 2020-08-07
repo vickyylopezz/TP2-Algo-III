@@ -41,11 +41,11 @@ public class Jugada {
         return this.jugador.obtenerComodines();
     }
 
-    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
+    public void seleccionarOpcion(Opcion opcion) {
         this.respuesta.agregarOpcion(opcion);
     }
 
-    public void deseleccionarOpcion(Opcion opcion) throws RespuestaError {
+    public void deseleccionarOpcion(Opcion opcion) {
         this.respuesta.sacarOpcion(opcion);
     }
 

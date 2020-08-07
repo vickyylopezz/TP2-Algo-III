@@ -2,15 +2,15 @@ package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.util.punto.Puntaje;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
+import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
+import edu.fiuba.algo3.modelo.util.punto.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -154,90 +154,28 @@ public class ExclusividadTest {
         verify(unaRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
         verify(otraRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
     }
+    @Test
+    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError {
+        Exclusividad exclusividad = new Exclusividad(2);
+        Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoNulo());
 
-   /* @Test
-    public void recibeUnPuntajeNuloYSeLanzaExcepcion() throws ComodinError {
-        Multiplicador multiplicador = new Multiplicador(2);
-
-        assertThrows(ComodinError.class, () ->  multiplicador.puntajeNuevo(null));
+        assertEquals(0,puntoNuevo.obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntajeConPuntosNulosYDevuelvePuntajeConPuntosConValorCero() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoNulo());
-
+    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError {
         Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+        Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoPositivo());
 
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+        assertEquals(2,puntoNuevo.obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntajeConPuntosPositivosYDevuelvePuntajeConPuntosPositivosConValorDos() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoPositivo());
-
+    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError {
         Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+        Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoNegativo());
 
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+        assertEquals(-2,puntoNuevo.obtenerValor());
     }
-
-    @Test
-    public void recibeUnPuntajeConPuntosNegativosYDevuelvePuntajeConPuntosNegativosConValorDos() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
-
-        Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void recibeUnPuntajeConUnPuntoPositivoYOtroNegativo() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-
-        Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void recibeUnPuntajeConUnPuntoPositivoYOtroNulo() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNulo());
-
-        Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void recibeUnPuntajeConUnPuntoNegativoYOtroNulo() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-
-        Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }*/
 }
 
