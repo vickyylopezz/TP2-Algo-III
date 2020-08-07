@@ -3,7 +3,8 @@ package edu.fiuba.algo3.modelo.util.punto;
 import java.util.ArrayList;
 
 //Compuesto
-public class Puntaje implements Punto {
+public class Puntaje extends Punto {
+
     private ArrayList<Punto> puntos;
 
     public Puntaje() {
@@ -22,11 +23,12 @@ public class Puntaje implements Punto {
     }
 
     @Override
-    public Punto modificarValor(int factor) {
-        puntos.forEach(punto -> modificarValor(factor));
-        return this;}
+    public Punto copiar() { return this.clone(); }
 
-    public ArrayList<Punto> obtenerPuntos() {
-        return this.puntos;
+    @Override
+    public Puntaje clone() {
+        Puntaje clonado = new Puntaje();
+        for (Punto punto: this.puntos) clonado.agregarPunto(punto);
+        return clonado;
     }
 }

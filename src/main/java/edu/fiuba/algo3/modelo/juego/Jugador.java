@@ -57,8 +57,6 @@ public class Jugador {
         this.comodines.remove(comodin);
     }
 
-    public void sumarPuntaje(Punto punto) { this.puntaje.agregarPunto(punto); }
-
     public Punto puntajeTotal() { return this.puntaje; }
 
     public void validarComodin(Comodin comodin) throws JugadorError {
