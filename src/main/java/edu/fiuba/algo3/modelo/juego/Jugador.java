@@ -29,31 +29,21 @@ public class Jugador {
 
     public ArrayList<Comodin> obtenerComodines() { return new ArrayList<>(this.comodines); }
 
-    public void agregarRespuesta(Respuesta respuesta) throws JugadorError {
-        if (this.respuestas.contains(respuesta)) {
-            throw new JugadorError(respuesta.toString() + " ya se encuentra en las respuestas");
-        }
+    public void agregarRespuesta(Respuesta respuesta) {
+        if (respuesta == null || this.respuestas.contains(respuesta)) return;
         this.respuestas.add(respuesta);
     }
 
-    public void sacarRespuesta(Respuesta respuesta) throws JugadorError {
-        if (!this.respuestas.contains(respuesta)) {
-            throw new JugadorError(respuesta.toString() + " no se encuentra en las respuestas");
-        }
+    public void sacarRespuesta(Respuesta respuesta) {
         this.respuestas.remove(respuesta);
     }
 
-    public void agregarComodin(Comodin comodin) throws JugadorError {
-        if (this.comodines.contains(comodin)) {
-            throw new JugadorError(comodin.toString() + " ya se encuentra en " + this.toString());
-        }
+    public void agregarComodin(Comodin comodin) {
+        if (comodin == null || this.comodines.contains(comodin)) return;
         this.comodines.add(comodin);
     }
 
-    public void sacarComodin(Comodin comodin) throws JugadorError {
-        if (!this.comodines.contains(comodin)) {
-            throw new JugadorError(comodin.toString() + " no se encuentra en " + this.toString());
-        }
+    public void sacarComodin(Comodin comodin) {
         this.comodines.remove(comodin);
     }
 

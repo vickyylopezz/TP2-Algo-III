@@ -35,7 +35,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void obtenerRespuestaDevuelveUnArregloCopiadoDelQueContineElJugador() throws JugadorError {
+    public void obtenerRespuestaDevuelveUnArregloCopiadoDelQueContineElJugador() {
         Respuesta respuesta1 = mock(Respuesta.class);
         Respuesta respuesta2 = mock(Respuesta.class);
         Respuesta respuesta3 = mock(Respuesta.class);
@@ -56,7 +56,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void obtenerRespuestaDevuelveLasRespuestasAgregadas() throws JugadorError {
+    public void obtenerRespuestaDevuelveLasRespuestasAgregadas() {
         Respuesta respuesta1 = mock(Respuesta.class);
         Respuesta respuesta2 = mock(Respuesta.class);
         Respuesta respuesta3 = mock(Respuesta.class);
@@ -76,7 +76,7 @@ public class JugadorTest {
 
     // agregarRespuesta
     @Test
-    public void agregarRespuestaGuardaLaRespuestaEnElJugador() throws JugadorError {
+    public void agregarRespuestaGuardaLaRespuestaEnElJugador() {
         Jugador carlos = new Jugador("Carlos");
 
         Respuesta respuesta = mock(Respuesta.class);
@@ -88,17 +88,45 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarDosVecesLaMismaRespuestaLanzaExcepcionJugadorError() throws JugadorError {
+    public void agregarRespuestaYaGuardadaNoHaceNada() {
         Jugador carlos = new Jugador("Carlos");
 
         Respuesta respuesta = mock(Respuesta.class);
+
         carlos.agregarRespuesta(respuesta);
 
-        assertThrows(JugadorError.class, () -> carlos.agregarRespuesta(respuesta));
+        ArrayList<Respuesta> respuestas = carlos.obtenerRespuestas();
+        assertEquals(1, respuestas.size());
+        assertTrue(respuestas.contains(respuesta));
+
+        carlos.agregarRespuesta(respuesta);
+
+        ArrayList<Respuesta> respuestasNuevas = carlos.obtenerRespuestas();
+        assertEquals(1, respuestasNuevas.size());
+        assertTrue(respuestasNuevas.contains(respuesta));
     }
 
     @Test
-    public void agregarVariasRespuestasSeGuardanTodas() throws JugadorError {
+    public void agregarRespuestaNulNoPasaNada() {
+        Jugador carlos = new Jugador("Carlos");
+
+        Respuesta respuesta = mock(Respuesta.class);
+
+        carlos.agregarRespuesta(respuesta);
+
+        ArrayList<Respuesta> respuestas = carlos.obtenerRespuestas();
+        assertEquals(1, respuestas.size());
+        assertTrue(respuestas.contains(respuesta));
+
+        carlos.agregarRespuesta(null);
+
+        ArrayList<Respuesta> respuestasNuevas = carlos.obtenerRespuestas();
+        assertEquals(1, respuestasNuevas.size());
+        assertTrue(respuestasNuevas.contains(respuesta));
+    }
+
+    @Test
+    public void agregarVariasRespuestasSeGuardanTodas() {
         Jugador carlos = new Jugador("Carlos");
         Respuesta respuesta1 = mock(Respuesta.class);
         Respuesta respuesta2 = mock(Respuesta.class);
@@ -118,7 +146,7 @@ public class JugadorTest {
 
     // sacarRespuesta
     @Test
-    public void sacarRespuestaSacaLasRespuestaDeLasRespuestaDelJugados() throws JugadorError {
+    public void sacarRespuestaSacaLasRespuesta() {
         Jugador carlos = new Jugador("Carlos");
 
         Respuesta respuesta = mock(Respuesta.class);
@@ -131,30 +159,35 @@ public class JugadorTest {
     }
 
     @Test
-    public void sacarRespuestaInvalidaLanzaJugadorError() throws JugadorError {
+    public void sacarRespuestaNulaNoHaceNada() {
         Jugador carlos = new Jugador("Carlos");
 
         Respuesta respuesta = mock(Respuesta.class);
         carlos.agregarRespuesta(respuesta);
 
-        Respuesta respuestaInvalida = mock(Respuesta.class);
-        assertThrows(JugadorError.class, () -> carlos.sacarRespuesta(respuestaInvalida));
+        carlos.sacarRespuesta(null);
+
+        ArrayList<Respuesta> respuestasNuevas = carlos.obtenerRespuestas();
+        assertEquals(1, respuestasNuevas.size());
+        assertTrue(respuestasNuevas.contains(respuesta));
     }
 
     @Test
-    public void sacarRespuestaDosVecesLanzaJugadorError() throws JugadorError {
+    public void sacarRespuestaQueNoEstaEnLasRespuestasNoHaceNada() {
         Jugador carlos = new Jugador("Carlos");
 
-        Respuesta respuesta = mock(Respuesta.class);
+        ArrayList<Respuesta> respuestas = carlos.obtenerRespuestas();
+        assertEquals(0, respuestas.size());
 
-        carlos.agregarRespuesta(respuesta);
+        Respuesta respuesta = mock(Respuesta.class);
         carlos.sacarRespuesta(respuesta);
 
-        assertThrows(JugadorError.class, () -> carlos.sacarRespuesta(respuesta));
+        respuestas = carlos.obtenerRespuestas();
+        assertEquals(0, respuestas.size());
     }
 
     @Test
-    public void sacarRespuestaSacaLaRespuestaCorrecta() throws JugadorError {
+    public void sacarRespuestaSacaLaRespuestaCorrecta() {
         Jugador carlos = new Jugador("Carlos");
 
         Respuesta respuesta1 = mock(Respuesta.class);
@@ -186,7 +219,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void obtenerComodinesDevuelveUnArregloCopiadoDelQueContineElJugador() throws JugadorError {
+    public void obtenerComodinesDevuelveUnArregloCopiadoDelQueContineElJugador() {
         Comodin comodin1 = mock(Comodin.class);
         Comodin comodin2 = mock(Comodin.class);
         Comodin comodin3 = mock(Comodin.class);
@@ -207,7 +240,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void obtenerComodinesDevuelveLosComodinesAgregados() throws JugadorError {
+    public void obtenerComodinesDevuelveLosComodinesAgregados() {
         Comodin comodin1 = mock(Comodin.class);
         Comodin comodin2 = mock(Comodin.class);
         Comodin comodin3 = mock(Comodin.class);
@@ -227,7 +260,7 @@ public class JugadorTest {
 
     // agregarComodin
     @Test
-    public void agregarComodinGuardaElComodin() throws JugadorError {
+    public void agregarComodinGuardaElComodin() {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin = mock(Comodin.class);
@@ -239,17 +272,43 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarDosVecesElMismoComodinLanzaExcepcionJugadorError() throws JugadorError {
+    public void agregarComodinQueYaFueAgregadoNoHaceNada() {
         Jugador carlos = new Jugador("Carlos");
-
         Comodin comodin = mock(Comodin.class);
+
         carlos.agregarComodin(comodin);
 
-        assertThrows(JugadorError.class, () -> carlos.agregarComodin(comodin));
+        ArrayList<Comodin> comodines = carlos.obtenerComodines();
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
+
+        carlos.agregarComodin(comodin);
+
+        comodines = carlos.obtenerComodines();
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
     }
 
     @Test
-    public void agregarVariosComodinesSeGuardanTodos() throws JugadorError {
+    public void agregarComodinNuloNoHaceNada() {
+        Jugador carlos = new Jugador("Carlos");
+        Comodin comodin = mock(Comodin.class);
+
+        carlos.agregarComodin(comodin);
+
+        ArrayList<Comodin> comodines = carlos.obtenerComodines();
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
+
+        carlos.agregarComodin(null);
+
+        comodines = carlos.obtenerComodines();
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
+    }
+
+    @Test
+    public void agregarVariosComodinesSeGuardanTodos() {
         Jugador carlos = new Jugador("Carlos");
         Comodin comodin1 = mock(Comodin.class);
         Comodin comodin2 = mock(Comodin.class);
@@ -269,7 +328,7 @@ public class JugadorTest {
 
     // sacarComodin
     @Test
-    public void sacarComodinSacaElComoinDeLosComodinesDelJugador() throws JugadorError {
+    public void sacarComodinSacaElComoinDeLosComodinesDelJugador() {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin = mock(Comodin.class);
@@ -282,30 +341,44 @@ public class JugadorTest {
     }
 
     @Test
-    public void sacarComodinInvalidoLanzaJugadorError() throws JugadorError {
+    public void sacarComodinQueNoEstaEnLosComodinesDelJugadorNoHaceNada() {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin = mock(Comodin.class);
         carlos.agregarComodin(comodin);
 
-        Comodin comodinInvalido = mock(Comodin.class);
-        assertThrows(JugadorError.class, () -> carlos.sacarComodin(comodinInvalido));
+        ArrayList<Comodin> comodines = carlos.obtenerComodines();
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
+
+        Comodin comodinNoIngresado = mock(Comodin.class);
+        carlos.sacarComodin(comodinNoIngresado);
+
+        comodines = carlos.obtenerComodines();
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
     }
 
     @Test
-    public void sacarComodinDosVecesLanzaJugadorError() throws JugadorError {
+    public void sacarComodinNuloNoHaceNada() {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin = mock(Comodin.class);
-
         carlos.agregarComodin(comodin);
-        carlos.sacarComodin(comodin);
 
-        assertThrows(JugadorError.class, () -> carlos.sacarComodin(comodin));
+        ArrayList<Comodin> comodines = carlos.obtenerComodines();
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
+
+        carlos.sacarComodin(null);
+
+        comodines = carlos.obtenerComodines();
+        assertEquals(1, comodines.size());
+        assertTrue(comodines.contains(comodin));
     }
 
     @Test
-    public void sacarComodinSacaElComodinCorrecto() throws JugadorError {
+    public void sacarComodinSacaElComodinCorrecto() {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin1 = mock(Comodin.class);
@@ -338,7 +411,7 @@ public class JugadorTest {
 
     // validarComodin
     @Test
-    public void validarComodinLanzaExcepcionSiElComodinNoEstaDentroDeLosComodinesAgregados() throws JugadorError {
+    public void validarComodinLanzaExcepcionSiElComodinNoEstaDentroDeLosComodinesAgregados() {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin1 = mock(Comodin.class);
