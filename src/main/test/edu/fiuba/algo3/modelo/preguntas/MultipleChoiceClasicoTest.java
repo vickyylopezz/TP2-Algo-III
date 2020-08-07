@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
 
 public class MultipleChoiceClasicoTest {
     //
