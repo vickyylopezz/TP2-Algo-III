@@ -6,10 +6,6 @@ import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcialEstricto;
-import edu.fiuba.algo3.modelo.preguntas.estados.ConPenalidad;
-import edu.fiuba.algo3.modelo.util.punto.*;
-
-import java.util.ArrayList;
 
 public class MultipleChoiceParcial extends Pregunta {
 

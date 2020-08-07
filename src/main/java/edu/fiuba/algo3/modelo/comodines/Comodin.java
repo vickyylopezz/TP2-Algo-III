@@ -6,7 +6,6 @@ import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 
 import java.util.ArrayList;
