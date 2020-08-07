@@ -2,8 +2,6 @@ package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.comodin.AplicacionDeComodinInvalidaError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 

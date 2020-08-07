@@ -1,12 +1,14 @@
 package edu.fiuba.algo3.modelo.comodines;
 
-import edu.fiuba.algo3.modelo.excepciones.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.FactorComodinNegativoError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.FactorComodinNuloError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.JugadorInvalidoError;
+import edu.fiuba.algo3.modelo.excepciones.respuesta.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 
 import java.util.ArrayList;
@@ -17,10 +19,10 @@ public abstract class Comodin {
 
     public Comodin(int factor) throws ComodinError {
         if (factor == 0)  {
-            throw new ComodinError(" Factor del multiplicador nulo invalido ");
+            throw new FactorComodinNuloError();
         }
         if (factor < 0) {
-            throw new ComodinError(" Factor del multiplicador negativo invalido ");
+            throw new FactorComodinNegativoError();
         }
         this.factor = factor;
     }
@@ -39,7 +41,7 @@ public abstract class Comodin {
 
     public void definirJugador(Jugador jugador) throws ComodinError {
         if(jugador == null){
-            throw new ComodinError("Jugador invalido");
+            throw new JugadorInvalidoError();
         }
         this.jugador = jugador;
     }
