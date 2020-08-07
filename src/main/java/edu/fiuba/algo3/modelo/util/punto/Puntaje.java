@@ -5,13 +5,14 @@ import java.util.ArrayList;
 //Compuesto
 public class Puntaje extends Punto {
 
-    private ArrayList<Punto> puntos;
+    private final ArrayList<Punto> puntos;
 
     public Puntaje() {
         this.puntos = new ArrayList<>();
     }
 
     public void agregarPunto(Punto punto){
+        if (punto == null) return;
         this.puntos.add(punto);
     }
 
