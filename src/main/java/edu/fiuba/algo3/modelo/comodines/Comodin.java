@@ -36,7 +36,7 @@ public abstract class Comodin {
 
     public abstract void validarPregunta(Jugada jugada) throws ComodinError, JugadorError;
 
-    abstract void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws ComodinError, JugadorError;
+    public abstract void aplicarARespuestas(ArrayList<Respuesta> respuestas);
 
     public void definirJugador(Jugador jugador) throws ComodinError {
         if(jugador == null){
