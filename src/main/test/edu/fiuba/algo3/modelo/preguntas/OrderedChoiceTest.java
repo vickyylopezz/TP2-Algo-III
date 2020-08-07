@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
 
 public class OrderedChoiceTest {
 
@@ -72,7 +71,7 @@ public class OrderedChoiceTest {
     }
 
     @Test
-    public void ConfirmarUnaRespuestaOrdenadaPeroSinIncluirTodosLosElementosNoOtorgaPuntos() throws PreguntaError, RespuestaError {
+    public void ConfirmarUnaRespuestaOrdenadaPeroSinIncluirTodosLosElementosNoOtorgaPuntos() throws PreguntaError {
         OrderedChoice pregunta = new OrderedChoice("Ordenar de menor a mayor");
         pregunta.agregarOpcion("Uno");
         pregunta.agregarOpcion("Dos");
