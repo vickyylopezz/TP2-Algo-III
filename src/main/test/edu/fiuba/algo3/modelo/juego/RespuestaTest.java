@@ -43,7 +43,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
 
         Opcion opcion = mock(Opcion.class);
         respuesta.agregarOpcion(opcion);
@@ -76,8 +75,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
-        //respuesta.cerrar();
 
         Comodin comodin = mock(Comodin.class);
         respuesta.aplicarComodin(comodin);
@@ -91,176 +88,6 @@ public class RespuestaTest {
         assertEquals(1, comodinesVerificacion.size());
     }
 
-    /*
-    // abrir
-    @Test
-    public void abrirTeHabilitaAPoderAgregarYSacarOpciones() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-
-        Opcion opcion = mock(Opcion.class);
-
-        assertThrows(RespuestaError.class, () -> respuesta.agregarOpcion(opcion));
-        assertThrows(RespuestaError.class, () -> respuesta.sacarOpcion(opcion));
-
-        respuesta.abrir();
-
-        assertDoesNotThrow(() -> respuesta.agregarOpcion(opcion));
-        assertDoesNotThrow(() -> respuesta.sacarOpcion(opcion));
-    }
-
-    @Test
-    public void abrirDosVecesLanzaRespuestaError() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-
-        assertThrows(RespuestaError.class, respuesta::abrir);
-    }
-
-    @Test
-    public void abrirUnaVezCerradaLanzaExcepcionRespuestaError() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-        respuesta.cerrar();
-
-        assertThrows(RespuestaError.class, respuesta::abrir);
-    }
-
-    // abierta
-    @Test
-    public void abiertaDevuelveTrueSiLaRespuestaEstaAbierta() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-
-        assertTrue(respuesta.abierta());
-    }
-
-    @Test
-    public void abiertaDevuelveFalseSiLaRespuestaNoSeAbrio() {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-
-        assertFalse(respuesta.abierta());
-    }
-
-    @Test
-    public void abiertaDevuelveFalseSiLaRespuestaSeCerro() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-        respuesta.cerrar();
-
-        assertFalse(respuesta.abierta());
-    }
-
-    // cerrar
-    @Test
-    public void cerrarTeDeshabilitaAPoderAgregarYSacarOpciones() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-
-        Opcion opcion = mock(Opcion.class);
-        respuesta.abrir();
-
-        assertDoesNotThrow(() -> respuesta.agregarOpcion(opcion));
-        assertDoesNotThrow(() -> respuesta.sacarOpcion(opcion));
-
-        respuesta.cerrar();
-
-        assertThrows(RespuestaError.class, () -> respuesta.agregarOpcion(opcion));
-        assertThrows(RespuestaError.class, () -> respuesta.sacarOpcion(opcion));
-    }
-
-    @Test
-    public void cerrarTeHabilitaAPoderAplicarComodines() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-
-        Comodin comodin = mock(Comodin.class);
-
-        assertThrows(RespuestaError.class, () -> respuesta.aplicarComodin(comodin));
-
-        respuesta.abrir();
-
-        assertThrows(RespuestaError.class, () -> respuesta.aplicarComodin(comodin));
-
-        respuesta.cerrar();
-
-        assertDoesNotThrow(() -> respuesta.aplicarComodin(comodin));
-    }
-
-    @Test
-    public void cerrarAntesDeAbrirLanzaRespuestaError() {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-
-        assertThrows(RespuestaError.class, respuesta::cerrar);
-    }
-
-    @Test
-    public void cerrarDosVecesLanzaRespuestaError() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-
-        respuesta.abrir();
-        respuesta.cerrar();
-
-        assertThrows(RespuestaError.class, respuesta::cerrar);
-    }
-
-    // cerrada
-    @Test
-    public void cerradaDevuelveTrueSiLaRespuestaSeCerro() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-        respuesta.cerrar();
-
-        assertTrue(respuesta.cerrada());
-    }
-
-    @Test
-    public void cerradaDevuelveFalseSiLaRespuestaNoSeAbrio() {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-
-        assertFalse(respuesta.cerrada());
-    }
-
-    @Test
-    public void cerradaDevuelveFalseSiLaRespuestaSeAbrio() throws RespuestaError {
-        Pregunta pregunta = mock(Pregunta.class);
-        Jugador jugador = mock(Jugador.class);
-
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.abrir();
-
-        assertFalse(respuesta.cerrada());
-    }
-    */
-
     // agregarOpcion
     @Test
     public void seAgregaUnaOpcionAListaDeOpcionesElegidasYOpcionesElegidasLaDevuelveEnUnArreglo() throws RespuestaError {
@@ -268,7 +95,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
 
         Opcion opcion = mock(Opcion.class);
         respuesta.agregarOpcion(opcion);
@@ -286,7 +112,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
 
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
@@ -311,7 +136,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
 
         Opcion opcion = mock(Opcion.class);
         respuesta.agregarOpcion(opcion);
@@ -326,7 +150,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
 
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
@@ -342,7 +165,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
 
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
@@ -368,9 +190,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
-        //respuesta.cerrar();
-
         Comodin comodin = mock(Comodin.class);
         respuesta.aplicarComodin(comodin);
 
@@ -387,8 +206,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
-        //respuesta.cerrar();
 
         Comodin comodin1 = mock(Comodin.class);
         Comodin comodin2 = mock(Comodin.class);
@@ -413,8 +230,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
-        //respuesta.cerrar();
 
         Comodin comodin = mock(Comodin.class);
         respuesta.aplicarComodin(comodin);
@@ -440,7 +255,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
 
         respuesta.agregarOpcion(opcion1);
         respuesta.agregarOpcion(opcion2);
@@ -466,7 +280,6 @@ public class RespuestaTest {
         Jugador jugador = mock(Jugador.class);
 
         Respuesta respuesta = new Respuesta(pregunta, jugador);
-        //respuesta.abrir();
 
         respuesta.agregarOpcion(opcion1);
         respuesta.agregarOpcion(opcion2);
