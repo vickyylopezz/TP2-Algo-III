@@ -220,7 +220,7 @@ public class JugadaTest {
 
         Comodin comodinInvalido = mock(Comodin.class);
         Jugador jugador = mock(Jugador.class);
-        doThrow(JugadorError.class).when(jugador).validarComodin(comodinInvalido);
+        doThrow(JugadorNoTieneAlComodinError.class).when(jugador).validarComodin(comodinInvalido);
 
         Jugada jugada = new Jugada(pregunta, jugador);
 

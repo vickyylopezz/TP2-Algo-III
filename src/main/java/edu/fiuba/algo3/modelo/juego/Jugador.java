@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.JugadorNoTieneAlComodinError;
 import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 
@@ -51,7 +52,7 @@ public class Jugador {
 
     public void validarComodin(Comodin comodin) throws JugadorError {
         if (!this.comodines.contains(comodin)) {
-            throw new JugadorError(comodin.toString() + " no esta en el jugador");
+            throw new JugadorNoTieneAlComodinError();
         }
     }
 }
