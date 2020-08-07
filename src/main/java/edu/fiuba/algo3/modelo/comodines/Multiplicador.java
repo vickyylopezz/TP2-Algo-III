@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 
@@ -23,6 +21,9 @@ public class Multiplicador extends Comodin{
 
     @Override
     public void aplicarARespuestas(ArrayList<Respuesta> respuestas) {
-        for(Respuesta respuesta : respuestas) respuesta.aplicarComodin(this);
+        for(Respuesta respuesta : respuestas)
+            if(respuesta.obtenerJugador() == this.jugador){
+                respuesta.aplicarComodin(this);
+            }
     }
 }

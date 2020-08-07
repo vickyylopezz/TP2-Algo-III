@@ -3,9 +3,6 @@ package edu.fiuba.algo3.modelo.preguntas.estados;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
-
-import java.util.ArrayList;
 
 public class ConPenalidad extends EstadoPregunta {
 
