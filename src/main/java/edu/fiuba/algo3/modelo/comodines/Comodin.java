@@ -35,9 +35,6 @@ public abstract class Comodin {
 
     public abstract void validarPregunta(Jugada jugada) throws ComodinError, JugadorError;
 
-    public abstract void validarJugada(Jugada jugada) throws ComodinError, JugadorError;
-
-    abstract void aplicarARespuestas(Respuesta unaRespuesta,Respuesta otraRespuesta) throws ComodinError, RespuestaError, JugadorError;
     abstract void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws ComodinError, RespuestaError, JugadorError;
 
     public void definirJugador(Jugador jugador) throws ComodinError {
@@ -53,5 +50,9 @@ public abstract class Comodin {
             puntaje.agregarPunto(punto.modificarValor(this.factor));
         }
         return puntaje;
+    }
+
+    public Punto aplicarComodinAPunto(Punto puntaje) {
+        return puntaje.modificarValor(this.factor);
     }
 }
