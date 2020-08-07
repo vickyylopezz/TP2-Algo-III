@@ -23,6 +23,9 @@ public class Multiplicador extends Comodin{
 
     @Override
     public void aplicarARespuestas(ArrayList<Respuesta> respuestas) {
-        for(Respuesta respuesta : respuestas) respuesta.aplicarComodin(this);
+        for(Respuesta respuesta : respuestas)
+            if(respuesta.obtenerJugador() == this.jugador){
+                respuesta.aplicarComodin(this);
+            }
     }
 }

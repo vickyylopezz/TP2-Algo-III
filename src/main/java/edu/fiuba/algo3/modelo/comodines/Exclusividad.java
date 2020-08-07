@@ -30,6 +30,5 @@ public class Exclusividad extends Comodin {
             respuestaCorrecta = respuesta;
         }
         if (respuestaCorrecta != null) respuestaCorrecta.aplicarComodin(this);
-            //respuesta.eliminarComodin(this);
     }
 }
