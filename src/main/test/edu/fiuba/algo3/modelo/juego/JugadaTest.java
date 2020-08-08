@@ -239,7 +239,7 @@ public class JugadaTest {
 
         Jugada jugada = new Jugada(pregunta, jugador);
 
-        doThrow(AplicacionDeComodinInvalidaError.class).when(comodinInvalido).validarPregunta(jugada);
+        doThrow(AplicacionDeComodinInvalidaError.class).when(comodinInvalido).validarPregunta(pregunta);
 
         assertThrows(ComodinError.class, () -> jugada.seleccionarComodin(comodinInvalido));
     }
@@ -256,8 +256,8 @@ public class JugadaTest {
         doNothing().when(jugador).validarComodin(comodinNuevo);
 
         Jugada jugada = new Jugada(pregunta, jugador);
-        doNothing().when(comodinAnterior).validarPregunta(jugada);
-        doNothing().when(comodinNuevo).validarPregunta(jugada);
+        doNothing().when(comodinAnterior).validarPregunta(pregunta);
+        doNothing().when(comodinNuevo).validarPregunta(pregunta);
 
         jugada.seleccionarComodin(comodinAnterior);
         assertEquals(comodinAnterior, jugada.comodinSeleccionado());
@@ -304,8 +304,8 @@ public class JugadaTest {
         Pregunta pregunta = mock(Pregunta.class);
         Jugada jugada = new Jugada(pregunta, jugador);
 
-        doNothing().when(comodin1).validarPregunta(jugada);
-        doNothing().when(comodin2).validarPregunta(jugada);
+        doNothing().when(comodin1).validarPregunta(pregunta);
+        doNothing().when(comodin2).validarPregunta(pregunta);
 
         jugada.seleccionarComodin(comodin1);
         jugada.seleccionarComodin(comodin2);

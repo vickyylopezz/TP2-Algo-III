@@ -50,7 +50,7 @@ public class Jugada {
 
     public void seleccionarComodin(Comodin comodin) throws JugadorError, ComodinError {
         this.jugador.validarComodin(comodin);
-        comodin.validarPregunta(this);
+        comodin.validarPregunta(this.pregunta);
         this.comodin = comodin;
     }
 

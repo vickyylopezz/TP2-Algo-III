@@ -74,12 +74,9 @@ public class ExclusividadTest {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(true);
 
-        Jugador jugador = mock(Jugador.class);
-        Jugada jugada = new Jugada(pregunta, jugador);
-
         Exclusividad exclusividad = new Exclusividad(2);
 
-        assertThrows(ComodinError.class, () -> exclusividad.validarPregunta(jugada));
+        assertThrows(ComodinError.class, () -> exclusividad.validarPregunta(pregunta));
     }
 
     @Test

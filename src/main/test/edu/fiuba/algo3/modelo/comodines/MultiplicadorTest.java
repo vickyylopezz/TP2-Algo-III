@@ -73,12 +73,9 @@ public class MultiplicadorTest {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(false);
 
-        Jugador jugador = mock(Jugador.class);
-        Jugada jugada = new Jugada(pregunta,jugador);
-
         Multiplicador multiplicador = new Multiplicador(2);
 
-        assertThrows(ComodinError.class, () ->  multiplicador.validarPregunta(jugada));
+        assertThrows(ComodinError.class, () ->  multiplicador.validarPregunta(pregunta));
     }
 
     @Test
