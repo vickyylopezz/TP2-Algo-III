@@ -1,9 +1,8 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.PartidaError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -15,112 +14,221 @@ public class PartidaTest {
 
     // Test unitarios
 
-    // contructor
+    // existeTurno
     @Test
-    public void partidaSeCreaConUnaPreguntaYUnaListaDeJugadores() {
-        Pregunta pregunta = mock(Pregunta.class);
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-
-        assertDoesNotThrow(() -> { new Partida(pregunta, jugadores); });
-    }
-
-    // obtenerPregunta
-    @Test
-    public void obtenerPreguntaTeDevuelveLaPreguntaPasadaEnElConstructor() {
+    public void existeTurnoConArrayDeJugadoresVacioDevuelveFalse() {
         Pregunta pregunta = mock(Pregunta.class);
         ArrayList<Jugador> jugadores = new ArrayList<>();
 
         Partida partida = new Partida(pregunta, jugadores);
 
-        assertEquals(pregunta, partida.obtenerPregunta());
-    }
-
-    // obtenerJugadores
-    @Test
-    public void obtenerJugadoresTeDevuelveLosJugadoresPasadosEnElConstructor() {
-        Pregunta pregunta = mock(Pregunta.class);
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-
-        Partida partida = new Partida(pregunta, jugadores);
-
-        assertEquals(jugadores, partida.obtenerJugadores());
-    }
-
-    // siguienteTurno
-    @Test
-    public void siguienteTurnoSinJugadoresDevuelveFalse() {
-        Pregunta pregunta = mock(Pregunta.class);
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-
-        Partida partida = new Partida(pregunta, jugadores);
-
-        assertFalse(partida.siguienteTurno());
+        assertFalse(partida.existeTurno());
     }
 
     @Test
-    public void siguienteTurnoConUnJugadorDevuelveTrueYDespuesNull() {
+    public void existeTurnoConUnJugadorDevuelveTrue() {
         Pregunta pregunta = mock(Pregunta.class);
         ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(mock(Jugador.class));
 
         Partida partida = new Partida(pregunta, jugadores);
 
-        assertTrue(partida.siguienteTurno());
-        assertFalse(partida.siguienteTurno());
+        assertTrue(partida.existeTurno());
     }
 
     @Test
-    public void siguienteTurnoConVariosJugadoresDevuelveLaMismaCantidadTruePorJugadorYDespuesNull() {
+    public void existeTurnoConUnJugadorAlFinalDeLosTurnosDevuelveFalse() {
         Pregunta pregunta = mock(Pregunta.class);
         ArrayList<Jugador> jugadores = new ArrayList<>();
-
         jugadores.add(mock(Jugador.class));
+
+        Partida partida = new Partida(pregunta, jugadores);
+
+        partida.siguienteTurno();
+
+        assertFalse(partida.existeTurno());
+    }
+
+    @Test
+    public void existeTurnoEntrePorCadaJugadaEsTrueAlFinalEsFalse() {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(mock(Jugador.class));
         jugadores.add(mock(Jugador.class));
         jugadores.add(mock(Jugador.class));
 
         Partida partida = new Partida(pregunta, jugadores);
 
-        assertTrue(partida.siguienteTurno());
-        assertTrue(partida.siguienteTurno());
-        assertTrue(partida.siguienteTurno());
-        assertTrue(partida.siguienteTurno());
+        assertTrue(partida.existeTurno());
 
-        assertFalse(partida.siguienteTurno());
+        partida.siguienteTurno();
+
+        assertTrue(partida.existeTurno());
+
+        partida.siguienteTurno();
+
+        assertTrue(partida.existeTurno());
+
+        partida.siguienteTurno();
+
+        assertFalse(partida.existeTurno());
     }
 
+    // sigueinteTurno
     @Test
-    public void siguienteTurnoUnaVezFinalizadoLosTurnosSiempreDevuelveFalse() {
+    public void siguienteTurnoIncrementaElTurnoDeAUno() {
         Pregunta pregunta = mock(Pregunta.class);
-        ArrayList<Jugador> jugadores = new ArrayList<>();
 
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(mock(Jugador.class));
         jugadores.add(mock(Jugador.class));
         jugadores.add(mock(Jugador.class));
 
         Partida partida = new Partida(pregunta, jugadores);
 
-        assertTrue(partida.siguienteTurno());
-        assertTrue(partida.siguienteTurno());
+        partida.siguienteTurno();
+        assertTrue(partida.existeTurno());
 
-        assertFalse(partida.siguienteTurno());
-        assertFalse(partida.siguienteTurno());
-        assertFalse(partida.siguienteTurno());
-        assertFalse(partida.siguienteTurno());
+        partida.siguienteTurno();
+        assertTrue(partida.existeTurno());
+
+        partida.siguienteTurno();
+        assertFalse(partida.existeTurno());
     }
+
+    @Test
+    public void siguienteTurnoFinalizadoLosTurnosAgregaLasRespuestasALosJugadores() {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Jugador jugador1 = mock(Jugador.class);
+        Jugador jugador2 = mock(Jugador.class);
+        Jugador jugador3 = mock(Jugador.class);
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        jugadores.add(jugador3);
+
+        Partida partida = new Partida(pregunta, jugadores);
+
+        partida.siguienteTurno();
+        partida.siguienteTurno();
+        partida.siguienteTurno();
+
+        int invocaciones = 1;
+
+        verify(jugador1, times(invocaciones)).agregarRespuesta(any(Respuesta.class));
+        verify(jugador2, times(invocaciones)).agregarRespuesta(any(Respuesta.class));
+        verify(jugador3, times(invocaciones)).agregarRespuesta(any(Respuesta.class));
+    }
+
+    @Test
+    public void siguienteTurnoFinalizadoLosTurnosAplicaLosComodinesALasRespuestas() throws JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodin1 = mock(Comodin.class);
+        doNothing().when(comodin1).validarPregunta(pregunta);
+
+        Comodin comodin2 = mock(Comodin.class);
+        doNothing().when(comodin2).validarPregunta(pregunta);
+
+        Jugador jugador1 = mock(Jugador.class);
+        doNothing().when(jugador1).validarComodin(comodin1);
+
+        Jugador jugador2 = mock(Jugador.class);
+
+        Jugador jugador3 = mock(Jugador.class);
+        doNothing().when(jugador3).validarComodin(comodin2);
+
+        when(comodin1.obtenerJugador()).thenReturn(jugador1);
+        when(comodin2.obtenerJugador()).thenReturn(jugador3);
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        jugadores.add(jugador3);
+
+        Partida partida = new Partida(pregunta, jugadores);
+
+        partida.obtenerJugada().seleccionarComodin(comodin1);
+        partida.siguienteTurno();
+
+        // no aplica ningun comodin
+        partida.siguienteTurno();
+
+        partida.obtenerJugada().seleccionarComodin(comodin2);
+        partida.siguienteTurno();
+
+        int invocaciones = 1;
+
+        verify(comodin1, times(invocaciones)).aplicarARespuestas(any(ArrayList.class));
+        verify(comodin2, times(invocaciones)).aplicarARespuestas(any(ArrayList.class));
+    }
+
+    @Test
+    public void siguienteTurnoFinalizadoLosTurnosSacaElComodinAplicadoDelJugador() throws JugadorError, ComodinError {
+        Pregunta pregunta = mock(Pregunta.class);
+
+        Comodin comodin1 = mock(Comodin.class);
+        doNothing().when(comodin1).validarPregunta(pregunta);
+
+        Comodin comodin2 = mock(Comodin.class);
+        doNothing().when(comodin2).validarPregunta(pregunta);
+
+        Jugador jugador1 = mock(Jugador.class);
+        doNothing().when(jugador1).validarComodin(comodin1);
+
+        Jugador jugador2 = mock(Jugador.class);
+
+        Jugador jugador3 = mock(Jugador.class);
+        doNothing().when(jugador3).validarComodin(comodin2);
+
+        when(comodin1.obtenerJugador()).thenReturn(jugador1);
+        when(comodin2.obtenerJugador()).thenReturn(jugador3);
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        jugadores.add(jugador3);
+
+        Partida partida = new Partida(pregunta, jugadores);
+
+        partida.obtenerJugada().seleccionarComodin(comodin1);
+        partida.siguienteTurno();
+
+        // no aplica ningun comodin
+        partida.siguienteTurno();
+
+        partida.obtenerJugada().seleccionarComodin(comodin2);
+        partida.siguienteTurno();
+
+        verify(jugador1, times(1)).sacarComodin(comodin1);
+        verify(jugador2, times(0)).sacarComodin(any(Comodin.class));
+        verify(jugador3, times(1)).sacarComodin(comodin2);
+    }
+
 
     // obtenerJugada
     @Test
-    public void obtenerJugadaSinHaberLlamadoSiguienteTurnoDevuelveNull() {
+    public void obtenerJugadaDevuelveLaJugadaDelPrimerJugador() {
         Pregunta pregunta = mock(Pregunta.class);
 
+        Jugador jugador1 = mock(Jugador.class);
+        Jugador jugador2 = mock(Jugador.class);
+        Jugador jugador3 = mock(Jugador.class);
+
         ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(mock(Jugador.class));
-        jugadores.add(mock(Jugador.class));
-        jugadores.add(mock(Jugador.class));
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+        jugadores.add(jugador3);
 
         Partida partida = new Partida(pregunta, jugadores);
 
-        assertNull(partida.obtenerJugada());
+        Jugada jugada = partida.obtenerJugada();
+
+        assertEquals(jugada.obtenerJugador(), jugador1);
+        assertEquals(jugada.obtenerPregunta(), pregunta);
     }
 
     @Test
@@ -135,12 +243,12 @@ public class PartidaTest {
         Partida partida = new Partida(pregunta, jugadores);
 
         for (Jugador jugador: jugadores) {
-            partida.siguienteTurno();
-
             Jugada jugada = partida.obtenerJugada();
 
             assertEquals(jugada.obtenerJugador(), jugador);
             assertEquals(jugada.obtenerPregunta(), pregunta);
+
+            partida.siguienteTurno();
         }
     }
 
@@ -154,53 +262,15 @@ public class PartidaTest {
 
         Partida partida = new Partida(pregunta, jugadores);
 
-        partida.siguienteTurno();
         assertNotNull(partida.obtenerJugada());
         partida.siguienteTurno();
         assertNotNull(partida.obtenerJugada());
 
         partida.siguienteTurno();
-        assertNull(partida.obtenerJugada());
-    }
 
-    @Test
-    public void obtenerJugadaDespuesDeTodosLosTurnosSiempreNull() {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(mock(Jugador.class));
-        jugadores.add(mock(Jugador.class));
-
-        Partida partida = new Partida(pregunta, jugadores);
-
-        partida.siguienteTurno();
-        assertNotNull(partida.obtenerJugada());
-        partida.siguienteTurno();
-        assertNotNull(partida.obtenerJugada());
-
-        partida.siguienteTurno();
         assertNull(partida.obtenerJugada());
         assertNull(partida.obtenerJugada());
         assertNull(partida.obtenerJugada());
-        assertNull(partida.obtenerJugada());
-    }
-
-    @Test
-    public void obtenerJugadaDosVecesSobreElMismoTurnoTeDevuelveLaMismaJugada() {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(mock(Jugador.class));
-        jugadores.add(mock(Jugador.class));
-
-        Partida partida = new Partida(pregunta, jugadores);
-
-        partida.siguienteTurno();
-
-        Jugada jugada1 = partida.obtenerJugada();
-        Jugada jugada2 = partida.obtenerJugada();
-
-        assertEquals(jugada1, jugada2);
     }
 
     @Test
@@ -224,94 +294,4 @@ public class PartidaTest {
         assertEquals(jugada2, jugada3);
         assertEquals(jugada3, jugada4);
     }
-
-    // obtenerRespuestas
-    @Test
-    public void obtenerRespuestasSinHaberTerminadoLosTurnosLanzaPartidaError() {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(mock(Jugador.class));
-        jugadores.add(mock(Jugador.class));
-        jugadores.add(mock(Jugador.class));
-
-        Partida partida = new Partida(pregunta, jugadores);
-
-        assertThrows(PartidaError.class, partida::obtenerRespuestas);
-    }
-
-    @Test
-    public void obtenerRespuestasConTurnosFinalizadosNoLanzaExcepcion() {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(mock(Jugador.class));
-
-        Partida partida = new Partida(pregunta, jugadores);
-        partida.siguienteTurno(); // primer turno
-        partida.siguienteTurno(); // turnos finalizados
-
-        assertDoesNotThrow(partida::obtenerRespuestas);
-    }
-
-    @Test
-    public void obtenerRespuestasDevuelveLasRespuestasGeneradasPorLasJugadas() throws PartidaError {
-        Pregunta pregunta = mock(Pregunta.class);
-
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(mock(Jugador.class));
-        jugadores.add(mock(Jugador.class));
-
-        Partida partida = new Partida(pregunta, jugadores);
-        partida.siguienteTurno();
-        Respuesta respuesta1 = partida.obtenerJugada().obtenerRespuesta();
-        partida.siguienteTurno();
-        Respuesta respuesta2 = partida.obtenerJugada().obtenerRespuesta();
-        partida.siguienteTurno();
-
-        ArrayList<Respuesta> respuestasPartida = partida.obtenerRespuestas();
-
-        assertEquals(2, respuestasPartida.size());
-        assertTrue(respuestasPartida.contains(respuesta1));
-        assertTrue(respuestasPartida.contains(respuesta2));
-    }
-
-    // @Test
-    /*  refactorizaciones necesarias:
-    *       cambio de nombre en comodin validarPregunta por validarJugada
-    *       comodin tiene que aceptar un arreglo de respuestas aplicarARespuestas
-    *           violacion de principio open-close.
-    *       Jugada tiene que sacar el comodin del jugadr o marcarlo como utilizado linea 307
-    public void obtenerRespuestasDevuelveLasRespuestasConLosComodinesAplicados() throws PartidaError, JugadorError, ComodinError {
-        // inicializo el entorno
-        Pregunta pregunta = mock(Pregunta.class);
-        Comodin comodin = mock(Comodin.class);
-
-        Jugador jugador = mock(Jugador.class);
-        doNothing().when(jugador).validarComodin(comodin);
-
-        ArrayList<Jugador> jugadores = new ArrayList<>();
-        jugadores.add(jugador);
-
-        Partida partida = new Partida(pregunta, jugadores);
-        partida.siguienteTurno();
-
-        Jugada jugada = partida.obtenerJugada();
-        doNothing().when(comodin).validarPregunta(jugada);
-
-        // parte a testear
-        jugada.seleccionarComodin(comodin);
-        partida.siguienteTurno();
-
-        // al finalizar el turno los comodines se marcan como utilizado
-        verify(jugador, times(1)).sacarComodin(comodin);
-
-        ArrayList<Respuesta> respuestasPartida = partida.obtenerRespuestas();
-        assertEquals(1, respuestasPartida.size());
-
-        ArrayList<Comodin> comodinesAplicados = respuestasPartida.get(0).comodinesAplicados();
-
-        assertEquals(1, comodinesAplicados.size());
-        assertTrue(comodinesAplicados.contains(comodin));
-    } */
 }
