@@ -19,7 +19,8 @@ public abstract class EstructuraPrincipalVista implements Escena {
         BorderPane raiz = new BorderPane();
 
         raiz.setTop(this.cabecera());
-        raiz.setCenter(this.centro());
+        raiz.setCenter(this.nucleo());
+        //raiz.setCenter(this.centro());
 
         return new Scene(raiz, 800, 600);
     }
@@ -73,4 +74,36 @@ public abstract class EstructuraPrincipalVista implements Escena {
     abstract protected Node cabeceraIzquierda();
 
     abstract protected Node centro();
+
+    private Node nucleo() {
+        HBox centro = new HBox();
+        centro.setPadding(new Insets(10, 10, 10, 10));
+
+        StackPane izq = new StackPane();
+        izq.setAlignment(Pos.CENTER_LEFT);
+        StackPane cen = new StackPane();
+        cen.setAlignment(Pos.CENTER);
+        StackPane der = new StackPane();
+        der.setAlignment(Pos.CENTER_RIGHT);
+
+        Node contenidoIzq = this.centroIzquierda();
+        Node contenidoCen = this.centro();
+        Node contenidoDer = this.centroDerecha();
+
+        if (contenidoIzq != null) izq.getChildren().add(contenidoIzq);
+        if (contenidoCen != null) cen.getChildren().add(contenidoCen);
+        if (contenidoDer != null) der.getChildren().add(contenidoDer);
+
+        centro.setHgrow(izq, Priority.ALWAYS);
+        centro.setHgrow(cen, Priority.ALWAYS);
+        centro.setHgrow(der, Priority.ALWAYS);
+
+        centro.getChildren().addAll(izq, cen, der);
+
+        return centro;
+    }
+
+    abstract protected Node centroIzquierda();
+
+    abstract protected Node centroDerecha();
 }
