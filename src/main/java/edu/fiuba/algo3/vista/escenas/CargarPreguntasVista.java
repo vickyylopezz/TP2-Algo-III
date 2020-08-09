@@ -22,11 +22,11 @@ public class CargarPreguntasVista extends EstructuraPrincipalVista {
     }
 
     @Override
-    protected Node centroIzquierda() {
+    protected Node centroArriba() {
         return null;
     }
     @Override
-    protected Node centroDerecha() {
+    protected Node centroAbajo() {
         return null;
     }
 }

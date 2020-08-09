@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.vista.escenas;
 
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -28,7 +27,7 @@ public abstract class EstructuraPrincipalVista implements Escena {
     private Node cabecera() {
         HBox cabecera = new HBox();
         cabecera.setSpacing(10);
-        //cabecera.setPadding(new Insets(10, 10, 10, 10));
+        cabecera.setPadding(new Insets(10, 10, 10, 10));
         cabecera.setAlignment(Pos.TOP_CENTER);
 
         StackPane izq = new StackPane();
@@ -80,7 +79,7 @@ public abstract class EstructuraPrincipalVista implements Escena {
     private Node nucleo() {
         VBox nucleo = new VBox();
         nucleo.setSpacing(10);
-        //nucleo.setPadding(new Insets(10, 10, 10, 10));
+        nucleo.setPadding(new Insets(10, 10, 10, 10));
         nucleo.setAlignment(Pos.CENTER);
 
         StackPane izq = new StackPane();
@@ -90,9 +89,9 @@ public abstract class EstructuraPrincipalVista implements Escena {
         StackPane der = new StackPane();
         der.setAlignment(Pos.CENTER_RIGHT);
 
-        Node contenidoIzq = this.centroIzquierda();
+        Node contenidoIzq = this.centroArriba();
         Node contenidoCen = this.centro();
-        Node contenidoDer = this.centroDerecha();
+        Node contenidoDer = this.centroAbajo();
 
         if (contenidoIzq != null) izq.getChildren().add(contenidoIzq);
         if (contenidoCen != null) cen.getChildren().add(contenidoCen);
@@ -107,7 +106,7 @@ public abstract class EstructuraPrincipalVista implements Escena {
         return nucleo;
     }
 
-    abstract protected Node centroIzquierda();
+    abstract protected Node centroArriba();
 
-    abstract protected Node centroDerecha();
+    abstract protected Node centroAbajo();
 }

@@ -19,12 +19,12 @@ public class IniciarJuegoVista extends EstructuraPrincipalVista{
     protected Node centro() {return new BotonEtiquetaVista("JUGAR", true).obtenerNodo() ;}
 
     @Override
-    protected Node centroIzquierda() {
+    protected Node centroArriba() {
         return null;
     }
 
     @Override
-    protected Node centroDerecha() {
+    protected Node centroAbajo() {
         return null;
     }
 

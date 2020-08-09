@@ -21,12 +21,12 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
     }
 
     @Override
-    protected Node centroIzquierda() {
+    protected Node centroArriba() {
         return new GrupoDeComponentesVista("Jugador 1",true).obtenerNodo();
     }
 
     @Override
-    protected Node centroDerecha() {
+    protected Node centroAbajo() {
         return new BotonEtiquetaVista("CONFIRMAR",true).obtenerNodo();
     }
 
