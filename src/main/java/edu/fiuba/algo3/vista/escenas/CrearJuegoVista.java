@@ -3,8 +3,7 @@ package edu.fiuba.algo3.vista.escenas;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
 import javafx.scene.Node;
 
-public class IniciarJuegoVista extends EstructuraPrincipalVista{
-
+public class CrearJuegoVista extends EstructuraPrincipalVista{
     @Override
     protected Node cabeceraDerecha() {
         return null;
@@ -16,7 +15,9 @@ public class IniciarJuegoVista extends EstructuraPrincipalVista{
     }
 
     @Override
-    protected Node centro() {return new BotonEtiquetaVista("JUGAR", true).obtenerNodo() ;}
+    protected Node centro() {
+        return null;
+    }
 
     @Override
     protected Node centroIzquierda() {
@@ -25,7 +26,6 @@ public class IniciarJuegoVista extends EstructuraPrincipalVista{
 
     @Override
     protected Node centroDerecha() {
-        return null;
+        return new BotonEtiquetaVista("CREAR JUEGO",true).obtenerNodo();
     }
-
 }

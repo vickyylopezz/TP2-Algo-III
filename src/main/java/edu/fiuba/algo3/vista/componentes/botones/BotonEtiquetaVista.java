@@ -7,12 +7,12 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
-public class BotonEtiquietaVista implements Componente {
+public class BotonEtiquetaVista implements Componente {
 
     private Node nodo;
     private String titulo;
 
-    public BotonEtiquietaVista(String titulo, Boolean etiquetaIzquierda) {
+    public BotonEtiquetaVista(String titulo, Boolean etiquetaIzquierda) {
         this.titulo = titulo;
 
         this.aplicarEstilo(etiquetaIzquierda);
@@ -48,6 +48,7 @@ public class BotonEtiquietaVista implements Componente {
 
         Label texto = new Label(this.titulo);
         etiqueta.getChildren().add(texto);
+        etiqueta.setAlignment(Pos.CENTER);
 
         return etiqueta;
     }
@@ -67,4 +68,5 @@ public class BotonEtiquietaVista implements Componente {
     public Node obtenerNodo() {
         return this.nodo;
     }
+
 }

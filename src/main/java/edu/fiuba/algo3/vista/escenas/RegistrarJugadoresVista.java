@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.escenas;
 
+import edu.fiuba.algo3.vista.componentes.GrupoDeComponentesVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
 import javafx.scene.Node;
 
@@ -21,12 +22,12 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node centroIzquierda() {
-        return new BotonEtiquetaVista("JUGADOR 1", true).obtenerNodo();
+        return new GrupoDeComponentesVista("Jugador 1",true).obtenerNodo();
     }
 
     @Override
     protected Node centroDerecha() {
-        return new BotonEtiquetaVista("JUGADOR 2", true).obtenerNodo();
+        return new BotonEtiquetaVista("CONFIRMAR",true).obtenerNodo();
     }
 
 }
