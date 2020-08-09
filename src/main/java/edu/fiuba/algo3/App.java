@@ -19,7 +19,7 @@ public class App extends Application {
         //Escena cargadorPreguntas = new CargarPreguntasVista();
         //Escena iniciarJuego = new IniciarJuegoVista();
         //Escena registrarJugadores = new RegistrarJugadoresVista();
-        //Escena puntosobtenidos = new PuntosObtenidos();
+        //Escena puntosobtenidos = new PuntosObtenidosVista();
         //Escena ganador = new GanadorVista();
 
         Jugada jugada = new Jugada(new VerdaderoFalsoConPenalidad("Estamos en el año 2021"), new Jugador("Carlos"));

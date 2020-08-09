@@ -12,7 +12,7 @@ import javafx.scene.layout.VBox;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class PuntosObtenidos extends EstructuraPrincipalVista {
+public class PuntosObtenidosVista extends EstructuraPrincipalVista {
     @Override
     protected Node cabeceraDerecha() {
         return null;
