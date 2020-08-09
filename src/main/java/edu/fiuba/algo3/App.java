@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
 import edu.fiuba.algo3.vista.escenas.CargarPreguntasVista;
 import edu.fiuba.algo3.vista.escenas.Escena;
 import edu.fiuba.algo3.vista.escenas.PreviaPreguntaVista;
+import edu.fiuba.algo3.vista.escenas.PuntosObtenidos;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -22,6 +23,7 @@ public class App extends Application {
         Jugador jugador = new Jugador("Carlos");
         Jugada jugada = new Jugada(pregunta, jugador);
         Escena previaPregunta = new PreviaPreguntaVista(jugada);
+        Escena puntosObtenidos = new PuntosObtenidos();
 
         /*
         Timer timer = new Timer();
@@ -37,8 +39,10 @@ public class App extends Application {
         /*
         stage.setScene(previaPregunta.obtenerEscena());
         stage.show();
+
         timer.schedule(tarea, 6000);
          */
+        stage.show();
     }
 
     public static void main(String[] args) {
