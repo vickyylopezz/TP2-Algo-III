@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesErro
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcial;
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionGroupChoice;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
 
 import java.util.ArrayList;
@@ -35,15 +35,15 @@ public class GroupChoice extends Pregunta {
             throw new CantidadMaximaDeOpcionesError();
         }
         if(grupo.equals(grupos.get(0))){
-            OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeIncorrecto(),grupos.get(1));
-            OpcionGroupChoice opcionCorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeCorrecto(),grupo);
+            Opcion opcionIncorrecta = new Opcion(titulo,this.estado.puntajeIncorrecto(),grupos.get(1));
+            Opcion opcionCorrecta = new Opcion(titulo,this.estado.puntajeCorrecto(),grupo);
             grupo.agregarOpcion(opcionCorrecta);
             grupos.get(1).agregarOpcion(opcionIncorrecta);
             opciones.add(opcionCorrecta);
             opciones.add(opcionIncorrecta);
         }else{
-            OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeIncorrecto(),grupos.get(0));
-            OpcionGroupChoice opcionCorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeCorrecto(),grupo);
+            Opcion opcionIncorrecta = new Opcion(titulo,this.estado.puntajeIncorrecto(),grupos.get(0));
+            Opcion opcionCorrecta = new Opcion(titulo,this.estado.puntajeCorrecto(),grupo);
             grupo.agregarOpcion(opcionCorrecta);
             grupos.get(0).agregarOpcion(opcionIncorrecta);
             opciones.add(opcionCorrecta);

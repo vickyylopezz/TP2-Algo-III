@@ -4,14 +4,14 @@ import edu.fiuba.algo3.modelo.excepciones.preguntas.OpcionCorrectaYaAgregadaErro
 import edu.fiuba.algo3.modelo.excepciones.preguntas.OpcionIncorrectaYaAgregadaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcial;
 import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
 public class VerdaderoFalsoClasico extends Pregunta {
 
-    private OpcionClasica opcionCorrecta;
-    private OpcionClasica opcionIncorrecta;
+    private Opcion opcionCorrecta;
+    private Opcion opcionIncorrecta;
 
     public VerdaderoFalsoClasico(String titulo) {
         super(titulo, new SinPenalidad(new CalculadorPuntajeParcial()));
@@ -23,7 +23,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
         if (opcionCorrecta != null){
             throw new OpcionCorrectaYaAgregadaError();
         }
-        this.opcionCorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeCorrecto());
+        this.opcionCorrecta = new Opcion(opcionTitulo, this.estado.puntajeCorrecto());
         opciones.add(this.opcionCorrecta);
     }
 
@@ -31,7 +31,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
         if (opcionIncorrecta != null){
             throw new OpcionIncorrectaYaAgregadaError();
         }
-        this.opcionIncorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeIncorrecto());
+        this.opcionIncorrecta = new Opcion(opcionTitulo, this.estado.puntajeIncorrecto());
         opciones.add(this.opcionIncorrecta);
     }
 

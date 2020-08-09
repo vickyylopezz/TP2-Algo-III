@@ -1,23 +1,23 @@
 package edu.fiuba.algo3.modelo.preguntas.groupChoice;
 
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionGroupChoice;
-
-
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import java.util.ArrayList;
 
 public class Grupo {
-    private String titulo;
-    private ArrayList<OpcionGroupChoice> opciones = new ArrayList<>();
+
+    private final String titulo;
+    private final ArrayList<Opcion> opciones;
 
     public Grupo(String titulo) {
         this.titulo = titulo;
+        this.opciones = new ArrayList<>();
     }
 
-    public String obtenerTitulo(){return this.titulo; }
+    public String obtenerTitulo(){ return this.titulo; }
 
-    public ArrayList<OpcionGroupChoice> obtenerOpciones() {return this.opciones;}
+    public ArrayList<Opcion> obtenerOpciones() { return this.opciones;}
 
-    public void agregarOpcion(OpcionGroupChoice opcion) {
+    public void agregarOpcion(Opcion opcion) {
         opciones.add(opcion);
     }
 
