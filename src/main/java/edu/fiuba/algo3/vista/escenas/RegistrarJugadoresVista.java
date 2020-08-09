@@ -17,7 +17,7 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node centro() {
-        return null;
+        return new GrupoDeComponentesVista("Jugador 2",true).obtenerNodo();
     }
 
     @Override
