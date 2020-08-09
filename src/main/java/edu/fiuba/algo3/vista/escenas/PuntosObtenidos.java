@@ -72,4 +72,14 @@ public class PuntosObtenidos extends EstructuraPrincipalVista {
         hbox.setAlignment(Pos.CENTER);
         return hbox;
     }
+
+    @Override
+    protected Node centroArriba() {
+        return null;
+    }
+
+    @Override
+    protected Node centroAbajo() {
+        return null;
+    }
 }

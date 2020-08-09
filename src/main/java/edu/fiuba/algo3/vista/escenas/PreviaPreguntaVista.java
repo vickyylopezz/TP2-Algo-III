@@ -1,17 +1,11 @@
 package edu.fiuba.algo3.vista.escenas;
 
 import edu.fiuba.algo3.modelo.juego.Jugada;
-import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquietaVista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.text.Font;
 
 public class PreviaPreguntaVista extends EstructuraPrincipalVista {
 
@@ -50,5 +44,15 @@ public class PreviaPreguntaVista extends EstructuraPrincipalVista {
         vbox.getChildren().addAll(jLabelTipoPregunta, jLabelTituloPregunta);
         vbox.setAlignment(Pos.CENTER);
         return vbox;
+    }
+
+    @Override
+    protected Node centroArriba() {
+        return null;
+    }
+
+    @Override
+    protected Node centroAbajo() {
+        return null;
     }
 }

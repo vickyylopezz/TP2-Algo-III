@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.vista.escenas;
 
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -19,14 +18,17 @@ public abstract class EstructuraPrincipalVista implements Escena {
         BorderPane raiz = new BorderPane();
 
         raiz.setTop(this.cabecera());
-        raiz.setCenter(this.centro());
+        raiz.setCenter(this.nucleo());
+        //raiz.setCenter(this.centro());
 
         return new Scene(raiz, 800, 600);
     }
 
     private Node cabecera() {
         HBox cabecera = new HBox();
+        cabecera.setSpacing(10);
         cabecera.setPadding(new Insets(10, 10, 10, 10));
+        cabecera.setAlignment(Pos.TOP_CENTER);
 
         StackPane izq = new StackPane();
         izq.setAlignment(Pos.CENTER_LEFT);
@@ -73,4 +75,38 @@ public abstract class EstructuraPrincipalVista implements Escena {
     abstract protected Node cabeceraIzquierda();
 
     abstract protected Node centro();
+
+    private Node nucleo() {
+        VBox nucleo = new VBox();
+        nucleo.setSpacing(10);
+        nucleo.setPadding(new Insets(10, 10, 10, 10));
+        nucleo.setAlignment(Pos.CENTER);
+
+        StackPane izq = new StackPane();
+        izq.setAlignment(Pos.CENTER_LEFT);
+        StackPane cen = new StackPane();
+        cen.setAlignment(Pos.CENTER);
+        StackPane der = new StackPane();
+        der.setAlignment(Pos.CENTER_RIGHT);
+
+        Node contenidoIzq = this.centroArriba();
+        Node contenidoCen = this.centro();
+        Node contenidoDer = this.centroAbajo();
+
+        if (contenidoIzq != null) izq.getChildren().add(contenidoIzq);
+        if (contenidoCen != null) cen.getChildren().add(contenidoCen);
+        if (contenidoDer != null) der.getChildren().add(contenidoDer);
+
+        nucleo.setVgrow(izq, Priority.ALWAYS);
+        nucleo.setVgrow(cen, Priority.ALWAYS);
+        nucleo.setVgrow(der, Priority.ALWAYS);
+
+        nucleo.getChildren().addAll(izq, cen, der);
+
+        return nucleo;
+    }
+
+    abstract protected Node centroArriba();
+
+    abstract protected Node centroAbajo();
 }

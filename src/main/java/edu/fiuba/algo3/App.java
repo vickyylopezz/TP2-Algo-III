@@ -3,20 +3,37 @@ package edu.fiuba.algo3;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
-import edu.fiuba.algo3.vista.escenas.CargarPreguntasVista;
-import edu.fiuba.algo3.vista.escenas.Escena;
-import edu.fiuba.algo3.vista.escenas.PreviaPreguntaVista;
-import edu.fiuba.algo3.vista.escenas.PuntosObtenidos;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 
-import java.util.Timer;
-import java.util.TimerTask;
+import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
+import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
+import edu.fiuba.algo3.vista.escenas.*;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
 
 public class App extends Application {
 
     @Override
+    public void start(Stage stage) {
+        //Escena crearJuego = new CrearJuegoVista();
+        //Escena cargadorPreguntas = new CargarPreguntasVista();
+        //Escena iniciarJuego = new IniciarJuegoVista();
+        //Escena registrarJugadores = new RegistrarJugadoresVista();
+        //Escena puntosobtenidos = new PuntosObtenidos();
+
+        Jugada jugada = new Jugada(new VerdaderoFalsoConPenalidad("Estamos en el año 2021"), new Jugador("Carlos"));
+        Escena previaPregunta = new PreviaPreguntaVista(jugada);
+
+        //stage.setScene(crearJuego.obtenerEscena());
+        //stage.setScene(cargadorPreguntas.obtenerEscena());
+        //stage.setScene(iniciarJuego.obtenerEscena());
+        //stage.setScene(registrarJugadores.obtenerEscena());
+        //stage.setScene(puntosobtenidos.obtenerEscena());
+        stage.setScene(previaPregunta.obtenerEscena());
+        stage.show();
+    }
+
+    /*@Override
     public void start(Stage stage) {
         Escena cargadorPreguntas = new CargarPreguntasVista();
         MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Cuál es el apellido de nuestro corrector?");
@@ -33,17 +50,15 @@ public class App extends Application {
                 System.exit(0);
             }
         };
-        */
 
-        stage.setScene(cargadorPreguntas.obtenerEscena());
-        /*
+
+        //stage.setScene(cargadorPreguntas.obtenerEscena());
+
         stage.setScene(previaPregunta.obtenerEscena());
         stage.show();
 
-        timer.schedule(tarea, 6000);
-         */
-        stage.show();
-    }
+    }*/
+
 
     public static void main(String[] args) {
         launch();
