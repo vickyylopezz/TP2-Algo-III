@@ -20,6 +20,7 @@ public class App extends Application {
         //Escena iniciarJuego = new IniciarJuegoVista();
         //Escena registrarJugadores = new RegistrarJugadoresVista();
         //Escena puntosobtenidos = new PuntosObtenidos();
+        //Escena ganador = new GanadorVista();
 
         Jugada jugada = new Jugada(new VerdaderoFalsoConPenalidad("Estamos en el año 2021"), new Jugador("Carlos"));
         Escena previaPregunta = new PreviaPreguntaVista(jugada);
@@ -30,6 +31,7 @@ public class App extends Application {
         //stage.setScene(registrarJugadores.obtenerEscena());
         //stage.setScene(puntosobtenidos.obtenerEscena());
         stage.setScene(previaPregunta.obtenerEscena());
+        //stage.setScene(ganador.obtenerEscena());
         stage.show();
     }
 
