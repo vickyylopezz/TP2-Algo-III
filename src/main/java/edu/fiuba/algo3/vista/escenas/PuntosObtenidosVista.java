@@ -29,8 +29,9 @@ public class PuntosObtenidosVista extends EstructuraPrincipalVista {
 
         Group contenedorIcono1 = new Group();
         try {
-            FileInputStream stream = new FileInputStream("src/main/resources/icono jugador.png");
+            FileInputStream stream = new FileInputStream("src/main/resources/jugador.png");
             ImageView icono1 = new ImageView(new Image(stream));
+            icono1.setFitHeight(150);
 
             icono1.setPreserveRatio(true);
 
@@ -50,8 +51,9 @@ public class PuntosObtenidosVista extends EstructuraPrincipalVista {
 
         Group contenedorIcono2 = new Group();
         try {
-            FileInputStream stream = new FileInputStream("src/main/resources/icono jugador.png");
+            FileInputStream stream = new FileInputStream("src/main/resources/jugador.png");
             ImageView icono2 = new ImageView(new Image(stream));
+            icono2.setFitHeight(150);
 
             icono2.setPreserveRatio(true);
 
@@ -74,12 +76,12 @@ public class PuntosObtenidosVista extends EstructuraPrincipalVista {
     }
 
     @Override
-    protected Node centroArriba() {
+    protected Node centroIzquierda() {
         return null;
     }
 
     @Override
-    protected Node centroAbajo() {
+    protected Node centroDerecha() {
         return null;
     }
 }

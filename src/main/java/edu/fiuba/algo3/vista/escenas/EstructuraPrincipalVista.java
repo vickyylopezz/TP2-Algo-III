@@ -77,7 +77,7 @@ public abstract class EstructuraPrincipalVista implements Escena {
     abstract protected Node centro();
 
     private Node nucleo() {
-        VBox nucleo = new VBox();
+        HBox nucleo = new HBox();
         nucleo.setSpacing(10);
         nucleo.setPadding(new Insets(10, 10, 10, 10));
         nucleo.setAlignment(Pos.CENTER);
@@ -89,24 +89,24 @@ public abstract class EstructuraPrincipalVista implements Escena {
         StackPane der = new StackPane();
         der.setAlignment(Pos.CENTER_RIGHT);
 
-        Node contenidoIzq = this.centroArriba();
+        Node contenidoIzq = this.centroIzquierda();
         Node contenidoCen = this.centro();
-        Node contenidoDer = this.centroAbajo();
+        Node contenidoDer = this.centroDerecha();
 
         if (contenidoIzq != null) izq.getChildren().add(contenidoIzq);
         if (contenidoCen != null) cen.getChildren().add(contenidoCen);
         if (contenidoDer != null) der.getChildren().add(contenidoDer);
 
-        nucleo.setVgrow(izq, Priority.ALWAYS);
-        nucleo.setVgrow(cen, Priority.ALWAYS);
-        nucleo.setVgrow(der, Priority.ALWAYS);
+        nucleo.setHgrow(izq, Priority.ALWAYS);
+        nucleo.setHgrow(cen, Priority.ALWAYS);
+        nucleo.setHgrow(der, Priority.ALWAYS);
 
         nucleo.getChildren().addAll(izq, cen, der);
 
         return nucleo;
     }
 
-    abstract protected Node centroArriba();
+    abstract protected Node centroIzquierda();
 
-    abstract protected Node centroAbajo();
+    abstract protected Node centroDerecha();
 }

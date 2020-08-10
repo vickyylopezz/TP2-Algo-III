@@ -58,22 +58,20 @@ public class GanadorVista extends EstructuraPrincipalVista{
         Label jLabelGanador = new Label("nombre ganador");
         jLabelGanador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 30; -fx-font-weight: bold");
 
-
         VBox vbox = new VBox(20);
 
         vbox.getChildren().addAll(jLabelTituloGanador,boxJugador,jLabelGanador);
         vbox.setAlignment(Pos.CENTER);
         return vbox;
-
     }
 
     @Override
-    protected Node centroArriba() {
+    protected Node centroIzquierda() {
         return null;
     }
 
     @Override
-    protected Node centroAbajo() {
+    protected Node centroDerecha() {
         return null;
     }
 }

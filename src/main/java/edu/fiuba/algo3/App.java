@@ -19,48 +19,21 @@ public class App extends Application {
         //Escena cargadorPreguntas = new CargarPreguntasVista();
         //Escena iniciarJuego = new IniciarJuegoVista();
         //Escena registrarJugadores = new RegistrarJugadoresVista();
-        //Escena puntosobtenidos = new PuntosObtenidosVista();
+        Escena puntosobtenidos = new PuntosObtenidosVista();
         //Escena ganador = new GanadorVista();
 
-        Jugada jugada = new Jugada(new VerdaderoFalsoConPenalidad("Estamos en el año 2021"), new Jugador("Carlos"));
-        Escena previaPregunta = new PreviaPreguntaVista(jugada);
+        //Jugada jugada = new Jugada(new VerdaderoFalsoConPenalidad("Estamos en el año 2021"), new Jugador("Carlos"));
+        //Escena previaPregunta = new PreviaPreguntaVista(jugada);
 
         //stage.setScene(crearJuego.obtenerEscena());
         //stage.setScene(cargadorPreguntas.obtenerEscena());
         //stage.setScene(iniciarJuego.obtenerEscena());
         //stage.setScene(registrarJugadores.obtenerEscena());
-        //stage.setScene(puntosobtenidos.obtenerEscena());
-        stage.setScene(previaPregunta.obtenerEscena());
+        stage.setScene(puntosobtenidos.obtenerEscena());
+        //stage.setScene(previaPregunta.obtenerEscena());
         //stage.setScene(ganador.obtenerEscena());
         stage.show();
     }
-
-    /*@Override
-    public void start(Stage stage) {
-        Escena cargadorPreguntas = new CargarPreguntasVista();
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Cuál es el apellido de nuestro corrector?");
-        Jugador jugador = new Jugador("Carlos");
-        Jugada jugada = new Jugada(pregunta, jugador);
-        Escena previaPregunta = new PreviaPreguntaVista(jugada);
-        Escena puntosObtenidos = new PuntosObtenidos();
-
-        /*
-        Timer timer = new Timer();
-        TimerTask tarea = new TimerTask() {
-            @Override
-            public void run() {
-                System.exit(0);
-            }
-        };
-
-
-        //stage.setScene(cargadorPreguntas.obtenerEscena());
-
-        stage.setScene(previaPregunta.obtenerEscena());
-        stage.show();
-
-    }*/
-
 
     public static void main(String[] args) {
         launch();
