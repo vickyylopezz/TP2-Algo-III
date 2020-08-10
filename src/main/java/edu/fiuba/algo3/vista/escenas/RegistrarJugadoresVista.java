@@ -6,6 +6,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,20 +20,20 @@ import static javafx.geometry.Pos.TOP_CENTER;
 public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
     @Override
     protected Node cabeceraDerecha() {
-        return null;
+        return new BotonEtiquetaVista("INICIAR",true).obtenerNodo();
     }
 
     @Override
     protected Node cabeceraIzquierda() {
-        return null;
+        return new BotonEtiquetaVista("PREGUNTAS",false).obtenerNodo();
     }
 
     @Override
-    protected Node centro() { return new GrupoDeComponentesVista("Jugador 2").obtenerNodo(); }
+    protected Node centro() { return new GrupoDeComponentesVista("JUGADOR 2").obtenerNodo(); }
 
     @Override
     protected Node centroIzquierda() {
-        return new GrupoDeComponentesVista("Jugador 1").obtenerNodo();
+        return new GrupoDeComponentesVista("JUGADOR 1").obtenerNodo();
     }
 
     @Override

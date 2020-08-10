@@ -8,12 +8,12 @@ public class CargarPreguntasVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node cabeceraDerecha() {
-        return new BotonEtiquetaVista("Jugadores", true).obtenerNodo();
+        return new BotonEtiquetaVista("JUGADORES", true).obtenerNodo();
     }
 
     @Override
     protected Node cabeceraIzquierda() {
-        return new BotonEtiquetaVista("Inicio", false).obtenerNodo();
+        return new BotonEtiquetaVista("INICIO", false).obtenerNodo();
     }
 
     @Override

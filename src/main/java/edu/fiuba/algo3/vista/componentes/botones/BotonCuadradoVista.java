@@ -27,7 +27,8 @@ public class BotonCuadradoVista implements Componente {
         this.estilo += "-fx-font-weight: bold;";
 
         this.boton.setStyle(this.estilo);
-        this.boton.setPrefHeight(50);
+        this.boton.setPrefHeight(75);
+        this.boton.setPrefWidth(135);
         this.boton.setBorder(Border.EMPTY);
     }
 

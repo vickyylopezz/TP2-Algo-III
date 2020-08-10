@@ -27,7 +27,7 @@ public abstract class EstructuraPrincipalVista implements Escena {
     private Node cabecera() {
         HBox cabecera = new HBox();
         cabecera.setSpacing(10);
-        cabecera.setPadding(new Insets(10, 10, 10, 10));
+        cabecera.setPadding(new Insets(0, 0, 0, 0));
         cabecera.setAlignment(Pos.TOP_CENTER);
 
         StackPane izq = new StackPane();
@@ -78,16 +78,16 @@ public abstract class EstructuraPrincipalVista implements Escena {
 
     private Node nucleo() {
         VBox nucleo = new VBox();
-        nucleo.setSpacing(10);
-        nucleo.setPadding(new Insets(10, 10, 10, 10));
         nucleo.setAlignment(Pos.CENTER);
+        nucleo.setSpacing(10);
+        nucleo.setPadding(new Insets(0, 0, 0, 0));
 
         StackPane izq = new StackPane();
-        izq.setAlignment(Pos.CENTER_LEFT);
+        izq.setAlignment(Pos.TOP_CENTER);
         StackPane cen = new StackPane();
         cen.setAlignment(Pos.CENTER);
         StackPane der = new StackPane();
-        der.setAlignment(Pos.CENTER_RIGHT);
+        der.setAlignment(Pos.BOTTOM_CENTER);
 
         Node contenidoIzq = this.centroIzquierda();
         Node contenidoCen = this.centro();
