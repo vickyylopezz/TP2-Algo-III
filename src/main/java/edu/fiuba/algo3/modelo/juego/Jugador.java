@@ -11,7 +11,6 @@ import java.util.ArrayList;
 public class Jugador {
 
     private String nombre;
-    private Puntaje puntaje;
     private ArrayList<Respuesta> respuestas;
     private ArrayList<Comodin> comodines;
 
@@ -19,7 +18,6 @@ public class Jugador {
         this.nombre = nombre;
         this.respuestas = new ArrayList<>();
         this.comodines = new ArrayList<>();
-        this.puntaje = new Puntaje();
     }
 
     public String nombre() {
@@ -48,7 +46,13 @@ public class Jugador {
         this.comodines.remove(comodin);
     }
 
-    public Punto puntajeTotal() { return this.puntaje; }
+    public Punto puntajeTotal() {
+        Puntaje puntajeTotal = new Puntaje();
+        for (Respuesta respuesta : this.respuestas){
+            puntajeTotal.agregarPunto(respuesta.puntaje());
+        }
+        return puntajeTotal;
+    }
 
     public void validarComodin(Comodin comodin) throws JugadorError {
         if (!this.comodines.contains(comodin)) {

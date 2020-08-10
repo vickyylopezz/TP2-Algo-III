@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.escenas;
 
+import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -13,6 +14,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
 public class PuntosObtenidosVista extends EstructuraPrincipalVista {
+
     @Override
     protected Node cabeceraDerecha() {
         return null;
@@ -82,6 +84,7 @@ public class PuntosObtenidosVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node centroDerecha() {
-        return null;
+        BotonCuadradoVista botonContinuar = new BotonCuadradoVista("Continuar");
+        return botonContinuar.obtenerNodo();
     }
 }

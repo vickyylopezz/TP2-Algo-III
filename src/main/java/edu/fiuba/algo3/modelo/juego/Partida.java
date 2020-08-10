@@ -30,8 +30,8 @@ public class Partida {
         if (!this.turnosFinalizados() || this.accionesDeFinalizacion) return;
         this.accionesDeFinalizacion = true;
 
-        agregarRespuestas();
         aplicarComodines();
+        agregarRespuestas();
     }
 
     public Jugada obtenerJugada() {
