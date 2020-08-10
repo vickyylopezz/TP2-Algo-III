@@ -1,7 +1,12 @@
 package edu.fiuba.algo3.modelo.util.punto;
+
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
+
 //Componente
 public abstract class Punto {
-    abstract public Integer obtenerValor();
+    abstract public Punto obtenerPunto() throws PuntoError;
+
+    abstract public Integer obtenerValor() throws PuntoError;
 
     abstract public Punto copiar();
 
@@ -10,4 +15,7 @@ public abstract class Punto {
         for (int i = 0; i < factor; i++) puntaje.agregarPunto(this.copiar());
         return puntaje;
     }
+
+
 }
+

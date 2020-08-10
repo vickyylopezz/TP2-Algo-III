@@ -2,10 +2,9 @@ package edu.fiuba.algo3.modelo.util.punto;
 
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 
-//Hoja
-public class PuntoNulo extends Punto {
+public class PuntoExacto extends Punto {
 
-    private final Integer valor = 0;
+    private Integer valor = 0;
 
     @Override
     public Punto obtenerPunto() {
@@ -21,5 +20,12 @@ public class PuntoNulo extends Punto {
     public Punto copiar() { return this.clone(); }
 
     @Override
-    public PuntoNulo clone() { return new PuntoNulo(); }
+    public PuntoExacto clone() { return new PuntoExacto(); }
+
+    public void agregarValor(Punto punto){
+        try{this.valor += punto.obtenerValor();}
+            catch (PuntoError excepcion){
+                this.agregarValor(punto);
+            }
+    }
 }
