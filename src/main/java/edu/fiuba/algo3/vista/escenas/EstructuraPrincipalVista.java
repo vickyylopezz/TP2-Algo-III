@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.escenas;
 
+import edu.fiuba.algo3.vista.Resources;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -58,7 +59,7 @@ public abstract class EstructuraPrincipalVista implements Escena {
         Group contenedor = new Group();
 
         try {
-            FileInputStream stream = new FileInputStream("src/main/resources/logo.png");
+            FileInputStream stream = new FileInputStream(Resources.LogoPrincipalRuta());
             ImageView logo = new ImageView(new Image(stream));
 
             logo.setPreserveRatio(true);

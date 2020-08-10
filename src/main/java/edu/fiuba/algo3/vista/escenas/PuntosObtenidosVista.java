@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.escenas;
 
+import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -31,7 +32,7 @@ public class PuntosObtenidosVista extends EstructuraPrincipalVista {
 
         Group contenedorIcono1 = new Group();
         try {
-            FileInputStream stream = new FileInputStream("src/main/resources/jugador.png");
+            FileInputStream stream = new FileInputStream(Resources.IconoJugadorBlancoRuta());
             ImageView icono1 = new ImageView(new Image(stream));
             icono1.setFitHeight(150);
 
@@ -53,7 +54,7 @@ public class PuntosObtenidosVista extends EstructuraPrincipalVista {
 
         Group contenedorIcono2 = new Group();
         try {
-            FileInputStream stream = new FileInputStream("src/main/resources/jugador.png");
+            FileInputStream stream = new FileInputStream(Resources.IconoJugadorBlancoRuta());
             ImageView icono2 = new ImageView(new Image(stream));
             icono2.setFitHeight(150);
 

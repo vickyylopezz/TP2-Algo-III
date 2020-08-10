@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.escenas;
 
+import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
@@ -37,7 +38,7 @@ public class GanadorVista extends EstructuraPrincipalVista{
 
         Group contenedorIcono = new Group();
         try {
-            FileInputStream stream = new FileInputStream("src/main/resources/jugador.png");
+            FileInputStream stream = new FileInputStream(Resources.IconoJugadorBlancoRuta());
             ImageView icono = new ImageView(new Image(stream));
             icono.setPreserveRatio(true);
             icono.setFitHeight(150);

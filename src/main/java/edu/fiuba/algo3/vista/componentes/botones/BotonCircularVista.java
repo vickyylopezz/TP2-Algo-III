@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.componentes.botones;
 
+import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.Componente;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -28,11 +29,11 @@ public class BotonCircularVista implements Componente {
     }
 
     static public BotonCircularVista crearFlechaSiguiente() {
-        return BotonCircularVista.crearConImagen("src/main/resources/adelante.png");
+        return BotonCircularVista.crearConImagen(Resources.IconoFlechaDerechaRuta());
     }
 
     static public BotonCircularVista crearFlechaAntras() {
-        return BotonCircularVista.crearConImagen("src/main/resources/atras.png");
+        return BotonCircularVista.crearConImagen(Resources.IconoFlechaIzquierdaRuta());
     }
 
     static public BotonCircularVista crearConImagen(String path) {
