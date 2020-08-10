@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.vista.componentes.botones;
 
 import edu.fiuba.algo3.vista.componentes.Componente;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContentDisplay;
@@ -15,6 +17,9 @@ public class BotonCircularVista implements Componente {
 
     private Button boton;
     private String estilo;
+
+    private Boolean activado;
+    private EventHandler<ActionEvent> clickAccion;
 
     static public BotonCircularVista crearConTexto(String texto) {
         BotonCircularVista boton = new BotonCircularVista();
@@ -39,6 +44,8 @@ public class BotonCircularVista implements Componente {
     public BotonCircularVista() {
         this.boton = new Button();
         this.cargarEstilo();
+
+        this.activar();
     }
 
     private void cargarEstilo() {
@@ -68,12 +75,29 @@ public class BotonCircularVista implements Componente {
         }
     }
 
-    public void desactivar() {
+    /*public void desactivar() {
         this.boton.setStyle(this.estilo + "-fx-background-color: #7D7D7D;");
     }
 
     public void activar() {
         this.boton.setStyle(this.estilo + "-fx-background-color: #9463EB;");
+    }
+*/
+    public void desactivar() {
+        this.activado = false;
+        this.boton.setStyle(this.estilo + "-fx-background-color: #7D7D7D;");
+        this.boton.setOnAction(null);
+    }
+
+    public void activar() {
+        this.activado = true;
+        this.boton.setStyle(this.estilo + "-fx-background-color: #9463EB;");
+        this.boton.setOnAction(this.clickAccion);
+    }
+
+    public void click(EventHandler<ActionEvent> accion) {
+        if (this.activado) this.boton.setOnAction(accion);
+        this.clickAccion = accion;
     }
 
     @Override
