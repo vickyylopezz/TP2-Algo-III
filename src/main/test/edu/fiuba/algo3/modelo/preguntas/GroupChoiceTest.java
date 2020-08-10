@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
@@ -14,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class GroupChoiceTest {
 
     @Test
-    public void GroupChoiceAsignaPuntosAJugador() throws PreguntaError {
+    public void GroupChoiceAsignaPuntosAJugador() throws PreguntaError, PuntoError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Nombres");
@@ -37,7 +38,7 @@ public class GroupChoiceTest {
         opcionesElegidas.add(opciones.get(6));
         opcionesElegidas.add(opciones.get(9));
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),3);
+        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerPunto().obtenerValor(),3);
 
     }
 
@@ -95,7 +96,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void GroupChoiceAsignaPuntosAJugadores() throws PreguntaError {
+    public void GroupChoiceAsignaPuntosAJugadores() throws PreguntaError, PuntoError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Colores");
@@ -125,13 +126,13 @@ public class GroupChoiceTest {
         opcionesJugador2.add(opciones.get(7));
         opcionesJugador2.add(opciones.get(8));
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesJugador1).obtenerValor(),3);
-        assertEquals(pregunta.puntajeConOpciones(opcionesJugador2).obtenerValor(),2);
+        assertEquals(pregunta.puntajeConOpciones(opcionesJugador1).obtenerPunto().obtenerValor(),3);
+        assertEquals(pregunta.puntajeConOpciones(opcionesJugador2).obtenerPunto().obtenerValor(),2);
 
     }
 
     @Test
-    public void GroupChoiceNoSeAsignanPuntosAJugadorQueRespondeTodasMal() throws PreguntaError {
+    public void GroupChoiceNoSeAsignanPuntosAJugadorQueRespondeTodasMal() throws PreguntaError, PuntoError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Flores");
@@ -154,12 +155,12 @@ public class GroupChoiceTest {
         opcionesElegidas.add(opciones.get(7));
         opcionesElegidas.add(opciones.get(9));
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),0);
+        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerPunto().obtenerValor(),0);
 
     }
 
     @Test
-    public void GroupChoiceAsignanTodosLosPuntosAJugadorQueRespondeTodasBien() throws PreguntaError {
+    public void GroupChoiceAsignanTodosLosPuntosAJugadorQueRespondeTodasBien() throws PreguntaError, PuntoError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Flores");
@@ -183,7 +184,7 @@ public class GroupChoiceTest {
         opcionesElegidas.add(opciones.get(6));
         opcionesElegidas.add(opciones.get(8));
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),5);
+        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerPunto().obtenerValor(),5);
 
     }
 

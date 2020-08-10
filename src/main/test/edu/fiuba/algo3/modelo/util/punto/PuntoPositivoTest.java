@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,7 +9,7 @@ public class PuntoPositivoTest {
 
     // obtenerValor
     @Test
-    public void obtenerValorDevuelveUno() {
+    public void obtenerValorDevuelveUno(){
         PuntoPositivo punto = new PuntoPositivo();
 
         assertEquals(1, punto.obtenerValor());
@@ -16,7 +17,7 @@ public class PuntoPositivoTest {
 
     // copiar
     @Test
-    public void copiarDevuelveUnPuntoConElMismoValor() {
+    public void copiarDevuelveUnPuntoConElMismoValor() throws PuntoError {
         PuntoPositivo punto = new PuntoPositivo();
 
         Punto copia = punto.copiar();
@@ -36,38 +37,38 @@ public class PuntoPositivoTest {
 
     // multiplicarPorFactor
     @Test
-    public void multiplicarPorFactorConFactorNegativoDevuelvePuntoConValorCero() {
+    public void multiplicarPorFactorConFactorNegativoDevuelvePuntoConValorCero() throws PuntoError {
         PuntoPositivo puntoPositivo = new PuntoPositivo();
 
         Punto punto = puntoPositivo.multiplicarPorFactor(-4);
 
-        assertEquals(0, punto.obtenerValor());
+        assertEquals(0, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConFactorCeroDevuelvePuntoConValorCero() {
+    public void multiplicarPorFactorConFactorCeroDevuelvePuntoConValorCero() throws PuntoError {
         PuntoPositivo puntoPositivo = new PuntoPositivo();
 
         Punto punto = puntoPositivo.multiplicarPorFactor(0);
 
-        assertEquals(0, punto.obtenerValor());
+        assertEquals(0, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConFactorDosDevuelveUnPuntoConElDobleDelValor() {
+    public void multiplicarPorFactorConFactorDosDevuelveUnPuntoConElDobleDelValor() throws PuntoError {
         PuntoPositivo puntoPositivo = new PuntoPositivo();
 
         Punto punto = puntoPositivo.multiplicarPorFactor(2);
 
-        assertEquals(2, punto.obtenerValor());
+        assertEquals(2, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConFactorGrandeDevuelveLoCorrecto() {
+    public void multiplicarPorFactorConFactorGrandeDevuelveLoCorrecto() throws PuntoError {
         PuntoPositivo puntoPositivo = new PuntoPositivo();
 
         Punto punto = puntoPositivo.multiplicarPorFactor(25);
 
-        assertEquals(25, punto.obtenerValor());
+        assertEquals(25, punto.obtenerPunto().obtenerValor());
     }
 }

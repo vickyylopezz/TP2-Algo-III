@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.util.punto.*;
 import org.junit.jupiter.api.Test;
@@ -79,7 +80,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seAplicaARespuestasCorrectasYSeGuardaEnListaDeComodinesDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError {
+    public void seAplicaARespuestasCorrectasYSeGuardaEnListaDeComodinesDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
 
         Jugador unJugador = mock(Jugador.class);
@@ -105,7 +106,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError {
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
 
         Jugador unJugador = mock(Jugador.class);
@@ -131,7 +132,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYSeGuardaEnListaDeComodinesDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError {
+    public void seAplicaARespuestasIncorrectasYSeGuardaEnListaDeComodinesDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
 
         Jugador unJugador = mock(Jugador.class);
@@ -157,26 +158,26 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError {
+    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
         Punto puntoNuevo = multiplicador.aplicarComodinAPunto(new PuntoNulo());
 
-        assertEquals(0,puntoNuevo.obtenerValor());
+        assertEquals(0,puntoNuevo.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError {
+    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
         Punto puntoNuevo = multiplicador.aplicarComodinAPunto(new PuntoPositivo());
 
-        assertEquals(2,puntoNuevo.obtenerValor());
+        assertEquals(2,puntoNuevo.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError {
+    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
         Punto puntoNuevo = multiplicador.aplicarComodinAPunto(new PuntoNegativo());
 
-        assertEquals(-2,puntoNuevo.obtenerValor());
+        assertEquals(-2,puntoNuevo.obtenerPunto().obtenerValor());
     }
 }

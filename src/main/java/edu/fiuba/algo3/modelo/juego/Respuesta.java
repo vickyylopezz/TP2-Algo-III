@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 
@@ -48,11 +49,11 @@ public class Respuesta {
         this.comodines.add(comodin);
     }
 
-    public boolean esCorrecta() {
+    public boolean esCorrecta() throws PuntoError {
         return this.pregunta.opcionesCorrectas(this.opcionesElegidas());
     }
 
-    public Punto puntaje() {
+    public Punto puntaje() throws PuntoError {
         Punto puntaje = this.pregunta.puntajeConOpciones(this.opciones);
 
         for (Comodin comodin: comodines) {

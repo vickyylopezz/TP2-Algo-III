@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceConPenalidad;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
@@ -39,7 +40,7 @@ public class MultipleChoiceConPenalidadTest {
     }
 
     @Test
-    public void MultipleChoiceConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError {
+    public void MultipleChoiceConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError, PuntoError {
         MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
@@ -69,10 +70,10 @@ public class MultipleChoiceConPenalidadTest {
         Integer esperadoJugador3 = 1;
         Integer esperadoJugador4 = -2;
 
-        assertEquals(esperadoJugador1, preguntaMCCP.puntajeConOpciones(opcionesElegidas1).obtenerValor());
-        assertEquals(esperadoJugador2, preguntaMCCP.puntajeConOpciones(opcionesElegidas2).obtenerValor());
-        assertEquals(esperadoJugador3, preguntaMCCP.puntajeConOpciones(opcionesElegidas3).obtenerValor());
-        assertEquals(esperadoJugador4, preguntaMCCP.puntajeConOpciones(opcionesElegidas4).obtenerValor());
+        assertEquals(esperadoJugador1, preguntaMCCP.puntajeConOpciones(opcionesElegidas1).obtenerPunto().obtenerValor());
+        assertEquals(esperadoJugador2, preguntaMCCP.puntajeConOpciones(opcionesElegidas2).obtenerPunto().obtenerValor());
+        assertEquals(esperadoJugador3, preguntaMCCP.puntajeConOpciones(opcionesElegidas3).obtenerPunto().obtenerValor());
+        assertEquals(esperadoJugador4, preguntaMCCP.puntajeConOpciones(opcionesElegidas4).obtenerPunto().obtenerValor());
     }
 
     @Test
@@ -89,11 +90,11 @@ public class MultipleChoiceConPenalidadTest {
     }
 
     @Test
-    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() {
+    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PuntoError {
         MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Cuál es el apellido de nuestro corrector?");
         ArrayList<Opcion> opciones = new ArrayList<>();
 
-        assertEquals(0, preguntaMCCP.puntajeConOpciones(opciones).obtenerValor());
+        assertEquals(0, preguntaMCCP.puntajeConOpciones(opciones).obtenerPunto().obtenerValor());
     }
 
 }
