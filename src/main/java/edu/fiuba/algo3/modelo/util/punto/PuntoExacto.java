@@ -22,10 +22,10 @@ public class PuntoExacto extends Punto {
     @Override
     public PuntoExacto clone() { return new PuntoExacto(); }
 
-    public void agregarValor(Punto punto){
+    public void agregarValor(Punto punto) throws PuntoError {
         try{this.valor += punto.obtenerValor();}
             catch (PuntoError excepcion){
-                this.agregarValor(punto);
+                this.agregarValor(punto.obtenerPunto());
             }
     }
 }
