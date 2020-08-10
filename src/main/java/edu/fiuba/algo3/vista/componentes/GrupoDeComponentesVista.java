@@ -17,6 +17,7 @@ public class GrupoDeComponentesVista {
 
     private final String titulo;
     private Node nodo;
+    private TextField texto;
 
     public GrupoDeComponentesVista(String titulo) {
         this.titulo = titulo;
@@ -49,7 +50,13 @@ public class GrupoDeComponentesVista {
         TextField texto = new TextField();
         texto.setPromptText("Ingresar nombre..");
 
+        this.texto = texto;
+
         return texto;
+    }
+
+    public TextField obtenerTexto() {
+        return this.texto;
     }
 
     private Node etiqueta() {
