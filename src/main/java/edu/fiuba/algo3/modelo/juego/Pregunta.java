@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.juego;
 
+import com.google.gson.JsonObject;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.estados.EstadoPregunta;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
@@ -48,4 +50,6 @@ public abstract class Pregunta {
         for (Opcion opcion: seleccionadas) seleccionables.remove(opcion);
         return seleccionables;
     }
+
+    public void extraerOpciones(JsonObject object) throws PreguntaError {}
 }

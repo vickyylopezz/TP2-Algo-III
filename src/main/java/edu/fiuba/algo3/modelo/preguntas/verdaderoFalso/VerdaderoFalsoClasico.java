@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.preguntas.verdaderoFalso;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.OpcionCorrectaYaAgregadaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.OpcionIncorrectaYaAgregadaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
@@ -33,6 +36,19 @@ public class VerdaderoFalsoClasico extends Pregunta {
         }
         this.opcionIncorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeIncorrecto());
         opciones.add(this.opcionIncorrecta);
+    }
+
+    @Override
+    public void extraerOpciones(JsonObject object) throws PreguntaError {
+        boolean respuesta = object.get("respuesta").getAsBoolean();
+
+        if (respuesta) {
+            agregarOpcionCorrecta("Verdadero");
+            agregarOpcionIncorrecta("Falso");
+        } else {
+            agregarOpcionCorrecta("Falso");
+            agregarOpcionIncorrecta("Verdadero");
+        }
     }
 
 }

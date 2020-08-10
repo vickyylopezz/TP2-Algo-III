@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.preguntas.orderedChoice;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
@@ -19,5 +22,14 @@ public class OrderedChoice extends Pregunta {
             throw new CantidadMaximaDeOpcionesError();
         }
         this.opciones.add(new OpcionClasica(opcionTitulo, new PuntoNulo()));
+    }
+
+    @Override
+    public void extraerOpciones(JsonObject object) throws PreguntaError {
+        JsonArray orden = object.getAsJsonArray("orden");
+        if (orden == null) { return; /* EXCEPCION */ }
+        for (JsonElement opcion: orden){
+            agregarOpcion(opcion.getAsString());
+        }
     }
 }
