@@ -20,12 +20,20 @@ public class PuntoExacto extends Punto {
     public Punto copiar() { return this.clone(); }
 
     @Override
-    public PuntoExacto clone() { return new PuntoExacto(); }
+    public PuntoExacto clone() {
+        PuntoExacto clonado = new PuntoExacto();
+        try {
+            clonado.agregarValor(this);
+        } catch (PuntoError puntoError) {
+            puntoError.printStackTrace();
+        }
+        return clonado;
+    }
 
     public void agregarValor(Punto punto) throws PuntoError {
-        try{this.valor += punto.obtenerValor();}
-            catch (PuntoError excepcion){
+        try{this.valor += punto.obtenerValor();
+        } catch (PuntoError excepcion){
                 this.agregarValor(punto.obtenerPunto());
-            }
+        }
     }
 }
