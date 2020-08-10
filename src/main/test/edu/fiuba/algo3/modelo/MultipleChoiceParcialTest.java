@@ -21,7 +21,7 @@ public class MultipleChoiceParcialTest {
         preguntaMCP.agregarOpcionIncorrecta("Fernando");
         preguntaMCP.agregarOpcionIncorrecta("Catalina");
 
-        assertEquals("¿Quienes son integrantes del grupo PM3?", preguntaMCP.titulo());
+        assertEquals("¿Quienes son integrantes del grupo PM3?", preguntaMCP.obtenerTitulo());
         assertEquals(4, preguntaMCP.obtenerOpciones().size());
     }
 

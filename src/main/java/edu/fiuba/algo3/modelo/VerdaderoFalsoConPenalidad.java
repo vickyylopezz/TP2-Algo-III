@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import java.util.ArrayList;
 
 public class VerdaderoFalsoConPenalidad implements Pregunta {
@@ -65,4 +68,8 @@ public class VerdaderoFalsoConPenalidad implements Pregunta {
         return resultado;
     }
 
+    @Override
+    public void extraerOpciones(JsonObject object){
+        System.out.println("VFPenalidad");
+    }
 }

@@ -21,7 +21,7 @@ public class VerdaderoFalsoClasicoTest {
         preguntavf.agregarOpcionCorrecta("Verdadero");
         preguntavf.agregarOpcionIncorrecta("Falso");
 
-        assertEquals("¿Estamos en Algoritmos y programcion 3?", preguntavf.titulo());
+        assertEquals("¿Estamos en Algoritmos y programcion 3?", preguntavf.obtenerTitulo());
         assertEquals(2, preguntavf.obtenerOpciones().size());
     }
     @Test

@@ -2,13 +2,13 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.eventos.BotonOpcionEventHandler;
 import edu.fiuba.algo3.modelo.*;
-import edu.fiuba.algo3.vistas.RegistroView;
 import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -19,7 +19,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 
 /**
@@ -28,8 +27,8 @@ import java.util.ArrayList;
 public class App extends Application {
     private Stage stage;
 
-    public static void main(String[] args) throws IOException, URISyntaxException {
-        new Kahoot().leerArchivo();
+    public static void main(String[] args) throws IOException, PreguntaError {
+        new Lector().extraerPreguntas();
         launch(args);
     }
 
@@ -38,7 +37,10 @@ public class App extends Application {
         this.stage = stage;
 
         Button empezar = new Button("Empezar");
-        empezar.setMinSize(220, 70);
+        //empezar.setWrapText(true);
+        empezar.setPrefSize(220, 70);
+        //empezar.setMaxSize(220, 70);
+        //empezar.setMaxWidth(220);
         empezar.setOnAction(e -> {
             // muestro la pantalla de usuarios
             Scene registro = pantallaDeRegistro();
@@ -58,6 +60,9 @@ public class App extends Application {
         indicadorJugador2.setFont(new Font(15));
         HBox indicadorJugadores = new HBox(200, indicadorJugador1, indicadorJugador2);
         indicadorJugadores.setAlignment(Pos.CENTER);
+
+        //Label a = new Label(":-)");
+        //a.setStyle("-fx-background-color: aqua");
 
         // CAMPOS DE TEXTO
         TextField campo1 = new TextField();
@@ -123,7 +128,7 @@ public class App extends Application {
     }
 
     public Scene crearEscenaJuegoCon(MultipleChoiceParcial pregunta, ArrayList<Jugador> jugadores) {
-        Text consigna = new Text(pregunta.titulo());
+        Text consigna = new Text(pregunta.obtenerTitulo());
         Text nombre1 = new Text("Jugador 1: " + jugadores.get(0).nombre());
         Text nombre2 = new Text("Jugador 2: " + jugadores.get(1).nombre());
 
@@ -149,8 +154,6 @@ public class App extends Application {
 
         return (new Scene(grillaOpciones, 800,600));
     }
-
-
 
     public void cambiarEscena(Scene scene, Stage stage){
         stage.setScene(scene);
