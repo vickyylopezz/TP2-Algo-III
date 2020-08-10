@@ -24,10 +24,10 @@ import java.util.ArrayList;
 public class Lector {
     private ArrayList<Pregunta> preguntas = new ArrayList<>();
 
-    public void extraerPreguntas() throws IOException, PreguntaError {
-        File file = new File(getClass().getClassLoader().getResource("Preguntas2.json").getFile());
+    public void extraerPreguntas(File archivo) throws IOException, PreguntaError {
+        //File file = new File(getClass().getClassLoader().getResource("Preguntas2.json").getFile());
 
-        JsonReader reader = new JsonReader(new FileReader(file));
+        JsonReader reader = new JsonReader(new FileReader(archivo));
         JsonElement parser = JsonParser.parseReader(reader);
 
         JsonArray array = parser.getAsJsonArray();
@@ -36,7 +36,7 @@ public class Lector {
             preguntas.add(crearPregunta(object));
         }
 
-        mostrarContenido(); // DEBUG
+        //mostrarContenido(); // DEBUG
     }
 
     private Pregunta crearPregunta(JsonObject object) throws PreguntaError {
