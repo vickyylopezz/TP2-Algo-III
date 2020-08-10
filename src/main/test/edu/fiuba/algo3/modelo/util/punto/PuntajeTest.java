@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntajeNoTieneValorError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -8,23 +10,23 @@ public class PuntajeTest {
 
     // obtenerValor
     @Test
-    public void obtenerValorSinAgregarPuntoEsCero() {
+    public void obtenerValorSinAgregarPuntoEsCero() throws PuntoError {
         Puntaje puntaje = new Puntaje();
 
-        assertEquals(0, puntaje.obtenerValor());
+        assertEquals(0, puntaje.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void obtenerValorAgregandoPuntoPositivoValorDevuelveUno() {
+    public void obtenerValorAgregandoPuntoPositivoValorDevuelveUno() throws PuntoError {
         Puntaje puntaje = new Puntaje();
 
         puntaje.agregarPunto(new PuntoPositivo());
 
-        assertEquals(1, puntaje.obtenerValor());
+        assertEquals(1, puntaje.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void obtenerValorAgregandoVariosPuntosLosSuma() {
+    public void obtenerValorAgregandoVariosPuntosLosSuma() throws PuntoError {
         Puntaje puntaje = new Puntaje();
 
         puntaje.agregarPunto(new PuntoPositivo());
@@ -35,31 +37,31 @@ public class PuntajeTest {
         puntaje.agregarPunto(new PuntoNegativo());
         puntaje.agregarPunto(new PuntoNegativo());
 
-        assertEquals(-1, puntaje.obtenerValor());
+        assertEquals(-1, puntaje.obtenerPunto().obtenerValor());
     }
 
     // agregarPunto
     @Test
-    public void agregarPuntoNuloNoHaceNada() {
+    public void agregarPuntoNuloNoHaceNada() throws PuntoError {
         Puntaje puntaje = new Puntaje();
 
         puntaje.agregarPunto(null);
 
-        assertEquals(0, puntaje.obtenerValor());
+        assertEquals(0, puntaje.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void agregarPuntoPositivoAumentaElValor() {
+    public void agregarPuntoPositivoAumentaElValor() throws PuntoError {
         Puntaje puntaje = new Puntaje();
 
         puntaje.agregarPunto(new PuntoPositivo());
 
-        assertEquals(1, puntaje.obtenerValor());
+        assertEquals(1, puntaje.obtenerPunto().obtenerValor());
     }
 
     // copiar
     @Test
-    public void copiarDevuelveUnPuntoConElMismoValor() {
+    public void copiarDevuelveUnPuntoConElMismoValor() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -68,12 +70,12 @@ public class PuntajeTest {
 
         Punto copia = puntaje.copiar();
 
-        assertEquals(puntaje.obtenerValor(), copia.obtenerValor());
+        assertEquals(puntaje.obtenerPunto().obtenerValor(), copia.obtenerPunto().obtenerValor());
     }
 
     // clone
     @Test
-    public void cloneDevuelveUnPuntajeConElMismoValor() {
+    public void cloneDevuelveUnPuntajeConElMismoValor() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -82,12 +84,12 @@ public class PuntajeTest {
 
         Puntaje copia = puntaje.clone();
 
-        assertEquals(puntaje.obtenerValor(), copia.obtenerValor());
+        assertEquals(puntaje.obtenerPunto().obtenerValor(), copia.obtenerPunto().obtenerValor());
     }
 
     // multiplicarPorFactor
     @Test
-    public void multiplicarPorFactorConPuntajePositivoConFactorNegativoDevuelvePuntoConValorCero() {
+    public void multiplicarPorFactorConPuntajePositivoConFactorNegativoDevuelvePuntoConValorCero() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -96,11 +98,11 @@ public class PuntajeTest {
 
         Punto punto = puntaje.multiplicarPorFactor(-4);
 
-        assertEquals(0, punto.obtenerValor());
+        assertEquals(0, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajePositivoConFactorCeroDevuelvePuntoConValorCero() {
+    public void multiplicarPorFactorConPuntajePositivoConFactorCeroDevuelvePuntoConValorCero() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -109,11 +111,11 @@ public class PuntajeTest {
 
         Punto punto = puntaje.multiplicarPorFactor(0);
 
-        assertEquals(0, punto.obtenerValor());
+        assertEquals(0, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajePositivoConFactorDosDevuelveUnPuntoConElDobleDelValor() {
+    public void multiplicarPorFactorConPuntajePositivoConFactorDosDevuelveUnPuntoConElDobleDelValor() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -123,11 +125,11 @@ public class PuntajeTest {
 
         Punto punto = puntaje.multiplicarPorFactor(2);
 
-        assertEquals(4, punto.obtenerValor());
+        assertEquals(4, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajePositivoConFactorGrandeDevuelveLoCorrecto() {
+    public void multiplicarPorFactorConPuntajePositivoConFactorGrandeDevuelveLoCorrecto() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -137,11 +139,11 @@ public class PuntajeTest {
 
         Punto punto = puntaje.multiplicarPorFactor(25);
 
-        assertEquals(50, punto.obtenerValor());
+        assertEquals(50, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajeNegativoConFactorNegativoDevuelvePuntoConValorCero() {
+    public void multiplicarPorFactorConPuntajeNegativoConFactorNegativoDevuelvePuntoConValorCero() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -152,11 +154,11 @@ public class PuntajeTest {
 
         Punto punto = puntaje.multiplicarPorFactor(-4);
 
-        assertEquals(0, punto.obtenerValor());
+        assertEquals(0, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajeNegativoConFactorCeroDevuelvePuntoConValorCero() {
+    public void multiplicarPorFactorConPuntajeNegativoConFactorCeroDevuelvePuntoConValorCero() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -167,11 +169,11 @@ public class PuntajeTest {
 
         Punto punto = puntaje.multiplicarPorFactor(0);
 
-        assertEquals(0, punto.obtenerValor());
+        assertEquals(0, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajeNegativoConFactorDosDevuelveUnPuntoConElDobleDelValor() {
+    public void multiplicarPorFactorConPuntajeNegativoConFactorDosDevuelveUnPuntoConElDobleDelValor() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -182,11 +184,11 @@ public class PuntajeTest {
 
         Punto punto = puntaje.multiplicarPorFactor(3);
 
-        assertEquals(-9, punto.obtenerValor());
+        assertEquals(-9, punto.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajeNegativoConFactorGrandeDevuelveLoCorrecto() {
+    public void multiplicarPorFactorConPuntajeNegativoConFactorGrandeDevuelveLoCorrecto() throws PuntoError {
         Puntaje puntaje = new Puntaje();
         puntaje.agregarPunto(new PuntoPositivo());
         puntaje.agregarPunto(new PuntoNegativo());
@@ -196,6 +198,6 @@ public class PuntajeTest {
 
         Punto punto = puntaje.multiplicarPorFactor(30);
 
-        assertEquals(-60, punto.obtenerValor());
+        assertEquals(-60, punto.obtenerPunto().obtenerValor());
     }
 }

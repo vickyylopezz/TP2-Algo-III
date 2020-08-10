@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
@@ -80,7 +81,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError {
+    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -103,7 +104,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError {
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -126,7 +127,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError {
+    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -148,27 +149,27 @@ public class ExclusividadTest {
         verify(otraRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
     }
     @Test
-    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError {
+    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
         Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoNulo());
 
-        assertEquals(0,puntoNuevo.obtenerValor());
+        assertEquals(0,puntoNuevo.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError {
+    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
         Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoPositivo());
 
-        assertEquals(2,puntoNuevo.obtenerValor());
+        assertEquals(2,puntoNuevo.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError {
+    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
         Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoNegativo());
 
-        assertEquals(-2,puntoNuevo.obtenerValor());
+        assertEquals(-2,puntoNuevo.obtenerPunto().obtenerValor());
     }
 }
 

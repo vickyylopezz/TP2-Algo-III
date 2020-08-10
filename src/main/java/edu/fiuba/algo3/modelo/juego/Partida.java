@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
@@ -24,7 +25,7 @@ public class Partida {
 
     public Boolean existeTurno() { return this.turno < this.jugadas.size(); }
 
-    public void siguienteTurno() {
+    public void siguienteTurno() throws PuntoError {
         this.turno++;
 
         if (!this.turnosFinalizados() || this.accionesDeFinalizacion) return;
@@ -45,7 +46,7 @@ public class Partida {
         }
     }
 
-    private void aplicarComodines() {
+    private void aplicarComodines() throws PuntoError {
         ArrayList<Respuesta> respuestas = this.respuestasJugadas();
 
         for (Comodin comodin: this.comodinesJugadas()) {

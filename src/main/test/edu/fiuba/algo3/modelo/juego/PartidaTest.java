@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.juego;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void existeTurnoConUnJugadorAlFinalDeLosTurnosDevuelveFalse() {
+    public void existeTurnoConUnJugadorAlFinalDeLosTurnosDevuelveFalse() throws PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
         ArrayList<Jugador> jugadores = new ArrayList<>();
         jugadores.add(mock(Jugador.class));
@@ -50,7 +51,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void existeTurnoEntrePorCadaJugadaEsTrueAlFinalEsFalse() {
+    public void existeTurnoEntrePorCadaJugadaEsTrueAlFinalEsFalse() throws PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -77,7 +78,7 @@ public class PartidaTest {
 
     // sigueinteTurno
     @Test
-    public void siguienteTurnoIncrementaElTurnoDeAUno() {
+    public void siguienteTurnoIncrementaElTurnoDeAUno() throws PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -98,7 +99,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void siguienteTurnoFinalizadoLosTurnosAgregaLasRespuestasALosJugadores() {
+    public void siguienteTurnoFinalizadoLosTurnosAgregaLasRespuestasALosJugadores() throws PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Jugador jugador1 = mock(Jugador.class);
@@ -124,7 +125,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void siguienteTurnoFinalizadoLosTurnosAplicaLosComodinesALasRespuestas() throws JugadorError, ComodinError {
+    public void siguienteTurnoFinalizadoLosTurnosAplicaLosComodinesALasRespuestas() throws JugadorError, ComodinError, PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodin1 = mock(Comodin.class);
@@ -167,7 +168,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void siguienteTurnoFinalizadoLosTurnosSacaElComodinAplicadoDelJugador() throws JugadorError, ComodinError {
+    public void siguienteTurnoFinalizadoLosTurnosSacaElComodinAplicadoDelJugador() throws JugadorError, ComodinError, PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodin1 = mock(Comodin.class);
@@ -232,7 +233,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void obtenerJugadaTeDevuelveLaJugadaDelTurno() {
+    public void obtenerJugadaTeDevuelveLaJugadaDelTurno() throws PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -253,7 +254,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void obtenerJugadaDespuesDeTodosLosTurnosDevuelveNull() {
+    public void obtenerJugadaDespuesDeTodosLosTurnosDevuelveNull() throws PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -274,7 +275,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void obtenerJugadaVariasVecesSobreElMismoTurnoTeDevuelveLaMismaJugada() {
+    public void obtenerJugadaVariasVecesSobreElMismoTurnoTeDevuelveLaMismaJugada() throws PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         ArrayList<Jugador> jugadores = new ArrayList<>();

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas.estados;
 
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntaje;
@@ -16,18 +17,18 @@ public abstract class EstadoPregunta {
         this.calculadorPuntaje = calculadorPuntaje;
     }
 
-    public Punto puntajeConOpciones(Pregunta pregunta, ArrayList<Opcion> opciones) {
+    public Punto puntajeConOpciones(Pregunta pregunta, ArrayList<Opcion> opciones) throws PuntoError {
         return this.calculadorPuntaje.calcular(pregunta, opciones);
     }
 
-    public Boolean opcionesCorrectas(Pregunta pregunta, ArrayList<Opcion> opciones) {
+    public Boolean opcionesCorrectas(Pregunta pregunta, ArrayList<Opcion> opciones) throws PuntoError {
         for (Opcion opcion: opciones) {
             if (opcion.obtenerPunto().obtenerValor() != 1) return false;
         }
         return opciones.size() == this.cantidadOpcionesCorrectas(pregunta);
     }
 
-    public Integer cantidadOpcionesCorrectas(Pregunta pregunta) {
+    public Integer cantidadOpcionesCorrectas(Pregunta pregunta) throws PuntoError {
         Integer correctas = 0;
         for (Opcion opcion: pregunta.obtenerOpciones()) {
             if (opcion.obtenerPunto().obtenerValor() == 1) correctas++;
