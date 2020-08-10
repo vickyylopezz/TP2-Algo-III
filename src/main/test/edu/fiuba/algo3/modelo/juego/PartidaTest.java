@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.juego;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -250,7 +251,7 @@ public class PartidaTest {
 
     // finalizarTurnos
     @Test
-    public void finalizarTurnosConTurnosExistentesNoHaceNada() {
+    public void finalizarTurnosConTurnosExistentesNoHaceNada() throws PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -270,7 +271,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void finalizarTurnosAgregaLasRespuestasALosJugadores() {
+    public void finalizarTurnosAgregaLasRespuestasALosJugadores() throws PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Jugador jugador1 = mock(Jugador.class);
@@ -299,7 +300,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void finalizarTurnosAplicaLosComodinesALasRespuestas() throws JugadorError, ComodinError {
+    public void finalizarTurnosAplicaLosComodinesALasRespuestas() throws JugadorError, ComodinError, PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodin1 = mock(Comodin.class);
@@ -345,7 +346,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void finalizarTurnosSacaElComodinAplicadoDelJugador() throws JugadorError, ComodinError {
+    public void finalizarTurnosSacaElComodinAplicadoDelJugador() throws JugadorError, ComodinError, PuntoError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodin1 = mock(Comodin.class);
