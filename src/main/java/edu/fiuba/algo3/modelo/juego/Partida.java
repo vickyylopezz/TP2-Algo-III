@@ -12,31 +12,30 @@ public class Partida {
 
     private final ArrayList<Jugada> jugadas;
     private Integer turno;
-    private boolean accionesDeFinalizacion;
 
     public Partida(Pregunta pregunta, ArrayList<Jugador> jugadores) {
         this.jugadas = new ArrayList<>();
-        this.turno = 0;
-        this.accionesDeFinalizacion = false;
-
         for (Jugador jugador: jugadores) this.jugadas.add(new Jugada(pregunta, jugador));
     }
 
-    public Boolean existeTurno() { return this.turno < this.jugadas.size(); }
-
-    public void siguienteTurno() {
-        this.turno++;
-
-        if (!this.turnosFinalizados() || this.accionesDeFinalizacion) return;
-        this.accionesDeFinalizacion = true;
-
-        agregarRespuestas();
-        aplicarComodines();
+    public void iniciarTurnos() {
+        if (this.turno != null) return;
+        this.turno = 0;
     }
 
+    public Boolean existeTurno() { return this.turno != null && this.turno < this.jugadas.size(); }
+
+    public void siguienteTurno() { this.turno++; }
+
     public Jugada obtenerJugada() {
-        if (this.turnosFinalizados()) return null;
+        if (!this.existeTurno()) return null;
         return this.jugadas.get(this.turno);
+    }
+
+    public void finalizarTurnos() {
+        if (this.existeTurno()) return;
+        agregarRespuestas();
+        aplicarComodines();
     }
 
     private void agregarRespuestas() {
@@ -52,10 +51,6 @@ public class Partida {
             comodin.aplicarARespuestas(respuestas);
             comodin.obtenerJugador().sacarComodin(comodin);
         }
-    }
-
-    private Boolean turnosFinalizados() {
-        return this.turno >= this.jugadas.size();
     }
 
     private ArrayList<Comodin> comodinesJugadas() {
