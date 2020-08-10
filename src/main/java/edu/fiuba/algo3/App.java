@@ -1,5 +1,6 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.controladores.CargarPreguntaControlador;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
@@ -18,13 +19,11 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, PreguntaError {
-        new Lector().extraerPreguntas();
-
         //Escena crearJuego = new CrearJuegoVista();
         //Escena cargadorPreguntas = new CargarPreguntasVista();
         //Escena iniciarJuego = new IniciarJuegoVista();
         //Escena registrarJugadores = new RegistrarJugadoresVista();
-        Escena puntosobtenidos = new PuntosObtenidosVista();
+        //Escena puntosobtenidos = new PuntosObtenidosVista();
         //Escena ganador = new GanadorVista();
 
         //Jugada jugada = new Jugada(new VerdaderoFalsoConPenalidad("Estamos en el año 2021"), new Jugador("Carlos"));
@@ -34,10 +33,13 @@ public class App extends Application {
         //stage.setScene(cargadorPreguntas.obtenerEscena());
         //stage.setScene(iniciarJuego.obtenerEscena());
         //stage.setScene(registrarJugadores.obtenerEscena());
-        stage.setScene(puntosobtenidos.obtenerEscena());
+        //stage.setScene(puntosobtenidos.obtenerEscena());
         //stage.setScene(previaPregunta.obtenerEscena());
         //stage.setScene(ganador.obtenerEscena());
-        stage.show();
+        //stage.show();
+
+        CargarPreguntaControlador preguntasControlador = new CargarPreguntaControlador(stage);
+        preguntasControlador.mostrarVista();
     }
 
     public static void main(String[] args) {
