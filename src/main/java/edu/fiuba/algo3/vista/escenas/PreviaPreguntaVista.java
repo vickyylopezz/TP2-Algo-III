@@ -23,8 +23,10 @@ public class PreviaPreguntaVista extends EstructuraPrincipalVista {
     @Override
     protected Node cabeceraIzquierda() {
         Label jLabelTurno = new Label("Turno de " + jugada.obtenerJugador().nombre());
-        jLabelTurno.setOpacity(100);
-        jLabelTurno.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18;");
+
+        jLabelTurno.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-background-color: white; -fx-border-color: #9A31E1");
+        jLabelTurno.setPrefHeight(70);
+        jLabelTurno.setPrefWidth(200);
 
         return jLabelTurno;
     }
@@ -39,7 +41,9 @@ public class PreviaPreguntaVista extends EstructuraPrincipalVista {
 
         Label jLabelTituloPregunta = new Label(jugada.tituloPregunta());
         jLabelTituloPregunta.setAlignment(Pos.CENTER);
-        jLabelTituloPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 24; -fx-font-weight: bold");
+        jLabelTituloPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 24; -fx-font-weight: bold; -fx-background-color: white; -fx-border-color: #9A31E1");
+        jLabelTituloPregunta.setPrefHeight(300);
+        jLabelTituloPregunta.setPrefWidth(600);
 
         vbox.getChildren().addAll(jLabelTipoPregunta, jLabelTituloPregunta);
         vbox.setAlignment(Pos.CENTER);
