@@ -15,9 +15,7 @@ public class CrearJuegoVista extends EstructuraPrincipalVista{
     }
 
     @Override
-    protected Node centro() {
-        return new BotonEtiquetaVista("CREAR JUEGO",true).obtenerNodo();
-    }
+    protected Node centro() { return null; }
 
     @Override
     protected Node centroIzquierda() {
@@ -25,7 +23,5 @@ public class CrearJuegoVista extends EstructuraPrincipalVista{
     }
 
     @Override
-    protected Node centroDerecha() {
-        return null;
-    }
+    protected Node centroDerecha() { return new BotonEtiquetaVista("CREAR JUEGO",true).obtenerNodo(); }
 }

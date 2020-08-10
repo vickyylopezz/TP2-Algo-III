@@ -28,42 +28,7 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
     }
 
     @Override
-    protected Node centro() {
-
-        return new GrupoDeComponentesVista("Jugador 2").obtenerNodo();
-
-        /*VBox boxJugador = new VBox();
-        boxJugador.setStyle("-fx-border-radius: 1;-fx-border-color: grey; -fx-background-radius: 1; -fx-background-color: white");
-
-        Group contenedorIcono = new Group();
-        try {
-            FileInputStream stream = new FileInputStream("src/main/resources/jugador.png");
-            ImageView icono = new ImageView(new Image(stream));
-            icono.setPreserveRatio(true);
-            icono.setFitHeight(10);
-
-            contenedorIcono.getChildren().add(icono);
-        } catch (FileNotFoundException e) { e.printStackTrace(); }
-
-        boxJugador.getChildren().addAll(contenedorIcono);
-        boxJugador.setAlignment(Pos.BOTTOM_CENTER);
-        boxJugador.setMaxHeight(10);
-        boxJugador.setMaxWidth(10);
-        boxJugador.setPadding(new Insets(10,10,10,10));
-
-        Label jLabelTituloJugador = new Label("JUGADOR 1");
-        jLabelTituloJugador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 30; -fx-font-weight: bold");
-        jLabelTituloJugador.setAlignment(TOP_CENTER);
-
-        Label jLabelGanador = new Label("nombre ganador");
-        jLabelGanador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 30; -fx-font-weight: bold");
-
-        VBox vbox = new VBox(20);
-
-        vbox.getChildren().addAll(jLabelTituloJugador,boxJugador,jLabelGanador);
-        vbox.setAlignment(Pos.CENTER);
-        return vbox;*/
-    }
+    protected Node centro() { return new GrupoDeComponentesVista("Jugador 2").obtenerNodo(); }
 
     @Override
     protected Node centroIzquierda() {
@@ -71,8 +36,5 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
     }
 
     @Override
-    protected Node centroDerecha() {
-        return new BotonEtiquetaVista("CONFIRMAR",true).obtenerNodo();
-    }
-
+    protected Node centroDerecha() { return new BotonEtiquetaVista("CONFIRMAR",true).obtenerNodo(); }
 }
