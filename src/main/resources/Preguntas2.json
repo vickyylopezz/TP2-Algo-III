@@ -1,0 +1,67 @@
+[
+{"categoria":"Mythology","tipo":"MCClasico","pregunta":"The ancient Roman god of war was commonly known as which of the following?","opcionesCorrectas":["Mars"],"opcionesIncorrectas":["Jupiter","Juno","Ares"]},
+
+{"categoria":"Entertainment: Video Games","tipo":"MCParcial","pregunta":"In the Nintendo DS game 'Ghost Trick: Phantom Detective', what is the name of the hitman seen at the start of the game?","opcionesCorrectas":["Nearsighted Jeego"],"opcionesIncorrectas":["One Step Ahead Tengo","Missile","Cabanela"]},
+
+{"categoria":"Entertainment: Film","tipo":"MCPenalidad","pregunta":"When was the movie 'Con Air' released?","opcionesCorrectas":["1997"],"opcionesIncorrectas":["1985","1999","1990"]},
+
+{"categoria":"Science & Nature","tipo":"VFClasico","pregunta":"The 'Gympie Stinger' is the deadliest plant in the world.","opcionesCorrectas":["False"],"opcionesIncorrectas":["True"]},
+
+{"categoria":"Geography","tipo":"MCClasico","pregunta":"Which country does Austria not border?","opcionesCorrectas":["France"],"opcionesIncorrectas":["Slovenia","Switzerland","Slovakia"]},
+
+{"categoria":"Geography","tipo":"MCParcial","pregunta":"What is the capital of Jamaica?","opcionesCorrectas":["Kingston"],"opcionesIncorrectas":["San Juan","Port-au-Prince","Bridgetown"]},
+
+{"categoria":"Entertainment: Music","tipo":"MCPenalidad","pregunta":"Which song in rapper Kanye West's album 'The Life of Pablo' features Rihanna?","opcionesCorrectas":["Famous"],"opcionesIncorrectas":["Wolves","Ultralight Beam","Highlights"]},
+
+{"categoria":"Entertainment: Board Games","tipo":"VFClasico","pregunta":"In the game 'Racko' you may pick up ANY card from the discard pile.","opcionesCorrectas":["False"],"opcionesIncorrectas":["True"]},
+
+{"categoria":"Science: Computers","tipo":"MCClasico","pregunta":"If you were to code software in this language you'd only be able to tipo 0's and 1's.","opcionesCorrectas":["Binary"],"opcionesIncorrectas":["JavaScript","C++","Python"]},
+
+{"categoria":"Science & Nature","tipo":"MCParcial","pregunta":"How many bones are in the human body?","opcionesCorrectas":["206"],"opcionesIncorrectas":["203","209","200"]},
+
+{"categoria":"Entertainment: Japanese Anime & Manga","tipo":"MCPenalidad","pregunta":"In the anime, Full Metal Panic!, who is Kaname's best friend?","opcionesCorrectas":["Kyoko Tokiwa"],"opcionesIncorrectas":["Melissa Mao","Ren Mikihara","Teletha 'Tessa' Testarossa"]},
+
+{"categoria":"Entertainment: Film","tipo":"MCClasico","pregunta":"In the 2010 Nightmare on Elm Street reboot, who played Freddy Kruger?","opcionesCorrectas":["Jackie Earle Haley"],"opcionesIncorrectas":["Tyler Mane","Derek Mears","Gunnar Hansen"]},
+
+{"categoria":"Entertainment: Television","tipo":"VFClasico","pregunta":"The television show Doctor Who first aired in 1963.","opcionesCorrectas":["True"],"opcionesIncorrectas":["False"]},
+
+{"categoria":"Entertainment: Video Games","tipo":"MCParcial","pregunta":"What ingredients are required to make a cake in Minecraft?","opcionesCorrectas":["Milk, Sugar, Egg, and Wheat"],"opcionesIncorrectas":["Milk, Bread, Egg, and Wheat","Milk, Sugar Cane, Egg, and Wheat","Milk, Sugar, and Wheat"]},
+
+{"categoria":"Entertainment: Video Games","tipo":"MCPenalidad","pregunta":"In WarioWare: Smooth Moves, which one of these is NOT a Form?","opcionesCorrectas":["The Hotshot"],"opcionesIncorrectas":["The Discard","The Elephant","The Mohawk"]},
+
+{"categoria":"Entertainment: Film","tipo":"MCClasico","pregunta":"In 'Jurassic World', what is the name of the dinosaur that is a genetic hybrid?","opcionesCorrectas":["Indominus Rex"],"opcionesIncorrectas":["Mosasaurus","Pteranodon","Tyrannosaurus Rex "]},
+
+{"categoria":"General Knowledge","tipo":"MCParcial","pregunta":"Amsterdam Centraal station is twinned with what station?","opcionesCorrectas":["London Liverpool Street"],"opcionesIncorrectas":["Frankfurt (Main) Hauptbahnhof","Paris Gare du Nord","Brussels Midi"]},
+
+{"categoria":"Geography","tipo":"MCPenalidad","pregunta":"What is the smallest country in South America by area?","opcionesCorrectas":["Suriname"],"opcionesIncorrectas":["Brazil","Uruguay","Chile"]},
+
+{"categoria":"Geography","tipo":"VFPenalidad","pregunta":"Liechtenstein does not have an airport.","opcionesCorrectas":["True"],"opcionesIncorrectas":["False"]},
+
+{"categoria":"History","tipo":"VFPenalidad","pregunta":"The Hundred Years' War was fought for more than a hundred years.","opcionesCorrectas":["True"],"opcionesIncorrectas":["False"]},
+
+{"categoria":"Entertainment: Music","tipo":"MCClasico","pregunta":"Which song on Daft Punk's 'Random Access Memories' features Pharrell Williams?","opcionesCorrectas":["Get Lucky"],"opcionesIncorrectas":["Doin' It Right","Instant Crush","The Game of Love"]},
+
+{"categoria":"Politics","tipo":"MCParcial","pregunta":"What is former United States President Bill Clinton's full name?","opcionesCorrectas":["William Jefferson Clinton"],"opcionesIncorrectas":["William Roosevelt Clinton","William Truman Clinton","William Lincoln Clinton"]},
+
+{"categoria":"Entertainment: Film","tipo":"MCPenalidad","pregunta":"In 'Jurassic World', which company purchases InGen and creates Jurassic World?","opcionesCorrectas":["Masrani Global Corporation "],"opcionesIncorrectas":["Biology Synthetics Technologies","International Genetics Incorporated","International Genetic Technologies"]},
+
+{"categoria":"Entertainment: Japanese Anime & Manga","tipo":"MCClasico","pregunta":"In 2013, virtual pop-star Hatsune Miku had a sponsorship with which pizza chain?","opcionesCorrectas":["Domino's"],"opcionesIncorrectas":["Papa John's","Pizza Hut","Sabarro's"]},
+
+{"categoria":"Entertainment: Books","tipo":"MCParcial","pregunta":"In 'Little Women', which of the March sisters married Laurie?","opcionesCorrectas":["Amy"],"opcionesIncorrectas":["Beth","Jo","Meg"]},
+
+{"categoria":"General Knowledge","tipo":"MCPenalidad","pregunta":"In flight systems, what does the initialism 'TCAS' stand for?","opcionesCorrectas":["Traffic Collision Avoidance System"],"opcionesIncorrectas":["Traffic Communication Alert System","Traffic Configuration Alignment System","Traffic Call-sign Abbreviation System"]},
+
+{"categoria":"Entertainment: Film","tipo":"MCClasico","pregunta":"What is Lilo's last name from Lilo and Stitch?","opcionesCorrectas":["Pelekai"],"opcionesIncorrectas":["Anoa\u02bbi","Kealoha","Ku\u02bbulei"]},
+
+{"categoria":"History","tipo":"VFPenalidad","pregunta":"Thomas Crapper was a plumber who invented the flushing toilet.","opcionesCorrectas":["False"],"opcionesIncorrectas":["True"]},
+
+{"categoria":"Entertainment: Video Games","tipo":"MCParcial","pregunta":"In the 'S.T.A.L.K.E.R.' series, which of these items can't be used to lower the player's accumulated radiation?","opcionesCorrectas":["Radioprotectant"],"opcionesIncorrectas":["Anti-rad","Medkit","Vodka"]},
+
+{"categoria":"Animals","tipo":"MCPenalidad","pregunta":"What colour is the female blackbird?","opcionesCorrectas":["Brown"],"opcionesIncorrectas":["Black","White","Yellow"]},
+
+{"categoria":"?","tipo":"MCClasico","pregunta":"Which of the following are true statements about the Titanic?","opcionesCorrectas":["The officers had grave concerns about the lifeboats would not be capable of holding so many passengers.", "The enormous loss of life on the Titanic was primarily caused by inadequate equipment, training and procedures."],"opcionesIncorrectas":["Nobody had thought of installing enough lifeboats to accommodate all the passengers.","The news of this tragic event created waves of sadness across the world."]},
+
+{"categoria":"?","tipo":"MCParcial","pregunta":"Which of the following are true statements about the paleolithic diet?","opcionesCorrectas":["It has little proven health benefits.","Our human ancestors probably ate more than what is included in today’s “paleolithic” diet."],"opcionesIncorrectas":["It is based on what our human ancestors ate.","It is adapted to the digestion of modern humans."]},
+
+{"categoria":"?","tipo":"MCPenalidad","pregunta":"Which of the following are true statements about Nefertiti?","opcionesCorrectas":["Nefertiti and her husband believed in a single deity.","Nefertiti ruled over Egypt during its most prosperous time."],"opcionesIncorrectas":["Nefertiti is the most famous queen in Egypt’s history.","Nefertiti was an Egyptian Pharaoh."]}
+]
