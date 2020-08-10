@@ -42,7 +42,7 @@ public class BotonEtiquetaVista implements Componente {
             etiqueta.setTranslateX(-5);
             etiqueta.setAlignment(Pos.CENTER_LEFT);
         } else {
-            etiqueta.setTranslateX(15);
+            etiqueta.setTranslateX(5);
             etiqueta.setAlignment(Pos.CENTER_RIGHT);
         }
 

@@ -7,11 +7,13 @@ import javafx.scene.Node;
 public class IniciarJuegoVista extends EstructuraPrincipalVista{
 
     @Override
-    protected Node cabeceraDerecha() { return null; }
+    protected Node cabeceraDerecha() {
+        return new BotonEtiquetaVista("CARGAR PREGUNTAS",true).obtenerNodo();
+    }
 
     @Override
     protected Node cabeceraIzquierda() {
-        return new BotonEtiquetaVista("JUGADORES",false).obtenerNodo();
+        return null;
     }
 
     @Override
