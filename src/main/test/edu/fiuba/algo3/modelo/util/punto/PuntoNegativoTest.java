@@ -71,4 +71,11 @@ public class PuntoNegativoTest {
 
         assertEquals(-25, punto.obtenerPunto().obtenerValor());
     }
+
+    @Test
+    public void obtenerPuntoDevuelveElMismoPuntos(){
+        PuntoNegativo punto = new PuntoNegativo();
+
+        assertEquals(punto,punto.obtenerPunto());
+    }
 }

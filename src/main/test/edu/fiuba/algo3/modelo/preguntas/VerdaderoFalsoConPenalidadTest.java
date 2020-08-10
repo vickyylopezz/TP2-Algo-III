@@ -2,14 +2,14 @@ package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
+import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class VerdaderoFalsoConPenalidadTest {
 
@@ -125,6 +125,13 @@ public class VerdaderoFalsoConPenalidadTest {
         pregunta.agregarOpcionIncorrecta("Verdadero");
 
         assertThrows(PreguntaError.class, () -> pregunta.agregarOpcionIncorrecta("True"));
+    }
+
+    @Test
+    public void VerdaderoFalsoConPenalidadDevuelveTrueEnPenalidad(){
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("Estamos el algoritmos?");
+
+        assertTrue(pregunta.conPenalidad());
     }
 
 }
