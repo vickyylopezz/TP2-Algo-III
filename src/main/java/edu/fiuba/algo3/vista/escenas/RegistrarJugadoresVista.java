@@ -2,11 +2,12 @@ package edu.fiuba.algo3.vista.escenas;
 
 import edu.fiuba.algo3.controladores.RegistrarJugadoresControlador;
 import edu.fiuba.algo3.vista.componentes.JugadorVista;
-import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
 import javafx.scene.Node;
+import javafx.scene.layout.VBox;
 
 public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
+
     private final RegistrarJugadoresControlador controlador;
     private JugadorVista jugadorVista1 = null;
     private JugadorVista jugadorVista2 = null;
@@ -16,7 +17,12 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
     }
 
     @Override
-    protected Node cabeceraDerecha() { return null; }
+    protected Node cabeceraDerecha() {
+        BotonEtiquetaVista botonConfirmar = new BotonEtiquetaVista("CONFIRMAR",true);
+        botonConfirmar.obtenerBoton().click((event) -> this.controlador.confirmar(this.jugadorVista1,this.jugadorVista2));
+
+        return botonConfirmar.obtenerNodo();
+    }
 
     @Override
     protected Node cabeceraIzquierda() {
@@ -28,25 +34,16 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node centro() {
-        JugadorVista grupoJugador = new JugadorVista("JUGADOR 2");
-        jugadorVista1 = grupoJugador;
+        VBox contenedor = new VBox();
 
-        return grupoJugador.obtenerNodo();
-    }
+        this.jugadorVista1 = new JugadorVista("JUGADOR 1");
+        this.jugadorVista2 = new JugadorVista("JUGADOR 2");
 
-    @Override
-    protected Node centroIzquierda() {
-        JugadorVista grupoJugador = new JugadorVista("JUGADOR 1");
-        jugadorVista2 = grupoJugador;
+        contenedor.getChildren().addAll(
+                this.jugadorVista1.obtenerNodo(),
+                this.jugadorVista2.obtenerNodo()
+        );
 
-        return grupoJugador.obtenerNodo();
-    }
-
-    @Override
-    protected Node centroDerecha() {
-        BotonCuadradoVista botonConfirmar = new BotonCuadradoVista("CONFIRMAR");
-        botonConfirmar.click((event) -> this.controlador.confirmar(this.jugadorVista1,this.jugadorVista2));
-
-        return botonConfirmar.obtenerNodo();
+        return contenedor;
     }
 }

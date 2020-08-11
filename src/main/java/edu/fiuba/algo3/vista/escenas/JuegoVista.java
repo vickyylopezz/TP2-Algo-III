@@ -27,12 +27,4 @@ public class JuegoVista extends EstructuraPrincipalVista{
 
     @Override
     protected Node centro() { return new BotonCuadradoVista("JUGAR").obtenerNodo(); }
-
-    @Override
-    protected Node centroIzquierda() {
-        return null;
-    }
-
-    @Override
-    protected Node centroDerecha() { return null; }
 }

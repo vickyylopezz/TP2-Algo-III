@@ -18,7 +18,8 @@ public class PuntosObtenidosVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node cabeceraDerecha() {
-        return null;
+        BotonCuadradoVista botonContinuar = new BotonCuadradoVista("Continuar");
+        return botonContinuar.obtenerNodo();
     }
 
     @Override
@@ -76,16 +77,5 @@ public class PuntosObtenidosVista extends EstructuraPrincipalVista {
         hbox.getChildren().addAll(vbox1, vbox2);
         hbox.setAlignment(Pos.CENTER);
         return hbox;
-    }
-
-    @Override
-    protected Node centroIzquierda() {
-        return null;
-    }
-
-    @Override
-    protected Node centroDerecha() {
-        BotonCuadradoVista botonContinuar = new BotonCuadradoVista("Continuar");
-        return botonContinuar.obtenerNodo();
     }
 }

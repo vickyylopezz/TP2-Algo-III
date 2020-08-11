@@ -158,13 +158,4 @@ public class CargarPreguntasVista extends EstructuraPrincipalVista {
 
         return barra;
     }
-
-    @Override
-    protected Node centroIzquierda() {
-        return null;
-    }
-    @Override
-    protected Node centroDerecha() {
-        return null;
-    }
 }

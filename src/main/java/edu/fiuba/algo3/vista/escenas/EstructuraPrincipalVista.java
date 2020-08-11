@@ -22,10 +22,7 @@ public abstract class EstructuraPrincipalVista implements Escena {
         CabeceraKahootVista cabecera = this.crearCabecera();
 
         raiz.setTop(cabecera.obtenerNodo());
-        raiz.setLeft(this.centroIzquierda());
         raiz.setCenter(this.centro());
-        raiz.setLeft(this.centroDerecha());
-        //raiz.setBottom(this.piso());
 
         this.escena = new Scene(raiz);
     }
@@ -40,8 +37,4 @@ public abstract class EstructuraPrincipalVista implements Escena {
     abstract protected Node cabeceraIzquierda();
 
     abstract protected Node centro();
-
-    abstract protected Node centroIzquierda();
-
-    abstract protected Node centroDerecha();
 }

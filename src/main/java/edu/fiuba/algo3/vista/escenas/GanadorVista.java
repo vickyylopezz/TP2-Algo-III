@@ -76,14 +76,4 @@ public class GanadorVista extends EstructuraPrincipalVista{
         vbox.setAlignment(Pos.CENTER);
         return vbox;
     }
-
-    @Override
-    protected Node centroIzquierda() {
-        return null;
-    }
-
-    @Override
-    protected Node centroDerecha() {
-        return null;
-    }
 }

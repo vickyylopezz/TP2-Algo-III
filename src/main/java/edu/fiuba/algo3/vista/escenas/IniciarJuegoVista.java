@@ -33,12 +33,4 @@ public class IniciarJuegoVista extends EstructuraPrincipalVista{
 
         return botonIniciar.obtenerNodo();
     }
-
-    @Override
-    protected Node centroIzquierda() {
-        return null;
-    }
-
-    @Override
-    protected Node centroDerecha() { return null; }
 }
