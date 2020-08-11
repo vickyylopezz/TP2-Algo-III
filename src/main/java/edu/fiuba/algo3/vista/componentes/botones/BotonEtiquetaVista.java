@@ -37,16 +37,16 @@ public class BotonEtiquetaVista implements Componente {
     private Node etiqueta(Boolean etiquetaIzquierda) {
         StackPane etiqueta = new StackPane();
 
-        etiqueta.setMaxHeight(50);
+        etiqueta.setMaxHeight(40);
         etiqueta.setMaxWidth(250);
-        etiqueta.setPadding(new Insets(1, 1, 1, 1));
+        etiqueta.setPadding(new Insets(5, 5, 5, 5));
         etiqueta.setStyle("-fx-border-radius: 2;-fx-border-color: grey; -fx-background-radius: 2; -fx-background-color: white");
 
         if (etiquetaIzquierda) {
-            etiqueta.setTranslateX(-5);
+            etiqueta.setTranslateX(-10);
             etiqueta.setAlignment(Pos.CENTER_LEFT);
         } else {
-            etiqueta.setTranslateX(5);
+            etiqueta.setTranslateX(10);
             etiqueta.setAlignment(Pos.CENTER_RIGHT);
         }
 
