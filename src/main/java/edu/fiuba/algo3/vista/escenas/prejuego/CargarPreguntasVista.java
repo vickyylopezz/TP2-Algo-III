@@ -1,10 +1,11 @@
-package edu.fiuba.algo3.vista.escenas;
+package edu.fiuba.algo3.vista.escenas.prejuego;
 
 import edu.fiuba.algo3.controladores.CargarPreguntaControlador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.componentes.preguntas.PreguntaBarraVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
+import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;

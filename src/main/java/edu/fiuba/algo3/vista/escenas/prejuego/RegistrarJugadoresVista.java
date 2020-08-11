@@ -1,8 +1,9 @@
-package edu.fiuba.algo3.vista.escenas;
+package edu.fiuba.algo3.vista.escenas.prejuego;
 
 import edu.fiuba.algo3.controladores.RegistrarJugadoresControlador;
 import edu.fiuba.algo3.vista.componentes.JugadorVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
+import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 

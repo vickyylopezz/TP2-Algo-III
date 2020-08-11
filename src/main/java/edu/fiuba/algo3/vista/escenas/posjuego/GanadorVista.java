@@ -1,9 +1,10 @@
-package edu.fiuba.algo3.vista.escenas;
+package edu.fiuba.algo3.vista.escenas.posjuego;
 
 import edu.fiuba.algo3.controladores.GanadorControlador;
 import edu.fiuba.algo3.controladores.JuegoControlador;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
+import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -22,7 +23,7 @@ import java.io.FileNotFoundException;
 
 import static javafx.geometry.Pos.*;
 
-public class GanadorVista extends EstructuraPrincipalVista{
+public class GanadorVista extends EstructuraPrincipalVista {
     private GanadorControlador controlador;
 
     public GanadorVista(GanadorControlador controlador) {

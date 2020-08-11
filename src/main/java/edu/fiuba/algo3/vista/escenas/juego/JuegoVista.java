@@ -1,11 +1,12 @@
-package edu.fiuba.algo3.vista.escenas;
+package edu.fiuba.algo3.vista.escenas.juego;
 
 import edu.fiuba.algo3.controladores.JuegoControlador;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
+import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.scene.Node;
 
-public class JuegoVista extends EstructuraPrincipalVista{
+public class JuegoVista extends EstructuraPrincipalVista {
     private JuegoControlador controlador;
 
     public JuegoVista(JuegoControlador controlador) {

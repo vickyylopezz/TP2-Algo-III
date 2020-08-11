@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.controladores;
 
-import edu.fiuba.algo3.vista.escenas.*;
+import edu.fiuba.algo3.vista.escenas.prejuego.CargarPreguntasVista;
+import edu.fiuba.algo3.vista.escenas.prejuego.IniciarJuegoVista;
+import edu.fiuba.algo3.vista.escenas.prejuego.RegistrarJugadoresVista;
 import javafx.stage.Stage;
 
 public class IniciarJuegoControlador {

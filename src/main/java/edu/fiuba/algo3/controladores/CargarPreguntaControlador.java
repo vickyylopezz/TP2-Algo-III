@@ -3,7 +3,7 @@ package edu.fiuba.algo3.controladores;
 import edu.fiuba.algo3.Lector;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.vista.escenas.CargarPreguntasVista;
+import edu.fiuba.algo3.vista.escenas.prejuego.CargarPreguntasVista;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
