@@ -35,8 +35,8 @@ public class Partida {
 
     public void finalizarTurnos() throws PuntoError {
         if (this.existeTurno()) return;
-        agregarRespuestas();
         aplicarComodines();
+        agregarRespuestas();
     }
 
     private void agregarRespuestas() {
