@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas.verdaderoFalso;
 
+import com.google.gson.JsonObject;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
@@ -34,4 +35,16 @@ public class VerdaderoFalsoConPenalidad extends Pregunta {
         this.opciones.add(this.opcionIncorrecta);
     }
 
+    @Override
+    public void extraerOpciones(JsonObject object) throws PreguntaError {
+        boolean respuesta = object.get("respuesta").getAsBoolean();
+
+        if (respuesta) {
+            agregarOpcionCorrecta("Verdadero");
+            agregarOpcionIncorrecta("Falso");
+        } else {
+            agregarOpcionCorrecta("Falso");
+            agregarOpcionIncorrecta("Verdadero");
+        }
+    }
 }
