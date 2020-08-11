@@ -4,7 +4,9 @@ import edu.fiuba.algo3.controladores.RegistrarJugadoresControlador;
 import edu.fiuba.algo3.vista.componentes.JugadorVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
 import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
@@ -35,7 +37,8 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node centro() {
-        VBox contenedor = new VBox();
+        HBox contenedor = new HBox();
+        contenedor.setAlignment(Pos.TOP_CENTER);
 
         this.jugadorVista1 = new JugadorVista("JUGADOR 1");
         this.jugadorVista2 = new JugadorVista("JUGADOR 2");
