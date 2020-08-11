@@ -53,23 +53,29 @@ public class GanadorVista extends EstructuraPrincipalVista {
             contenedorIcono.getChildren().add(icono);
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
-        boxJugador.getChildren().addAll(contenedorIcono);
-        boxJugador.setAlignment(Pos.BOTTOM_CENTER);
-        boxJugador.setMaxHeight(20);
-        boxJugador.setMaxWidth(150);
-        boxJugador.setPadding(new Insets(90,50,90,50));
+        Label jLabelGanador = new Label("nombre ganador");
+        jLabelGanador.setStyle("-fx-text-fill: white; -fx-font-size: 30; -fx-font-weight: bold; -fx-background-color: #8055CB");
+        jLabelGanador.setTranslateY(10);
+        jLabelGanador.setPrefSize(300,100);
+        jLabelGanador.setAlignment(CENTER);
+
+        boxJugador.getChildren().addAll(contenedorIcono,jLabelGanador);
+        boxJugador.setSpacing(40);
+        boxJugador.setAlignment(BOTTOM_CENTER);
+        boxJugador.setMaxHeight(200);
+        boxJugador.setMaxWidth(300);
+        boxJugador.setPadding(new Insets(70,20,70,20));
 
         Label jLabelTituloGanador = new Label("G A N A D O R");
-        jLabelTituloGanador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 30; -fx-font-weight: bold");
+        jLabelTituloGanador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 50; -fx-font-weight: bold");
         jLabelTituloGanador.setAlignment(TOP_CENTER);
 
-        Label jLabelGanador = new Label("nombre ganador");
-        jLabelGanador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 30; -fx-font-weight: bold");
+
 
         VBox vbox = new VBox(20);
 
-        vbox.getChildren().addAll(jLabelTituloGanador,boxJugador,jLabelGanador);
-        vbox.setAlignment(Pos.CENTER);
+        vbox.getChildren().addAll(jLabelTituloGanador,boxJugador);
+        vbox.setAlignment(CENTER);
         return vbox;
     }
 }
