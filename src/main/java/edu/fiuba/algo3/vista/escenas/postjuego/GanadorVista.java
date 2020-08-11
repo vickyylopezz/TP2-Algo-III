@@ -1,21 +1,16 @@
-package edu.fiuba.algo3.vista.escenas.posjuego;
+package edu.fiuba.algo3.vista.escenas.postjuego;
 
 import edu.fiuba.algo3.controladores.GanadorControlador;
-import edu.fiuba.algo3.controladores.JuegoControlador;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
 import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 
 import java.io.FileInputStream;

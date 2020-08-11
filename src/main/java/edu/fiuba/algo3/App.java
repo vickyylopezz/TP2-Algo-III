@@ -1,17 +1,11 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.controladores.CargarPreguntaControlador;
 import edu.fiuba.algo3.controladores.IniciarJuegoControlador;
-import edu.fiuba.algo3.controladores.RegistrarJugadoresControlador;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
-
-import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
-import edu.fiuba.algo3.vista.escenas.*;
-
+import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaVista;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

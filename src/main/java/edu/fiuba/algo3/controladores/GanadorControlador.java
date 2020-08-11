@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.controladores;
 
-import edu.fiuba.algo3.vista.escenas.posjuego.GanadorVista;
+import edu.fiuba.algo3.vista.escenas.postjuego.GanadorVista;
 import edu.fiuba.algo3.vista.escenas.juego.PuntosObtenidosVista;
 import javafx.stage.Stage;
 
