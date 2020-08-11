@@ -1,26 +1,29 @@
 package edu.fiuba.algo3.modelo.comodines;
 
-import edu.fiuba.algo3.modelo.excepciones.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.FactorComodinNegativoError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.FactorComodinNuloError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.JugadorInvalidoError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 
 import java.util.ArrayList;
 
 public abstract class Comodin {
-    private final int factor;
+    protected int factor;
     protected Jugador jugador;
 
     public Comodin(int factor) throws ComodinError {
         if (factor == 0)  {
-            throw new ComodinError(" Factor del multiplicador nulo invalido ");
+            throw new FactorComodinNuloError();
         }
         if (factor < 0) {
-            throw new ComodinError(" Factor del multiplicador negativo invalido ");
+            throw new FactorComodinNegativoError();
         }
         this.factor = factor;
     }
@@ -29,35 +32,22 @@ public abstract class Comodin {
         return this.factor;
     }
 
-    public void definirJugador(Jugador jugador) throws ComodinError {
-        if(jugador == null){
-            throw new ComodinError("Jugador invalido");
-        }
-        this.jugador = jugador;
-    }
-
     public Jugador obtenerJugador() {
         return this.jugador;
     }
 
-    public abstract void validarPregunta(Jugada jugada) throws ComodinError, JugadorError;
-    abstract void aplicarARespuestas(Respuesta unaRespuesta,Respuesta otraRespuesta) throws ComodinError, RespuestaError, JugadorError;
+    public abstract void validarPregunta(Pregunta pregunta) throws ComodinError, JugadorError;
 
-    public Puntaje puntajeNuevo(ArrayList<Punto> puntos) throws ComodinError {
-        if(puntos == null){
-            throw new ComodinError("Coleccion de puntos invalida");
+    public abstract void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws PuntoError;
+
+    public void definirJugador(Jugador jugador) throws ComodinError {
+        if(jugador == null){
+            throw new JugadorInvalidoError();
         }
-        Puntaje puntaje = new Puntaje();
-        for(Punto punto: puntos){
-            puntaje.agregarPunto(punto.modificarValor(this.factor));
-        }
-        return puntaje;
+        this.jugador = jugador;
     }
 
-    public Punto puntoNuevo(Punto punto) throws ComodinError {
-        if(punto == null){
-            throw new ComodinError("Punto nulo invalido");
-        }
-        return punto.modificarValor(this.factor);
+    public Punto aplicarComodinAPunto(Punto puntaje) {
+        return puntaje.multiplicarPorFactor(this.factor);
     }
 }

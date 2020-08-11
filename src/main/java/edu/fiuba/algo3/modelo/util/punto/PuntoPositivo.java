@@ -1,15 +1,25 @@
 package edu.fiuba.algo3.modelo.util.punto;
+
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
+
 //Hoja
-public class PuntoPositivo implements Punto {
-    private Integer valor = 1;
+public class PuntoPositivo extends Punto {
+
+    private final Integer valor = 1;
+
+    @Override
+    public Punto obtenerPunto() {
+        return this;
+    }
 
     @Override
     public Integer obtenerValor() {
         return this.valor;
     }
 
-    public Punto modificarValor(int factor){
-        this.valor *= factor;
-        return this;
-    }
+    @Override
+    public Punto copiar() { return this.clone(); }
+
+    @Override
+    public PuntoPositivo clone() { return new PuntoPositivo(); }
 }

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje;
 
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
@@ -15,7 +16,7 @@ import static org.mockito.Mockito.when;
 
 public class CalculadorPuntajeClasicoTest {
     @Test
-    public void calcularDevuelvePuntajeIncorrectoSiHayUnaOpcionIcorrecta() {
+    public void calcularDevuelvePuntajeIncorrectoSiHayUnaOpcionIcorrecta() throws PuntoError {
         Punto puntoCorrecto = new PuntoPositivo();
         Punto puntoIncorreco = new PuntoNulo();
 
@@ -54,7 +55,7 @@ public class CalculadorPuntajeClasicoTest {
     }
 
     @Test
-    public void calcularDevuelvePuntajeIncorrectoSiNoSeSeleccionaronTodasLasCorrectas() {
+    public void calcularDevuelvePuntajeIncorrectoSiNoSeSeleccionaronTodasLasCorrectas() throws PuntoError {
         Punto puntoCorrecto = new PuntoPositivo();
         Punto puntoIncorreco = new PuntoNulo();
 
@@ -91,7 +92,7 @@ public class CalculadorPuntajeClasicoTest {
     }
 
     @Test
-    public void calcularDevuelvePuntajeSeleccionandoTodasLasCorrectasDevuelveElPuntajeCorrecto() {
+    public void calcularDevuelvePuntajeSeleccionandoTodasLasCorrectasDevuelveElPuntajeCorrecto() throws PuntoError {
         Punto puntoCorrecto = new PuntoPositivo();
         Punto puntoIncorreco = new PuntoNulo();
 

@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.comodines.Exclusividad;
-import edu.fiuba.algo3.modelo.comodines.Multiplicador;
-import edu.fiuba.algo3.modelo.excepciones.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorNoTieneAlComodinError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 
@@ -13,7 +12,6 @@ import java.util.ArrayList;
 public class Jugador {
 
     private String nombre;
-    private Puntaje puntaje;
     private ArrayList<Respuesta> respuestas;
     private ArrayList<Comodin> comodines;
 
@@ -21,7 +19,6 @@ public class Jugador {
         this.nombre = nombre;
         this.respuestas = new ArrayList<>();
         this.comodines = new ArrayList<>();
-        this.puntaje = new Puntaje();
     }
 
     public String nombre() {
@@ -32,41 +29,35 @@ public class Jugador {
 
     public ArrayList<Comodin> obtenerComodines() { return new ArrayList<>(this.comodines); }
 
-    public void agregarRespuesta(Respuesta respuesta) throws JugadorError {
-        if (this.respuestas.contains(respuesta)) {
-            throw new JugadorError(respuesta.toString() + " ya se encuentra en las respuestas");
-        }
+    public void agregarRespuesta(Respuesta respuesta) {
+        if (respuesta == null || this.respuestas.contains(respuesta)) return;
         this.respuestas.add(respuesta);
     }
 
-    public void sacarRespuesta(Respuesta respuesta) throws JugadorError {
-        if (!this.respuestas.contains(respuesta)) {
-            throw new JugadorError(respuesta.toString() + " no se encuentra en las respuestas");
-        }
+    public void sacarRespuesta(Respuesta respuesta) {
         this.respuestas.remove(respuesta);
     }
 
-    public void agregarComodin(Comodin comodin) throws JugadorError {
-        if (this.comodines.contains(comodin)) {
-            throw new JugadorError(comodin.toString() + " ya se encuentra en " + this.toString());
-        }
+    public void agregarComodin(Comodin comodin) {
+        if (comodin == null || this.comodines.contains(comodin)) return;
         this.comodines.add(comodin);
     }
 
-    public void sacarComodin(Comodin comodin) throws JugadorError {
-        if (!this.comodines.contains(comodin)) {
-            throw new JugadorError(comodin.toString() + " no se encuentra en " + this.toString());
-        }
+    public void sacarComodin(Comodin comodin) {
         this.comodines.remove(comodin);
     }
 
-    public void sumarPuntaje(Punto punto) { this.puntaje.agregarPunto(punto); }
-
-    public Punto puntajeTotal() { return this.puntaje; }
+    public Punto puntajeTotal() throws PuntoError {
+        Puntaje puntajeTotal = new Puntaje();
+        for (Respuesta respuesta : this.respuestas){
+            puntajeTotal.agregarPunto(respuesta.puntaje());
+        }
+        return puntajeTotal;
+    }
 
     public void validarComodin(Comodin comodin) throws JugadorError {
         if (!this.comodines.contains(comodin)) {
-            throw new JugadorError(comodin.toString() + " no esta en el jugador");
+            throw new JugadorNoTieneAlComodinError();
         }
     }
 }

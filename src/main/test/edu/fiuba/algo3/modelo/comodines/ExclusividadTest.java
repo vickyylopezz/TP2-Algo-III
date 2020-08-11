@@ -1,19 +1,16 @@
 package edu.fiuba.algo3.modelo.comodines;
 
-import edu.fiuba.algo3.modelo.excepciones.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.JugadaError;
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.util.punto.Puntaje;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
+import edu.fiuba.algo3.modelo.util.punto.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -78,16 +75,13 @@ public class ExclusividadTest {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(true);
 
-        Jugador jugador = mock(Jugador.class);
-        Jugada jugada = new Jugada(pregunta, jugador);
-
         Exclusividad exclusividad = new Exclusividad(2);
 
-        assertThrows(ComodinError.class, () -> exclusividad.validarPregunta(jugada));
+        assertThrows(ComodinError.class, () -> exclusividad.validarPregunta(pregunta));
     }
 
     @Test
-    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError, JugadorError {
+    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -99,14 +93,18 @@ public class ExclusividadTest {
         Respuesta otraRespuestaCorrecta = mock(Respuesta.class);
         when(otraRespuestaCorrecta.esCorrecta()).thenReturn(true);
 
-        exclusividad.aplicarARespuestas(unaRespuestaCorrecta, otraRespuestaCorrecta);
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(unaRespuestaCorrecta);
+        respuestas.add(otraRespuestaCorrecta);
+
+        exclusividad.aplicarARespuestas(respuestas);
 
         verify(unaRespuestaCorrecta, times(0)).aplicarComodin(exclusividad);
         verify(otraRespuestaCorrecta, times(0)).aplicarComodin(exclusividad);
     }
 
     @Test
-    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError, JugadorError {
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -118,114 +116,60 @@ public class ExclusividadTest {
         Respuesta respuestaIncorrecta = mock(Respuesta.class);
         when(respuestaIncorrecta.esCorrecta()).thenReturn(false);
 
-        exclusividad.aplicarARespuestas(respuestaCorrecta, respuestaIncorrecta);
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(respuestaCorrecta);
+        respuestas.add(respuestaIncorrecta);
+
+        exclusividad.aplicarARespuestas(respuestas);
 
         verify(respuestaCorrecta, times(1)).aplicarComodin(exclusividad);
-        verify(respuestaIncorrecta, times(1)).aplicarComodin(exclusividad);
+        verify(respuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws RespuestaError, ComodinError, JugadorError {
+    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
         exclusividad.definirJugador(jugador);
 
         Respuesta unaRespuestaIncorrecta = mock(Respuesta.class);
-        when(unaRespuestaIncorrecta.esCorrecta()).thenReturn(true);
+        when(unaRespuestaIncorrecta.esCorrecta()).thenReturn(false);
 
         Respuesta otraRespuestaIncorrecta = mock(Respuesta.class);
-        when(otraRespuestaIncorrecta.esCorrecta()).thenReturn(true);
+        when(otraRespuestaIncorrecta.esCorrecta()).thenReturn(false);
 
-        exclusividad.aplicarARespuestas(unaRespuestaIncorrecta,otraRespuestaIncorrecta);
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(unaRespuestaIncorrecta);
+        respuestas.add(otraRespuestaIncorrecta);
+
+        exclusividad.aplicarARespuestas(respuestas);
 
         verify(unaRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
         verify(otraRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
     }
-
     @Test
-    public void recibeUnPuntajeNuloYSeLanzaExcepcion() throws ComodinError {
-        Multiplicador multiplicador = new Multiplicador(2);
+    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError, PuntoError {
+        Exclusividad exclusividad = new Exclusividad(2);
+        Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoNulo());
 
-        assertThrows(ComodinError.class, () ->  multiplicador.puntajeNuevo(null));
+        assertEquals(0,puntoNuevo.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntajeConPuntosNulosYDevuelvePuntajeConPuntosConValorCero() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoNulo());
-
+    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+        Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoPositivo());
 
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+        assertEquals(2,puntoNuevo.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntajeConPuntosPositivosYDevuelvePuntajeConPuntosPositivosConValorDos() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoPositivo());
-
+    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
+        Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoNegativo());
 
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void recibeUnPuntajeConPuntosNegativosYDevuelvePuntajeConPuntosNegativosConValorDos() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
-
-        Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void recibeUnPuntajeConUnPuntoPositivoYOtroNegativo() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-
-        Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void recibeUnPuntajeConUnPuntoPositivoYOtroNulo() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNulo());
-
-        Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void recibeUnPuntajeConUnPuntoNegativoYOtroNulo() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-
-        Exclusividad exclusividad = new Exclusividad(2);
-        Puntaje puntajeNuevo = exclusividad.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+        assertEquals(-2,puntoNuevo.obtenerPunto().obtenerValor());
     }
 }
 

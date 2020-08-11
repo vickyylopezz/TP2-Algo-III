@@ -1,20 +1,20 @@
 package edu.fiuba.algo3.modelo.preguntas.verdaderoFalso;
 
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.OpcionCorrectaYaAgregadaError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.OpcionIncorrectaYaAgregadaError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcial;
 import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
-import edu.fiuba.algo3.modelo.util.punto.Punto;
-import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
-
-import java.util.ArrayList;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
 public class VerdaderoFalsoClasico extends Pregunta {
 
-    private OpcionClasica opcionCorrecta;
-    private OpcionClasica opcionIncorrecta;
+    private Opcion opcionCorrecta;
+    private Opcion opcionIncorrecta;
 
     public VerdaderoFalsoClasico(String titulo) {
         super(titulo, new SinPenalidad(new CalculadorPuntajeParcial()));
@@ -24,18 +24,31 @@ public class VerdaderoFalsoClasico extends Pregunta {
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
         if (opcionCorrecta != null){
-            throw new PreguntaError("Ya existe una opcion correcta");
+            throw new OpcionCorrectaYaAgregadaError();
         }
-        this.opcionCorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeCorrecto());
+        this.opcionCorrecta = new Opcion(opcionTitulo, this.estado.puntajeCorrecto());
         opciones.add(this.opcionCorrecta);
     }
 
     public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
         if (opcionIncorrecta != null){
-            throw new PreguntaError("Ya existe una opcion incorrecta");
+            throw new OpcionIncorrectaYaAgregadaError();
         }
-        this.opcionIncorrecta = new OpcionClasica(opcionTitulo, this.estado.puntajeIncorrecto());
+        this.opcionIncorrecta = new Opcion(opcionTitulo, this.estado.puntajeIncorrecto());
         opciones.add(this.opcionIncorrecta);
+    }
+
+    @Override
+    public void extraerOpciones(JsonObject object) throws PreguntaError {
+        boolean respuesta = object.get("respuesta").getAsBoolean();
+
+        if (respuesta) {
+            agregarOpcionCorrecta("Verdadero");
+            agregarOpcionIncorrecta("Falso");
+        } else {
+            agregarOpcionCorrecta("Falso");
+            agregarOpcionIncorrecta("Verdadero");
+        }
     }
 
 }

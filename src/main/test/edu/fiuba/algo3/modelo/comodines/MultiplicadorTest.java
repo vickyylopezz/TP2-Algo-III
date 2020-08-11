@@ -1,10 +1,9 @@
 package edu.fiuba.algo3.modelo.comodines;
 
-import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.util.punto.*;
 import org.junit.jupiter.api.Test;
 
@@ -56,7 +55,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws JugadaError, RespuestaError, ComodinError, JugadorError {
+    public void seValidaPreguntaConPenalidadYComodinSeGuardaEnListaDeComodinesDeJugada() throws ComodinError, JugadorError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(true);
         Multiplicador multiplicador = new Multiplicador(2);
@@ -71,220 +70,114 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seValidaPreguntaSinPenalidadYSeLanzaExcepcion() throws JugadaError, RespuestaError, ComodinError {
+    public void seValidaPreguntaSinPenalidadYSeLanzaExcepcion() throws ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.conPenalidad()).thenReturn(false);
 
-        Jugador jugador = mock(Jugador.class);
-        Jugada jugada = new Jugada(pregunta,jugador);
-
         Multiplicador multiplicador = new Multiplicador(2);
 
-        assertThrows(ComodinError.class, () ->  multiplicador.validarPregunta(jugada));
+        assertThrows(ComodinError.class, () ->  multiplicador.validarPregunta(pregunta));
     }
 
     @Test
-    public void seAplicaARespuestasCorrectasYSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
+    public void seAplicaARespuestasCorrectasYSeGuardaEnListaDeComodinesDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
 
-        Jugador jugador = mock(Jugador.class);
-        multiplicador.definirJugador(jugador);
+        Jugador unJugador = mock(Jugador.class);
+        Jugador otroJugador = mock(Jugador.class);
+        multiplicador.definirJugador(unJugador);
 
         Respuesta unaRespuestaCorrecta = mock(Respuesta.class);
-        when(unaRespuestaCorrecta.obtenerJugador()).thenReturn(jugador);
+        when(unaRespuestaCorrecta.obtenerJugador()).thenReturn(unJugador);
         when(unaRespuestaCorrecta.esCorrecta()).thenReturn(true);
 
         Respuesta otraRespuestaCorrecta = mock(Respuesta.class);
-        when(otraRespuestaCorrecta.obtenerJugador()).thenReturn(jugador);
+        when(otraRespuestaCorrecta.obtenerJugador()).thenReturn(otroJugador);
         when(otraRespuestaCorrecta.esCorrecta()).thenReturn(true);
 
-        multiplicador.aplicarARespuestas(unaRespuestaCorrecta, otraRespuestaCorrecta);
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(unaRespuestaCorrecta);
+        respuestas.add(otraRespuestaCorrecta);
+
+        multiplicador.aplicarARespuestas(respuestas);
 
         verify(unaRespuestaCorrecta, times(1)).aplicarComodin(multiplicador);
-        verify(otraRespuestaCorrecta, times(1)).aplicarComodin(multiplicador);
+        verify(otraRespuestaCorrecta, times(0)).aplicarComodin(multiplicador);
     }
 
     @Test
-    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
 
-        Jugador jugador = mock(Jugador.class);
-        multiplicador.definirJugador(jugador);
+        Jugador unJugador = mock(Jugador.class);
+        Jugador otroJugador = mock(Jugador.class);
+        multiplicador.definirJugador(unJugador);
 
         Respuesta respuestaCorrecta = mock(Respuesta.class);
-        when(respuestaCorrecta.obtenerJugador()).thenReturn(jugador);
+        when(respuestaCorrecta.obtenerJugador()).thenReturn(unJugador);
         when(respuestaCorrecta.esCorrecta()).thenReturn(true);
 
         Respuesta respuestaIncorrecta = mock(Respuesta.class);
-        when(respuestaIncorrecta.obtenerJugador()).thenReturn(jugador);
+        when(respuestaIncorrecta.obtenerJugador()).thenReturn(otroJugador);
         when(respuestaIncorrecta.esCorrecta()).thenReturn(false);
 
-        multiplicador.aplicarARespuestas(respuestaCorrecta, respuestaIncorrecta);
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(respuestaCorrecta);
+        respuestas.add(respuestaIncorrecta);
+
+        multiplicador.aplicarARespuestas(respuestas);
 
         verify(respuestaCorrecta, times(1)).aplicarComodin(multiplicador);
-        verify(respuestaIncorrecta, times(1)).aplicarComodin(multiplicador);
+        verify(respuestaIncorrecta, times(0)).aplicarComodin(multiplicador);
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYSeGuardaEnListaDeComodinesDeLasMismas() throws RespuestaError, ComodinError {
+    public void seAplicaARespuestasIncorrectasYSeGuardaEnListaDeComodinesDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
 
-        Jugador jugador = mock(Jugador.class);
-        multiplicador.definirJugador(jugador);
+        Jugador unJugador = mock(Jugador.class);
+        Jugador otroJugador = mock(Jugador.class);
+        multiplicador.definirJugador(unJugador);
 
         Respuesta unaRespuestaIncorrecta = mock(Respuesta.class);
-        when(unaRespuestaIncorrecta.obtenerJugador()).thenReturn(jugador);
+        when(unaRespuestaIncorrecta.obtenerJugador()).thenReturn(unJugador);
         when(unaRespuestaIncorrecta.esCorrecta()).thenReturn(true);
 
         Respuesta otraRespuestaIncorrecta = mock(Respuesta.class);
-        when(otraRespuestaIncorrecta.obtenerJugador()).thenReturn(jugador);
+        when(otraRespuestaIncorrecta.obtenerJugador()).thenReturn(otroJugador);
         when(otraRespuestaIncorrecta.esCorrecta()).thenReturn(true);
 
-        multiplicador.aplicarARespuestas(unaRespuestaIncorrecta, otraRespuestaIncorrecta);
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(unaRespuestaIncorrecta);
+        respuestas.add(otraRespuestaIncorrecta);
+
+        multiplicador.aplicarARespuestas(respuestas);
 
         verify(unaRespuestaIncorrecta, times(1)).aplicarComodin(multiplicador);
-        verify(otraRespuestaIncorrecta, times(1)).aplicarComodin(multiplicador);
+        verify(otraRespuestaIncorrecta, times(0)).aplicarComodin(multiplicador);
     }
 
     @Test
-    public void recibeUnPuntajeNuloYSeLanzaExcepcion() throws ComodinError {
+    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
+        Punto puntoNuevo = multiplicador.aplicarComodinAPunto(new PuntoNulo());
 
-        assertThrows(ComodinError.class, () ->  multiplicador.puntajeNuevo(null));
+        assertEquals(0,puntoNuevo.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicadorDeFactorDosRecibeUnPuntajeConPuntosNulosYDevuelvePuntajeConPuntosConValorCero() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoNulo());
-
+    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
-        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+        Punto puntoNuevo = multiplicador.aplicarComodinAPunto(new PuntoPositivo());
 
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+        assertEquals(2,puntoNuevo.obtenerPunto().obtenerValor());
     }
 
     @Test
-    public void multiplicadorDeFactorDosRecibeUnPuntajeConPuntosPositivosYDevuelvePuntajeConPuntosPositivosConValorDos() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoPositivo());
-
+    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
-        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
+        Punto puntoNuevo = multiplicador.aplicarComodinAPunto(new PuntoNegativo());
 
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
+        assertEquals(-2,puntoNuevo.obtenerPunto().obtenerValor());
     }
-
-    @Test
-    public void multiplicadorDeFactorDosRecibeUnPuntajeConPuntosNegativosYDevuelvePuntajeConPuntosNegativosConValorDos() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
-
-        Multiplicador multiplicador = new Multiplicador(2);
-        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(-2,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void multiplicadorDeFactorTresRecibeUnPuntajeConPuntosNulosYDevuelvePuntajeConPuntosConValorCero() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoNulo());
-
-        Multiplicador multiplicador = new Multiplicador(3);
-        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void multiplicadorDeFactorTresRecibeUnPuntajeConPuntosPositivosYDevuelvePuntajeConPuntosPositivosConValorTres() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoPositivo());
-
-        Multiplicador multiplicador = new Multiplicador(3);
-        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(3,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void multiplicadorDeFactorTresRecibeUnPuntajeConPuntosNegativosYDevuelvePuntajeConPuntosNegativosConValorTres() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
-
-        Multiplicador multiplicador = new Multiplicador(3);
-        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(-3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(-3,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void multiplicadorDeFactorTresRecibeUnPuntajeConUnPuntoPositivoYOtroNegativo() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-
-        Multiplicador multiplicador = new Multiplicador(3);
-        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(-3,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void multiplicadorDeFactorTresRecibeUnPuntajeConUnPuntoPositivoYOtroNulo() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNulo());
-
-        Multiplicador multiplicador = new Multiplicador(3);
-        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void multiplicadorDeFactorTresRecibeUnPuntajeConUnPuntoNegativoYOtroNulo() throws ComodinError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-
-        Multiplicador multiplicador = new Multiplicador(3);
-        Puntaje puntajeNuevo = multiplicador.puntajeNuevo(puntaje.obtenerPuntos());
-
-        assertEquals(-3,puntajeNuevo.obtenerPuntos().get(0).obtenerValor());
-        assertEquals(0,puntajeNuevo.obtenerPuntos().get(1).obtenerValor());
-    }
-
-    @Test
-    public void aplicarComodinARespuestaNulaLanzaComodinError() throws ComodinError, PreguntaError, RespuestaError {
-        Multiplicador multiplicador = new Multiplicador(3);
-        VerdaderoFalsoClasico pregunta = new VerdaderoFalsoClasico("¿Estamso en 2020?");
-        pregunta.agregarOpcionCorrecta("Veradero");
-        pregunta.agregarOpcionIncorrecta("Falso");
-
-        Jugador jugador = new Jugador("Diego");
-        multiplicador.definirJugador(jugador);
-        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
-        Respuesta respuesta = new Respuesta(pregunta, jugador);
-        respuesta.agregarOpcion(opciones.get(0));
-
-        assertThrows(ComodinError.class, () -> multiplicador.aplicarARespuestas(null, respuesta));
-        assertThrows(ComodinError.class, () -> multiplicador.aplicarARespuestas(respuesta, null));
-    }
-
 }

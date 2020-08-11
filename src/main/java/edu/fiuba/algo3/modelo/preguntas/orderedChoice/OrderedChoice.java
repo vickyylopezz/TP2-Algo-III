@@ -1,44 +1,35 @@
 package edu.fiuba.algo3.modelo.preguntas.orderedChoice;
 
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
-import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeClasico;
+import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeOrdenado;
 import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
-import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
-import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
-
-import java.util.ArrayList;
 
 public class OrderedChoice extends Pregunta {
 
     public OrderedChoice(String titulo) {
-        super(titulo, new SinPenalidad(new CalculadorPuntajeClasico()));
+        super(titulo, new SinPenalidad(new CalculadorPuntajeOrdenado()));
     }
 
     public void agregarOpcion(String opcionTitulo) throws PreguntaError {
         if (this.opciones.size() == 5) {
-            throw new PreguntaError("Se alcanzo el maximo de opciones para esta pregunta");
+            throw new CantidadMaximaDeOpcionesError();
         }
-        this.opciones.add(new OpcionClasica(opcionTitulo, new PuntoNulo()));
-    }
-
-    public ArrayList<Opcion> obtenerOpciones() {
-        return this.opciones;
+        this.opciones.add(new Opcion(opcionTitulo, new PuntoNulo()));
     }
 
     @Override
-    public Punto puntajeConOpciones(ArrayList<Opcion> opciones) {
-        if (opciones.size() < this.opciones.size()) {
-            return new PuntoNulo();
+    public void extraerOpciones(JsonObject object) throws PreguntaError {
+        JsonArray orden = object.getAsJsonArray("orden");
+        if (orden == null) { return; /* EXCEPCION */ }
+        for (JsonElement opcion: orden){
+            agregarOpcion(opcion.getAsString());
         }
-        for (int i = 0; i < opciones.size(); i++) {
-            if (! opciones.get(i).obtenerTitulo().equals(this.opciones.get(i).obtenerTitulo())) {
-                return new PuntoNulo();
-            }
-        }
-        return new PuntoPositivo();
     }
 }

@@ -1,39 +1,35 @@
 package edu.fiuba.algo3.modelo.comodines;
 
-import edu.fiuba.algo3.modelo.excepciones.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
-import edu.fiuba.algo3.modelo.juego.Jugada;
+import edu.fiuba.algo3.modelo.excepciones.comodin.AplicacionDeComodinInvalidaError;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
+import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 
+import java.util.ArrayList;
+
 public class Exclusividad extends Comodin {
-    private final int factor = 0;
 
     public Exclusividad(int factor) throws ComodinError {
         super(factor);
     }
 
     @Override
-    public void validarPregunta(Jugada jugada) throws ComodinError, JugadorError {
-        if(jugada.obtenerPregunta().conPenalidad()){
-            throw new ComodinError("Aplicacion de comodin invalida");
+    public void validarPregunta(Pregunta pregunta) throws ComodinError {
+        if(pregunta.conPenalidad()){
+            throw new AplicacionDeComodinInvalidaError();
         }
     }
 
     @Override
-    void aplicarARespuestas(Respuesta unaRespuesta, Respuesta otraRespuesta) throws RespuestaError, JugadorError {
-        if(this.esAplicable(unaRespuesta,otraRespuesta) || (this.esAplicable(otraRespuesta,unaRespuesta))) {
-            unaRespuesta.aplicarComodin(this);
-            otraRespuesta.aplicarComodin(this);
+    public void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws PuntoError {
+        Respuesta respuestaCorrecta = null;
+        for (Respuesta respuesta : respuestas) {
+            if (!respuesta.esCorrecta()) continue;
+            if (respuestaCorrecta != null) return;
+            respuestaCorrecta = respuesta;
         }
-        if(unaRespuesta.validarComodin(this) && otraRespuesta.validarComodin(this)){
-            unaRespuesta.eliminarComodin(this);
-            otraRespuesta.eliminarComodin(this);
-         }
-
+        if (respuestaCorrecta != null) respuestaCorrecta.aplicarComodin(this);
+            //respuesta.eliminarComodin(this);
     }
-    protected boolean esAplicable(Respuesta unaRespuesta, Respuesta otraRespuesta) {
-        return ((unaRespuesta.esCorrecta()) && (!otraRespuesta.esCorrecta()));
-    }
-
 }

@@ -1,7 +1,8 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.*;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
 import java.util.ArrayList;
@@ -39,17 +40,17 @@ public class Jugada {
         return this.jugador.obtenerComodines();
     }
 
-    public void seleccionarOpcion(Opcion opcion) throws RespuestaError {
+    public void seleccionarOpcion(Opcion opcion) {
         this.respuesta.agregarOpcion(opcion);
     }
 
-    public void deseleccionarOpcion(Opcion opcion) throws RespuestaError {
+    public void deseleccionarOpcion(Opcion opcion) {
         this.respuesta.sacarOpcion(opcion);
     }
 
     public void seleccionarComodin(Comodin comodin) throws JugadorError, ComodinError {
         this.jugador.validarComodin(comodin);
-        comodin.validarPregunta(this);
+        comodin.validarPregunta(this.pregunta);
         this.comodin = comodin;
     }
 

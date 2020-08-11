@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
-import edu.fiuba.algo3.modelo.excepciones.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.RespuestaError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import org.junit.jupiter.api.Test;
@@ -25,7 +25,7 @@ public class VerdaderoFalsoClasicoTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError {
+    public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PreguntaError, PuntoError {
         VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?");
         preguntavf.agregarOpcionCorrecta("Verdadero");
         preguntavf.agregarOpcionIncorrecta("Falso");
@@ -41,8 +41,8 @@ public class VerdaderoFalsoClasicoTest {
         Integer esperadoJugador1 = 1;
         Integer esperadoJugador2 = 0;
 
-        assertEquals(esperadoJugador1, preguntavf.puntajeConOpciones(opcionesElegidasJugador1).obtenerValor());
-        assertEquals(esperadoJugador2, preguntavf.puntajeConOpciones(opcionesElegidasJugador2).obtenerValor());
+        assertEquals(esperadoJugador1, preguntavf.puntajeConOpciones(opcionesElegidasJugador1).obtenerPunto().obtenerValor());
+        assertEquals(esperadoJugador2, preguntavf.puntajeConOpciones(opcionesElegidasJugador2).obtenerPunto().obtenerValor());
     }
 
     @Test
@@ -71,11 +71,11 @@ public class VerdaderoFalsoClasicoTest {
     }
 
     @Test
-    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero(){
+    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PuntoError {
         VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico("¿Estamos en Algoritmos y programcion 3?");
         ArrayList<Opcion> opciones = new ArrayList<>();
 
-        assertEquals(0, preguntavf.puntajeConOpciones(opciones).obtenerValor());
+        assertEquals(0, preguntavf.puntajeConOpciones(opciones).obtenerPunto().obtenerValor());
     }
 
 }

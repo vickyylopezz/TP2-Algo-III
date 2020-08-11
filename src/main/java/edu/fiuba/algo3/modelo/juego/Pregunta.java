@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.juego;
 
+import com.google.gson.JsonObject;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.estados.EstadoPregunta;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
@@ -27,15 +30,15 @@ public abstract class Pregunta {
 
     public Punto puntajeIncorrecto() { return this.estado.puntajeIncorrecto(); }
 
-    public Punto puntajeConOpciones(ArrayList<Opcion> opciones) {
+    public Punto puntajeConOpciones(ArrayList<Opcion> opciones) throws PuntoError {
         return this.estado.puntajeConOpciones(this, opciones);
     }
 
-    public Boolean opcionesCorrectas(ArrayList<Opcion> opciones) {
+    public Boolean opcionesCorrectas(ArrayList<Opcion> opciones) throws PuntoError {
         return this.estado.opcionesCorrectas(this, opciones);
     }
 
-    public Integer cantidadOpcionesCorrectas() {
+    public Integer cantidadOpcionesCorrectas() throws PuntoError {
         return this.estado.cantidadOpcionesCorrectas(this);
     }
 
@@ -48,4 +51,5 @@ public abstract class Pregunta {
         for (Opcion opcion: seleccionadas) seleccionables.remove(opcion);
         return seleccionables;
     }
+    public void extraerOpciones(JsonObject object) throws PreguntaError {}
 }
