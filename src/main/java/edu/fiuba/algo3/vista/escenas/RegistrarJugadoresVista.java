@@ -1,17 +1,15 @@
 package edu.fiuba.algo3.vista.escenas;
 
 import edu.fiuba.algo3.controladores.RegistrarJugadoresControlador;
-import edu.fiuba.algo3.vista.componentes.GrupoDeComponentesVista;
+import edu.fiuba.algo3.vista.componentes.JugadorVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
 import javafx.scene.Node;
-import javafx.scene.control.TextField;
-
-import java.util.ArrayList;
 
 public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
     private final RegistrarJugadoresControlador controlador;
-    private ArrayList<TextField> textos = new ArrayList<>();
+    private JugadorVista jugadorVista1 = null;
+    private JugadorVista jugadorVista2 = null;
 
     public RegistrarJugadoresVista(RegistrarJugadoresControlador controlador) {
         this.controlador = controlador;
@@ -30,16 +28,16 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node centro() {
-        GrupoDeComponentesVista grupoJugador = new GrupoDeComponentesVista("JUGADOR 2");
-        this.textos.add(grupoJugador.obtenerTexto());
+        JugadorVista grupoJugador = new JugadorVista("JUGADOR 2");
+        jugadorVista1 = grupoJugador;
 
         return grupoJugador.obtenerNodo();
     }
 
     @Override
     protected Node centroIzquierda() {
-        GrupoDeComponentesVista grupoJugador = new GrupoDeComponentesVista("JUGADOR 1");
-        this.textos.add(grupoJugador.obtenerTexto());
+        JugadorVista grupoJugador = new JugadorVista("JUGADOR 1");
+        jugadorVista2 = grupoJugador;
 
         return grupoJugador.obtenerNodo();
     }
@@ -47,7 +45,7 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
     @Override
     protected Node centroDerecha() {
         BotonCuadradoVista botonConfirmar = new BotonCuadradoVista("CONFIRMAR");
-        botonConfirmar.click((event) -> this.controlador.confirmar(this.textos));
+        botonConfirmar.click((event) -> this.controlador.confirmar(this.jugadorVista1,this.jugadorVista2));
 
         return botonConfirmar.obtenerNodo();
     }
