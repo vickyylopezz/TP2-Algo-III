@@ -60,6 +60,23 @@ public class CargarPreguntasVista extends EstructuraPrincipalVista {
         return area;
     }
 
+    public void actualizarPreguntas(ArrayList<Pregunta> preguntas) {
+        this.contenedorPreguntas.getChildren().clear();
+
+        for (Pregunta pregunta: preguntas) {
+            this.contenedorPreguntas.getChildren().add(
+                    this.preguntaVista(pregunta)
+            );
+        }
+
+        if (preguntas.size() == 0) {
+            Label textoSinPreguntas = new Label("No hay preguntas seleccionadas");
+            textoSinPreguntas.setPadding(new Insets(10, 10, 10, 10));
+
+            this.contenedorPreguntas.getChildren().add(textoSinPreguntas);
+        }
+    }
+
     private Node cabeceraSubContenedor() {
         HBox cabecera = new HBox();
 
@@ -108,24 +125,6 @@ public class CargarPreguntasVista extends EstructuraPrincipalVista {
         scrollPane.setPrefHeight(400);
 
         return scrollPane;
-    }
-
-    public void actualizarPreguntas(ArrayList<Pregunta> preguntas) {
-        this.contenedorPreguntas.getChildren().clear();
-
-        for (Pregunta pregunta: preguntas) {
-            System.out.println(pregunta.obtenerTitulo());
-            this.contenedorPreguntas.getChildren().add(
-                    this.preguntaVista(pregunta)
-            );
-        }
-
-        if (preguntas.size() == 0) {
-            Label textoSinPreguntas = new Label("No hay preguntas seleccionadas");
-            textoSinPreguntas.setPadding(new Insets(10, 10, 10, 10));
-
-            this.contenedorPreguntas.getChildren().add(textoSinPreguntas);
-        }
     }
 
     private Node preguntaVista(Pregunta pregunta) {

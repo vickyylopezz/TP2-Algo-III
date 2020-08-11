@@ -24,7 +24,7 @@ public abstract class EstructuraPrincipalVista {
         raiz.setTop(cabecera.obtenerNodo());
         raiz.setCenter(this.centro());
 
-        this.escena = new Scene(raiz);
+        this.escena = new Scene(raiz, 800, 600);
     }
 
     public Scene obtenerEscena() {
