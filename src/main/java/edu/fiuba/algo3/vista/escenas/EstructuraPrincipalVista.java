@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista.escenas;
 
 import edu.fiuba.algo3.vista.Resources;
+import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -15,97 +16,40 @@ import java.io.FileNotFoundException;
 
 public abstract class EstructuraPrincipalVista implements Escena {
 
-    public Scene obtenerEscena() {
+    private Scene escena;
+    private CabeceraKahootVista cabecera;
+
+    public EstructuraPrincipalVista() {
+        this.crearCabecera();
+        this.crearEscena();
+    }
+
+    private void crearCabecera() {
+        this.cabecera = new CabeceraKahootVista(
+                this.cabeceraIzquierda(),
+                this.cabeceraDerecha()
+        );
+    }
+
+    private void crearEscena() {
         BorderPane raiz = new BorderPane();
 
-        raiz.setTop(this.cabecera());
-        raiz.setCenter(this.nucleo());
-        //raiz.setCenter(this.centro());
+        raiz.setTop(this.cabecera.obtenerNodo());
+        raiz.setLeft(this.centroIzquierda());
+        raiz.setCenter(this.centro());
+        raiz.setLeft(this.centroDerecha());
+        //raiz.setBottom(this.piso());
 
-        return new Scene(raiz, 800, 600);
+        this.escena = new Scene(raiz, 800, 600);
     }
 
-    private Node cabecera() {
-        HBox cabecera = new HBox();
-        cabecera.setSpacing(10);
-        cabecera.setPadding(new Insets(0, 0, 0, 0));
-        cabecera.setAlignment(Pos.TOP_CENTER);
-
-        StackPane izq = new StackPane();
-        izq.setAlignment(Pos.CENTER_LEFT);
-        StackPane cen = new StackPane();
-        cen.setAlignment(Pos.CENTER);
-        StackPane der = new StackPane();
-        der.setAlignment(Pos.CENTER_RIGHT);
-
-        Node contenidoIzq = this.cabeceraIzquierda();
-        Node contenidoCen = this.cabeceraCentro();
-        Node contenidoDer = this.cabeceraDerecha();
-
-        if (contenidoIzq != null) izq.getChildren().add(contenidoIzq);
-        if (contenidoCen != null) cen.getChildren().add(contenidoCen);
-        if (contenidoDer != null) der.getChildren().add(contenidoDer);
-
-        cabecera.setHgrow(izq, Priority.ALWAYS);
-        cabecera.setHgrow(cen, Priority.ALWAYS);
-        cabecera.setHgrow(der, Priority.ALWAYS);
-
-        cabecera.getChildren().addAll(izq, cen, der);
-
-        return cabecera;
-    }
-
-    private Node cabeceraCentro() {
-        Group contenedor = new Group();
-
-        try {
-            FileInputStream stream = new FileInputStream(Resources.LogoPrincipalRuta());
-            ImageView logo = new ImageView(new Image(stream));
-
-            logo.setPreserveRatio(true);
-            logo.setFitHeight(75);
-
-            contenedor.getChildren().add(logo);
-        } catch (FileNotFoundException e) { e.printStackTrace(); }
-
-        return contenedor;
-    }
+    public Scene obtenerEscena() { return this.escena; }
 
     abstract protected Node cabeceraDerecha();
 
     abstract protected Node cabeceraIzquierda();
 
     abstract protected Node centro();
-
-    private Node nucleo() {
-        VBox nucleo = new VBox();
-        nucleo.setAlignment(Pos.CENTER);
-        nucleo.setSpacing(10);
-        nucleo.setPadding(new Insets(0, 0, 0, 0));
-
-        StackPane izq = new StackPane();
-        izq.setAlignment(Pos.TOP_CENTER);
-        StackPane cen = new StackPane();
-        cen.setAlignment(Pos.CENTER);
-        StackPane der = new StackPane();
-        der.setAlignment(Pos.BOTTOM_CENTER);
-
-        Node contenidoIzq = this.centroIzquierda();
-        Node contenidoCen = this.centro();
-        Node contenidoDer = this.centroDerecha();
-
-        if (contenidoIzq != null) izq.getChildren().add(contenidoIzq);
-        if (contenidoCen != null) cen.getChildren().add(contenidoCen);
-        if (contenidoDer != null) der.getChildren().add(contenidoDer);
-
-        nucleo.setVgrow(izq, Priority.ALWAYS);
-        nucleo.setVgrow(cen, Priority.ALWAYS);
-        nucleo.setVgrow(der, Priority.ALWAYS);
-
-        nucleo.getChildren().addAll(izq, cen, der);
-
-        return nucleo;
-    }
 
     abstract protected Node centroIzquierda();
 
