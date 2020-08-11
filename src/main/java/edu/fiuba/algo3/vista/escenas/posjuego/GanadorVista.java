@@ -38,7 +38,7 @@ public class GanadorVista extends EstructuraPrincipalVista {
     @Override
     protected Node cabeceraIzquierda() {
         BotonEtiquetaVista botonResultados = new BotonEtiquetaVista("Resultados",false);
-        botonResultados.obtenerBoton().click((event) -> this.controlador.escenaAnterior());
+        botonResultados.click((event) -> this.controlador.escenaAnterior());
 
         return botonResultados.obtenerNodo();
     }

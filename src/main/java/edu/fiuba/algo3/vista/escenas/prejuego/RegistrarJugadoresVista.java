@@ -7,7 +7,6 @@ import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 
 public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
 
@@ -22,7 +21,7 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
     @Override
     protected Node cabeceraDerecha() {
         BotonEtiquetaVista botonConfirmar = new BotonEtiquetaVista("CONFIRMAR",true);
-        botonConfirmar.obtenerBoton().click((event) -> this.controlador.confirmar(this.jugadorVista1,this.jugadorVista2));
+        botonConfirmar.click((event) -> this.controlador.confirmar(this.jugadorVista1,this.jugadorVista2));
 
         return botonConfirmar.obtenerNodo();
     }
@@ -30,7 +29,7 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
     @Override
     protected Node cabeceraIzquierda() {
         BotonEtiquetaVista botonInicio = new BotonEtiquetaVista("INICIO",false);
-        botonInicio.obtenerBoton().click((event) -> this.controlador.otraEscena());
+        botonInicio.click((event) -> this.controlador.otraEscena());
 
         return botonInicio.obtenerNodo();
     }

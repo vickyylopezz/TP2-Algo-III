@@ -21,7 +21,7 @@ public class JuegoVista extends EstructuraPrincipalVista {
     @Override
     protected Node cabeceraIzquierda() {
         BotonEtiquetaVista botonJugadores = new BotonEtiquetaVista("JUGADORES",false);
-        botonJugadores.obtenerBoton().click((event) -> this.controlador.otraEscena());
+        botonJugadores.click((event) -> this.controlador.otraEscena());
 
         return botonJugadores.obtenerNodo();
     }

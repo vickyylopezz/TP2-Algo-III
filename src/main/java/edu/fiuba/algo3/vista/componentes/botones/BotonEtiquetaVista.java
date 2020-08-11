@@ -1,16 +1,15 @@
 package edu.fiuba.algo3.vista.componentes.botones;
 
-import edu.fiuba.algo3.vista.componentes.Componente;
+import edu.fiuba.algo3.vista.componentes.Boton;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 
-public class BotonEtiquetaVista implements Componente {
+public class BotonEtiquetaVista implements Boton {
 
     private Node nodo;
     private String titulo;
@@ -70,9 +69,14 @@ public class BotonEtiquetaVista implements Componente {
         return boton.obtenerNodo();
     }
 
-    public BotonCircularVista obtenerBoton() {
-        return this.boton;
-    }
+    @Override
+    public void desactivar() { this.boton.desactivar(); }
+
+    @Override
+    public void activar() { this.boton.activar(); }
+
+    @Override
+    public void click(EventHandler<ActionEvent> accion) { this.boton.click(accion); }
 
     @Override
     public Node obtenerNodo() {

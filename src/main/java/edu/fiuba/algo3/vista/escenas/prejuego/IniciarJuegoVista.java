@@ -17,7 +17,7 @@ public class IniciarJuegoVista extends EstructuraPrincipalVista {
     @Override
     protected Node cabeceraDerecha() {
         BotonEtiquetaVista botonCargarPreguntas = new BotonEtiquetaVista("CARGAR PREGUNTAS",true);
-        botonCargarPreguntas.obtenerBoton().click((event) -> this.controlador.otraEscena());
+        botonCargarPreguntas.click((event) -> this.controlador.otraEscena());
 
         return botonCargarPreguntas.obtenerNodo();
     }
