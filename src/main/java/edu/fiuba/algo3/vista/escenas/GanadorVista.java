@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.vista.escenas;
 
+import edu.fiuba.algo3.controladores.GanadorControlador;
+import edu.fiuba.algo3.controladores.JuegoControlador;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
 import javafx.geometry.HPos;
@@ -21,6 +23,12 @@ import java.io.FileNotFoundException;
 import static javafx.geometry.Pos.*;
 
 public class GanadorVista extends EstructuraPrincipalVista{
+    private GanadorControlador controlador;
+
+    public GanadorVista(GanadorControlador controlador) {
+        this.controlador = controlador;
+    }
+
     @Override
     protected Node cabeceraDerecha() {
         return null;
@@ -28,7 +36,10 @@ public class GanadorVista extends EstructuraPrincipalVista{
 
     @Override
     protected Node cabeceraIzquierda() {
-        return new BotonEtiquetaVista("Resultados", false).obtenerNodo();
+        BotonEtiquetaVista botonResultados = new BotonEtiquetaVista("Resultados",false);
+        botonResultados.obtenerBoton().click((event) -> this.controlador.escenaAnterior());
+
+        return botonResultados.obtenerNodo();
     }
 
     @Override
