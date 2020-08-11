@@ -5,7 +5,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 
-public abstract class EstructuraPrincipalVista implements Escena {
+public abstract class EstructuraPrincipalVista {
 
     private Scene escena;
 
