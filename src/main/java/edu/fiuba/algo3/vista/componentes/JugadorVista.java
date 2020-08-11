@@ -10,17 +10,19 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class GrupoDeComponentesVista {
+public class JugadorVista {
 
     private final String titulo;
     private Node nodo;
     private TextField texto;
+    private Label etiqueta = new Label();
 
-    public GrupoDeComponentesVista(String titulo) {
+    public JugadorVista(String titulo) {
         this.titulo = titulo;
 
         this.aplicarEstilo();
@@ -53,10 +55,22 @@ public class GrupoDeComponentesVista {
 
         this.texto = texto;
 
-        return texto;
+        Label etiqueta = new Label();
+        this.etiqueta = etiqueta;
+
+        VBox vbox = new VBox(10);
+
+        vbox.getChildren().addAll(texto,etiqueta);
+        vbox.setAlignment(Pos.CENTER_LEFT);
+
+        return vbox;
     }
 
-    public TextField obtenerTexto() {
+    public boolean esInvalido() {
+        return (this.texto.getText().trim().equals(""));
+    }
+
+    public TextField obtenerTexto(){
         return this.texto;
     }
 
@@ -92,5 +106,15 @@ public class GrupoDeComponentesVista {
 
     public Node obtenerNodo() {
         return this.nodo;
+    }
+
+    public void validarJugadorVista() {
+        this.etiqueta.setText("Debe ingresar un nombre");
+        this.etiqueta.setTextFill(Color.web("#FF0000"));
+        this.obtenerTexto().requestFocus();
+    }
+
+    public void confirmarJugadorVista() {
+        this.etiqueta.setText("");
     }
 }
