@@ -1,58 +1,65 @@
 package edu.fiuba.algo3.vista.componentes.botones;
 
-import edu.fiuba.algo3.vista.componentes.Boton;
+import edu.fiuba.algo3.vista.Tema;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Border;
+import javafx.scene.control.ContentDisplay;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 
-public class BotonCuadradoVista implements Boton {
+public class BotonCuadradoVista extends Button {
 
-    private final Button boton;
-    private String estilo;
-    private Boolean activado;
-    private EventHandler<ActionEvent> clickAccion;
-
-    public BotonCuadradoVista(String texto) {
-        this.boton = new Button(texto);
+    public BotonCuadradoVista(String t) {
+        super(t);
         this.cargarEstilo();
-        this.activar();
+    }
+
+    public BotonCuadradoVista(ImageView img) {
+        this.setGraphic(img);
+        this.setContentDisplay(ContentDisplay.CENTER);
+        this.cargarEstilo();
     }
 
     private void cargarEstilo() {
-        this.estilo += "-fx-effect: dropshadow(three-pass-box, grey, 3, 0, 0, 0);";
-        this.estilo += "-fx-text-fill: white;";
-        this.estilo += "-fx-font-weight: bold;";
-
-        this.boton.setStyle(this.estilo);
-        this.boton.setPrefHeight(50);
-        this.boton.setBorder(Border.EMPTY);
+        this.setBorder(new Border(
+                new BorderStroke(
+                        Color.TRANSPARENT,
+                        BorderStrokeStyle.NONE,
+                        new CornerRadii(3),
+                        BorderWidths.EMPTY
+                )
+        ));
+        this.setEffect(new DropShadow(3, Color.LIGHTGREY));
+        this.setPrefHeight(50);
+        this.setPrefWidth(50);
+        this.activar();
     }
 
-    @Override
     public void desactivar() {
-        this.activado = false;
-        this.boton.setStyle(this.estilo + "-fx-background-color: #7D7D7D;");
-        this.boton.setOnAction(null);
+        this.disableProperty().set(true);
+        this.setBackground(new Background(
+                new BackgroundFill(
+                        Tema.colorBotonPrincipalDesactivado,
+                        new CornerRadii(3),
+                        new Insets(10)
+                )
+        ));
     }
 
-    @Override
     public void activar() {
-        this.activado = true;
-        this.boton.setStyle(this.estilo + "-fx-background-color: #9463EB;");
-        this.boton.setOnAction(this.clickAccion);
-    }
-
-    @Override
-    public void click(EventHandler<ActionEvent> accion) {
-        if (this.activado) this.boton.setOnAction(accion);
-        this.clickAccion = accion;
-    }
-
-    @Override
-    public Node obtenerNodo() {
-        return this.boton;
+        this.disableProperty().set(false);
+        this.setBackground(new Background(
+                new BackgroundFill(
+                        Tema.colorBotonPrincipal,
+                        new CornerRadii(3),
+                        new Insets(10)
+                )
+        ));
     }
 }
