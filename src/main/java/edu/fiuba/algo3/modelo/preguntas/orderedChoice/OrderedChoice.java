@@ -7,8 +7,8 @@ import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesErro
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeOrdenado;
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionClasica;
 import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 
 public class OrderedChoice extends Pregunta {
@@ -21,7 +21,7 @@ public class OrderedChoice extends Pregunta {
         if (this.opciones.size() == 5) {
             throw new CantidadMaximaDeOpcionesError();
         }
-        this.opciones.add(new OpcionClasica(opcionTitulo, new PuntoNulo()));
+        this.opciones.add(new Opcion(opcionTitulo, new PuntoNulo()));
     }
 
     @Override

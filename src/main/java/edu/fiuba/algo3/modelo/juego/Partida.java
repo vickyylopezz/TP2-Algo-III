@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
@@ -12,31 +13,30 @@ public class Partida {
 
     private final ArrayList<Jugada> jugadas;
     private Integer turno;
-    private boolean accionesDeFinalizacion;
 
     public Partida(Pregunta pregunta, ArrayList<Jugador> jugadores) {
         this.jugadas = new ArrayList<>();
-        this.turno = 0;
-        this.accionesDeFinalizacion = false;
-
         for (Jugador jugador: jugadores) this.jugadas.add(new Jugada(pregunta, jugador));
     }
 
-    public Boolean existeTurno() { return this.turno < this.jugadas.size(); }
-
-    public void siguienteTurno() {
-        this.turno++;
-
-        if (!this.turnosFinalizados() || this.accionesDeFinalizacion) return;
-        this.accionesDeFinalizacion = true;
-
-        aplicarComodines();
-        agregarRespuestas();
+    public void iniciarTurnos() {
+        if (this.turno != null) return;
+        this.turno = 0;
     }
 
+    public Boolean existeTurno() { return this.turno != null && this.turno < this.jugadas.size(); }
+
+    public void siguienteTurno() { this.turno++; }
+
     public Jugada obtenerJugada() {
-        if (this.turnosFinalizados()) return null;
+        if (!this.existeTurno()) return null;
         return this.jugadas.get(this.turno);
+    }
+
+    public void finalizarTurnos() throws PuntoError {
+        if (this.existeTurno()) return;
+        aplicarComodines();
+        agregarRespuestas();
     }
 
     private void agregarRespuestas() {
@@ -45,17 +45,13 @@ public class Partida {
         }
     }
 
-    private void aplicarComodines() {
+    private void aplicarComodines() throws PuntoError {
         ArrayList<Respuesta> respuestas = this.respuestasJugadas();
 
         for (Comodin comodin: this.comodinesJugadas()) {
             comodin.aplicarARespuestas(respuestas);
             comodin.obtenerJugador().sacarComodin(comodin);
         }
-    }
-
-    private Boolean turnosFinalizados() {
-        return this.turno >= this.jugadas.size();
     }
 
     private ArrayList<Comodin> comodinesJugadas() {

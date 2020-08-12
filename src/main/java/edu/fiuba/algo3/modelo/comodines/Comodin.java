@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.FactorComodinNegativoError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.FactorComodinNuloError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.JugadorInvalidoError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
@@ -37,7 +38,7 @@ public abstract class Comodin {
 
     public abstract void validarPregunta(Pregunta pregunta) throws ComodinError, JugadorError;
 
-    public abstract void aplicarARespuestas(ArrayList<Respuesta> respuestas);
+    public abstract void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws PuntoError;
 
     public void definirJugador(Jugador jugador) throws ComodinError {
         if(jugador == null){

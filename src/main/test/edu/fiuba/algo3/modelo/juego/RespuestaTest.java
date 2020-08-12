@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
@@ -310,7 +311,7 @@ public class RespuestaTest {
 
     // esCorrecta
     @Test
-    public void esCorrectasDevuelveTrueSiLasOpcionesSeleccionadasSonCorrectasEnLaPregunta() {
+    public void esCorrectasDevuelveTrueSiLasOpcionesSeleccionadasSonCorrectasEnLaPregunta() throws PuntoError {
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -335,7 +336,7 @@ public class RespuestaTest {
     }
 
     @Test
-    public void esCorrectasDevuelveFalseSiLasOpcionesSeleccionadasSonIncorrectasEnLaPregunta() {
+    public void esCorrectasDevuelveFalseSiLasOpcionesSeleccionadasSonIncorrectasEnLaPregunta() throws PuntoError {
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -361,7 +362,7 @@ public class RespuestaTest {
 
     // puntaje
     @Test
-    public void puntajeSinOpcionesDevuelvePuntajeNulo() {
+    public void puntajeSinOpcionesDevuelvePuntajeNulo() throws PuntoError {
         Punto puntoEsperado = new PuntoNulo();
 
         ArrayList<Opcion> opcionesVacias = new ArrayList<>();
@@ -378,7 +379,7 @@ public class RespuestaTest {
     }
 
     @Test
-    public void puntajeConOpcionesSinComodinesDevuelveLoCorrecto() {
+    public void puntajeConOpcionesSinComodinesDevuelveLoCorrecto() throws PuntoError {
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -406,7 +407,7 @@ public class RespuestaTest {
     }
 
     @Test
-    public void puntajeConOpcionesYUnComodinDevuelveLoCorrecto() {
+    public void puntajeConOpcionesYUnComodinDevuelveLoCorrecto() throws PuntoError {
         Punto puntajeRespuestaSinComodines = new PuntoPositivo();
 
         Puntaje puntajeRespuestaConComodin = new Puntaje();
@@ -444,7 +445,7 @@ public class RespuestaTest {
     }
 
     @Test
-    public void puntajeConOpcionesYVariosComodinesDevuelveLoCorrecto() {
+    public void puntajeConOpcionesYVariosComodinesDevuelveLoCorrecto() throws PuntoError {
         Punto puntajeSinComodines = new PuntoPositivo();
 
         Puntaje puntajeConComodin1 = new Puntaje();
