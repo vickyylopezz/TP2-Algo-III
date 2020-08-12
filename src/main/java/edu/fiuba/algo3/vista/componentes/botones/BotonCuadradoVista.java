@@ -22,6 +22,8 @@ public class BotonCuadradoVista extends Button {
 
     public BotonCuadradoVista(ImageView img) {
         this.setGraphic(img);
+        img.setFitWidth(25);
+        img.setFitHeight(25);
         this.setContentDisplay(ContentDisplay.CENTER);
         this.cargarEstilo();
     }
@@ -35,9 +37,9 @@ public class BotonCuadradoVista extends Button {
                         BorderWidths.EMPTY
                 )
         ));
+        this.setPadding(new Insets(5));
         this.setEffect(new DropShadow(3, Color.LIGHTGREY));
         this.setPrefHeight(50);
-        this.setPrefWidth(50);
         this.activar();
     }
 
@@ -47,7 +49,7 @@ public class BotonCuadradoVista extends Button {
                 new BackgroundFill(
                         Tema.colorBotonPrincipalDesactivado,
                         new CornerRadii(3),
-                        new Insets(10)
+                        Insets.EMPTY
                 )
         ));
     }
@@ -58,7 +60,7 @@ public class BotonCuadradoVista extends Button {
                 new BackgroundFill(
                         Tema.colorBotonPrincipal,
                         new CornerRadii(3),
-                        new Insets(10)
+                        Insets.EMPTY
                 )
         ));
     }

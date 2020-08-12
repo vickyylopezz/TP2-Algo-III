@@ -17,23 +17,26 @@ public class BotonCircularVista extends Button {
     }
 
     public BotonCircularVista(ImageView img) {
+        img.setPreserveRatio(true);
+        img.setFitWidth(25);
+        img.setFitHeight(25);
         this.setGraphic(img);
         this.setContentDisplay(ContentDisplay.CENTER);
         this.cargarEstilo();
     }
 
     private void cargarEstilo() {
+        this.setEffect(new DropShadow(5, Color.GREY));
+        this.setPrefHeight(50);
+        this.setPrefWidth(50);
         this.setBorder(new Border(
                 new BorderStroke(
                         Color.TRANSPARENT,
                         BorderStrokeStyle.NONE,
-                        new CornerRadii(Double.MAX_VALUE),
+                        new CornerRadii(50, true),
                         BorderWidths.EMPTY
                 )
         ));
-        this.setEffect(new DropShadow(3, Color.LIGHTGREY));
-        this.setPrefHeight(50);
-        this.setPrefWidth(50);
         this.activar();
     }
 
@@ -42,8 +45,8 @@ public class BotonCircularVista extends Button {
         this.setBackground(new Background(
                 new BackgroundFill(
                         Tema.colorBotonPrincipalDesactivado,
-                        new CornerRadii(Double.MAX_VALUE),
-                        new Insets(10)
+                        new CornerRadii(50, true),
+                        Insets.EMPTY
                 )
         ));
     }
@@ -53,8 +56,8 @@ public class BotonCircularVista extends Button {
         this.setBackground(new Background(
                 new BackgroundFill(
                         Tema.colorBotonPrincipal,
-                        new CornerRadii(Double.MAX_VALUE),
-                        new Insets(10)
+                        new CornerRadii(50, true),
+                        Insets.EMPTY
                 )
         ));
     }

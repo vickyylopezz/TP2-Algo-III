@@ -27,6 +27,8 @@ public class BotonEtiquetaIzquierdaVista extends StackPane {
     }
 
     private void cargarEstilo() {
+        this.setAlignment(Pos.CENTER_RIGHT);
+
         etiqueta.setTranslateX(-10);
         etiqueta.setAlignment(Pos.CENTER_LEFT);
     }
