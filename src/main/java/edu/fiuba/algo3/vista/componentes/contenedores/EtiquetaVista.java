@@ -18,9 +18,15 @@ public class EtiquetaVista extends StackPane {
         this.setPadding(new Insets(5));
         this.setBorder(new Border(new BorderStroke(
                 Color.GRAY,
-                BorderStrokeStyle.NONE,
+                BorderStrokeStyle.SOLID,
                 new CornerRadii(2),
                 new BorderWidths(1)
         )));
+        this.setBackground(new Background(new BackgroundFill(
+                Color.WHITE,
+                new CornerRadii(2),
+                Insets.EMPTY
+        )
+        ));
     }
 }
