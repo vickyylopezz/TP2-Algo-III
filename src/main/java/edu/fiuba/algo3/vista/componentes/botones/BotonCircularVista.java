@@ -29,6 +29,7 @@ public class BotonCircularVista extends Button {
         this.setEffect(new DropShadow(5, Color.GREY));
         this.setPrefHeight(50);
         this.setPrefWidth(50);
+        this.setTextFill(Tema.ColorBotonPrincipalTexto);
         this.setBorder(new Border(
                 new BorderStroke(
                         Color.TRANSPARENT,

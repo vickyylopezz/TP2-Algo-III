@@ -38,6 +38,7 @@ public class BotonCuadradoVista extends Button {
                 )
         ));
         this.setPadding(new Insets(5));
+        this.setTextFill(Tema.ColorBotonPrincipalTexto);
         this.setEffect(new DropShadow(3, Color.LIGHTGREY));
         this.setPrefHeight(50);
         this.activar();

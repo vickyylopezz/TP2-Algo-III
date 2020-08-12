@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vista.componentes.botones;
 
 import edu.fiuba.algo3.vista.CargadorResources;
 import edu.fiuba.algo3.vista.Resources;
+import edu.fiuba.algo3.vista.Tema;
 import edu.fiuba.algo3.vista.componentes.contenedores.EtiquetaVista;
 import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;
 import javafx.beans.property.ObjectProperty;
@@ -28,6 +29,7 @@ public class BotonEtiquetaIzquierdaVista extends StackPane {
 
     private void cargarEstilo() {
         this.setAlignment(Pos.CENTER_RIGHT);
+        this.boton.setTextFill(Tema.ColorBotonPrincipalTexto);
 
         etiqueta.setTranslateX(-10);
         etiqueta.setAlignment(Pos.CENTER_LEFT);
