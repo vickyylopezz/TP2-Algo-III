@@ -2,9 +2,10 @@ package edu.fiuba.algo3.vista.escenas.prejuego;
 
 import edu.fiuba.algo3.controladores.CargarPreguntaControlador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
 import edu.fiuba.algo3.vista.componentes.preguntas.PreguntaBarraVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
-import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
+import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -29,12 +30,12 @@ public class CargarPreguntasVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node cabeceraDerecha() {
-        return new BotonEtiquetaVista("JUGADORES", true).obtenerNodo();
+        return new BotonEtiquetaIzquierdaVista("JUGADORES");
     }
 
     @Override
     protected Node cabeceraIzquierda() {
-        return new BotonEtiquetaVista("INICIO", false).obtenerNodo();
+        return new BotonEtiquetaDerechaVista("INICIO");
     }
 
     @Override
@@ -97,12 +98,12 @@ public class CargarPreguntasVista extends EstructuraPrincipalVista {
         HBox.setHgrow(separador, Priority.ALWAYS);
 
         BotonCuadradoVista botonCargarJson = new BotonCuadradoVista("Cargar Json");
-        botonCargarJson.click((event)-> this.controlador.cargarJson());
+        botonCargarJson.setOnAction((event)-> this.controlador.cargarJson());
 
         cabecera.getChildren().addAll(
                 tituloIzuiquirda,
                 separador,
-                botonCargarJson.obtenerNodo()
+                botonCargarJson
         );
 
         return cabecera;
@@ -135,10 +136,10 @@ public class CargarPreguntasVista extends EstructuraPrincipalVista {
         barra.setSpacing(5);
 
         BotonCuadradoVista botonSubir = new BotonCuadradoVista("subir");
-        botonSubir.click((event) -> this.controlador.subirPregunta(pregunta));
+        botonSubir.setOnAction((event) -> this.controlador.subirPregunta(pregunta));
 
         BotonCuadradoVista botonBajar = new BotonCuadradoVista("bajar");
-        botonBajar.click((event) -> this.controlador.bajarPregunta(pregunta));
+        botonBajar.setOnAction((event) -> this.controlador.bajarPregunta(pregunta));
 
         PreguntaBarraVista barraPregunta = new PreguntaBarraVista(pregunta);
 
@@ -146,14 +147,14 @@ public class CargarPreguntasVista extends EstructuraPrincipalVista {
         HBox.setHgrow(separador, Priority.ALWAYS);
 
         BotonCuadradoVista botonBorrar = new BotonCuadradoVista("borrar");
-        botonBorrar.click((event) -> this.controlador.borrarPregunta(pregunta));
+        botonBorrar.setOnAction((event) -> this.controlador.borrarPregunta(pregunta));
 
         barra.getChildren().addAll(
-                botonSubir.obtenerNodo(),
-                botonBajar.obtenerNodo(),
-                barraPregunta.obtenerNodo(),
+                botonSubir,
+                botonBajar,
+                barraPregunta,
                 separador,
-                botonBorrar.obtenerNodo()
+                botonBorrar
         );
 
         return barra;

@@ -2,11 +2,13 @@ package edu.fiuba.algo3.vista.escenas.juego;
 
 import edu.fiuba.algo3.controladores.JuegoControlador;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
-import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
+import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
+import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.scene.Node;
 
 public class JuegoVista extends EstructuraPrincipalVista {
+
     private JuegoControlador controlador;
 
     public JuegoVista(JuegoControlador controlador) {
@@ -20,12 +22,11 @@ public class JuegoVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node cabeceraIzquierda() {
-        BotonEtiquetaVista botonJugadores = new BotonEtiquetaVista("JUGADORES",false);
-        botonJugadores.click((event) -> this.controlador.otraEscena());
-
-        return botonJugadores.obtenerNodo();
+        BotonEtiquetaDerechaVista boton = new BotonEtiquetaDerechaVista("JUGADORES");
+        boton.setOnAction((event) -> this.controlador.otraEscena());
+        return boton;
     }
 
     @Override
-    protected Node centro() { return new BotonCuadradoVista("JUGAR").obtenerNodo(); }
+    protected Node centro() { return new BotonCuadradoVista("Iniciar Juego"); }
 }

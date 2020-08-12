@@ -1,35 +1,24 @@
 package edu.fiuba.algo3.vista.componentes.preguntas;
 
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.vista.componentes.Componente;
+import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 
-public class PreguntaBarraVista implements Componente {
+public class PreguntaBarraVista extends HBox {
 
     private final Pregunta pregunta;
-    private HBox contenedor;
 
     public PreguntaBarraVista(Pregunta pregunta) {
         this.pregunta = pregunta;
-
-        this.crearVista();
+        this.cargarEstilo();
     }
 
-    private void crearVista() {
-        this.contenedor = new HBox();
-        this.contenedor.setPrefHeight(30);
-        this.contenedor.setAlignment(Pos.CENTER_LEFT);
+    private void cargarEstilo() {
+        this.setPrefHeight(30);
+        this.setAlignment(Pos.CENTER_LEFT);
 
-        Label titulo = new Label(this.pregunta.obtenerTitulo());
-
-        this.contenedor.getChildren().add(titulo);
-    }
-
-    @Override
-    public Node obtenerNodo() {
-        return this.contenedor;
+        MiniTexto titulo = new MiniTexto(this.pregunta.obtenerTitulo());
+        this.getChildren().add(titulo);
     }
 }

@@ -18,10 +18,7 @@ import java.io.FileNotFoundException;
 public class PuntosObtenidosVista extends EstructuraPrincipalVista {
 
     @Override
-    protected Node cabeceraDerecha() {
-        BotonCuadradoVista botonContinuar = new BotonCuadradoVista("Continuar");
-        return botonContinuar.obtenerNodo();
-    }
+    protected Node cabeceraDerecha() { return new BotonCuadradoVista("Continuar"); }
 
     @Override
     protected Node cabeceraIzquierda() {

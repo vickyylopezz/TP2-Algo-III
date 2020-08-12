@@ -2,7 +2,8 @@ package edu.fiuba.algo3.vista.escenas.prejuego;
 
 import edu.fiuba.algo3.controladores.RegistrarJugadoresControlador;
 import edu.fiuba.algo3.vista.componentes.JugadorVista;
-import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaVista;
+import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
+import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -20,18 +21,16 @@ public class RegistrarJugadoresVista extends EstructuraPrincipalVista {
 
     @Override
     protected Node cabeceraDerecha() {
-        BotonEtiquetaVista botonConfirmar = new BotonEtiquetaVista("CONFIRMAR",true);
-        botonConfirmar.click((event) -> this.controlador.confirmar(this.jugadorVista1,this.jugadorVista2));
-
-        return botonConfirmar.obtenerNodo();
+        BotonEtiquetaIzquierdaVista botonConfirmar = new BotonEtiquetaIzquierdaVista("CONFIRMAR");
+        botonConfirmar.setOnAction((event) -> this.controlador.confirmar(this.jugadorVista1,this.jugadorVista2));
+        return botonConfirmar;
     }
 
     @Override
     protected Node cabeceraIzquierda() {
-        BotonEtiquetaVista botonInicio = new BotonEtiquetaVista("INICIO",false);
-        botonInicio.click((event) -> this.controlador.otraEscena());
-
-        return botonInicio.obtenerNodo();
+        BotonEtiquetaDerechaVista botonInicio = new BotonEtiquetaDerechaVista("INICIO");
+        botonInicio.setOnAction((event) -> this.controlador.otraEscena());
+        return botonInicio;
     }
 
     @Override
