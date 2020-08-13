@@ -61,42 +61,13 @@ public class App extends Application {
         this.comenzarMusica();
         this.escenario.show();
 
-        //Escena crearJuego = new CrearJuegoVista();
-        //Escena cargadorPreguntas = new CargarPreguntasVista();
-        //Escena iniciarJuego = new IniciarJuegoVista();
-        //Escena registrarJugadores = new RegistrarJugadoresVista();
-        //PuntosObtenidosVista puntosobtenidos = new PuntosObtenidosVista();
-        //PreviaPreguntaVista previaPregunta = new PreviaPreguntaVista(jugada);
-        //Escena ganador = new GanadorVista();
-
-        //Jugada jugada = new Jugada(new VerdaderoFalsoConPenalidad("Estamos en el año 2021"), new Jugador("Carlos"));
-        //this.escenario.setScene(this.previaPreguntaEscena(jugada));
-        //this.escenario.setScene(this.resultadosEscena());
-        //this.escenario.show();
-
-        //stage.setScene(crearJuego.obtenerEscena());
-        //stage.setScene(cargadorPreguntas.obtenerEscena());
-        //stage.setScene(iniciarJuego.obtenerEscena());
-        //stage.setScene(registrarJugadores.obtenerEscena());
-        //stage.setScene(puntosobtenidos.obtenerEscena());
-        //stage.setScene(previaPregunta.obtenerEscena());
-        //stage.setScene(ganador.obtenerEscena());
-        //stage.show();
-
-        //CargarPreguntaControlador preguntasControlador = new CargarPreguntaControlador(stage);
-        //preguntasControlador.mostrarVista();
-
-        //IniciarJuegoControlador iniciarJuegoControlador = new IniciarJuegoControlador(stage);
-        //iniciarJuegoControlador.mostrarVista();
-        //comenzarMusica();
-
     }
 
     private Scene iniciarJuegoEscena() {
         //Botones
 
         BotonEtiquetaIzquierdaVista botonCargarPreguntas = new BotonEtiquetaIzquierdaVista("CARGAR PREGUNTAS");
-        botonCargarPreguntas.setOnAction((event) -> this.escenario.setScene(this.seleccionarPreguntasEscena()));
+        botonCargarPreguntas.setOnAction((event) -> this.escenario.setScene(seleccionarPreguntasEscena()));
 
         BotonCuadradoVista botonIniciar = new BotonCuadradoVista("INICIAR");
         botonIniciar.setOnAction((event) -> this.escenario.setScene(resgistrarJugadoresEscena()));
@@ -276,7 +247,7 @@ public class App extends Application {
         //set on action
 
         BotonCuadradoVista botonIniciar = new BotonCuadradoVista("Iniciar Juego");
-        //set on action
+        botonIniciar.setOnAction((event) -> this.escenario.setScene(iniciarJuegoEscena()));
 
         //Contenedor
         BorderPane contenedorPrincipal = new BorderPane();
