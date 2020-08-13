@@ -1,41 +1,33 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.controladores.IniciarJuegoControlador;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Juego;
-import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
+import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.JugadorVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
-import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaVista;
+import edu.fiuba.algo3.vista.componentes.preguntas.PreguntaBarraVista;
 import edu.fiuba.algo3.vista.escenas.postjuego.GanadorVista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.application.Application;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import static javafx.geometry.Pos.*;
 import static javafx.geometry.Pos.CENTER;
@@ -44,6 +36,7 @@ public class App extends Application {
     private Stage escenario;
     private Juego juego;
     private Jugador[] jugadores = new Jugador[2];
+    private ArrayList<Pregunta> preguntas = new ArrayList<>();
     private Media musica;
     private MediaPlayer reproductor;
 
@@ -52,7 +45,7 @@ public class App extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException, PreguntaError {
+    public void start(Stage stage) {
         this.escenario = stage;
         this.escenario.setTitle("Kahoot");
         this.escenario.setScene(this.iniciarJuegoEscena());
@@ -91,7 +84,7 @@ public class App extends Application {
         //Botones
 
         BotonEtiquetaIzquierdaVista botonCargarPreguntas = new BotonEtiquetaIzquierdaVista("CARGAR PREGUNTAS");
-        //botonCargarPreguntas.setOnAction((event) -> this.cargarPreguntasEscena());
+        botonCargarPreguntas.setOnAction((event) -> this.escenario.setScene(this.seleccionarPreguntasEscena()));
 
         BotonCuadradoVista botonIniciar = new BotonCuadradoVista("INICIAR");
         botonIniciar.setOnAction((event) -> this.escenario.setScene(resgistrarJugadoresEscena()));
@@ -102,6 +95,132 @@ public class App extends Application {
         contenedorPrincipal.setCenter(botonIniciar);
 
         return new Scene(contenedorPrincipal,800,600);
+    }
+
+    private Scene seleccionarPreguntasEscena() {
+        //XBox
+        StackPane contenedor = new StackPane();
+
+        VBox caja = new VBox();
+        String estilo = "-fx-border-radius: 2;";
+        estilo += "-fx-background-radius: 2;";
+        estilo += "-fx-border-width: 1;";
+        estilo += "-fx-border-color: #999;";
+        estilo += "-fx-background-color: white;";
+        caja.setStyle(estilo);
+
+        //Cuerpo caja
+        VBox listadoPreguntas = new VBox();
+        listadoPreguntas.setAlignment(Pos.TOP_CENTER);
+
+        this.actualizarPreguntas(listadoPreguntas);
+
+        ScrollPane cuerpoCaja = new ScrollPane();
+        cuerpoCaja.setContent(listadoPreguntas);
+        cuerpoCaja.setStyle("-fx-background-color: white;-fx-background: white");
+        cuerpoCaja.setFitToHeight(true);
+        cuerpoCaja.setFitToWidth(true);
+        cuerpoCaja.setPrefHeight(400);
+
+        //Cabecera Caja
+        HBox cabecera = new HBox();
+
+        cabecera.setStyle("-fx-border-width: 0 0 1 0;-fx-border-color: #999");
+        cabecera.setPadding(new Insets(0, 10, 0, 10));
+        cabecera.setPrefHeight(60);
+        cabecera.setAlignment(Pos.CENTER_LEFT);
+
+        Label tituloIzuiquirda = new Label("Agrege las Preguntas");
+        tituloIzuiquirda.setStyle("-fx-font-weight: bold;-fx-font-size: 20;-fx-text-fill: #999;");
+
+        Pane separador = new Pane();
+        HBox.setHgrow(separador, Priority.ALWAYS);
+
+        BotonCuadradoVista botonCargarJson = new BotonCuadradoVista("Cargar Json");
+        botonCargarJson.setOnAction((evento) -> {
+            FileChooser seleccionadorArchivos = new FileChooser();
+            seleccionadorArchivos.getExtensionFilters().add(new FileChooser.ExtensionFilter("Json", "*.json"));
+            File archivo = seleccionadorArchivos.showOpenDialog(this.escenario);
+
+            Lector lector = new Lector();
+            try { lector.extraerPreguntas(archivo); }
+            catch (IOException | PreguntaError e) { e.printStackTrace(); }
+
+            this.preguntas.addAll(lector.obtenerPreguntas());
+            this.actualizarPreguntas(listadoPreguntas);
+        });
+
+        cabecera.getChildren().addAll(tituloIzuiquirda, separador, botonCargarJson);
+
+        caja.getChildren().addAll(cabecera, cuerpoCaja);
+
+        VBox.setMargin(caja, new Insets(20, 20, 20, 20));
+        contenedor.getChildren().add(caja);
+
+        //Botones
+        BotonEtiquetaDerechaVista botonInicio = new BotonEtiquetaDerechaVista("INICIO");
+        botonInicio.setOnAction((event) -> this.escenario.setScene(iniciarJuegoEscena()));
+
+        BotonEtiquetaIzquierdaVista botonConfirmar = new BotonEtiquetaIzquierdaVista("CONFIRMAR");
+        botonConfirmar.setOnAction((event) -> this.escenario.setScene(resgistrarJugadoresEscena()));
+
+        //Contenedor
+        BorderPane contenedorPrincipal = new BorderPane();
+        contenedorPrincipal.setTop(new CabeceraKahootVista(botonInicio, botonConfirmar));
+        contenedorPrincipal.setCenter(contenedor);
+
+        return new Scene(contenedorPrincipal, 800, 600);
+    }
+
+    private void actualizarPreguntas(VBox listadoPreguntas) {
+        listadoPreguntas.getChildren().clear();
+
+        for (Pregunta pregunta: this.preguntas) {
+            HBox item = new HBox();
+            String estilo = "-fx-border-width: 0 0 1 0";
+            item.setStyle(estilo);
+            item.setPadding(new Insets(10, 10, 10, 10));
+            item.setSpacing(5);
+
+            BotonCuadradoVista botonSubir = new BotonCuadradoVista("subir");
+            botonSubir.setOnAction((event) -> {
+                int indiceAMover = listadoPreguntas.getChildren().indexOf(item) - 1;
+                if (indiceAMover < 0) return;
+                listadoPreguntas.getChildren().remove(item);
+                listadoPreguntas.getChildren().add(indiceAMover, item);
+            });
+
+            BotonCuadradoVista botonBajar = new BotonCuadradoVista("bajar");
+            botonBajar.setOnAction((event) -> {
+                int indiceAMover = listadoPreguntas.getChildren().indexOf(item) + 1;
+                if (indiceAMover == listadoPreguntas.getChildren().size()) return;
+                listadoPreguntas.getChildren().remove(item);
+                listadoPreguntas.getChildren().add(indiceAMover, item);
+            });
+
+            PreguntaBarraVista barraPregunta = new PreguntaBarraVista(pregunta);
+
+            Pane separador = new Pane();
+            HBox.setHgrow(separador, Priority.ALWAYS);
+
+            BotonCuadradoVista botonBorrar = new BotonCuadradoVista("borrar");
+            botonBorrar.setOnAction((event) -> listadoPreguntas.getChildren().remove(item) );
+
+            item.getChildren().addAll(
+                    botonSubir,
+                    botonBajar,
+                    barraPregunta,
+                    separador,
+                    botonBorrar
+            );
+            listadoPreguntas.getChildren().add(item);
+        }
+        if (this.preguntas.size() == 0) {
+            Label textoSinPreguntas = new Label("No hay preguntas seleccionadas");
+            textoSinPreguntas.setPadding(new Insets(10, 10, 10, 10));
+
+            listadoPreguntas.getChildren().add(textoSinPreguntas);
+        }
     }
 
     private Scene resgistrarJugadoresEscena() {
@@ -145,7 +264,6 @@ public class App extends Application {
             this.escenario.setScene(juegoEscena());
         }
     }
-
 
     private Scene juegoEscena() {
         //Botones
@@ -201,7 +319,4 @@ public class App extends Application {
         });
         this.reproductor.play();
     }
-
-
-
 }
