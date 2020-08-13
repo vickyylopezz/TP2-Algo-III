@@ -1,16 +1,21 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.eventos.BajarPreguntaEventHandler;
+import edu.fiuba.algo3.eventos.BorrarPreguntaEventHanlder;
+import edu.fiuba.algo3.eventos.SubirPreguntaEventHandler;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.Resources;
+import edu.fiuba.algo3.vista.Tema;
 import edu.fiuba.algo3.vista.componentes.JugadorVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
 import edu.fiuba.algo3.vista.componentes.preguntas.PreguntaBarraVista;
+import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;
 import edu.fiuba.algo3.vista.escenas.postjuego.GanadorVista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -183,28 +188,22 @@ public class App extends Application {
             item.setSpacing(5);
 
             BotonCuadradoVista botonSubir = new BotonCuadradoVista("subir");
-            botonSubir.setOnAction((event) -> {
-                int indiceAMover = listadoPreguntas.getChildren().indexOf(item) - 1;
-                if (indiceAMover < 0) return;
-                listadoPreguntas.getChildren().remove(item);
-                listadoPreguntas.getChildren().add(indiceAMover, item);
-            });
+            SubirPreguntaEventHandler eventoSubir = new SubirPreguntaEventHandler(listadoPreguntas.getChildren(), item);
+            botonSubir.setOnAction(eventoSubir);
 
             BotonCuadradoVista botonBajar = new BotonCuadradoVista("bajar");
-            botonBajar.setOnAction((event) -> {
-                int indiceAMover = listadoPreguntas.getChildren().indexOf(item) + 1;
-                if (indiceAMover == listadoPreguntas.getChildren().size()) return;
-                listadoPreguntas.getChildren().remove(item);
-                listadoPreguntas.getChildren().add(indiceAMover, item);
-            });
+            BajarPreguntaEventHandler eventoBajar = new BajarPreguntaEventHandler(listadoPreguntas.getChildren(), item);
+            botonBajar.setOnAction(eventoBajar);
 
             PreguntaBarraVista barraPregunta = new PreguntaBarraVista(pregunta);
+            HBox.setHgrow(barraPregunta, Priority.NEVER);
 
             Pane separador = new Pane();
             HBox.setHgrow(separador, Priority.ALWAYS);
 
             BotonCuadradoVista botonBorrar = new BotonCuadradoVista("borrar");
-            botonBorrar.setOnAction((event) -> listadoPreguntas.getChildren().remove(item) );
+            BorrarPreguntaEventHanlder eventoBorrar = new BorrarPreguntaEventHanlder(listadoPreguntas.getChildren(), item);
+            botonBorrar.setOnAction(eventoBorrar);
 
             item.getChildren().addAll(
                     botonSubir,
@@ -216,10 +215,9 @@ public class App extends Application {
             listadoPreguntas.getChildren().add(item);
         }
         if (this.preguntas.size() == 0) {
-            Label textoSinPreguntas = new Label("No hay preguntas seleccionadas");
-            textoSinPreguntas.setPadding(new Insets(10, 10, 10, 10));
-
-            listadoPreguntas.getChildren().add(textoSinPreguntas);
+            MiniTexto texto = new MiniTexto("No hay preguntas seleccionadas");
+            texto.setPadding(new Insets(10, 10, 10, 10));
+            listadoPreguntas.getChildren().add(texto);
         }
     }
 
