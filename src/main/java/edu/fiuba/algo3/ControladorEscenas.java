@@ -1,31 +1,21 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.eventos.BotonOpcionEventHandler;
-import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceConPenalidad;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceParcial;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionGroupChoice;
 import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -35,34 +25,106 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
 
-public class ConstructorEscenas {
+public class ControladorEscenas {
     private ArrayList<Jugador> jugadores;
+    private Jugador jugadorActual;
     private Pregunta preguntaActual;
-    private ArrayList<ToggleButton> botones;
     private ListIterator<Pregunta> iterador;
+    private Stage stage;
 
-    public ConstructorEscenas(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas) {
+    public ControladorEscenas(Stage stage, Scene escenaResultados, Scene ultimaEscena) {
+        this.stage = stage;
+        //
+        //
+    }
+
+    public void cargarDatos (ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas) {
+        this.jugadores = jugadores;
+        this.jugadorActual = jugadores.get(0);
+
+        Collections.shuffle(preguntas);
+        this.iterador = preguntas.listIterator();
+        this.preguntaActual = this.iterador.next();
+    }
+
+    public void crearUnaEscena () {
+        //cosas comunes a un escenario de preguntas
+        //jugador: nombre y puntaje
+        //comodines: botones
+        //pregunta: indicador
+
+        // para verdadero falso:
+        // dos botones, cada uno actua como confirmar
+
+        // multiple choice:
+        // muchos botones, mas un boton confirmar
+
+        // ordered choice:
+        // etiquetas que suben y bajan, en un unico vbox, boton confirmar
+        // o sino, tocar dos botones para reemplazar sus posiciones ( ESTA FUNCIONA )
+
+        // group choice:
+        // primer click selecciona la opcion, segundo click selecciona el grupo
+        // las cosas se ordenan en un grid pane como columnas ( funcionará? )
+
+
+        // el layout general es un borderpane, y esta en esta altura
+        // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
+        Text indicadorJugador = new Text("Jugador 1: " + jugadorActual.nombre());
+        indicadorJugador.setFont(new Font(15));
+        Text indicadorPuntaje = new Text("Puntos: " + jugadorActual.puntajeTotal().obtenerValor());
+        indicadorPuntaje.setFont(new Font(15));
+        VBox datosJugador = new VBox(20, indicadorJugador, indicadorPuntaje);
+        datosJugador.setAlignment(Pos.TOP_LEFT);
+
+        // LAYOUT BORDERPANE
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPadding(new Insets(20,20,20,20));
+
+        VBox vista;
+        Button confirmar = new Button("Confirmar");
+        // el vbox, depende de la clase
+        // incluye pregunta y botones segun la posicion caracteristica (y botno confirmar)
+        if (preguntaActual.getClass() == VerdaderoFalsoClasico.class || preguntaActual.getClass() == VerdaderoFalsoConPenalidad.class) {
+        //    vista = new EscenaVerdaderoFalso(this.preguntaActual, obtenerOpciones(preguntaActual));
+            vista = new VistaMultipleChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
+            //confirmar = null;
+        } else if (preguntaActual.getClass() == OrderedChoice.class) {
+        //    vista = new EscenaOrderedChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
+            vista = new VistaMultipleChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
+        } else if (preguntaActual.getClass() == GroupChoice.class) {
+        //    vista = new EscenaGroupChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
+            vista = new VistaMultipleChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
+        } else {
+            vista = new VistaMultipleChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
+        }
+
+        borderPane.setTop(datosJugador);
+        borderPane.setCenter(vista);
+        if (confirmar != null) {
+            // condicion del boton
+            confirmar.setOnAction(e -> {
+                if (iterador.hasNext()) {
+                    this.preguntaActual = iterador.next();
+                    crearUnaEscena();
+                }
+            });
+            borderPane.setBottom(confirmar);
+            BorderPane.setAlignment(confirmar, Pos.BOTTOM_CENTER);
+        }
+
+        stage.setScene(new Scene(borderPane, 1080,720));
+    }
+
+    public ControladorEscenas(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas) {
         this.jugadores = jugadores;
 
         Collections.shuffle(preguntas);
         this.iterador = preguntas.listIterator();
         this.preguntaActual = this.iterador.next();
 
-        this.botones = obtenerBotones(obtenerOpciones(this.preguntaActual));
+        //this.botones = obtenerBotones(obtenerOpciones(this.preguntaActual));
     }
-
-    /*public seleccionarEscena() {
-        if (preguntaActual.getClass() == OrderedChoice.class) {
-            crearEscenaOrdered();
-        } else if (preguntaActual.getClass() == GroupChoice.class) {
-            crearEscenaGroup();
-        } else if (preguntaActual.getClass() == VerdaderoFalsoClasico.class || preguntaActual.getClass() == VerdaderoFalsoConPenalidad.class) {
-            crearEscenaVF();
-        } else {
-            crearEscena();
-        }
-
-    }*/
 
     public Scene crearEscena() {
         // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
@@ -79,7 +141,7 @@ public class ConstructorEscenas {
         // OPCIONES
         ArrayList<Opcion> opciones = obtenerOpciones(this.preguntaActual);
         // BOTONES PARA LAS OPCIONES
-        botones = obtenerBotones(opciones);
+        ArrayList<ToggleButton> botones = obtenerBotones(opciones);
 
         // LAYOUT VBOX (indicadorPregunta + gridPane)
         VBox vbox = new VBox(20);
@@ -117,13 +179,13 @@ public class ConstructorEscenas {
                 indicadorPregunta.setText(this.preguntaActual.obtenerTitulo());
                 vbox.getChildren().add(indicadorPregunta);
 
-                botones = obtenerBotones(obtenerOpciones(this.preguntaActual));
-                for (int i = 0; i < this.botones.size(); i++){
-                    if ((i == (this.botones.size()-1)) && (i % 2 == 0)) {
-                        this.botones.get(i).setPrefWidth((this.botones.get(i).getPrefWidth())*2);
-                        gridPane.add(this.botones.get(i), 0, i / 2,2,1);
+                ArrayList<ToggleButton> nuevosBotones = obtenerBotones(obtenerOpciones(this.preguntaActual));
+                for (int i = 0; i < nuevosBotones.size(); i++){
+                    if ((i == (nuevosBotones.size()-1)) && (i % 2 == 0)) {
+                        nuevosBotones.get(i).setPrefWidth((nuevosBotones.get(i).getPrefWidth())*2 + 20);
+                        gridPane.add(nuevosBotones.get(i), 0, i / 2,2,1);
                     } else {
-                        gridPane.add(this.botones.get(i), i % 2, i / 2);
+                        gridPane.add(nuevosBotones.get(i), i % 2, i / 2);
                     }
                 }
                 vbox.getChildren().add(gridPane);
@@ -136,8 +198,8 @@ public class ConstructorEscenas {
         vbox.getChildren().add(indicadorPregunta);
         //vbox.getChildren().add(confirmar);
 
-        for (int i = 0; i < this.botones.size(); i++){
-            gridPane.add(this.botones.get(i), i%2, i/2);
+        for (int i = 0; i < botones.size(); i++){
+            gridPane.add(botones.get(i), i%2, i/2);
         }
         vbox.getChildren().add(gridPane);
 
@@ -169,6 +231,10 @@ public class ConstructorEscenas {
             botones.add(temp);
         }
         return botones;
+    }
+
+    public void limpiarLayouts(){
+
     }
 
 }

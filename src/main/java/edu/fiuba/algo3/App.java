@@ -1,21 +1,12 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.controladores.CargarPreguntaControlador;
-import edu.fiuba.algo3.controladores.IniciarJuegoControlador;
-import edu.fiuba.algo3.controladores.RegistrarJugadoresControlador;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
 
-import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
-import edu.fiuba.algo3.vista.escenas.*;
-
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -59,13 +50,14 @@ public class App extends Application {
 
         ArrayList<Pregunta> preguntas = lector.obtenerPreguntas();
 
-        ConstructorEscenas constructor = new ConstructorEscenas(jugadores, lector.obtenerPreguntas());
-        Scene escena = constructor.crearEscena();
-        stage.setScene(escena);
+        //ControladorEscenas constructor = new ControladorEscenas(jugadores, lector.obtenerPreguntas());
+
+        ControladorEscenas controlador = new ControladorEscenas(stage, new Scene(new VBox()), new Scene(new VBox()));
+        controlador.cargarDatos(jugadores, preguntas);
+        controlador.crearUnaEscena();
+        //Scene escena = constructor.crearEscena();
+        //stage.setScene(escena);
         stage.show();
-
-
-
 
         //IniciarJuegoControlador iniciarJuegoControlador = new IniciarJuegoControlador(stage);
         //iniciarJuegoControlador.mostrarVista();
