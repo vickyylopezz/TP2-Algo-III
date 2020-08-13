@@ -111,7 +111,7 @@ public class App extends Application {
         cabecera.setPrefHeight(60);
         cabecera.setAlignment(Pos.CENTER_LEFT);
 
-        Label tituloIzuiquirda = new Label("Agrege las Preguntas");
+        Label tituloIzuiquirda = new Label("Agregue las Preguntas");
         tituloIzuiquirda.setStyle("-fx-font-weight: bold;-fx-font-size: 20;-fx-text-fill: #999;");
 
         Pane separador = new Pane();

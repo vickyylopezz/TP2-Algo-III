@@ -39,6 +39,11 @@ public class VerdaderoFalsoClasico extends Pregunta {
     }
 
     @Override
+    public String mostrarTipoPregunta() {
+        return "Verdadero Falso Clasico";
+    }
+
+    @Override
     public void extraerOpciones(JsonObject object) throws PreguntaError {
         boolean respuesta = object.get("respuesta").getAsBoolean();
 

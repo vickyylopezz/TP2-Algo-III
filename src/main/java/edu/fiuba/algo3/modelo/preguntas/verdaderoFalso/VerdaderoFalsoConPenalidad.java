@@ -36,6 +36,11 @@ public class VerdaderoFalsoConPenalidad extends Pregunta {
     }
 
     @Override
+    public String mostrarTipoPregunta() {
+        return "Verdadero Falso con Penalidad";
+    }
+
+    @Override
     public void extraerOpciones(JsonObject object) throws PreguntaError {
         boolean respuesta = object.get("respuesta").getAsBoolean();
 

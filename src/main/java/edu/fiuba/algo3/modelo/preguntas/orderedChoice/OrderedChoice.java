@@ -25,6 +25,11 @@ public class OrderedChoice extends Pregunta {
     }
 
     @Override
+    public String mostrarTipoPregunta() {
+        return "Ordered Choice";
+    }
+
+    @Override
     public void extraerOpciones(JsonObject object) throws PreguntaError {
         JsonArray orden = object.getAsJsonArray("orden");
         if (orden == null) { return; /* EXCEPCION */ }

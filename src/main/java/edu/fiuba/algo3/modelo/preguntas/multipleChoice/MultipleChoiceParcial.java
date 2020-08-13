@@ -33,6 +33,11 @@ public class MultipleChoiceParcial extends Pregunta {
     }
 
     @Override
+    public String mostrarTipoPregunta() {
+        return "Multiple Choice Parcial";
+    }
+
+    @Override
     public void extraerOpciones(JsonObject object) throws PreguntaError {
         JsonArray opcionesCorrectas = object.getAsJsonArray("opcionesCorrectas");
         if (opcionesCorrectas == null) { return; /* EXCEPCION */ }

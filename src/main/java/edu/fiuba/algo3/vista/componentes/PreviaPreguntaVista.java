@@ -24,7 +24,7 @@ public class PreviaPreguntaVista {
     private void aplicarEstilo() {
         VBox vbox = new VBox(100);
         vbox.setPadding(new Insets(100));
-        Label jLabelTipoPregunta = new Label(jugada.obtenerPregunta().getClass().getSimpleName());
+        Label jLabelTipoPregunta = new Label(jugada.obtenerPregunta().mostrarTipoPregunta());
         jLabelTipoPregunta.setAlignment(Pos.CENTER);
         jLabelTipoPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold");
 

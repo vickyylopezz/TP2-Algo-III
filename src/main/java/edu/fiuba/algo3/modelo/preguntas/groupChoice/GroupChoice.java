@@ -67,6 +67,11 @@ public class GroupChoice extends Pregunta {
     }
 
     @Override
+    public String mostrarTipoPregunta() {
+        return "Group Choice";
+    }
+
+    @Override
     public void extraerOpciones(JsonObject object) throws PreguntaError {
         JsonArray nombresGrupos = object.getAsJsonArray("grupos");
         if (nombresGrupos == null) { return; /* EXCEPCION */ }

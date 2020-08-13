@@ -33,6 +33,11 @@ public class MultipleChoiceConPenalidad extends Pregunta {
     }
 
     @Override
+    public String mostrarTipoPregunta() {
+        return "Multiple Choice con Penalidad";
+    }
+
+    @Override
     public void extraerOpciones(JsonObject object) throws PreguntaError {
         JsonArray opcionesCorrectas = object.getAsJsonArray("opcionesCorrectas");
         if (opcionesCorrectas == null) { return; /* EXCEPCION */ }
