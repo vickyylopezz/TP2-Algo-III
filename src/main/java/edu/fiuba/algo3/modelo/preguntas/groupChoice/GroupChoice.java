@@ -85,7 +85,5 @@ public class GroupChoice extends Pregunta {
         for (JsonElement opcion: grupo2){
             agregarOpcion(grupos.get(1), opcion.getAsString());
         }
-
-        System.out.println(grupos.get(0).obtenerOpciones());
     }
 }

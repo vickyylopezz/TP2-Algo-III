@@ -17,10 +17,13 @@ import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -35,7 +38,7 @@ import java.util.ListIterator;
 public class ConstructorEscenas {
     private ArrayList<Jugador> jugadores;
     private Pregunta preguntaActual;
-    private ArrayList<Button> botones;
+    private ArrayList<ToggleButton> botones;
     private ListIterator<Pregunta> iterador;
 
     public ConstructorEscenas(ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas) {
@@ -48,14 +51,27 @@ public class ConstructorEscenas {
         this.botones = obtenerBotones(obtenerOpciones(this.preguntaActual));
     }
 
+    /*public seleccionarEscena() {
+        if (preguntaActual.getClass() == OrderedChoice.class) {
+            crearEscenaOrdered();
+        } else if (preguntaActual.getClass() == GroupChoice.class) {
+            crearEscenaGroup();
+        } else if (preguntaActual.getClass() == VerdaderoFalsoClasico.class || preguntaActual.getClass() == VerdaderoFalsoConPenalidad.class) {
+            crearEscenaVF();
+        } else {
+            crearEscena();
+        }
+
+    }*/
+
     public Scene crearEscena() {
-        // JUGADOR ACTUAL + PUNTAJE
+        // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
         Text indicadorJugador = new Text("Jugador 1: " + jugadores.get(0).nombre());
         indicadorJugador.setFont(new Font(15));
-        Text indicadorPuntaje = new Text("Puntos: " + jugadores.get(0).puntajeTotal());
+        Text indicadorPuntaje = new Text("Puntos: " + jugadores.get(0).puntajeTotal().obtenerValor());
         indicadorPuntaje.setFont(new Font(15));
-        HBox indicadorJugadores = new HBox(200, indicadorJugador, indicadorPuntaje);
-        indicadorJugadores.setAlignment(Pos.TOP_LEFT);
+        VBox datosJugador = new VBox(20, indicadorJugador, indicadorPuntaje);
+        datosJugador.setAlignment(Pos.TOP_LEFT);
 
         // PREGUNTA
         Text indicadorPregunta = new Text(this.preguntaActual.obtenerTitulo());
@@ -65,23 +81,36 @@ public class ConstructorEscenas {
         // BOTONES PARA LAS OPCIONES
         botones = obtenerBotones(opciones);
 
-        // LAYOUTS HBOX
-        HBox hbox1 = new HBox(20);
-        hbox1.setAlignment(Pos.CENTER);
-        HBox hbox2 = new HBox(20);
-        hbox2.setAlignment(Pos.CENTER);
-
-        // LAYOUT VBOX
+        // LAYOUT VBOX (indicadorPregunta + gridPane)
         VBox vbox = new VBox(20);
         vbox.setAlignment(Pos.CENTER);
 
-
+        // BOTON PARA CONFIRMAR (centro-abajo del borderPane)
         Button confirmar = new Button("Confirmar");
+        //confirmar.setAlignment(Pos.CENTER);
+
+        // GRIDPANE EN LUGAR DE VBOX
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setHgap(20);
+        gridPane.setVgap(20);
+
+        // LAYOUT BORDERPANE
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPadding(new Insets(20,20,20,20));
+
+        borderPane.setTop(datosJugador);
+        borderPane.setCenter(vbox);
+        borderPane.setBottom(confirmar);
+        borderPane.setAlignment(confirmar, Pos.BOTTOM_CENTER);
+
+
+
         confirmar.setOnAction(e -> {
             if (iterador.hasNext()) {
+                // estas son las que se limpian por cada pregunta
                 vbox.getChildren().clear();
-                hbox1.getChildren().clear();
-                hbox2.getChildren().clear();
+                gridPane.getChildren().clear();
 
                 this.preguntaActual = iterador.next();
 
@@ -90,15 +119,14 @@ public class ConstructorEscenas {
 
                 botones = obtenerBotones(obtenerOpciones(this.preguntaActual));
                 for (int i = 0; i < this.botones.size(); i++){
-                    if (i < 3) {
-                        hbox1.getChildren().add(this.botones.get(i));
+                    if ((i == (this.botones.size()-1)) && (i % 2 == 0)) {
+                        this.botones.get(i).setPrefWidth((this.botones.get(i).getPrefWidth())*2);
+                        gridPane.add(this.botones.get(i), 0, i / 2,2,1);
                     } else {
-                        hbox2.getChildren().add(this.botones.get(i));
+                        gridPane.add(this.botones.get(i), i % 2, i / 2);
                     }
                 }
-
-                vbox.getChildren().addAll(hbox1,hbox2);
-                vbox.getChildren().add(confirmar);
+                vbox.getChildren().add(gridPane);
 
             } else {
                 System.exit(0);
@@ -106,18 +134,15 @@ public class ConstructorEscenas {
         });
 
         vbox.getChildren().add(indicadorPregunta);
+        //vbox.getChildren().add(confirmar);
+
         for (int i = 0; i < this.botones.size(); i++){
-            if (i < 3) {
-                hbox1.getChildren().add(this.botones.get(i));
-            } else {
-                hbox2.getChildren().add(this.botones.get(i));
-            }
+            gridPane.add(this.botones.get(i), i%2, i/2);
         }
-        vbox.getChildren().addAll(hbox1,hbox2);
-        vbox.getChildren().add(confirmar);
+        vbox.getChildren().add(gridPane);
 
         // ESCENA
-        return new Scene(vbox,800,600);
+        return new Scene(borderPane,1280,720);
     }
 
     public ArrayList<Opcion> obtenerOpciones(Pregunta pregunta) {
@@ -132,39 +157,18 @@ public class ConstructorEscenas {
         return opciones;
     }
 
-    public ArrayList<Button> obtenerBotones(ArrayList<Opcion> opciones) {
-        Button temp = null;
-        ArrayList<Button> botones = new ArrayList<>();
+    public ArrayList<ToggleButton> obtenerBotones(ArrayList<Opcion> opciones) {
+        ToggleButton temp = null;
+        ArrayList<ToggleButton> botones = new ArrayList<>();
         for (Opcion opcion: opciones){
-            temp = new Button(opcion.obtenerTitulo());
-            temp.setPrefSize(220,70);
+            temp = new ToggleButton(opcion.obtenerTitulo());
+            temp.setPrefSize(250,100);
+            temp.setAlignment(Pos.CENTER);
             temp.setWrapText(true);
-            temp.setOnAction(new BotonOpcionEventHandler(opcion));
+            //temp.setOnAction(new BotonOpcionEventHandler(opcion));
             botones.add(temp);
         }
         return botones;
     }
-
-    /*public VBox crearLayout(Text indicadorPregunta, ArrayList<Button> botones) {
-
-        HBox hbox1 = new HBox(20);
-        hbox1.setAlignment(Pos.CENTER);
-        HBox hbox2 = new HBox(20);
-        hbox2.setAlignment(Pos.CENTER);
-
-        for (int i = 0; i < botones.size(); i++){
-            if (i < 3) {
-                hbox1.getChildren().add(botones.get(i));
-            } else {
-                hbox2.getChildren().add(botones.get(i));
-            }
-        }
-
-        VBox vbox = new VBox(20, indicadorPregunta, hbox1, hbox2);
-        vbox.setAlignment(Pos.CENTER);
-
-        return vbox;
-    }*/
-
 
 }
