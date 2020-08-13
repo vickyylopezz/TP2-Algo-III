@@ -12,32 +12,17 @@ import javafx.stage.Stage;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class PreviaPreguntaVista extends EstructuraPrincipalVista {
+public class PreviaPreguntaVista {
 
     private Jugada jugada;
+    private Node nodo;
 
     public PreviaPreguntaVista(Jugada jugada){
         this.jugada = jugada;
+        this.aplicarEstilo();
     }
 
-    @Override
-    protected Node cabeceraDerecha() {
-        return null;
-    }
-
-    @Override
-    protected Node cabeceraIzquierda() {
-        Label jLabelTurno = new Label("Turno de " + jugada.obtenerJugador().nombre());
-
-        jLabelTurno.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-background-color: white; -fx-border-color: #9A31E1");
-        jLabelTurno.setPrefHeight(70);
-        jLabelTurno.setPrefWidth(200);
-
-        return jLabelTurno;
-    }
-
-    @Override
-    protected Node centro() {
+    private void aplicarEstilo() {
         VBox vbox = new VBox(100);
         vbox.setPadding(new Insets(100));
         Label jLabelTipoPregunta = new Label(jugada.obtenerPregunta().getClass().getSimpleName());
@@ -52,6 +37,11 @@ public class PreviaPreguntaVista extends EstructuraPrincipalVista {
 
         vbox.getChildren().addAll(jLabelTipoPregunta, jLabelTituloPregunta);
         vbox.setAlignment(Pos.CENTER);
-        return vbox;
+
+        this.nodo = vbox;
+    }
+
+    public Node obtenerNodo() {
+        return this.nodo;
     }
 }

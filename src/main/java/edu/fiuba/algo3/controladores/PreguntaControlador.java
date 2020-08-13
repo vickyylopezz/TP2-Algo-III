@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+/*
 public class PreguntaControlador {
     private Partida partida;
     private Stage stage;
@@ -27,7 +27,7 @@ public class PreguntaControlador {
         TimerTask tarea = new TimerTask() {
             @Override
             public void run() {
-                //return new PreguntaVista(this);       partida.siguienteTurno() controlador.siguienteEscena
+                return new PreguntaVista(this);       partida.siguienteTurno() controlador.siguienteEscena
                 stage.setScene(new PuntosObtenidosVista().obtenerEscena());
             }
         };
@@ -36,3 +36,4 @@ public class PreguntaControlador {
 
 
 }
+*/

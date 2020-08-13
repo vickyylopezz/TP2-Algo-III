@@ -2,8 +2,10 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Juego;
+import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.JugadorVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
@@ -11,6 +13,8 @@ import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
 import edu.fiuba.algo3.vista.componentes.preguntas.PreguntaBarraVista;
+import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaVista;
+import edu.fiuba.algo3.vista.escenas.juego.PuntosObtenidosVista;
 import edu.fiuba.algo3.vista.escenas.postjuego.GanadorVista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -56,11 +60,14 @@ public class App extends Application {
         //Escena cargadorPreguntas = new CargarPreguntasVista();
         //Escena iniciarJuego = new IniciarJuegoVista();
         //Escena registrarJugadores = new RegistrarJugadoresVista();
-        //Escena puntosobtenidos = new PuntosObtenidosVista();
+        //PuntosObtenidosVista puntosobtenidos = new PuntosObtenidosVista();
+        //PreviaPreguntaVista previaPregunta = new PreviaPreguntaVista(jugada);
         //Escena ganador = new GanadorVista();
 
         //Jugada jugada = new Jugada(new VerdaderoFalsoConPenalidad("Estamos en el año 2021"), new Jugador("Carlos"));
-        //Escena previaPregunta = new PreviaPreguntaVista(jugada);
+        //this.escenario.setScene(this.previaPreguntaEscena(jugada));
+        //this.escenario.setScene(this.resultadosEscena());
+        //this.escenario.show();
 
         //stage.setScene(crearJuego.obtenerEscena());
         //stage.setScene(cargadorPreguntas.obtenerEscena());
@@ -281,10 +288,45 @@ public class App extends Application {
         return new Scene(contenedorPrincipal, 800, 600);
     }
 
+    public Scene previaPreguntaEscena(Jugada jugada){
+        PreviaPreguntaVista previaPregunta = new PreviaPreguntaVista(jugada);
+
+        Label jLabelTurno = new Label("Turno de " + jugada.obtenerJugador().nombre());
+        jLabelTurno.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-background-color: white; -fx-border-color: #9A31E1");
+        jLabelTurno.setPrefHeight(70);
+        jLabelTurno.setPrefWidth(200);
+
+        BorderPane contenedorPrincipal = new BorderPane();
+        contenedorPrincipal.setTop(new CabeceraKahootVista(jLabelTurno, null));
+        contenedorPrincipal.setCenter(previaPregunta.obtenerNodo());
+
+        return new Scene(contenedorPrincipal, 800, 600);
+    }
+
+    public Scene resultadosEscena(){
+        PuntosObtenidosVista puntosObtenidos = new PuntosObtenidosVista();
+
+        BotonEtiquetaIzquierdaVista botonContinuar = new BotonEtiquetaIzquierdaVista("Continuar");
+        /*
+        if (juego.existePartida()) {
+            //botonContinuar.setOnAction((event) -> this.escenario.setScene(this.previaPreguntaEscena(jugada)));
+        } else {
+            botonContinuar.setOnAction((event) -> this.escenario.setScene(this.ganadorEscena()));
+        }
+        */
+        botonContinuar.setOnAction((event) -> this.escenario.setScene(this.ganadorEscena()));
+
+        BorderPane contenedorPrincipal = new BorderPane();
+        contenedorPrincipal.setTop(new CabeceraKahootVista(null, botonContinuar));
+        contenedorPrincipal.setCenter(puntosObtenidos.obtenerNodo());
+
+        return new Scene(contenedorPrincipal, 800, 600);
+    }
+
     public Scene ganadorEscena(){
         //Botones
         BotonEtiquetaDerechaVista botonResultados = new BotonEtiquetaDerechaVista("Resultados");
-        //botonResultados.setOnAction((event) -> this.escenario.setScene(resultadosEscena()));
+        botonResultados.setOnAction((event) -> this.escenario.setScene(resultadosEscena()));
 
         //TituloGanador
         Label tituloGanador = new Label("G A N A D O R");

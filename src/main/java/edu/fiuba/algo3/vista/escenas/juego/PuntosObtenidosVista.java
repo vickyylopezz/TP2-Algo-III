@@ -15,18 +15,16 @@ import javafx.scene.layout.VBox;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 
-public class PuntosObtenidosVista extends EstructuraPrincipalVista {
+public class PuntosObtenidosVista {
 
-    @Override
-    protected Node cabeceraDerecha() { return new BotonCuadradoVista("Continuar"); }
+    private Node nodo;
 
-    @Override
-    protected Node cabeceraIzquierda() {
-        return null;
+    public PuntosObtenidosVista(){
+
+        this.aplicarEstilo();
     }
 
-    @Override
-    protected Node centro() {
+    private void aplicarEstilo(){
         VBox vbox1 = new VBox(50);
 
         Group contenedorIcono1 = new Group();
@@ -74,6 +72,11 @@ public class PuntosObtenidosVista extends EstructuraPrincipalVista {
         HBox hbox = new HBox(200);
         hbox.getChildren().addAll(vbox1, vbox2);
         hbox.setAlignment(Pos.CENTER);
-        return hbox;
+
+        this.nodo = hbox;
+    }
+
+    public Node obtenerNodo() {
+        return this.nodo;
     }
 }
