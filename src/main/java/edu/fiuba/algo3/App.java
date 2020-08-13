@@ -159,7 +159,7 @@ public class App extends Application {
 
         caja.getChildren().addAll(cabecera, cuerpoCaja);
 
-        VBox.setMargin(caja, new Insets(20, 20, 20, 20));
+        StackPane.setMargin(caja, new Insets(20, 20, 20, 20));
         contenedor.getChildren().add(caja);
 
         //Botones
