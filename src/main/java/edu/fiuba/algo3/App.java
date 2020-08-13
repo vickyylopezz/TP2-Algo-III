@@ -6,15 +6,22 @@ import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
+import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.JugadorVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
 import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaVista;
+import edu.fiuba.algo3.vista.escenas.postjuego.GanadorVista;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -26,7 +33,12 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+
+import static javafx.geometry.Pos.*;
+import static javafx.geometry.Pos.CENTER;
 
 public class App extends Application {
     private Stage escenario;
@@ -141,6 +153,7 @@ public class App extends Application {
         //set on action
 
         BotonCuadradoVista botonIniciar = new BotonCuadradoVista("Iniciar Juego");
+        //set on action
 
         //Contenedor
         BorderPane contenedorPrincipal = new BorderPane();
@@ -148,6 +161,33 @@ public class App extends Application {
         contenedorPrincipal.setCenter(botonIniciar);
 
         return new Scene(contenedorPrincipal, 800, 600);
+    }
+
+    public Scene ganadorEscena(){
+        //Botones
+        BotonEtiquetaDerechaVista botonResultados = new BotonEtiquetaDerechaVista("Resultados");
+        //botonResultados.setOnAction((event) -> this.escenario.setScene(resultadosEscena()));
+
+        //TituloGanador
+        Label tituloGanador = new Label("G A N A D O R");
+        tituloGanador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 50; -fx-font-weight: bold");
+        tituloGanador.setAlignment(TOP_CENTER);
+
+        //JugadorGanador
+        GanadorVista ganador = new GanadorVista();
+
+        //XBox
+        VBox vbox = new VBox(20);
+        vbox.getChildren().addAll(tituloGanador,ganador.obtenerNodo());
+        vbox.setAlignment(CENTER);
+
+        //Contenedor
+        BorderPane contenedorPrincipal = new BorderPane();
+        contenedorPrincipal.setTop(new CabeceraKahootVista( botonResultados,null));
+        contenedorPrincipal.setCenter(vbox);
+
+        return new Scene(contenedorPrincipal, 800, 600);
+
     }
 
     public void comenzarMusica(){

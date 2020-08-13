@@ -10,8 +10,8 @@ public class GanadorControlador {
 
     public GanadorControlador(Stage stage) {
         this.stage = stage;
-        this.vista = new GanadorVista(this);
-        this.stage.setScene(this.vista.obtenerEscena());
+        //this.vista = new GanadorVista(this);
+        //this.stage.setScene(this.vista.obtenerEscena());
     }
 
     public PuntosObtenidosVista escenaAnterior() {

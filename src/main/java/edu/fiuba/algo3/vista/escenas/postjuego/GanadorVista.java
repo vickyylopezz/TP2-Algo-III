@@ -17,28 +17,13 @@ import java.io.FileNotFoundException;
 
 import static javafx.geometry.Pos.*;
 
-public class GanadorVista extends EstructuraPrincipalVista {
-    private GanadorControlador controlador;
-
-    public GanadorVista(GanadorControlador controlador) {
-        this.controlador = controlador;
+public class GanadorVista{
+    protected Node nodo;
+    public GanadorVista(){
+        this.aplicarEstilo();
     }
 
-    @Override
-    protected Node cabeceraDerecha() {
-        return null;
-    }
-
-    @Override
-    protected Node cabeceraIzquierda() {
-        BotonEtiquetaIzquierdaVista botonResultados = new BotonEtiquetaIzquierdaVista("Resultados");
-        botonResultados.setOnAction((event) -> this.controlador.escenaAnterior());
-
-        return botonResultados;
-    }
-
-    @Override
-    protected Node centro() {
+    public void aplicarEstilo(){
         VBox boxJugador = new VBox();
         boxJugador.setStyle("-fx-border-radius: 2;-fx-border-color: grey; -fx-background-radius: 2; -fx-background-color: white");
 
@@ -65,16 +50,10 @@ public class GanadorVista extends EstructuraPrincipalVista {
         boxJugador.setMaxWidth(300);
         boxJugador.setPadding(new Insets(70,20,70,20));
 
-        Label jLabelTituloGanador = new Label("G A N A D O R");
-        jLabelTituloGanador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 50; -fx-font-weight: bold");
-        jLabelTituloGanador.setAlignment(TOP_CENTER);
+        this.nodo = boxJugador;
+    }
 
-
-
-        VBox vbox = new VBox(20);
-
-        vbox.getChildren().addAll(jLabelTituloGanador,boxJugador);
-        vbox.setAlignment(CENTER);
-        return vbox;
+    public Node obtenerNodo(){
+        return this.nodo;
     }
 }
