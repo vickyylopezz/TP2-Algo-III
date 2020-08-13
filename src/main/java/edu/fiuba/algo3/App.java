@@ -6,15 +6,22 @@ import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaVista;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 
 public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException, PreguntaError {
+
+
+
         //Escena crearJuego = new CrearJuegoVista();
         //Escena cargadorPreguntas = new CargarPreguntasVista();
         //Escena iniciarJuego = new IniciarJuegoVista();
@@ -39,8 +46,14 @@ public class App extends Application {
 
         IniciarJuegoControlador iniciarJuegoControlador = new IniciarJuegoControlador(stage);
         iniciarJuegoControlador.mostrarVista();
-    }
+        comenzarMusica();
 
+    }
+    public static void comenzarMusica(){
+         Media sonido = new Media(new File("./src/main/resources/Kahoot.wav").toURI().toString());
+         MediaPlayer reproductor = new MediaPlayer(sonido);
+         reproductor.play();
+     }
     public static void main(String[] args) {
         launch();
     }
