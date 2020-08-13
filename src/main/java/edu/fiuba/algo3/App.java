@@ -105,7 +105,7 @@ public class App extends Application {
         botonInicio.setOnAction((event) -> this.escenario.setScene(iniciarJuegoEscena()));
 
         BotonEtiquetaIzquierdaVista botonConfirmar = new BotonEtiquetaIzquierdaVista("CONFIRMAR");
-        botonConfirmar.setOnAction((event) -> this.escenario.setScene(juegoEscena()));
+        botonConfirmar.setOnAction((event) -> this.confirmarJugador(jugadorVista1,jugadorVista2));
 
         //Contenedor
         BorderPane contenedorPrincipal = new BorderPane();
@@ -115,6 +115,25 @@ public class App extends Application {
         return new Scene(contenedorPrincipal, 800, 600);
 
     }
+
+    private void confirmarJugador(JugadorVista jugadorVista1, JugadorVista jugadorVista2){
+        if (jugadorVista1.esInvalido()){
+            jugadorVista1.validarJugadorVista();
+        } else {
+            jugadorVista1.confirmarJugadorVista();
+        }
+
+        if (jugadorVista2.esInvalido()){
+            jugadorVista2.validarJugadorVista();
+        } else {
+            jugadorVista2.confirmarJugadorVista();
+        }
+
+        if(!jugadorVista1.esInvalido() && !jugadorVista2.esInvalido()){
+            this.escenario.setScene(juegoEscena());
+        }
+    }
+
 
     private Scene juegoEscena() {
         //Botones
