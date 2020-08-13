@@ -191,7 +191,7 @@ public class App extends Application {
     }
 
     public void comenzarMusica(){
-        this.musica = new Media(new File("src/main/resources/Kahoot.wav").toURI().toString());
+        this.musica = new Media(new File(Resources.MusicaKahootRuta()).toURI().toString());
         this.reproductor = new MediaPlayer(musica);
 
         this.reproductor.setOnEndOfMedia(new Runnable() {

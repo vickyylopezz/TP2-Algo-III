@@ -13,9 +13,11 @@ public class Resources {
     static public String IconoFlechaIzquierda = "atras.png";
     static public String IconoJugadorNegro = "icono jugador.png";
     static public String IconoJugadorBlanco = "jugador.png";
+    static public String musicaKahoot = "Kahoot.wav";
 
     public static String IconoFlechaDerechaRuta() { return Ruta + Iconos + IconoFlechaDerecha; }
     public static String IconoFlechaIzquierdaRuta() { return Ruta + Iconos + IconoFlechaIzquierda; }
     public static String IconoJugadorNegroRuta() { return Ruta + Iconos + IconoJugadorNegro; }
     public static String IconoJugadorBlancoRuta() { return Ruta + Iconos + IconoJugadorBlanco; }
+    public static String MusicaKahootRuta(){return Ruta + musicaKahoot;};
 }
