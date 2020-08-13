@@ -1,8 +1,7 @@
-package edu.fiuba.algo3.vista.escenas.juego;
+package edu.fiuba.algo3.vista.componentes;
 
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
-import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;

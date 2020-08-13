@@ -1,7 +1,6 @@
-package edu.fiuba.algo3.vista.escenas.juego;
+package edu.fiuba.algo3.vista.componentes;
 
 import edu.fiuba.algo3.modelo.juego.Jugada;
-import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;

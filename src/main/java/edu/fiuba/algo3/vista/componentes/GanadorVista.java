@@ -1,9 +1,6 @@
-package edu.fiuba.algo3.vista.escenas.postjuego;
+package edu.fiuba.algo3.vista.componentes;
 
-import edu.fiuba.algo3.controladores.GanadorControlador;
 import edu.fiuba.algo3.vista.Resources;
-import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
-import edu.fiuba.algo3.vista.escenas.EstructuraPrincipalVista;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Node;
