@@ -23,6 +23,12 @@ public class ListadoPreguntasVista extends ScrollPane {
         preguntas.addListener(new PreguntaCambioViewListener(this));
 
         this.setContent(this.cotenedor);
+        this.cargarEstilo();
+    }
+
+    private void cargarEstilo() {
+        this.setFitToHeight(true);
+        this.setFitToWidth(true);
     }
 
     public void agregarPregunta(Integer index, Pregunta pregunta) {
