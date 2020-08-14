@@ -22,17 +22,8 @@ public class ContenedorSonido extends VBox{
         BotonMutearVista botonMutear = new BotonMutearVista(reproductor);
         BotonDesmutearVista botonDesmutear = new BotonDesmutearVista(reproductor);
 
-        botonMutear.setOnAction(e-> {reproductor.stop();botonMutear.setDisable(true);botonDesmutear.setDisable(false);});
-        botonDesmutear.setOnAction(e-> {reproductor.play();botonMutear.setDisable(false);botonDesmutear.setDisable(true);});
-
-        if(reproductor.isMute()){
-            comenzarMusica();
-            botonMutear.setDisable(true);
-            botonDesmutear.setDisable(false);
-        }else{
-            botonMutear.setDisable(false);
-            botonDesmutear.setDisable(true);
-        }
+        botonMutear.setOnAction(e-> {reproductor.stop();});
+        botonDesmutear.setOnAction(e-> {reproductor.play();});
 
         this.setSpacing(10);
         this.setPadding(new Insets(20));
