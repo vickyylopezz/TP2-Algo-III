@@ -1,16 +1,16 @@
-package edu.fiuba.algo3.vista.layouts.preparacion;
+package edu.fiuba.algo3.vista.escenas.preparacion;
 
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
-import edu.fiuba.algo3.vista.layouts.BaseEscena;
+import edu.fiuba.algo3.vista.escenas.BaseEscena;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.StackPane;
 
-public class IniciarJuegoEscena extends BaseEscena {
+public class BienvenidaEscena extends BaseEscena {
 
     private StackPane cuerpo;
 
-    public IniciarJuegoEscena() {
+    public BienvenidaEscena() {
         super();
 
         this.cuerpo = new StackPane();
@@ -20,7 +20,7 @@ public class IniciarJuegoEscena extends BaseEscena {
     public void eventoBotonPrincipal(EventHandler<ActionEvent> evento) {
         if (evento == null) this.cuerpo.getChildren().clear();
 
-        String tituloBoton = "Iniciar Juego";
+        String tituloBoton = "Crear Jugadores";
         BotonCuadradoVista boton = new BotonCuadradoVista(tituloBoton);
         boton.setOnAction(evento);
 

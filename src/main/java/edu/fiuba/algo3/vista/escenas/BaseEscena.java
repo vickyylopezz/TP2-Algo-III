@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vista.layouts;
+package edu.fiuba.algo3.vista.escenas;
 
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
