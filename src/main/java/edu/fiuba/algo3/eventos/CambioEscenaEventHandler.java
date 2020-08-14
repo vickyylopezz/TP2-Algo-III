@@ -5,12 +5,12 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class CambioLayoutEventHandler implements EventHandler<ActionEvent> {
+public class CambioEscenaEventHandler implements EventHandler<ActionEvent> {
 
     private final Stage stage;
     private final Scene escena;
 
-    public CambioLayoutEventHandler(Stage stage, Scene escena) {
+    public CambioEscenaEventHandler(Stage stage, Scene escena) {
         this.stage = stage;
         this.escena = escena;
     }
