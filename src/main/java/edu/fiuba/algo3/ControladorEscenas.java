@@ -30,6 +30,7 @@ public class ControladorEscenas {
     private Jugador jugadorActual;
     private Pregunta preguntaActual;
     private ListIterator<Pregunta> iterador;
+    private ArrayList<Opcion> opciones;
     private Stage stage;
 
     public ControladorEscenas(Stage stage, Scene escenaResultados, Scene ultimaEscena) {
@@ -44,10 +45,13 @@ public class ControladorEscenas {
 
         Collections.shuffle(preguntas);
         this.iterador = preguntas.listIterator();
-        this.preguntaActual = this.iterador.next();
+        this.preguntaActual = iterador.next();
+        this.opciones = obtenerOpciones(preguntaActual);
     }
 
     public void crearUnaEscena () {
+
+        //this.preguntaActual = iterador.next();
         //cosas comunes a un escenario de preguntas
         //jugador: nombre y puntaje
         //comodines: botones
@@ -81,22 +85,24 @@ public class ControladorEscenas {
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(20,20,20,20));
 
+
+
         VBox vista;
         Button confirmar = new Button("Confirmar");
         // el vbox, depende de la clase
-        // incluye pregunta y botones segun la posicion caracteristica (y botno confirmar)
+        // incluye pregunta y botones segun la posicion caracteristica (y boton confirmar)
         if (preguntaActual.getClass() == VerdaderoFalsoClasico.class || preguntaActual.getClass() == VerdaderoFalsoConPenalidad.class) {
-        //    vista = new EscenaVerdaderoFalso(this.preguntaActual, obtenerOpciones(preguntaActual));
-            vista = new VistaMultipleChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
-            //confirmar = null;
+        //    vista = new EscenaVerdaderoFalso(this.preguntaActual, obtenerOpciones(preguntaActual), this.iterador);
+            vista = new VistaVerdaderoFalso(this.preguntaActual, this.opciones, this);
+            confirmar = null;
         } else if (preguntaActual.getClass() == OrderedChoice.class) {
         //    vista = new EscenaOrderedChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
-            vista = new VistaMultipleChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
+            vista = new VistaOrderedChoice(this.preguntaActual, this.opciones);
         } else if (preguntaActual.getClass() == GroupChoice.class) {
-        //    vista = new EscenaGroupChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
-            vista = new VistaMultipleChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
+            vista = new VistaGroupChoice(this.preguntaActual, this.opciones);
+            //vista = new VistaMultipleChoice(this.preguntaActual, this.opciones);
         } else {
-            vista = new VistaMultipleChoice(this.preguntaActual, obtenerOpciones(preguntaActual));
+            vista = new VistaMultipleChoice(this.preguntaActual, this.opciones);
         }
 
         borderPane.setTop(datosJugador);
@@ -105,8 +111,11 @@ public class ControladorEscenas {
             // condicion del boton
             confirmar.setOnAction(e -> {
                 if (iterador.hasNext()) {
-                    this.preguntaActual = iterador.next();
-                    crearUnaEscena();
+                    //this.preguntaActual = iterador.next();
+                    actualizarParametros();
+                    new Intermission(stage, this);
+                } else {
+                    System.exit(0);
                 }
             });
             borderPane.setBottom(confirmar);
@@ -126,6 +135,7 @@ public class ControladorEscenas {
         //this.botones = obtenerBotones(obtenerOpciones(this.preguntaActual));
     }
 
+    /*
     public Scene crearEscena() {
         // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
         Text indicadorJugador = new Text("Jugador 1: " + jugadores.get(0).nombre());
@@ -205,7 +215,7 @@ public class ControladorEscenas {
 
         // ESCENA
         return new Scene(borderPane,1280,720);
-    }
+    }*/
 
     public ArrayList<Opcion> obtenerOpciones(Pregunta pregunta) {
         ArrayList<Opcion> opciones = new ArrayList<>();
@@ -233,8 +243,15 @@ public class ControladorEscenas {
         return botones;
     }
 
-    public void limpiarLayouts(){
+    public Stage getStage() { return this.stage; }
 
+    public void actualizarParametros(){
+        if (this.jugadorActual == jugadores.get(1)) {
+            this.jugadorActual = jugadores.get(0);
+            this.preguntaActual = iterador.next();
+            this.opciones = obtenerOpciones(this.preguntaActual);
+        } else {
+            this.jugadorActual = jugadores.get(1);
+        }
     }
-
 }
