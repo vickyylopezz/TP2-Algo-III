@@ -20,7 +20,7 @@ public class KahootPreparacion extends KahootModo {
     @Override
     public void iniciar() {
         BienvenidaEscena bienvenida = new BienvenidaEscena();
-        EditorPreguntasEscena editorPreguntas = new EditorPreguntasEscena();
+        EditorPreguntasEscena editorPreguntas = new EditorPreguntasEscena(this.stage, this.preguntas);
         EditorJugadoresEscena editorJugadores = new EditorJugadoresEscena();
         IniciarJuegoEscena iniciarJuego = new IniciarJuegoEscena();
 
