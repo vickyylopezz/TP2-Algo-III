@@ -5,6 +5,7 @@ import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import java.util.ArrayList;
 
@@ -25,5 +26,5 @@ public abstract class KahootModo {
         this.eventoSalida = eventoDeSalida;
     }
 
-    abstract public void iniciar();
+    abstract public void iniciar(MediaPlayer reproductor);
 }

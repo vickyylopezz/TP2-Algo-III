@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.escenas;
 
+import edu.fiuba.algo3.vista.componentes.ContenedorSonido;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
@@ -8,6 +9,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.media.MediaPlayer;
 
 public abstract class BaseEscena extends Scene {
 
@@ -16,7 +18,7 @@ public abstract class BaseEscena extends Scene {
     protected BotonEtiquetaIzquierdaVista botonSigueinte;
     protected BotonEtiquetaDerechaVista botonAnterior;
 
-    public BaseEscena() {
+    public BaseEscena(MediaPlayer reproductor) {
         super(new Label("Loading"), 800, 600);
 
         this.raiz = new BorderPane();
@@ -24,6 +26,8 @@ public abstract class BaseEscena extends Scene {
 
         this.raiz.setTop(this.cabecera);
         this.setRoot(this.raiz);
+        ContenedorSonido botoneraSonido = new ContenedorSonido(reproductor);
+        this.raiz.setRight(botoneraSonido.obtenerNodo());
     }
 
     public void eventoSiguiente(EventHandler<ActionEvent> evento) {

@@ -12,13 +12,15 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class EditorPreguntasEscena extends BaseEscena {
 
-    public EditorPreguntasEscena(Stage stage, ArrayList<Pregunta> preguntas) {
+    public EditorPreguntasEscena(Stage stage, ArrayList<Pregunta> preguntas, MediaPlayer reproductor) {
+        super(reproductor);
         ObservableList<Pregunta> preguntasObserver = FXCollections.observableList(preguntas);
         //preguntasObserver.addListener(new ActualizadorArrayPreguntasListener(preguntas));
 

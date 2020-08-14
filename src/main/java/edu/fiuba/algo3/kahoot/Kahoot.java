@@ -7,6 +7,7 @@ import edu.fiuba.algo3.vista.Resources;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -16,11 +17,15 @@ public class Kahoot {
     private final Stage stage;
     private final ArrayList<Pregunta> preguntas;
     private final ArrayList<Jugador> jugadores;
+    private final MediaPlayer reproductor;
+    private final Media musica;
 
     public Kahoot(Stage stage) {
         this.stage = stage;
         this.preguntas = new ArrayList<>();
         this.jugadores = new ArrayList<>();
+        this.musica = new Media(new File(Resources.MusicaKahootRuta()).toURI().toString());
+        this.reproductor = new MediaPlayer(this.musica);
     }
 
     public void iniciar() {
@@ -28,16 +33,20 @@ public class Kahoot {
         KahootModo modoJuego = new KahootJuego(this.stage, this.preguntas, this.jugadores);
         KahootModo modoRespuestas = new KahootResultados(this.stage, this.preguntas, this.jugadores);
 
-        modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego));
-        modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas));
+        modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego,reproductor));
+        modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas,reproductor));
         modoRespuestas.cuandoFinaliceEjecutar(new KahootSalirEventHandler());
 
-        modoPreparacion.iniciar();
+        modoPreparacion.iniciar(reproductor);
+        this.comenzarMusica();
     }
 
-    public static void comenzarMusica(){
-        Media sonido = new Media(new File(Resources.MusicaKahootRuta()).toURI().toString());
-        MediaPlayer reproductor = new MediaPlayer(sonido);
-        reproductor.play();
+    public void comenzarMusica(){
+        this.reproductor.setOnEndOfMedia(new Runnable() {
+            public void run() {
+                reproductor.seek(Duration.ZERO);
+            }
+        });
+        this.reproductor.play();
     }
 }

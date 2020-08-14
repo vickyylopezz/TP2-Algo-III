@@ -14,10 +14,14 @@ public class Resources {
     static public String IconoJugadorNegro = "icono jugador.png";
     static public String IconoJugadorBlanco = "jugador.png";
     static public String musicaKahoot = "Kahoot.wav";
+    static public String IconoMute = "mute.png";
+    static public String IconoSonido = "sonido.png";
 
     public static String IconoFlechaDerechaRuta() { return Ruta + Iconos + IconoFlechaDerecha; }
     public static String IconoFlechaIzquierdaRuta() { return Ruta + Iconos + IconoFlechaIzquierda; }
     public static String IconoJugadorNegroRuta() { return Ruta + Iconos + IconoJugadorNegro; }
     public static String IconoJugadorBlancoRuta() { return Ruta + Iconos + IconoJugadorBlanco; }
-    public static String MusicaKahootRuta(){return Ruta + musicaKahoot;};
+    public static String MusicaKahootRuta(){return Ruta + musicaKahoot;}
+    public static String IconoMuteRuta(){return Ruta + Iconos + IconoMute;}
+    public static String IconoSonidoRuta(){return Ruta + Iconos + IconoSonido;}
 }

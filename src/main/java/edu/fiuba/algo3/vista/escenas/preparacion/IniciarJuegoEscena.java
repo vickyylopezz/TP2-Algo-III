@@ -5,13 +5,14 @@ import edu.fiuba.algo3.vista.escenas.BaseEscena;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.MediaPlayer;
 
 public class IniciarJuegoEscena extends BaseEscena {
 
     private StackPane cuerpo;
 
-    public IniciarJuegoEscena() {
-        super();
+    public IniciarJuegoEscena(MediaPlayer reproductor) {
+        super(reproductor);
 
         this.cuerpo = new StackPane();
         this.raiz.setCenter(this.cuerpo);

@@ -7,6 +7,7 @@ import edu.fiuba.algo3.vista.escenas.preparacion.BienvenidaEscena;
 import edu.fiuba.algo3.vista.escenas.preparacion.EditorJugadoresEscena;
 import edu.fiuba.algo3.vista.escenas.preparacion.EditorPreguntasEscena;
 import edu.fiuba.algo3.vista.escenas.preparacion.IniciarJuegoEscena;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -18,11 +19,11 @@ public class KahootPreparacion extends KahootModo {
     }
 
     @Override
-    public void iniciar() {
-        BienvenidaEscena bienvenida = new BienvenidaEscena();
-        EditorPreguntasEscena editorPreguntas = new EditorPreguntasEscena(this.stage, this.preguntas);
-        EditorJugadoresEscena editorJugadores = new EditorJugadoresEscena();
-        IniciarJuegoEscena iniciarJuego = new IniciarJuegoEscena();
+    public void iniciar(MediaPlayer reproductor) {
+        BienvenidaEscena bienvenida = new BienvenidaEscena(reproductor);
+        EditorPreguntasEscena editorPreguntas = new EditorPreguntasEscena(this.stage, this.preguntas,reproductor);
+        EditorJugadoresEscena editorJugadores = new EditorJugadoresEscena(reproductor);
+        IniciarJuegoEscena iniciarJuego = new IniciarJuegoEscena(reproductor);
 
         bienvenida.eventoBotonPrincipal(new CambioEscenaEventHandler(this.stage, editorJugadores));
         bienvenida.eventoSiguiente(new CambioEscenaEventHandler(this.stage, editorPreguntas));
