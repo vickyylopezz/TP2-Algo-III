@@ -5,7 +5,7 @@ import edu.fiuba.algo3.eventos.BorrarPreguntaEventHanlder;
 import edu.fiuba.algo3.eventos.SubirPreguntaEventHandler;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
-import edu.fiuba.algo3.vista.componentes.preguntas.PreguntaBarraVista;
+import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;
 import javafx.collections.ObservableList;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
@@ -26,7 +26,7 @@ public class ItemPregunta extends Item {
         BotonCuadradoVista botonBajar = new BotonCuadradoVista("bajar");
         botonBajar.setOnAction(new BajarPreguntaEventHandler(preguntas, pregunta));
 
-        PreguntaBarraVista barraPregunta = new PreguntaBarraVista(pregunta);
+        MiniTexto tituloPregunta = new MiniTexto(pregunta.obtenerTitulo());
 
         Pane separador = new Pane();
         HBox.setHgrow(separador, Priority.ALWAYS);
@@ -34,6 +34,6 @@ public class ItemPregunta extends Item {
         BotonCuadradoVista botonBorrar = new BotonCuadradoVista("borrar");
         botonBorrar.setOnAction(new BorrarPreguntaEventHanlder(preguntas, pregunta));
 
-        this.getChildren().addAll(botonSubir, botonBajar, barraPregunta, separador, botonBorrar);
+        this.getChildren().addAll(botonSubir, botonBajar, tituloPregunta, separador, botonBorrar);
     }
 }
