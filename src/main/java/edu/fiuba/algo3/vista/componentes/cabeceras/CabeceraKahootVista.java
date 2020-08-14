@@ -9,23 +9,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-
 public class CabeceraKahootVista extends GridPane {
 
-    public CabeceraKahootVista(Node nodoIzquierdo, Node nodoDerecho) {
+    private StackPane panelIzquierdo;
+    private StackPane panelCentral;
+    private StackPane panelDerecho;
+
+    public CabeceraKahootVista() {
         this.estrucutraCabecera();
         this.cargarEstilo();
-
-        this.contenidoPanelIzquierdo(nodoIzquierdo);
-        this.contenidoPanelCentral();
-        this.contenidoPanelDerecho(nodoDerecho);
-    }
-
-    private void cargarEstilo() {
-        this.setPadding(new Insets(10));
-        this.setAlignment(Pos.CENTER);
+        this.cambiarContenido(this.panelCentral, this.contenidoPanelCentral());
     }
 
     private void estrucutraCabecera() {
@@ -38,38 +31,39 @@ public class CabeceraKahootVista extends GridPane {
         col3.setPercentWidth(30);
 
         this.getColumnConstraints().addAll(col1, col2, col3);
+
+        this.panelIzquierdo = new StackPane();
+        this.panelCentral = new StackPane();
+        this.panelDerecho = new StackPane();
+
+        this.add(this.panelIzquierdo, 0, 0);
+        this.add(this.panelCentral, 1, 0);
+        this.add(this.panelDerecho, 2, 0);
     }
 
-    private void contenidoPanelIzquierdo(Node nodo) {
-        if (nodo == null) return;
+    private void cargarEstilo() {
+        this.setPadding(new Insets(10));
+        this.setAlignment(Pos.CENTER);
 
-        StackPane columna = new StackPane();
-        columna.setAlignment(Pos.CENTER_LEFT);
-        columna.getChildren().add(nodo);
-
-        this.add(nodo, 0, 0);
+        this.panelDerecho.setAlignment(Pos.CENTER_LEFT);
+        this.panelCentral.setAlignment(Pos.CENTER);
+        this.panelDerecho.setAlignment(Pos.CENTER_RIGHT);
     }
 
-    private void contenidoPanelDerecho(Node nodo) {
-        if (nodo == null) return;
+    public void definirPanelIzquierdo(Node nodo) { this.cambiarContenido(this.panelIzquierdo, nodo); }
 
-        StackPane columna = new StackPane();
-        columna.setAlignment(Pos.CENTER_RIGHT);
-        columna.getChildren().add(nodo);
+    public void definirPanelDerecho(Node nodo) { this.cambiarContenido(this.panelDerecho, nodo); }
 
-        this.add(columna, 2, 0);
+    private void cambiarContenido(StackPane panel, Node contenido) {
+        if (contenido == null) panel.getChildren().clear();
+        else panel.getChildren().add(contenido);
     }
 
-    private void contenidoPanelCentral() {
-        StackPane columna = new StackPane();
-        columna.setAlignment(Pos.CENTER);
-
+    private Node contenidoPanelCentral() {
         Image img = CargadorResources.obtenerImagen(Resources.LogoPrincipalRuta());
         ImageView logo = new ImageView(img);
         logo.setPreserveRatio(true);
         logo.setFitHeight(75);
-        columna.getChildren().add(logo);
-
-        this.add(columna, 1, 0);
+        return logo;
     }
 }
