@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.eventos;
+package edu.fiuba.algo3.eventos.kahoot;
 
 import edu.fiuba.algo3.kahoot.KahootModo;
 import javafx.event.ActionEvent;

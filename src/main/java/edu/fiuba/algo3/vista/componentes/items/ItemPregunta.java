@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.vista.componentes.items;
 
-import edu.fiuba.algo3.eventos.BorrarPreguntaEventHanlder;
+import edu.fiuba.algo3.eventos.preparacion.editorPreguntas.BorrarPreguntaEventHanlder;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;

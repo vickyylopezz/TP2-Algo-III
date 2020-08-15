@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.kahoot;
 
-import edu.fiuba.algo3.eventos.*;
+import edu.fiuba.algo3.eventos.kahoot.KahootCambioModoEventHandler;
+import edu.fiuba.algo3.eventos.kahoot.KahootSalirEventHandler;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.Resources;

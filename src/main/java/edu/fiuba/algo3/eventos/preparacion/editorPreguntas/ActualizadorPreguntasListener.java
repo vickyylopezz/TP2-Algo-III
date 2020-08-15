@@ -1,8 +1,6 @@
-package edu.fiuba.algo3.eventos;
+package edu.fiuba.algo3.eventos.preparacion.editorPreguntas;
 
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.collections.ListChangeListener;
 
 import java.util.ArrayList;

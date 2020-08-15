@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.eventos;
+package edu.fiuba.algo3.eventos.kahoot;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

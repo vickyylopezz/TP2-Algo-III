@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.eventos;
+package edu.fiuba.algo3.eventos.preparacion.editorPreguntas;
 
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.componentes.contenedores.ListadoPreguntasVista;

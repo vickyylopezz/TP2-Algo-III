@@ -1,11 +1,9 @@
 package edu.fiuba.algo3.vista.componentes.contenedores;
 
-import edu.fiuba.algo3.eventos.PreguntaCambioViewListener;
+import edu.fiuba.algo3.eventos.preparacion.editorPreguntas.PreguntaCambioViewListener;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.vista.componentes.items.Item;
 import edu.fiuba.algo3.vista.componentes.items.ItemPregunta;
 import edu.fiuba.algo3.vista.componentes.items.ItemSinElementos;
-import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;

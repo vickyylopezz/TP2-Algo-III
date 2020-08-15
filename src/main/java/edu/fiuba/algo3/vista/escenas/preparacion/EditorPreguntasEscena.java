@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.vista.escenas.preparacion;
 
-import edu.fiuba.algo3.eventos.ActualizadorPreguntasListener;
-import edu.fiuba.algo3.eventos.CargarJsonPreguntasEventHandler;
+import edu.fiuba.algo3.eventos.preparacion.editorPreguntas.ActualizadorPreguntasListener;
+import edu.fiuba.algo3.eventos.preparacion.editorPreguntas.CargarJsonPreguntasEventHandler;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraCajaVista;

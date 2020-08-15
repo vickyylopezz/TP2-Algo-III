@@ -1,19 +1,15 @@
-package edu.fiuba.algo3.eventos;
+package edu.fiuba.algo3.eventos.preparacion.editorPreguntas;
 
 import edu.fiuba.algo3.Lector;
-import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.Optional;
 
 public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent> {
 
