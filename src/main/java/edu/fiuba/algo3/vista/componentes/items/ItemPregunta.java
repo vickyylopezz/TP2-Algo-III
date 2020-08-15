@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.vista.componentes.items;
 
-import edu.fiuba.algo3.eventos.BajarPreguntaEventHandler;
 import edu.fiuba.algo3.eventos.BorrarPreguntaEventHanlder;
-import edu.fiuba.algo3.eventos.SubirPreguntaEventHandler;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;
@@ -20,12 +18,6 @@ public class ItemPregunta extends Item {
     }
 
     private void crearEstructura(ObservableList<Pregunta> preguntas, Pregunta pregunta) {
-        BotonCuadradoVista botonSubir = new BotonCuadradoVista("subir");
-        botonSubir.setOnAction(new SubirPreguntaEventHandler(preguntas, pregunta));
-
-        BotonCuadradoVista botonBajar = new BotonCuadradoVista("bajar");
-        botonBajar.setOnAction(new BajarPreguntaEventHandler(preguntas, pregunta));
-
         MiniTexto tituloPregunta = new MiniTexto(pregunta.obtenerTitulo());
 
         Pane separador = new Pane();
@@ -34,6 +26,6 @@ public class ItemPregunta extends Item {
         BotonCuadradoVista botonBorrar = new BotonCuadradoVista("borrar");
         botonBorrar.setOnAction(new BorrarPreguntaEventHanlder(preguntas, pregunta));
 
-        this.getChildren().addAll(botonSubir, botonBajar, tituloPregunta, separador, botonBorrar);
+        this.getChildren().addAll(tituloPregunta, separador, botonBorrar);
     }
 }
