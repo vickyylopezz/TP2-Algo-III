@@ -6,11 +6,14 @@ import edu.fiuba.algo3.modelo.juego.Pregunta;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent> {
 
@@ -31,12 +34,20 @@ public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent
         File archivo = seleccionadorArchivos.showOpenDialog(this.stage);
 
         Lector lector = new Lector();
-        try {
-            lector.extraerPreguntas(archivo);
-        } catch (IOException | PreguntaError e) {
-            e.printStackTrace();
+        try { lector.extraerPreguntas(archivo);
+        } catch (Exception e) {
+            this.mostrarAlertaDeCargaDeArchivo(e.toString());
+            return;
         }
 
         this.preguntas.addAll(lector.obtenerPreguntas());
+    }
+
+    public void mostrarAlertaDeCargaDeArchivo(String error) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error de carga");
+        alert.setHeaderText("Hubo un error al cargar las pregunas");
+        alert.setContentText(error);
+        alert.showAndWait();
     }
 }

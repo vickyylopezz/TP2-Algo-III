@@ -1,9 +1,6 @@
 package edu.fiuba.algo3;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
@@ -24,9 +21,7 @@ import java.util.ArrayList;
 public class Lector {
     private ArrayList<Pregunta> preguntas = new ArrayList<>();
 
-    public void extraerPreguntas(File archivo) throws IOException, PreguntaError {
-        //File file = new File(getClass().getClassLoader().getResource("Preguntas2.json").getFile());
-
+    public void extraerPreguntas(File archivo) throws IOException, JsonSyntaxException, PreguntaError {
         JsonReader reader = new JsonReader(new FileReader(archivo));
         JsonElement parser = JsonParser.parseReader(reader);
 
@@ -35,8 +30,6 @@ public class Lector {
             JsonObject object = element.getAsJsonObject();
             preguntas.add(crearPregunta(object));
         }
-
-        //mostrarContenido(); // DEBUG
     }
 
     private Pregunta crearPregunta(JsonObject object) throws PreguntaError {
