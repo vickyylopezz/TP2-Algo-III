@@ -21,15 +21,18 @@ public class PreguntaCambioViewListener implements ListChangeListener<Pregunta> 
     }
 
     private void sacarPreguntas(Change<? extends Pregunta> cambio) {
-        for (Pregunta pregunta: cambio.getRemoved()) {
-            this.listadoVista.sacarPregunta(cambio.getList().indexOf(pregunta));
+        for (int i = cambio.getFrom(); i <= cambio.getTo(); i++) {
+            this.listadoVista.sacarPregunta(i);
         }
     }
 
     private void agregarPreguntas(Change<? extends Pregunta> cambio) {
+        int indiceInicial = cambio.getFrom();
         for (Pregunta pregunta: cambio.getAddedSubList()) {
-            this.listadoVista.agregarPregunta(cambio.getList().indexOf(pregunta), pregunta);
+            if (indiceInicial <= cambio.getTo()) {
+                this.listadoVista.agregarPregunta(indiceInicial, pregunta);
+                indiceInicial++;
+            }
         }
     }
-
 }

@@ -36,7 +36,6 @@ public class ListadoPreguntasVista extends ScrollPane {
     }
 
     public void sacarPregunta(int index) {
-        System.out.println("a remover" + index);
         this.cotenedor.getChildren().remove(index);
     }
 }

@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.escenas.preparacion;
 
+import edu.fiuba.algo3.eventos.ActualizadorPreguntasListener;
 import edu.fiuba.algo3.eventos.CargarJsonPreguntasEventHandler;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
@@ -22,7 +23,7 @@ public class EditorPreguntasEscena extends BaseEscena {
     public EditorPreguntasEscena(Stage stage, ArrayList<Pregunta> preguntas, MediaPlayer reproductor) {
         super(reproductor);
         ObservableList<Pregunta> preguntasObserver = FXCollections.observableList(preguntas);
-        //preguntasObserver.addListener(new ActualizadorArrayPreguntasListener(preguntas));
+        preguntasObserver.addListener(new ActualizadorPreguntasListener(preguntas));
 
         Node cuerpo = this.crearCuerpo(stage, preguntasObserver);
         this.raiz.setCenter(cuerpo);
