@@ -45,7 +45,7 @@ public class Lector {
 
         switch(object.get("tipo").getAsString()) {
             case "VFClasico":
-                pregunta = new VerdaderoFalsoClasico(titulo);
+                pregunta = new VerdaderoFalsoClasico(titulo, "", "");
                 break;
 
             case "VFPenalidad":
