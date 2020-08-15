@@ -49,7 +49,7 @@ public class Lector {
                 break;
 
             case "VFPenalidad":
-                pregunta = new VerdaderoFalsoConPenalidad(titulo);
+                pregunta = new VerdaderoFalsoConPenalidad(titulo, "", "");
                 break;
 
             case "MCClasico":

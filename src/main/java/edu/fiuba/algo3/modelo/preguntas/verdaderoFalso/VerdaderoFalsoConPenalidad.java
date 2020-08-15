@@ -10,33 +10,23 @@ import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
 public class VerdaderoFalsoConPenalidad extends Pregunta {
 
-    private Opcion opcionCorrecta;
-    private Opcion opcionIncorrecta;
-
-    public VerdaderoFalsoConPenalidad(String titulo){
+    public VerdaderoFalsoConPenalidad(String titulo, String tituloCorrecta, String tiuloIncorrecta){
         super(titulo, new ConPenalidad(new CalculadorPuntajeParcial()));
-        this.opcionCorrecta = null;
-        this.opcionIncorrecta = null;
+
+        this.agregarOpcionCorrecta(tituloCorrecta);
+        this.agregarOpcionIncorrecta(tiuloIncorrecta);
     }
 
-    public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
-        if (opcionCorrecta != null){
-            throw new CantidadMaximaDeOpcionesError();
-        }
-        this.opcionCorrecta = new Opcion(opcionTitulo, this.estado.puntajeCorrecto());
-        this.opciones.add(this.opcionCorrecta);
+    private void agregarOpcionCorrecta(String opcionTitulo) {
+        this.opciones.add(new Opcion(opcionTitulo, this.puntajeCorrecto()));
     }
 
-    public void agregarOpcionIncorrecta(String opcionTitulo) throws PreguntaError {
-        if (opcionIncorrecta != null){
-            throw new CantidadMaximaDeOpcionesError();
-        }
-        this.opcionIncorrecta = new Opcion(opcionTitulo, this.estado.puntajeIncorrecto());
-        this.opciones.add(this.opcionIncorrecta);
+    private void agregarOpcionIncorrecta(String opcionTitulo) {
+        this.opciones.add(new Opcion(opcionTitulo, this.puntajeIncorrecto()));
     }
 
     @Override
-    public void extraerOpciones(JsonObject object) throws PreguntaError {
+    public void extraerOpciones(JsonObject object) {
         boolean respuesta = object.get("respuesta").getAsBoolean();
 
         if (respuesta) {
