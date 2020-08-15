@@ -24,4 +24,7 @@ public class Resources {
     public static String MusicaKahootRuta(){return Ruta + musicaKahoot;}
     public static String IconoMuteRuta(){return Ruta + Iconos + IconoMute;}
     public static String IconoSonidoRuta(){return Ruta + Iconos + IconoSonido;}
+
+    public static String DataPreguntas = "Preguntas2.json";
+    public static String RutaDataPreguntas() { return Ruta + DataPreguntas; }
 }

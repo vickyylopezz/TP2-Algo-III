@@ -1,15 +1,21 @@
 package edu.fiuba.algo3.kahoot;
 
+import edu.fiuba.algo3.Lector;
 import edu.fiuba.algo3.eventos.CambioEscenaEventHandler;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.escenas.preparacion.BienvenidaEscena;
 import edu.fiuba.algo3.vista.escenas.preparacion.EditorJugadoresEscena;
 import edu.fiuba.algo3.vista.escenas.preparacion.EditorPreguntasEscena;
 import edu.fiuba.algo3.vista.escenas.preparacion.IniciarJuegoEscena;
 import javafx.scene.media.MediaPlayer;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class KahootPreparacion extends KahootModo {
@@ -20,6 +26,8 @@ public class KahootPreparacion extends KahootModo {
 
     @Override
     public void iniciar(MediaPlayer reproductor) {
+        this.precargarPreguntas();
+
         BienvenidaEscena bienvenida = new BienvenidaEscena(reproductor);
         EditorPreguntasEscena editorPreguntas = new EditorPreguntasEscena(this.stage, this.preguntas,reproductor);
         EditorJugadoresEscena editorJugadores = new EditorJugadoresEscena(reproductor);
@@ -38,5 +46,16 @@ public class KahootPreparacion extends KahootModo {
         iniciarJuego.eventoBotonPrincipal(this.eventoSalida);
 
         new CambioEscenaEventHandler(this.stage, bienvenida).handle(null);
+    }
+
+    private void precargarPreguntas() {
+        Lector lector = new Lector();
+        try {
+            lector.extraerPreguntas(new File(Resources.RutaDataPreguntas()));
+        } catch (IOException | PreguntaError e) {
+            e.printStackTrace();
+        }
+
+        this.preguntas.addAll(lector.obtenerPreguntas());
     }
 }
