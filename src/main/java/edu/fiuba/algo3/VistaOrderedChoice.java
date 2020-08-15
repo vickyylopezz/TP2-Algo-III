@@ -80,7 +80,8 @@ public class VistaOrderedChoice extends VBox {
             columna.getChildren().removeAll(first, second);
             columna.add(first, 1, secondRow);
             columna.add(second, 1, firstRow);
+            //first.requestFocus();
         }
-        first.requestFocus();
+        columna.requestFocus();
     }
 }
