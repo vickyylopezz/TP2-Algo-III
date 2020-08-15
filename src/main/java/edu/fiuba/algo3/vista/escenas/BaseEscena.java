@@ -27,7 +27,7 @@ public abstract class BaseEscena extends Scene {
         this.raiz.setTop(this.cabecera);
         this.setRoot(this.raiz);
         ContenedorSonido botoneraSonido = new ContenedorSonido(reproductor);
-        this.raiz.setRight(botoneraSonido.obtenerNodo());
+        this.raiz.setBottom(botoneraSonido.obtenerNodo());
     }
 
     public void eventoSiguiente(EventHandler<ActionEvent> evento) {

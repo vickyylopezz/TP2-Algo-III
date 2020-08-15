@@ -4,7 +4,9 @@ import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonDesmutearVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonMutearVista;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -12,10 +14,9 @@ import javafx.util.Duration;
 
 import java.io.File;
 
-public class ContenedorSonido extends VBox{
+public class ContenedorSonido extends HBox {
     protected Node nodo;
     protected MediaPlayer reproductor;
-    protected Media musica;
 
     public ContenedorSonido(MediaPlayer reproductor) {
         this.reproductor = reproductor;
@@ -28,6 +29,7 @@ public class ContenedorSonido extends VBox{
         this.setSpacing(10);
         this.setPadding(new Insets(20));
         this.getChildren().addAll(botonDesmutear,botonMutear);
+        this.setAlignment(Pos.BOTTOM_RIGHT);
         this.nodo = this;
 
     }
