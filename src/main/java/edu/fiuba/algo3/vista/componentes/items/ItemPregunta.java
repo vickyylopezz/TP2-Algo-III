@@ -19,11 +19,14 @@ public class ItemPregunta extends Item {
 
     private void crearEstructura(ObservableList<Pregunta> preguntas, Pregunta pregunta) {
         MiniTexto tituloPregunta = new MiniTexto(pregunta.obtenerTitulo());
+        tituloPregunta.setWrapText(true);
 
         Pane separador = new Pane();
         HBox.setHgrow(separador, Priority.ALWAYS);
 
         BotonCuadradoVista botonBorrar = new BotonCuadradoVista("borrar");
+        botonBorrar.setWrapText(false);
+        botonBorrar.setMinWidth(55);
         botonBorrar.setOnAction(new BorrarPreguntaEventHanlder(preguntas, pregunta));
 
         this.getChildren().addAll(tituloPregunta, separador, botonBorrar);
