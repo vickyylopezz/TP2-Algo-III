@@ -3,6 +3,9 @@ package edu.fiuba.algo3.vista.escenas.juego;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraCajaVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
+import edu.fiuba.algo3.vista.componentes.contenedores.CajaVista;
+import edu.fiuba.algo3.vista.componentes.contenedores.EtiquetaVista;
+import edu.fiuba.algo3.vista.componentes.textos.Titulo;
 import edu.fiuba.algo3.vista.escenas.BaseEscena;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -21,7 +24,7 @@ public class PreviaPreguntaEscena extends BaseEscena {
 
     private Node crearCuerpo(Jugada jugada) {
         VBox vbox = new VBox(100);
-        vbox.setPadding(new Insets(100));
+        vbox.setPadding(new Insets(70));
         Label jLabelTipoPregunta = new Label(jugada.obtenerPregunta().mostrarTipoPregunta());
         jLabelTipoPregunta.setAlignment(Pos.CENTER);
         jLabelTipoPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold");
@@ -32,16 +35,20 @@ public class PreviaPreguntaEscena extends BaseEscena {
         jLabelTituloPregunta.setPrefHeight(300);
         jLabelTituloPregunta.setPrefWidth(600);
 
-        vbox.getChildren().addAll(jLabelTipoPregunta, jLabelTituloPregunta);
+        CajaVista cajaVista = new CajaVista();
+        Titulo tituloPregunta = new Titulo(jugada.tituloPregunta());
+        tituloPregunta.setWrapText(true);
+        cajaVista.setCenter(tituloPregunta);
+        cajaVista.setPadding(new Insets(60));
+
+        vbox.getChildren().addAll(jLabelTipoPregunta, cajaVista);
         vbox.setAlignment(Pos.CENTER);
 
-
         Label jLabelTurno = new Label("Turno de " + jugada.obtenerJugador().nombre());
-        jLabelTurno.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-background-color: white; -fx-border-color: #9A31E1");
-        jLabelTurno.setPrefHeight(70);
-        jLabelTurno.setPrefWidth(200);
+        jLabelTurno.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18;");
+        EtiquetaVista turno = new EtiquetaVista(jLabelTurno);
 
-        this.cabecera.definirPanelIzquierdo(jLabelTurno);
+        this.cabecera.definirPanelIzquierdo(turno);
 
         return vbox;
     }

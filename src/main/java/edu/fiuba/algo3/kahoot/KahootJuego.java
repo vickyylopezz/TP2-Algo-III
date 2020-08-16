@@ -54,11 +54,13 @@ public class KahootJuego extends KahootModo {
         PreviaPreguntaEscena previaPregunta = new PreviaPreguntaEscena(reproductor, jugada);
         new CambioEscenaEventHandler(this.stage, previaPregunta).handle(null);
         /*
-        Lo que tiene que hacer el boton continuar de PuntajeParcialEscena
         if (partida.existeTurno()){
             this.proximaJugada(reproductor, partida);
         } else {
-            this.proximaPartida(reproductor);
+            PuntajeParcialEscena puntajeParcial = new PuntajeParcial(jugadores);
+            new CambioEscenaEventHandler(this.stage, puntajeParcial).handle(null);
+
+            this.proximaPartida(reproductor);       Lo que tiene que hacer el boton continuar de PuntajeParcialEscena
         }
         */
     }
