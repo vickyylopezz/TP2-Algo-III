@@ -11,6 +11,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
@@ -35,11 +38,12 @@ public class PreviaPreguntaEscena extends BaseEscena {
         jLabelTituloPregunta.setPrefHeight(300);
         jLabelTituloPregunta.setPrefWidth(600);
 
-        CajaVista cajaVista = new CajaVista();
-        Titulo tituloPregunta = new Titulo(jugada.tituloPregunta());
+        TextArea tituloPregunta = new TextArea(jugada.tituloPregunta());
+        tituloPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 24; -fx-font-weight: bold;");
         tituloPregunta.setWrapText(true);
+
+        CajaVista cajaVista = new CajaVista();
         cajaVista.setCenter(tituloPregunta);
-        cajaVista.setPadding(new Insets(60));
 
         vbox.getChildren().addAll(jLabelTipoPregunta, cajaVista);
         vbox.setAlignment(Pos.CENTER);
