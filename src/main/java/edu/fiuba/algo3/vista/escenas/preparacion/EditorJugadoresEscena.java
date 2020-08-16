@@ -54,4 +54,7 @@ public class EditorJugadoresEscena extends BaseEscena {
     public void deshabilitarEscenaSigueinte() {
         this.botonSigueinte.setDisable(true);
     }
+
+    @Override
+    protected void botonSigueinteDefinido() { this.botonSigueinte.setDisable(true); }
 }
