@@ -1,4 +1,4 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.modelo.lector;
 
 import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
@@ -38,11 +38,11 @@ public class Lector {
 
         switch(object.get("tipo").getAsString()) {
             case "VFClasico":
-                pregunta = new VerdaderoFalsoClasico(titulo);
+                pregunta = new VerdaderoFalsoClasico(titulo, "", "");
                 break;
 
             case "VFPenalidad":
-                pregunta = new VerdaderoFalsoConPenalidad(titulo);
+                pregunta = new VerdaderoFalsoConPenalidad(titulo, "", "");
                 break;
 
             case "MCClasico":

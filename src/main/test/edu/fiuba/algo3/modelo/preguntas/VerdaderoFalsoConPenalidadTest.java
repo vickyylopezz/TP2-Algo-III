@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
-import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import org.junit.jupiter.api.Test;
@@ -14,27 +12,31 @@ import static org.junit.jupiter.api.Assertions.*;
 public class VerdaderoFalsoConPenalidadTest {
 
     @Test
-    public void VerdaderoFalsoPuedeCrearseIndicandolecualEsLaRespuestaCorrecta() throws PreguntaError {
-        VerdaderoFalsoConPenalidad pregunta1 = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?");
-        pregunta1.agregarOpcionCorrecta("Verdadero");
-        pregunta1.agregarOpcionIncorrecta("Falso");
+    public void VerdaderoFalsoPuedeCrearseIndicandolecualEsLaRespuestaCorrecta() {
+        VerdaderoFalsoConPenalidad pregunta1 = new VerdaderoFalsoConPenalidad(
+                "¿Estamos en el año 2020?",
+                "Verdadero",
+                "Falso"
+        );
 
-        ArrayList<Opcion> opciones = pregunta1.obtenerOpciones();
-        Integer prueba = opciones.size();
         assertEquals(pregunta1.obtenerOpciones().size(),2);
 
-        VerdaderoFalsoConPenalidad pregunta2 = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?");
-        pregunta2.agregarOpcionCorrecta("Falso");
-        pregunta2.agregarOpcionIncorrecta("Verdadero");
+        VerdaderoFalsoConPenalidad pregunta2 = new VerdaderoFalsoConPenalidad(
+                "¿Estamos en el año 2020?",
+                "Falso",
+                "Verdadero"
+        );
 
         assertEquals(pregunta2.obtenerOpciones().size(),2);
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeCorrectamente() throws PreguntaError, PuntoError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?");
-        pregunta.agregarOpcionCorrecta("Verdadero");
-        pregunta.agregarOpcionIncorrecta("Falso");
+    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeCorrectamente() throws PuntoError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad(
+                "¿Estamos en el año 2020?",
+                "Verdadero",
+                "Falso"
+        );
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
         ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
@@ -44,10 +46,12 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeIncorrectamente() throws PreguntaError, PuntoError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?");
-        pregunta.agregarOpcionCorrecta("Falso");
-        pregunta.agregarOpcionIncorrecta("Verdadero");
+    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeIncorrectamente() throws PuntoError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad(
+                "¿Estamos en el año 2020?",
+                "Falso",
+                "Verdadero"
+        );
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
         ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
@@ -57,10 +61,12 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosAJugadores() throws PreguntaError, PuntoError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?");
-        pregunta.agregarOpcionCorrecta("Verdadero");
-        pregunta.agregarOpcionIncorrecta("Falso");
+    public void VerdaderoFalsoAsignaPuntosAJugadores() throws PuntoError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad(
+                "¿Estamos en el año 2020?",
+                "Verdadero",
+                "Falso"
+        );
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
@@ -76,16 +82,22 @@ public class VerdaderoFalsoConPenalidadTest {
 
     @Test
     public void CreacionVerdaderoFalsoObtenerTituloDevuelveElTitulo(){
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?");
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad(
+                "¿Estamos en el año 2020?",
+                "Verdadero",
+                "Falso"
+        );
 
         assertEquals("¿Estamos en el año 2020?",pregunta.obtenerTitulo());
     }
 
     @Test
-    public void OpcionVerdaderoFalsoMarcadaComoCorrectaValeUnoYFalsoMenosUno() throws PreguntaError, PuntoError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?");
-        pregunta.agregarOpcionCorrecta("Verdadero");
-        pregunta.agregarOpcionIncorrecta("Falso");
+    public void OpcionVerdaderoFalsoMarcadaComoCorrectaValeUnoYFalsoMenosUno() throws PuntoError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad(
+                "¿Estamos en el año 2020?",
+                "Verdadero",
+                "Falso"
+        );
 
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
@@ -97,10 +109,13 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void OpcionVerdaderoMarcadaComoIncorrectaValeMenosUnoYFalsoUno() throws PreguntaError, PuntoError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?");
-        pregunta.agregarOpcionCorrecta("Falso");
-        pregunta.agregarOpcionIncorrecta("Verdadero");
+    public void OpcionVerdaderoMarcadaComoIncorrectaValeMenosUnoYFalsoUno() throws PuntoError {
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad(
+                "¿Estamos en el año 2020?",
+                "Falso",
+                "Verdadero"
+        );
+
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertEquals("Verdadero",opciones.get(1).obtenerTitulo());
@@ -112,24 +127,12 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void AgregarDosOpcionesCorrectasLanzaPreguntaError() throws PreguntaError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?");
-        pregunta.agregarOpcionCorrecta("Falso");
-
-        assertThrows(PreguntaError.class, () -> pregunta.agregarOpcionCorrecta("False"));
-    }
-
-    @Test
-    public void AgregarDosOpcionesIncorrectasLanzaPreguntaError() throws PreguntaError {
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2021?");
-        pregunta.agregarOpcionIncorrecta("Verdadero");
-
-        assertThrows(PreguntaError.class, () -> pregunta.agregarOpcionIncorrecta("True"));
-    }
-
-    @Test
     public void VerdaderoFalsoConPenalidadDevuelveTrueEnPenalidad(){
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("Estamos el algoritmos?");
+        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad(
+                "¿Estamos en el año 2020?",
+                "Verdadero",
+                "Falso"
+        );
 
         assertTrue(pregunta.conPenalidad());
     }

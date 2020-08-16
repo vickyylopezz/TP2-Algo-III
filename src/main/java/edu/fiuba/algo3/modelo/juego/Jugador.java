@@ -25,6 +25,8 @@ public class Jugador {
         return this.nombre;
     }
 
+    public void cambiarNombre(String nombre) { this.nombre = nombre; }
+
     public ArrayList<Respuesta> obtenerRespuestas() { return new ArrayList<>(this.respuestas); }
 
     public ArrayList<Comodin> obtenerComodines() { return new ArrayList<>(this.comodines); }

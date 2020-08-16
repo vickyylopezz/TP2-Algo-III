@@ -25,6 +25,18 @@ public class JugadorTest {
         assertEquals(nombre, "Carlos");
     }
 
+    // cambiarNombre
+    @Test
+    public void cambiarNombreLeCambiaElNombreAlJugador() {
+        Jugador jugador = new Jugador("Carlos");
+
+        assertEquals("Carlos", jugador.nombre());
+
+        jugador.cambiarNombre("Maria");
+
+        assertEquals("Maria", jugador.nombre());
+    }
+
     // obtenerRespuestas
     @Test
     public void jugadorInicialmenteSinRespuestas() {
