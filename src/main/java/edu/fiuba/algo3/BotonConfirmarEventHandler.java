@@ -7,16 +7,22 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 public class BotonConfirmarEventHandler implements EventHandler<ActionEvent>{
-        private Stage stage;
-        private Scene proximaEscena;
+    private ControladorEscenas controlador;
+    private Stage stage;
 
-        public BotonConfirmarEventHandler(Stage stage, Scene proximaEscena) {
-            this.stage = stage;
-            this.proximaEscena = proximaEscena;
-        }
+    public BotonConfirmarEventHandler(ControladorEscenas controlador) {
+        this.controlador = controlador;
+        this.stage = controlador.getStage();
+    }
 
-        @Override
-        public void handle(ActionEvent actionEvent) {
-            stage.setScene(proximaEscena);
+    @Override
+    public void handle(ActionEvent actionEvent) {
+        // OJO: en la ultima pregunta, solo esta jugando el jugador 1
+        if (controlador.getIterador().hasNext()) {
+            controlador.actualizarAtributos();
+            new Intermission(controlador);
+        } else {
+            System.exit(0);
         }
     }
+}

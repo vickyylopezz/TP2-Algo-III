@@ -12,48 +12,48 @@ import javafx.scene.text.Text;
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-public class VistaVerdaderoFalso extends VBox{
+public class VistaVerdaderoFalso extends VistaPregunta{
     public VistaVerdaderoFalso(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorEscenas controlador) {
-        super(20);
+        super(preguntaActual, opciones, controlador);
         // Elementos del VBox
-        Text indicadorPregunta = new Text(preguntaActual.obtenerTitulo());
+        /*Text indicadorPregunta = new Text(preguntaActual.obtenerTitulo());
         ArrayList<Button> botones = obtenerBotones(opciones);
-        botones.forEach(boton -> {
-            boton.setOnAction(e -> {
-                controlador.actualizarParametros();
-                new Intermission(controlador.getStage(), controlador);
-            });
-        });
         GridPane grid = ordenarBotones(botones);
         //Button confirmar = new Button("Confirmar");
 
         this.setAlignment(Pos.CENTER);
         //this.setMargin(confirmar, new Insets(100,0,0,0));
-        this.getChildren().addAll(indicadorPregunta, grid);
+        this.getChildren().addAll(indicadorPregunta, grid);*/
 
         // Comportamiento de confirmar?
     }
 
-    public ArrayList<Button> obtenerBotones(ArrayList<Opcion> opciones) {
-        Button opcion1 = new Button(opciones.get(0).obtenerTitulo());
-        Button opcion2 = new Button(opciones.get(1).obtenerTitulo());
-
-        ArrayList<Button> botones = new ArrayList<Button>();
-        botones.add(opcion1); botones.add(opcion2);
-
+    private ArrayList<Button> obtenerBotones(ArrayList<Opcion> opciones) {
+        Button temp;
+        ArrayList<Button> botones = new ArrayList<>();
+        for (Opcion opcion : opciones) {
+            temp = new Button(opcion.obtenerTitulo());
+            temp.setPrefSize(250, 100);
+            temp.setAlignment(Pos.CENTER);
+            temp.setWrapText(true);
+            temp.setOnAction(new BotonConfirmarEventHandler(this.controlador));
+            botones.add(temp);
+        }
         return botones;
     }
 
-    public GridPane ordenarBotones(ArrayList<Button> botones) {
-        GridPane gridPane = new GridPane();
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(20);
-        gridPane.setVgap(20);
+    @Override
+    public void rellenarGrilla(ArrayList<Opcion> opciones) {
+        ArrayList<Button> botones = obtenerBotones(opciones);
 
-        gridPane.add(botones.get(0), 0, 0);
-        gridPane.add(botones.get(1),1,0);
-
-        return gridPane;
+        for (int i = 0; i < botones.size(); i++){
+            if ((i == (botones.size()-1)) && (i % 2 == 0)) {
+                botones.get(i).setPrefWidth((botones.get(i).getPrefWidth())*2 + 20);
+                grid.add(botones.get(i), 0, i / 2,2,1);
+            } else {
+                grid.add(botones.get(i), i % 2, i / 2);
+            }
+        }
     }
 
 }

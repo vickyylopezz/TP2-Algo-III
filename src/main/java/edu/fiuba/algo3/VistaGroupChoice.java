@@ -11,49 +11,28 @@ import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
-public class VistaGroupChoice extends VBox {
+public class VistaGroupChoice extends VistaPregunta {
     private Button botonActivo;
     private Button izquierda, derecha;
-    private GridPane grid;
 
-    public VistaGroupChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones){
-        super(20);
+    public VistaGroupChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorEscenas controlador){
+        super(preguntaActual, opciones, controlador);
 
-        Text indicadorPregunta = new Text(preguntaActual.obtenerTitulo());
+        /*Text indicadorPregunta = new Text(preguntaActual.obtenerTitulo());
         grid = obtenerGrilla(opciones);
 
         this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(indicadorPregunta, grid);
+        this.getChildren().addAll(indicadorPregunta, grid);*/
     }
 
-    public GridPane obtenerGrilla(ArrayList<Opcion> opciones) {
-        Button temp = null;
-        ArrayList<Button> botones = new ArrayList<>();
-        for (Opcion opcion : opciones) {
-            temp = new Button(opcion.obtenerTitulo());
-            temp.setPrefSize(300, 50);
-            temp.setAlignment(Pos.CENTER);
-            temp.setWrapText(true);
-
-            temp.setOnAction(e -> opcionActivada(e.getSource()));
-            temp.setOnAction(e -> {
-                this.izquierda.setDisable(false);
-                this.derecha.setDisable(false);
-                opcionActivada(e.getSource());
-            });
-            botones.add(temp);
-        }
-
-        GridPane grid = new GridPane();
-        grid.setAlignment(Pos.CENTER);
-        grid.setVgap(20);
-        grid.setHgap(50);
+    @Override
+    public void rellenarGrilla(ArrayList<Opcion> opciones) {
+        ArrayList<Button> botones = obtenerBotones(opciones);
 
         ColumnConstraints col1 = new ColumnConstraints(300);
         ColumnConstraints col2 = new ColumnConstraints(300);
         ColumnConstraints col3 = new ColumnConstraints(300);
-
-        grid.getColumnConstraints().addAll(col1,col2,col3);
+        grid.getColumnConstraints().addAll(col1, col2, col3);
 
         int i = 1;
         for (Button boton: botones) {
@@ -73,10 +52,27 @@ public class VistaGroupChoice extends VBox {
         grid.add(controles,1,0);
         grid.add(grupo2,2,0);
 
-        grid.setAlignment(Pos.CENTER);
         grid.setGridLinesVisible(true);
+    }
 
-        return grid;
+    public ArrayList<Button> obtenerBotones(ArrayList<Opcion> opciones) {
+        Button temp = null;
+        ArrayList<Button> botones = new ArrayList<>();
+        for (Opcion opcion : opciones) {
+            temp = new Button(opcion.obtenerTitulo());
+            temp.setPrefSize(300, 50);
+            temp.setAlignment(Pos.CENTER);
+            temp.setWrapText(true);
+
+            temp.setOnAction(e -> opcionActivada(e.getSource()));
+            temp.setOnAction(e -> {
+                this.izquierda.setDisable(false);
+                this.derecha.setDisable(false);
+                opcionActivada(e.getSource());
+            });
+            botones.add(temp);
+        }
+        return botones;
     }
 
     private void opcionActivada(Object source) {
