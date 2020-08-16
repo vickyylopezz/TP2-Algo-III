@@ -21,6 +21,6 @@ public class MiniTexto extends Texto {
     }
 
     private void cargarEstilo() {
-        this.setFont(new Font(this.getFont().getName(), 16));
+        this.setFont(new Font(this.getFont().getName(), 12));
     }
 }
