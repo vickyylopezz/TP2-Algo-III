@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.componentes;
 
+import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.vista.Resources;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
@@ -16,11 +17,11 @@ import static javafx.geometry.Pos.*;
 
 public class GanadorVista{
     protected Node nodo;
-    public GanadorVista(){
-        this.aplicarEstilo();
+    public GanadorVista(String nombre){
+        this.aplicarEstilo(nombre);
     }
 
-    public void aplicarEstilo(){
+    public void aplicarEstilo(String nombre){
         VBox boxJugador = new VBox();
         boxJugador.setStyle("-fx-border-radius: 2;-fx-border-color: grey; -fx-background-radius: 2; -fx-background-color: white");
 
@@ -34,7 +35,7 @@ public class GanadorVista{
             contenedorIcono.getChildren().add(icono);
         } catch (FileNotFoundException e) { e.printStackTrace(); }
 
-        Label jLabelGanador = new Label("nombre ganador");
+        Label jLabelGanador = new Label(nombre);
         jLabelGanador.setStyle("-fx-text-fill: white; -fx-font-size: 30; -fx-font-weight: bold; -fx-background-color: #8055CB");
         jLabelGanador.setTranslateY(10);
         jLabelGanador.setPrefSize(300,100);

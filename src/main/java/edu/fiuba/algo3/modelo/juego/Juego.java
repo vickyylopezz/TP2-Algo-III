@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.modelo.juego;
 
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntajeIgualError;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
+
 import java.util.ArrayList;
 
 public class Juego {
@@ -26,5 +29,15 @@ public class Juego {
     public Partida obtenerPartida() {
         if (!this.existePartida()) return null;
         return this.partidas.get(this.turno);
+    }
+
+    public Jugador ganador(Jugador jugador1, Jugador jugador2) throws PuntoError {
+        if(jugador1.puntajeTotal().mayor(jugador2.puntajeTotal())){
+            return jugador1;
+        }else if(!jugador1.puntajeTotal().mayor(jugador2.puntajeTotal())){
+            return jugador2;
+        }else{
+            throw new PuntajeIgualError();
+        }
     }
 }
