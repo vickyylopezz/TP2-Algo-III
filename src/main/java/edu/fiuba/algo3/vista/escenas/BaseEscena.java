@@ -47,6 +47,7 @@ public abstract class BaseEscena extends Scene {
         this.botonSigueinte = new BotonEtiquetaIzquierdaVista(tituloBoton);
         this.botonSigueinte.setOnAction(evento);
         this.cabecera.definirPanelDerecho(this.botonSigueinte);
+        this.botonSigueinteDefinido();
     }
 
     public void eventoAnterior(EventHandler<ActionEvent> evento, String titulo) {
@@ -58,5 +59,10 @@ public abstract class BaseEscena extends Scene {
         this.botonAnterior = new BotonEtiquetaDerechaVista(tituloBoton);
         this.botonAnterior.setOnAction(evento);
         this.cabecera.definirPanelIzquierdo(this.botonAnterior);
+        this.botonAnteriorDefinido();
     }
+
+    protected void botonSigueinteDefinido() { }
+
+    protected void botonAnteriorDefinido() { }
 }
