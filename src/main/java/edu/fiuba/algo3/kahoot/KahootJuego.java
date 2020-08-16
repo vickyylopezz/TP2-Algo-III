@@ -2,10 +2,8 @@ package edu.fiuba.algo3.kahoot;
 
 import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
-import edu.fiuba.algo3.vista.componentes.PreviaPreguntaVista;
-import edu.fiuba.algo3.vista.escenas.preparacion.PreviaPreguntaEscena;
-import edu.fiuba.algo3.vista.escenas.preparacion.PuntajeParcialEscena;
+import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaEscena;
+import edu.fiuba.algo3.vista.escenas.juego.PuntajeParcialEscena;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 

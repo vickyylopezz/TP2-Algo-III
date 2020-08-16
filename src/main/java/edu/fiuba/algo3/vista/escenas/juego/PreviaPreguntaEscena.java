@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vista.escenas.preparacion;
+package edu.fiuba.algo3.vista.escenas.juego;
 
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraCajaVista;
