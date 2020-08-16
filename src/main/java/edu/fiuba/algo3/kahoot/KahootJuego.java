@@ -14,43 +14,17 @@ import java.util.TimerTask;
 
 public class KahootJuego extends KahootModo {
 
-    private final Juego juego;
+    private Juego juego;
 
     public KahootJuego(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores) {
         super(stage, preguntas, jugadores);
-        this.juego = new Juego(this.preguntas, this.jugadores);
     }
 
     @Override
     public void iniciar(MediaPlayer reproductor) {
+        this.juego = new Juego(this.preguntas, this.jugadores);
         this.juego.iniciarPartidas();
         this.siguienteEscena(reproductor);
-
-        /*
-        Para probar las escenas
-
-        Jugada jugada = new Jugada(new VerdaderoFalsoClasico("Estamos en el año 2020 A.C."), new Jugador("Patricio"));
-        PreviaPreguntaEscena previaPregunta = new PreviaPreguntaEscena(reproductor, jugada);
-        new CambioEscenaEventHandler(this.stage, previaPregunta).handle(null);
-
-        PuntajeParcialEscena puntajesParciales = new PuntajeParcialEscena(this.stage, reproductor, juego);
-        new CambioEscenaEventHandler(this.stage, puntajesParciales).handle(null);
-
-
-        while(juego.existePartida()){
-            Partida partida = juego.obtenerPartida();
-            partida.iniciarTurnos();
-            while (partida.existeTurno()){
-                Jugada jugada = partida.obtenerJugada();
-                PreviaPreguntaEscena previaPregunta = new PreviaPreguntaEscena(reproductor, jugada);
-                new CambioEscenaEventHandler(this.stage, previaPregunta).handle(null);
-                partida.siguienteTurno();
-            }
-            PuntajeParcialEscena puntajesParciales = new PuntajeParcialEscena(this.stage, reproductor, juego);
-            new CambioEscenaEventHandler(this.stage, puntajesParciales).handle(null);
-        }
-        //cambiar a KahootResultados
-         */
     }
 
     private void siguienteEscena(MediaPlayer reproductor) {
@@ -63,6 +37,7 @@ public class KahootJuego extends KahootModo {
 
     private void proximaPartida(MediaPlayer reproductor) {
         Partida partida = this.juego.obtenerPartida();
+        partida.iniciarTurnos();
         this.juego.siguientePartida();
         if (partida.existeTurno()){
             this.proximaJugada(reproductor, partida);
@@ -77,13 +52,15 @@ public class KahootJuego extends KahootModo {
         partida.siguienteTurno();
 
         PreviaPreguntaEscena previaPregunta = new PreviaPreguntaEscena(reproductor, jugada);
-        new CambioEscenaEventHandler(this.stage, previaPregunta);
-
+        new CambioEscenaEventHandler(this.stage, previaPregunta).handle(null);
+        /*
+        Lo que tiene que hacer el boton continuar de PuntajeParcialEscena
         if (partida.existeTurno()){
             this.proximaJugada(reproductor, partida);
         } else {
             this.proximaPartida(reproductor);
         }
+        */
     }
 
     private void finalizarJuego(Juego juego) {

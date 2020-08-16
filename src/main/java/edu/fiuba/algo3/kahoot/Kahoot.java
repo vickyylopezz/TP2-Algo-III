@@ -4,6 +4,7 @@ import edu.fiuba.algo3.eventos.kahoot.KahootCambioModoEventHandler;
 import edu.fiuba.algo3.eventos.kahoot.KahootSalirEventHandler;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.vista.Resources;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
