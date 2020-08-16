@@ -14,9 +14,9 @@ import javafx.scene.media.MediaPlayer;
 
 import static javafx.geometry.Pos.CENTER;
 
-public class GanadorEscena extends BaseEscena {
+public class UltimaEscena extends BaseEscena {
     private StackPane cuerpo;
-    public GanadorEscena(MediaPlayer reproductor, Jugador jugador1, Jugador jugador2) {
+    public UltimaEscena(MediaPlayer reproductor, Jugador jugador1, Jugador jugador2) {
         super(reproductor);
         Node cuerpo = this.crearCuerpo(jugador1,jugador2);
         this.raiz.setCenter(cuerpo);
@@ -39,29 +39,5 @@ public class GanadorEscena extends BaseEscena {
 
         return vbox;
     }
-    /*//Botones
-    BotonEtiquetaDerechaVista botonResultados = new BotonEtiquetaDerechaVista("Resultados");
-        botonResultados.setOnAction((event) -> this.escenario.setScene(resultadosEscena()));
-
-    //TituloGanador
-    Label tituloGanador = new Label("G A N A D O R");
-        tituloGanador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 50; -fx-font-weight: bold");
-        tituloGanador.setAlignment(TOP_CENTER);
-
-    //JugadorGanador
-    GanadorVista ganador = new GanadorVista();
-
-    //XBox
-    VBox vbox = new VBox(20);
-        vbox.getChildren().addAll(tituloGanador,ganador.obtenerNodo());
-        vbox.setAlignment(CENTER);
-
-    //Contenedor
-    BorderPane contenedorPrincipal = new BorderPane();
-        contenedorPrincipal.setTop(new CabeceraKahootVista( botonResultados,null));
-        contenedorPrincipal.setCenter(vbox);
-
-        return new Scene(contenedorPrincipal, 800, 600);*/
-
-
+    
 }
