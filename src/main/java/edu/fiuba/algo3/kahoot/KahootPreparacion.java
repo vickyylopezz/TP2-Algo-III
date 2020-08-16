@@ -34,10 +34,16 @@ public class KahootPreparacion extends KahootModo {
         IniciarJuegoEscena iniciarJuego = new IniciarJuegoEscena(reproductor);
 
         bienvenida.eventoBotonPrincipal(new CambioEscenaEventHandler(this.stage, editorJugadores));
-        bienvenida.eventoSiguiente(new CambioEscenaEventHandler(this.stage, editorPreguntas));
+        bienvenida.eventoSiguiente(
+                new CambioEscenaEventHandler(this.stage, editorPreguntas),
+                "Preguntas"
+        );
 
         editorPreguntas.eventoAnterior(new CambioEscenaEventHandler(this.stage, bienvenida));
-        editorPreguntas.eventoSiguiente(new CambioEscenaEventHandler(this.stage, editorJugadores));
+        editorPreguntas.eventoSiguiente(
+                new CambioEscenaEventHandler(this.stage, editorJugadores),
+                "Jugadores"
+        );
 
         editorJugadores.eventoAnterior(new CambioEscenaEventHandler(this.stage, bienvenida));
         editorJugadores.eventoSiguiente(new CambioEscenaEventHandler(this.stage, iniciarJuego));
