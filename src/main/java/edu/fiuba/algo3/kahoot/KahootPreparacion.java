@@ -26,10 +26,11 @@ public class KahootPreparacion extends KahootModo {
     @Override
     public void iniciar(MediaPlayer reproductor) {
         this.precargarPreguntas();
+        this.crearJugadores();
 
         BienvenidaEscena bienvenida = new BienvenidaEscena(reproductor);
         EditorPreguntasEscena editorPreguntas = new EditorPreguntasEscena(this.stage, this.preguntas,reproductor);
-        EditorJugadoresEscena editorJugadores = new EditorJugadoresEscena(reproductor);
+        EditorJugadoresEscena editorJugadores = new EditorJugadoresEscena(this.jugadores, reproductor);
         IniciarJuegoEscena iniciarJuego = new IniciarJuegoEscena(reproductor);
 
         bienvenida.eventoBotonPrincipal(new CambioEscenaEventHandler(this.stage, editorJugadores));
@@ -45,6 +46,12 @@ public class KahootPreparacion extends KahootModo {
         iniciarJuego.eventoBotonPrincipal(this.eventoSalida);
 
         new CambioEscenaEventHandler(this.stage, bienvenida).handle(null);
+    }
+
+    private void crearJugadores() {
+        String nombreJugadorDefault = "";
+        this.jugadores.add(new Jugador(nombreJugadorDefault));
+        this.jugadores.add(new Jugador(nombreJugadorDefault));
     }
 
     private void precargarPreguntas() {
