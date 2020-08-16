@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntajeIgualError;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 
 //Componente
@@ -17,5 +18,14 @@ public abstract class Punto {
     }
 
 
+    public boolean mayor(Punto puntajeTotal) throws PuntoError {
+        if(this.obtenerPunto().obtenerValor() > puntajeTotal.obtenerPunto().obtenerValor()){
+            return true;
+        }else if(this.obtenerPunto().obtenerValor() < puntajeTotal.obtenerPunto().obtenerValor()){
+            return false;
+        }else{
+            throw new PuntajeIgualError();
+        }
+    }
 }
 
