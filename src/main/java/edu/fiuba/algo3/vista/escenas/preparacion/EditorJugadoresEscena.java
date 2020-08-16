@@ -47,14 +47,10 @@ public class EditorJugadoresEscena extends BaseEscena {
         return contenedor;
     }
 
-    public void habilitarEscenaSigueinte() {
-        this.botonSigueinte.setDisable(false);
-    }
+    public void habilitarEscenaSigueinte() { this.botonSigueinte.activar(); }
 
-    public void deshabilitarEscenaSigueinte() {
-        this.botonSigueinte.setDisable(true);
-    }
+    public void deshabilitarEscenaSigueinte() { this.botonSigueinte.desactivar(); }
 
     @Override
-    protected void botonSigueinteDefinido() { this.botonSigueinte.setDisable(true); }
+    protected void botonSigueinteDefinido() { this.botonSigueinte.desactivar(); }
 }

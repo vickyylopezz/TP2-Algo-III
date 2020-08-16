@@ -40,4 +40,14 @@ public class BotonEtiquetaDerechaVista extends StackPane {
     public EventHandler<ActionEvent> getOnAction() { return this.boton.getOnAction(); }
 
     public void setOnAction(EventHandler<ActionEvent> evento) { this.boton.setOnAction(evento); }
+
+    public void activar() {
+        this.boton.activar();
+        this.etiqueta.setVisible(true);
+    }
+
+    public void desactivar() {
+        this.boton.desactivar();
+        this.etiqueta.setVisible(false);
+    }
 }
