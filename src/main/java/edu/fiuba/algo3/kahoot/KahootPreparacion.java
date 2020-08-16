@@ -1,10 +1,10 @@
 package edu.fiuba.algo3.kahoot;
 
-import edu.fiuba.algo3.Lector;
 import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.lector.Lector;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.escenas.preparacion.BienvenidaEscena;
 import edu.fiuba.algo3.vista.escenas.preparacion.EditorJugadoresEscena;

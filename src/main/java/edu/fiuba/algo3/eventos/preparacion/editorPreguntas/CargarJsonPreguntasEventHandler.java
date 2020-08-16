@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.eventos.preparacion.editorPreguntas;
 
-import edu.fiuba.algo3.Lector;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.lector.Lector;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
