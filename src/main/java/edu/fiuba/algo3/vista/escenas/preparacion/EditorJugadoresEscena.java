@@ -23,8 +23,8 @@ public class EditorJugadoresEscena extends BaseEscena {
         contenedor.setAlignment(Pos.CENTER);
 
         for (Jugador jugador: jugadores) {
-            String tituloJugador = "JUGADOR " + (jugadores.indexOf(jugador) + 1);
-            contenedor.getChildren().add(new JugadorVista(tituloJugador).obtenerNodo());
+            int numeroJugador = jugadores.indexOf(jugador) + 1;
+            contenedor.getChildren().add(new JugadorVista(numeroJugador));
         }
 
         return contenedor;
