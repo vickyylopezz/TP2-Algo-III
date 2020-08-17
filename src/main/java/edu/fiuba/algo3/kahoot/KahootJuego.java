@@ -31,7 +31,7 @@ public class KahootJuego extends KahootModo {
         if (this.juego.existePartida()){
             this.proximaPartida(reproductor);
         } else {
-            this.finalizarJuego(juego);
+            this.finalizarJuego(reproductor);
         }
     }
 
@@ -55,19 +55,26 @@ public class KahootJuego extends KahootModo {
         //el proximo evento hice para probar pero mas o menos esto tendria que hacer el confirmar de pregunta
         //ademas de guardar las respuestas de los jugadores y aplicar comodin
         //se puede hacer una clase que tenga el condicional y reciba la partida
+
         previaPregunta.eventoSiguiente((event) -> {
             if (partida.existeTurno()){
                 this.proximaJugada(reproductor, partida);
             } else {
                 PuntajeParcialEscena puntajeParcial = new PuntajeParcialEscena(this.stage, reproductor, this.juego);
-                puntajeParcial.eventoSiguiente((e) -> this.proximaPartida(reproductor), "Continuar");
+                if (this.juego.existePartida()){
+                    puntajeParcial.eventoSiguiente((e) -> this.proximaPartida(reproductor), "Continuar");
+                } else {
+                    puntajeParcial.eventoSiguiente(this.eventoSalida, "Continuar");
+                }
                 new CambioEscenaEventHandler(this.stage, puntajeParcial).handle(null);
             }
         });
         new CambioEscenaEventHandler(this.stage, previaPregunta).handle(null);
+
     }
 
-    private void finalizarJuego(Juego juego) {
-        //cambiar a KahootResultados
+    // NO SE SI HACE FALTA ESTE METODO
+    // SI NO SE USA HABRIA QUE SACAR EL ELSE EN proximaPartida();
+    private void finalizarJuego(MediaPlayer reproductor){
     }
 }
