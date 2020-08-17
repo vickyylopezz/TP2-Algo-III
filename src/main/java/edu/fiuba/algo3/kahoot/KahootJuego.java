@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.kahoot;
 
 import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaEscena;
@@ -58,7 +59,12 @@ public class KahootJuego extends KahootModo {
             if (partida.existeTurno()){
                 this.proximaJugada(reproductor, partida);
             } else {
-                PuntajeParcialEscena puntajeParcial = new PuntajeParcialEscena(this.stage, reproductor, this.juego);
+                PuntajeParcialEscena puntajeParcial = null;
+                try {
+                    puntajeParcial = new PuntajeParcialEscena(this.stage, reproductor, this.jugadores);
+                } catch (PuntoError puntoError) {
+                    puntoError.printStackTrace();
+                }
                 if (this.juego.existePartida()){
                     puntajeParcial.eventoSiguiente((e) -> this.proximaPartida(reproductor), "Continuar");
                 } else {
