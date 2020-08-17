@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.vista.escenas.resultados;
 
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntajeIgualError;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
@@ -41,7 +42,7 @@ public class UltimaEscena extends BaseEscena {
             vbox.setAlignment(CENTER);
 
             return vbox;
-        }catch(PuntoError empateExcepcion){
+        }catch(PuntajeIgualError empateExcepcion){
             Label tituloEmpate = new Label("E M P A T E");
             tituloEmpate.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 50; -fx-font-weight: bold");
             tituloEmpate.setAlignment(Pos.TOP_CENTER);
