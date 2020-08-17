@@ -41,6 +41,7 @@ public class PreviaPreguntaEscena extends BaseEscena {
         TextArea tituloPregunta = new TextArea(jugada.tituloPregunta());
         tituloPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 24; -fx-font-weight: bold;");
         tituloPregunta.setWrapText(true);
+        tituloPregunta.setEditable(false);
 
         CajaVista cajaVista = new CajaVista();
         cajaVista.setCenter(tituloPregunta);

@@ -52,17 +52,19 @@ public class KahootJuego extends KahootModo {
         partida.siguienteTurno();
 
         PreviaPreguntaEscena previaPregunta = new PreviaPreguntaEscena(reproductor, jugada);
+        //el proximo evento hice para probar pero mas o menos esto tendria que hacer el confirmar de pregunta
+        //ademas de guardar las respuestas de los jugadores y aplicar comodin
+        //se puede hacer una clase que tenga el condicional y reciba la partida
+        previaPregunta.eventoSiguiente((event) -> {
+            if (partida.existeTurno()){
+                this.proximaJugada(reproductor, partida);
+            } else {
+                PuntajeParcialEscena puntajeParcial = new PuntajeParcialEscena(this.stage, reproductor, this.juego);
+                puntajeParcial.eventoSiguiente((e) -> this.proximaPartida(reproductor), "Continuar");
+                new CambioEscenaEventHandler(this.stage, puntajeParcial).handle(null);
+            }
+        });
         new CambioEscenaEventHandler(this.stage, previaPregunta).handle(null);
-        /*
-        if (partida.existeTurno()){
-            this.proximaJugada(reproductor, partida);
-        } else {
-            PuntajeParcialEscena puntajeParcial = new PuntajeParcial(jugadores);
-            new CambioEscenaEventHandler(this.stage, puntajeParcial).handle(null);
-
-            this.proximaPartida(reproductor);       Lo que tiene que hacer el boton continuar de PuntajeParcialEscena
-        }
-        */
     }
 
     private void finalizarJuego(Juego juego) {
