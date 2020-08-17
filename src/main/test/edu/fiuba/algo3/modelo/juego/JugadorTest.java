@@ -341,7 +341,7 @@ public class JugadorTest {
 
     // sacarComodin
     @Test
-    public void sacarComodinSacaElComoinDeLosComodinesDelJugador() {
+    public void sacarComodinSacaElComodinDeLosComodinesDelJugador() {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin = mock(Comodin.class);

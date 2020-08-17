@@ -18,6 +18,7 @@ public class MultiplicadorTest {
     public void seCreaMultiplicadorConJugadorNuloYSeClanzaExcepcion(){
         assertThrows(ComodinError.class, () -> new Multiplicador(0));
     }
+
     @Test
     public void seCreaMultiplicadorConFactorNuloYSeLanzaExcepcion() {
 
@@ -102,11 +103,35 @@ public class MultiplicadorTest {
         multiplicador.aplicarARespuestas(respuestas);
 
         verify(unaRespuestaCorrecta, times(1)).aplicarComodin(multiplicador);
+    }
+
+    @Test
+    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaConDistintoJugadorQueElComodin() throws ComodinError, PuntoError {
+        Multiplicador multiplicador = new Multiplicador(2);
+
+        Jugador unJugador = mock(Jugador.class);
+        Jugador otroJugador = mock(Jugador.class);
+        multiplicador.definirJugador(unJugador);
+
+        Respuesta unaRespuestaCorrecta = mock(Respuesta.class);
+        when(unaRespuestaCorrecta.obtenerJugador()).thenReturn(unJugador);
+        when(unaRespuestaCorrecta.esCorrecta()).thenReturn(true);
+
+        Respuesta otraRespuestaCorrecta = mock(Respuesta.class);
+        when(otraRespuestaCorrecta.obtenerJugador()).thenReturn(otroJugador);
+        when(otraRespuestaCorrecta.esCorrecta()).thenReturn(true);
+
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(unaRespuestaCorrecta);
+        respuestas.add(otraRespuestaCorrecta);
+
+        multiplicador.aplicarARespuestas(respuestas);
+
         verify(otraRespuestaCorrecta, times(0)).aplicarComodin(multiplicador);
     }
 
     @Test
-    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
 
         Jugador unJugador = mock(Jugador.class);
@@ -128,11 +153,35 @@ public class MultiplicadorTest {
         multiplicador.aplicarARespuestas(respuestas);
 
         verify(respuestaCorrecta, times(1)).aplicarComodin(multiplicador);
+    }
+
+    @Test
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYNoSeGuardaEnLaRespuestaConDistintoJugadorQueElComodin() throws ComodinError, PuntoError {
+        Multiplicador multiplicador = new Multiplicador(2);
+
+        Jugador unJugador = mock(Jugador.class);
+        Jugador otroJugador = mock(Jugador.class);
+        multiplicador.definirJugador(unJugador);
+
+        Respuesta respuestaCorrecta = mock(Respuesta.class);
+        when(respuestaCorrecta.obtenerJugador()).thenReturn(unJugador);
+        when(respuestaCorrecta.esCorrecta()).thenReturn(true);
+
+        Respuesta respuestaIncorrecta = mock(Respuesta.class);
+        when(respuestaIncorrecta.obtenerJugador()).thenReturn(otroJugador);
+        when(respuestaIncorrecta.esCorrecta()).thenReturn(false);
+
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(respuestaCorrecta);
+        respuestas.add(respuestaIncorrecta);
+
+        multiplicador.aplicarARespuestas(respuestas);
+
         verify(respuestaIncorrecta, times(0)).aplicarComodin(multiplicador);
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYSeGuardaEnListaDeComodinesDeLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
+    public void seAplicaARespuestasIncorrectasYSeGuardaEnLaRespuestaConMismoJugadorQueElComodin() throws ComodinError, PuntoError {
         Multiplicador multiplicador = new Multiplicador(2);
 
         Jugador unJugador = mock(Jugador.class);
@@ -154,6 +203,30 @@ public class MultiplicadorTest {
         multiplicador.aplicarARespuestas(respuestas);
 
         verify(unaRespuestaIncorrecta, times(1)).aplicarComodin(multiplicador);
+    }
+
+    @Test
+    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnLaRespuestaConDistintoJugadorQueElComodin() throws ComodinError, PuntoError {
+        Multiplicador multiplicador = new Multiplicador(2);
+
+        Jugador unJugador = mock(Jugador.class);
+        Jugador otroJugador = mock(Jugador.class);
+        multiplicador.definirJugador(unJugador);
+
+        Respuesta unaRespuestaIncorrecta = mock(Respuesta.class);
+        when(unaRespuestaIncorrecta.obtenerJugador()).thenReturn(unJugador);
+        when(unaRespuestaIncorrecta.esCorrecta()).thenReturn(true);
+
+        Respuesta otraRespuestaIncorrecta = mock(Respuesta.class);
+        when(otraRespuestaIncorrecta.obtenerJugador()).thenReturn(otroJugador);
+        when(otraRespuestaIncorrecta.esCorrecta()).thenReturn(true);
+
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(unaRespuestaIncorrecta);
+        respuestas.add(otraRespuestaIncorrecta);
+
+        multiplicador.aplicarARespuestas(respuestas);
+
         verify(otraRespuestaIncorrecta, times(0)).aplicarComodin(multiplicador);
     }
 

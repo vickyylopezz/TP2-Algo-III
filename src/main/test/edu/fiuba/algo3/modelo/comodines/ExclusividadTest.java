@@ -81,7 +81,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
+    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLasRespuestas() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -123,11 +123,32 @@ public class ExclusividadTest {
         exclusividad.aplicarARespuestas(respuestas);
 
         verify(respuestaCorrecta, times(1)).aplicarComodin(exclusividad);
+    }
+
+    @Test
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYNoSeGuardaEnListaDeComodinesDeLaRespuestaInorrecta() throws ComodinError, PuntoError {
+        Exclusividad exclusividad = new Exclusividad(2);
+
+        Jugador jugador = mock(Jugador.class);
+        exclusividad.definirJugador(jugador);
+
+        Respuesta respuestaCorrecta = mock(Respuesta.class);
+        when(respuestaCorrecta.esCorrecta()).thenReturn(true);
+
+        Respuesta respuestaIncorrecta = mock(Respuesta.class);
+        when(respuestaIncorrecta.esCorrecta()).thenReturn(false);
+
+        ArrayList<Respuesta> respuestas = new ArrayList<>();
+        respuestas.add(respuestaCorrecta);
+        respuestas.add(respuestaIncorrecta);
+
+        exclusividad.aplicarARespuestas(respuestas);
+
         verify(respuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
+    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLasRespuestas() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -148,6 +169,7 @@ public class ExclusividadTest {
         verify(unaRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
         verify(otraRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
     }
+
     @Test
     public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError, PuntoError {
         Exclusividad exclusividad = new Exclusividad(2);
