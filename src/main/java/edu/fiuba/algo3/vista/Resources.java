@@ -11,21 +11,17 @@ public class Resources {
     static public String Iconos = "iconos/";
     static public String IconoFlechaDerecha = "adelante.png";
     static public String IconoFlechaIzquierda = "atras.png";
-    static public String IconoJugadorNegro = "icono jugador.png";
     static public String IconoJugadorBlanco = "jugador.png";
     static public String musicaKahoot = "Kahoot.wav";
     static public String IconoMute = "mute.png";
     static public String IconoSonido = "sonido.png";
-    static public String IconoBackground = "textura.png";
 
     public static String IconoFlechaDerechaRuta() { return Ruta + Iconos + IconoFlechaDerecha; }
     public static String IconoFlechaIzquierdaRuta() { return Ruta + Iconos + IconoFlechaIzquierda; }
-    public static String IconoJugadorNegroRuta() { return Ruta + Iconos + IconoJugadorNegro; }
     public static String IconoJugadorBlancoRuta() { return Ruta + Iconos + IconoJugadorBlanco; }
     public static String MusicaKahootRuta(){return Ruta + musicaKahoot;}
     public static String IconoMuteRuta(){return Ruta + Iconos + IconoMute;}
     public static String IconoSonidoRuta(){return Ruta + Iconos + IconoSonido;}
-    public static String IconoBackground(){return Ruta + Iconos + IconoBackground;}
 
     public static String DataPreguntas = "Preguntas2.json";
     public static String RutaDataPreguntas() { return Ruta + DataPreguntas; }
