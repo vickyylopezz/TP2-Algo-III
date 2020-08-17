@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.eventos.kahoot;
 
 import edu.fiuba.algo3.kahoot.KahootModo;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.media.MediaPlayer;
@@ -14,5 +15,11 @@ public class KahootCambioModoEventHandler implements EventHandler<ActionEvent> {
     this.reproductor = reproductor;}
 
     @Override
-    public void handle(ActionEvent actionEvent) { this.modo.iniciar(reproductor); }
+    public void handle(ActionEvent actionEvent) {
+        try {
+            this.modo.iniciar(reproductor);
+        } catch (PuntoError puntoError) {
+            puntoError.printStackTrace();
+        }
+    }
 }
