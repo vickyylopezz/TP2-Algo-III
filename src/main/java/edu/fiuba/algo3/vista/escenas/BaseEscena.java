@@ -8,7 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 
 public abstract class BaseEscena extends Scene {
@@ -28,6 +29,10 @@ public abstract class BaseEscena extends Scene {
         this.setRoot(this.raiz);
         ContenedorSonido botoneraSonido = new ContenedorSonido(reproductor);
         this.raiz.setBottom(botoneraSonido.obtenerNodo());
+
+        Image imagen = new Image("file:src/main/resources/iconos/fondo.jpg");
+        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        this.raiz.setBackground(new Background(imagenDeFondo));
     }
 
     public void eventoSiguiente(EventHandler<ActionEvent> evento) {
