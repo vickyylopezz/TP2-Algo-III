@@ -30,7 +30,7 @@ public class VistaMultipleChoice extends VistaPregunta {
 
         for (int i = 0; i < botones.size(); i++){
             if ((i == (botones.size()-1)) && (i % 2 == 0)) {
-                botones.get(i).setPrefWidth((botones.get(i).getPrefWidth())*2 + 20);
+                botones.get(i).setPrefWidth((botones.get(i).getPrefWidth())*2 + 50);
                 grid.add(botones.get(i), 0, i / 2,2,1);
             } else {
                 grid.add(botones.get(i), i % 2, i / 2);

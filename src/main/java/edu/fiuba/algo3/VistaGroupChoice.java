@@ -1,6 +1,7 @@
 package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -18,6 +19,19 @@ public class VistaGroupChoice extends VistaPregunta {
     public VistaGroupChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorEscenas controlador){
         super(preguntaActual, opciones, controlador);
 
+        Label grupo1 = new Label(((GroupChoice)preguntaActual).obtenerGrupos().get(0).obtenerTitulo());
+        GridPane.setHalignment(grupo1, HPos.CENTER);
+        Label grupo2 = new Label(((GroupChoice)preguntaActual).obtenerGrupos().get(1).obtenerTitulo());
+        GridPane.setHalignment(grupo2, HPos.CENTER);
+
+        HBox controles = obtenerControles();
+        GridPane.setHalignment(controles, HPos.CENTER);
+
+        grid.add(grupo1,0,0);
+        grid.add(controles,1,0);
+        grid.add(grupo2,2,0);
+
+        grid.setGridLinesVisible(true);
         /*Text indicadorPregunta = new Text(preguntaActual.obtenerTitulo());
         grid = obtenerGrilla(opciones);
 
@@ -40,19 +54,7 @@ public class VistaGroupChoice extends VistaPregunta {
             i++;
         }
 
-        Label grupo1 = new Label("Grupo 1");
-        GridPane.setHalignment(grupo1, HPos.CENTER);
-        Label grupo2 = new Label("Grupo 2");
-        GridPane.setHalignment(grupo2, HPos.CENTER);
 
-        HBox controles = obtenerControles();
-        GridPane.setHalignment(controles, HPos.CENTER);
-
-        grid.add(grupo1,0,0);
-        grid.add(controles,1,0);
-        grid.add(grupo2,2,0);
-
-        grid.setGridLinesVisible(true);
     }
 
     public ArrayList<Button> obtenerBotones(ArrayList<Opcion> opciones) {
@@ -64,7 +66,7 @@ public class VistaGroupChoice extends VistaPregunta {
             temp.setAlignment(Pos.CENTER);
             temp.setWrapText(true);
 
-            temp.setOnAction(e -> opcionActivada(e.getSource()));
+            //temp.setOnAction(e -> opcionActivada(e.getSource()));
             temp.setOnAction(e -> {
                 this.izquierda.setDisable(false);
                 this.derecha.setDisable(false);

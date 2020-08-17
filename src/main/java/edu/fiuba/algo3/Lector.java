@@ -25,7 +25,7 @@ public class Lector {
     private ArrayList<Pregunta> preguntas = new ArrayList<>();
 
     public void extraerPreguntas(File archivo) throws IOException, PreguntaError {
-        //File file = new File(getClass().getClassLoader().getResource("Preguntas2.json").getFile());
+        //File file = new File(getClass().getClassLoader().getResource("Preguntas.json").getFile());
 
         JsonReader reader = new JsonReader(new FileReader(archivo));
         JsonElement parser = JsonParser.parseReader(reader);

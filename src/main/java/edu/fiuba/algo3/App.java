@@ -39,7 +39,7 @@ public class App extends Application {
         //preguntasControlador.mostrarVista();
 
         // para probar muestreo de preguntas
-        File file = new File("src/main/resources/Preguntas2.json");
+        File file = new File("src/main/resources/Preguntas.json");
         Lector lector = new Lector();
         lector.extraerPreguntas(file);
 

@@ -1,0 +1,115 @@
+[
+{"tipo":"VFClasico","pregunta":"Hay al menos una ciudad llamada Roma en cada continente.","respuesta":"Verdadero"}
+,
+{"tipo":"VFClasico","pregunta":"El programa de televisión 'Doctor Who' empezó a emitirse en 1963.","respuesta":"Verdadero"}
+,
+{"tipo":"VFClasico","pregunta":"Liechtenstein no tiene aeropuertos.","respuesta":"Verdadero"}
+,
+{"tipo":"VFClasico","pregunta":"La 'Guerra de los Cien Años' se libró durante más de cien años.","respuesta":"Verdadero"}
+,
+{"tipo":"VFClasico","pregunta":"Thomas Crapper fue un plomero que inventó el inodoro con descarga de agua.","respuesta":"Falso"}
+,
+{"tipo":"VFClasico","pregunta":"Tetris es el videojuego más vendido de todos los tiempos.","respuesta":"Falso"}
+,
+{"tipo":"VFClasico","pregunta":"Linus Torvalds creó Linux y GitHub.","respuesta":"Falso"}
+,
+{"tipo":"VFClasico","pregunta":"A pesar de su nombre, Rhode Island es en realidad parte del continente americano.","respuesta":"Verdadero"}
+,
+{"tipo":"VFClasico","pregunta":"L'Hôpital fue el matemático que creó la regla homónima que usa derivadas para evaluar límites con indeterminaciones.","respuesta":"Falso"}
+,
+
+{"tipo":"VFPenalidad","pregunta":"La ingeniería con peor reputación en cuanto a expectativas del cliente es la ingeniería informática.","respuesta":"Verdadero"}
+,
+{"tipo":"VFPenalidad","pregunta":"Desarrollo y programación son lo mismo.","respuesta":"Falso"}
+,
+{"tipo":"VFPenalidad","pregunta":"En el desarrollo de software, verificar no es lo mismo que validar.","respuesta":"Verdadero"}
+,
+{"tipo":"VFPenalidad","pregunta":"La computación ubicua es la integración de la informática en el entorno de la persona.","respuesta":"Verdadero"}
+,
+{"tipo":"VFPenalidad","pregunta":"El software no se construye, se fabrica.","respuesta":"Falso"}
+,
+{"tipo":"VFPenalidad","pregunta":"Según la ley de Brooks, agregar miembros a un proyecto de software atrasado logrará acelerarlo.","respuesta":"Falso"}
+,
+{"tipo":"VFPenalidad","pregunta":"Las metodologías ágiles surgen en los '90.","respuesta":"Falso"}
+,
+{"tipo":"VFPenalidad","pregunta":"El cambio es inherente al software.","respuesta":"Verdadero"}
+,
+{"tipo":"VFPenalidad","pregunta":"Las metodologías de desarrollo de software pueden clasificarse en procesos predictivos y ágiles.","respuesta":"Verdadero"}
+,
+
+{"tipo":"MCClasico","pregunta":"Con qué nombres se identifica a la antigua diosa romana de la guerra?","opcionesCorrectas":["Marte","Ares"],"opcionesIncorrectas":["Júpiter","Afrodita","Artemisa"]}
+,
+{"tipo":"MCClasico","pregunta":"Cuáles de los siguientes países limitan con Austria?","opcionesCorrectas":["Italia","Suiza"],"opcionesIncorrectas":["Serbia","Polonia","Rumania"]}
+,
+{"tipo":"MCClasico","pregunta":"Cuáles son ciudades de Jamaica?","opcionesCorrectas":["Kingston","Falmouth"],"opcionesIncorrectas":["San Juan","Puerto Príncipe","Bridgetown"]}
+,
+{"tipo":"MCClasico","pregunta":"Qué ingredientes son necesarios para crear una torta en Minecraft?","opcionesCorrectas":["Leche","Azucar","Huevo","Trigo"],"opcionesIncorrectas":["Hierro"]}
+,
+{"tipo":"MCClasico","pregunta":"Qué pasa en el puente de Aviñón?","opcionesCorrectas":["Todos cantan, todos bailan","Fue un fracaso de la ingeniería de proyectos"],"opcionesIncorrectas":["Todos saltan, todos nadan","Fue un fracaso de la ingeniería de software"]}
+,
+{"tipo":"MCClasico","pregunta":"Cuáles de los siguientes fueron presidentes de los Estados Unidos?","opcionesCorrectas":["Ronald Reagan","Abraham Lincoln"],"opcionesIncorrectas":["Boris Johnson","Baraka Obama"]}
+,
+{"tipo":"MCClasico","pregunta":"De qué color no era el caballo no blanco de San Martín?","opcionesCorrectas":["Blanco","Menos por menos no es menos"],"opcionesIncorrectas":["Negro","Marrón","Azul"]}
+,
+{"tipo":"MCClasico","pregunta":"Las metodologías ágiles...","opcionesCorrectas":["promueven querer ser parte de un equipo exitoso","priorizan la comunicación física entre personas antes que via documentación","usan reuniones retrospectivas","potencian las capacidades personales"],"opcionesIncorrectas":[]}
+,
+
+{"tipo":"MCParcial","pregunta":"Cuáles de las siguientes afirmaciones sobre el Titanic son ciertas?","opcionesCorrectas":["Los músicos continuaron tocando durante el hundimiento, en un intento de calmar a los pasajeros.","El elevado número de pérdidas fue causado principalmente por equipos, capacitación y procedimientos inadecuados.","El costo de construcción del Titanic fue de alrededor de US$ 7,5 millones."],"opcionesIncorrectas":["La tripulación contaba con más de 20 botes salvavidas.","La primera adaptación cinematográfica de los sucesos ocurridos fue en 1997."]}
+,
+{"tipo":"MCParcial","pregunta":"Cuáles de las siguientes afirmaciones sobre la dieta paleolítica son ciertas?","opcionesCorrectas":["Ha probado pocos beneficios para la salud.","Nuestros ancestros humanos probablemente comian más de lo que incluye la 'dieta' hoy en día."],"opcionesIncorrectas":["Está basada en lo que comían nuestros ancestros humanos.","Está adaptada a la digestión del hombre moderno."]}
+,
+{"tipo":"MCParcial","pregunta":"Cuáles de las siguientes afirmaciones sobre Nefertiti son ciertas?","opcionesCorrectas":["Ella y su esposo creían en una única deidad.","Nefertiti reinó sobre Egipto durante su período más prospero."],"opcionesIncorrectas":["Se trata de la última reina del Antiguo Egipto.","Nefertiti fue una faraona egipcia."]}
+,
+{"tipo":"MCParcial","pregunta":"Cuántos huesos se encuentran en el cuerpo humano?","opcionesCorrectas":["Entre 200 y 210","Entre 205 y 215"],"opcionesIncorrectas":["Entre 190 y 200","Entre 180 y 190","Entre 195 y 205"]}
+,
+{"tipo":"MCParcial","pregunta":"En la saga de videojuegos 'S.T.A.L.K.E.R.', cuáles de los siguientes elementos pueden utilizarse para reducir el nivel de radiación acumulada?","opcionesCorrectas":["Vodka","Kit de primeros auxilios","Anti-rad"],"opcionesIncorrectas":["Traje HEV"]}
+,
+{"tipo":"MCParcial","pregunta":"En el videojuego 'Wii Sports', cuáles de los siguientes deportes están incluidos?","opcionesCorrectas":["Bowling","Boxeo","Golf"],"opcionesIncorrectas":["Esgrima","Ping-Pong"]}
+,
+{"tipo":"MCParcial","pregunta":"De los siguientes países de Latinoamérica, cuáles superan los 1.000.000 kilómetros cuadrados de territorio?","opcionesCorrectas":["Brazil","Argentina","México"],"opcionesIncorrectas":["Chile","Ecuador"]}
+,
+{"tipo":"MCParcial","pregunta":"En sistemas de aviación, qué NO significan las siglas en inglés 'TCAS'?","opcionesCorrectas":["Traffic Communication Alert System","Traffic Configuration Alignment System","Traffic Call-sign Abbreviation System"],"opcionesIncorrectas":["Traffic Collision Avoidance System"]}
+,
+
+{"tipo":"MCPenalidad","pregunta":"El desarrollo de software es una actividad...","opcionesCorrectas":["de construcción del conocimiento","empírica"],"opcionesIncorrectas":["espiritual","esencial"]}
+,
+{"tipo":"MCPenalidad","pregunta":"La metodología incremental en el desarrollo de software...","opcionesCorrectas":["permite llegar a soluciones cada vez más refinadas","da la opción de partir de una aproximación"],"opcionesIncorrectas":["es mas lenta que su predecesora","es ineficiente en términos de eficiencia"]}
+,
+{"tipo":"MCPenalidad","pregunta":"Cuáles de las siguientes son metodologías ágiles?","opcionesCorrectas":["XP","Scrum"],"opcionesIncorrectas":["RUP","Just In Time"]}
+,
+{"tipo":"MCPenalidad","pregunta":"Cuáles son disciplinas del desarrollo de software?","opcionesCorrectas":["Análisis","Despliegue","Diseño"],"opcionesIncorrectas":["Optimización"]}
+,
+{"tipo":"MCPenalidad","pregunta":"Cuáles son disciplinas de soporte en el desarrollo de software?","opcionesCorrectas":["Gestión de cambios","Gestión de riesgos"],"opcionesIncorrectas":["Captura de requisitos","Diseño"]}
+,
+{"tipo":"MCPenalidad","pregunta":"Cuáles son características del software?","opcionesCorrectas":["Intangible","Maleable"],"opcionesIncorrectas":["Incorregible","Insoportable"]}
+,
+
+{"tipo":"Ordered","pregunta":"Ordenar los números de menor a mayor.","orden":["101 (binario)","30 (octal)","1F (hexadecimal)","40"]}
+,
+{"tipo":"Ordered","pregunta":"Cuáles son los pasos del método científico?","orden":["Observación","Hipótesis","Experimentación","Teoría","Ley"]}
+,
+{"tipo":"Ordered","pregunta":"Cuáles son los cambios que el agua de los océanos atraviesa hasta reincorporarse?","orden":["Evaporación","Condensación","Precipitación","Infiltración","Escorrentía"]}
+,
+{"tipo":"Ordered","pregunta":"Cuáles son las 5 fases del duelo, descritas por la doctora Elisabeth Kübler-Ross?","orden":["Negación","Ira","Negociación","Depresión","Aceptación"]}
+,
+{"tipo":"Ordered","pregunta":"Ordenar los siguientes hitos históricos, del más antiguo al más reciente.","orden":["Revolución Rusa","Gran Depresión","Liberación de París","Accidente de Chernobyl","Caída del muro de Berlín"]}
+,
+{"tipo":"Ordered","pregunta":"Ordenar los siguientes elementos químicos por su número atómico.","orden":["Hidrógeno","Carbono","Estaño","Praseodimio","Platino"]}
+,
+{"tipo":"Ordered","pregunta":"Ordenar los colores de menor a mayor, según su longitud de onda en el espectro visible.","orden":["Violeta","Azul","Verde","Amarillo","Rojo"]}
+,
+
+{"tipo":"Group","pregunta":"Clasificar los siguientes animales según su morfología.","grupos":["Vertebrados","Invertebrados"],"grupo1":["Conejo","Iguana","Rana"],"grupo2":["Hormiga","Abeja","Cangrejo"]}
+,
+{"tipo":"Group","pregunta":"Clasificar las siguientes películas animadas según el estudio.","grupos":["DreamWorks","Pixar"],"grupo1":["El Espantatiburones","Madagascar","El camino hacia El Dorado"],"grupo2":["Valiente","Ratatouille","Up"]}
+,
+{"tipo":"Group","pregunta":"Clasificar las siguientes canciones de los '70 según el grupo musical.","grupos":["Queen","ABBA"],"grupo1":["Hammer to Fall","Under Pressure","Killer Queen"],"grupo2":["Fernando","The Winner Takes It All","Dancing Queen"]}
+,
+{"tipo":"Group","pregunta":"Clasificar los siguientes lenguajes de programación según su implementación.","grupos":["Compilados","Interpretados"],"grupo1":["Objective C","Pascal","Fortran"],"grupo2":["Ruby","Python","Smalltalk"]}
+,
+{"tipo":"Group","pregunta":"Clasificar los colores según su temperatura asociada.","grupos":["Cálidos","Fríos"],"grupo1":["Naranja","Amarillo","Rojo"],"grupo2":["Azul","Violeta","Verde"]}
+,
+{"tipo":"Group","pregunta":"Clasificar los elementos químicos según sus propiedades.","grupos":["Metales","No metales"],"grupo1":["Zinc","Sodio","Níquel"],"grupo2":["Carbono","Fósforo","Selenio"]}
+,
+{"tipo":"Group","pregunta":"Clasificar los siguientes tipos de nubes según su altura.","grupos":["Nubes altas","Nubes bajas"],"grupo1":["Cirros","Cirroestratos","Cirrocúmulos"],"grupo2":["Estratos","Cúmulos","Estratocúmulos"]}
+]

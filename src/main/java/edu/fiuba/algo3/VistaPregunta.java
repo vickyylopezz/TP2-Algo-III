@@ -15,6 +15,8 @@ public abstract class VistaPregunta extends VBox {
     protected ControladorEscenas controlador;
     protected GridPane grid;
 
+    //protected int ANCHO_BOTON = 50;
+
     public VistaPregunta(Pregunta pregunta, ArrayList<Opcion> opciones, ControladorEscenas controlador) {
         super(20);
         this.controlador = controlador;
