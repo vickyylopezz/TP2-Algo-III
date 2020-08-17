@@ -17,13 +17,11 @@ public abstract class KahootModo {
     protected final ArrayList<Pregunta> preguntas;
     protected final ArrayList<Jugador> jugadores;
     protected EventHandler<ActionEvent> eventoSalida;
-    protected Juego juego;
 
-    public KahootModo(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores, Juego juego) {
+    public KahootModo(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores) {
         this.stage = stage;
         this.preguntas = preguntas;
         this.jugadores = jugadores;
-        this.juego = juego;
     }
 
     public void cuandoFinaliceEjecutar(EventHandler<ActionEvent> eventoDeSalida) {

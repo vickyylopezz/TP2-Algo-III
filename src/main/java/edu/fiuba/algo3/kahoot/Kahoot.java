@@ -22,7 +22,6 @@ public class Kahoot {
     private final ArrayList<Jugador> jugadores;
     private final MediaPlayer reproductor;
     private final Media musica;
-    private Juego juego;
 
     public Kahoot(Stage stage) {
         this.stage = stage;
@@ -33,9 +32,9 @@ public class Kahoot {
     }
 
     public void iniciar() throws PuntoError {
-        KahootModo modoPreparacion = new KahootPreparacion(this.stage, this.preguntas, this.jugadores,this.juego);
-        KahootModo modoJuego = new KahootJuego(this.stage, this.preguntas, this.jugadores,this.juego);
-        KahootModo modoRespuestas = new KahootResultados(this.stage, this.preguntas, this.jugadores,this.juego);
+        KahootModo modoPreparacion = new KahootPreparacion(this.stage, this.preguntas, this.jugadores);
+        KahootModo modoJuego = new KahootJuego(this.stage, this.preguntas, this.jugadores);
+        KahootModo modoRespuestas = new KahootResultados(this.stage, this.preguntas, this.jugadores);
 
         modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego,reproductor));
         modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas,reproductor));
