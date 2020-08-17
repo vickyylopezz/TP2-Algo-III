@@ -14,9 +14,10 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class KahootJuego extends KahootModo {
+    private Juego juego;
 
-    public KahootJuego(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores, Juego juego) {
-        super(stage, preguntas, jugadores,juego);
+    public KahootJuego(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores) {
+        super(stage, preguntas, jugadores);
     }
 
     @Override

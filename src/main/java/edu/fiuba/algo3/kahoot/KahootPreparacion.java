@@ -20,8 +20,8 @@ import java.util.ArrayList;
 
 public class KahootPreparacion extends KahootModo {
 
-    public KahootPreparacion(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores, Juego juego) {
-        super(stage, preguntas, jugadores,juego);
+    public KahootPreparacion(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores) {
+        super(stage, preguntas, jugadores);
 
         this.precargarPreguntas();
         this.crearJugadores();

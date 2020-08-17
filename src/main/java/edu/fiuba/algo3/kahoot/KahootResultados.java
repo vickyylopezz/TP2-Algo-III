@@ -12,8 +12,9 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class KahootResultados extends KahootModo {
-    public KahootResultados(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores, Juego juego) {
-        super(stage, preguntas, jugadores,juego);
+    private Juego juego;
+    public KahootResultados(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores) {
+        super(stage, preguntas, jugadores);
     }
 
     @Override
