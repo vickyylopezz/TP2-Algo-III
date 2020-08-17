@@ -33,7 +33,7 @@ public class EditorPreguntasEscena extends BaseEscena {
         StackPane cuerpo = new StackPane();
         CajaVista caja = new CajaVista();
 
-        CabeceraCajaVista cabecera = new CabeceraCajaVista("Agrege las Preguntas");
+        CabeceraCajaVista cabecera = new CabeceraCajaVista("Seleccione las Preguntas");
 
         BotonCuadradoVista botonCargarJson = new BotonCuadradoVista("Cargar Json");
         botonCargarJson.setOnAction(new CargarJsonPreguntasEventHandler(stage, preguntas));
