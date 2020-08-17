@@ -6,6 +6,6 @@ import javafx.event.EventHandler;
 public class KahootSalirEventHandler implements EventHandler<ActionEvent> {
     @Override
     public void handle(ActionEvent actionEvent) {
-        // nos vimos en disney
+        System.exit(0);
     }
 }
