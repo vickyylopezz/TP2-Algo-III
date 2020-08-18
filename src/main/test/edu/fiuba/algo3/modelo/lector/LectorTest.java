@@ -7,6 +7,8 @@ import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LectorTest {
@@ -167,5 +169,117 @@ public class LectorTest {
         assertEquals("Agrupar en numero y letas", pregunta.obtenerTitulo());
         assertFalse(pregunta.conPenalidad());
         assertEquals(8, pregunta.obtenerOpciones().size());
+    }
+
+    // extraerPreguntas
+    @Test
+    public void extraerPreguntasTextoNuloDevuelveNull() throws LectorError, PreguntaError {
+        Lector lector = new Lector();
+
+        assertNull(lector.extraerPreguntas(null));
+    }
+
+    @Test
+    public void extraerPreguntasTextoConFormatoJsonInvalidoLanzaLectorErrorSintaxisError() {
+        Lector lector = new Lector();
+
+        String cadenaJsonInvalida = "[{/{}}}}}]";
+
+        assertThrows(LectorSintaxisError.class, () -> lector.extraerPreguntas(cadenaJsonInvalida));
+    }
+
+    @Test
+    public void extraerPreguntasTextoConTipoDePreguntaIndefinidoLanzaLectorTipoPreguntaError() {
+        Lector lector = new Lector();
+
+        String cadenaTipoIndefinido = "[" +
+                    "{" +
+                        "\"tipo\":\"VFClasico\"," +
+                        "\"pregunta\":\"¿Es True/False?\"," +
+                        "\"respuesta\":\"False\"" +
+                    "}," +
+                    "{" +
+                        "\"pregunta\":\"¿Es True o False?\"," +
+                        "\"respuesta\":\"False\"" +
+                    "}" +
+                "]";
+
+        assertThrows(LectorFormatoDePreguntaError.class, () -> lector.extraerPreguntas(cadenaTipoIndefinido));
+    }
+
+    @Test
+    public void extraerPreguntasTextoConTipoDePreguntaIncorrectoLanzaLectorTipoPreguntaError() {
+        Lector lector = new Lector();
+
+        String cadenaTipoIncorrecto = "[" +
+                "{" +
+                "\"tipo\":\"VFClasico\"," +
+                "\"pregunta\":\"¿Es True/False?\"," +
+                "\"respuesta\":\"False\"" +
+                "}," +
+                "{" +
+                "\"tipo\":\"tipologico\"," +
+                "\"pregunta\":\"¿Es True o False?\"," +
+                "\"respuesta\":\"False\"" +
+                "}" +
+                "]";
+
+        assertThrows(LectorFormatoDePreguntaError.class, () -> lector.extraerPreguntas(cadenaTipoIncorrecto));
+    }
+
+    @Test
+    public void extraerPreguntasMedianteUnaCadenaDeJsonConArregloDePreguntasDevuelveArregloDePreguntasEnElMismoOrden() throws PreguntaError, LectorError {
+        Lector lector = new Lector();
+
+        String cadenaJson = "[" +
+                "{" +
+                "\"tipo\":\"VFClasico\"," +
+                "\"pregunta\":\"¿Es True/False?\"," +
+                "\"respuesta\":\"False\"" +
+                "}," +
+                "{" +
+                "\"tipo\":\"VFPenalidad\"," +
+                "\"pregunta\":\"¿Es True o False?\"," +
+                "\"respuesta\":\"False\"" +
+                "}" +
+                "]";
+
+        ArrayList<Pregunta> preguntas = lector.extraerPreguntas(cadenaJson);
+
+        assertEquals(2, preguntas.size());
+
+        assertEquals("¿Es True/False?", preguntas.get(0).obtenerTitulo());
+        assertEquals("¿Es True o False?", preguntas.get(1).obtenerTitulo());
+    }
+
+    @Test
+    public void extraerPreguntasMedianteUnaCadenaDeJsonConArregloDePreguntasDevuelveArregloDePreguntasCorrectas() throws PreguntaError, LectorError {
+        Lector lector = new Lector();
+
+        String cadenaJson = "[" +
+                "{" +
+                "\"tipo\":\"VFClasico\"," +
+                "\"pregunta\":\"¿Es True/False?\"," +
+                "\"respuesta\":\"False\"" +
+                "}," +
+                "{" +
+                "\"tipo\":\"VFPenalidad\"," +
+                "\"pregunta\":\"¿Es True o False?\"," +
+                "\"respuesta\":\"False\"" +
+                "}" +
+                "]";
+
+        ArrayList<Pregunta> preguntas = lector.extraerPreguntas(cadenaJson);
+
+        assertEquals(2, preguntas.size());
+
+        Pregunta pregunta1 = preguntas.get(0);
+        Pregunta pregunta2 = preguntas.get(1);
+
+        assertEquals("¿Es True/False?", pregunta1.obtenerTitulo());
+        assertEquals("¿Es True o False?", pregunta2.obtenerTitulo());
+
+        assertFalse(pregunta1.conPenalidad());
+        assertTrue(pregunta2.conPenalidad());
     }
 }

@@ -8,7 +8,31 @@ import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 
+import java.util.ArrayList;
+
 public class Lector {
+
+    public ArrayList<Pregunta> extraerPreguntas(String cadenaJson) throws LectorError, PreguntaError {
+        if (cadenaJson == null) return null;
+
+        JsonElement preguntasJson;
+        try { preguntasJson = JsonParser.parseString(cadenaJson); }
+        catch (JsonSyntaxException e) { throw new LectorSintaxisError(e.toString()); }
+        JsonArray preguntasArray = preguntasJson.getAsJsonArray();
+
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+
+        for (JsonElement preguntaElement: preguntasArray) {
+            JsonObject preguntaObjeto = preguntaElement.getAsJsonObject();
+            if (preguntaObjeto == null) {
+                throw new LectorFormatoDePreguntaError("Pregunta con formato invalido");
+            }
+
+            preguntas.add(this.clasificadorPregunta(preguntaObjeto).parsear(preguntaObjeto));
+        }
+
+        return preguntas;
+    }
 
     public Pregunta extraerPregunta(String cadenaJson) throws LectorError, PreguntaError {
         if (cadenaJson == null) return null;
@@ -20,9 +44,7 @@ public class Lector {
         }
         JsonObject preguntaObjeto = preguntaJson.getAsJsonObject();
 
-        ParserPregunta parserPregunta = this.clasificadorPregunta(preguntaObjeto);
-
-        return parserPregunta.parsear(preguntaObjeto);
+        return this.clasificadorPregunta(preguntaObjeto).parsear(preguntaObjeto);
     }
 
     private ParserPregunta clasificadorPregunta(JsonObject preguntaObjeto) throws LectorFormatoDePreguntaError {
