@@ -329,6 +329,7 @@ public class JugadaTest {
 
         Pregunta pregunta = mock(Pregunta.class);
         when(pregunta.obtenerOpciones()).thenReturn(opciones);
+        when(pregunta.opcionesSeleccionables(new ArrayList<>())).thenReturn(opciones);
 
         Jugador jugador = mock(Jugador.class);
         Jugada jugada = new Jugada(pregunta, jugador);
@@ -342,30 +343,25 @@ public class JugadaTest {
     }
 
     @Test
-    public void opcionesValidasDevuelveTodasLasOpcionesDespuesDeSeleccionarOpcion() {
+    public void opcionesValidasDevuelveTodasLasOpcionesValidasDespuesDeSeleccionarOpcion() {
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
 
-        ArrayList<Opcion> opciones = new ArrayList<>();
-        opciones.add(opcion1);
-        opciones.add(opcion2);
-        opciones.add(opcion3);
+        ArrayList<Opcion> opcionesValidas = new ArrayList<>();
+        opcionesValidas.add(opcion1);
+        opcionesValidas.add(opcion3);
 
         Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.obtenerOpciones()).thenReturn(opciones);
-
         Jugador jugador = mock(Jugador.class);
-
         Jugada jugada = new Jugada(pregunta, jugador);
 
         jugada.seleccionarOpcion(opcion2);
 
-        ArrayList<Opcion> opcionesValidas = jugada.opcionesValidas();
+        when(pregunta.opcionesSeleccionables(jugada.opcionesSeleccionadas()))
+                .thenReturn(opcionesValidas);
 
-        assertTrue(opcionesValidas.contains(opcion1));
-        assertFalse(opcionesValidas.contains(opcion2));
-        assertTrue(opcionesValidas.contains(opcion3));
+        assertEquals(opcionesValidas, jugada.opcionesValidas());
     }
 
     @Test
@@ -374,13 +370,14 @@ public class JugadaTest {
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
 
-        ArrayList<Opcion> opciones = new ArrayList<>();
-        opciones.add(opcion1);
-        opciones.add(opcion2);
-        opciones.add(opcion3);
+        ArrayList<Opcion> opcionesASeleccionar = new ArrayList<>();
+        opcionesASeleccionar.add(opcion2);
+        opcionesASeleccionar.add(opcion3);
+
+        ArrayList<Opcion> opcionesValidas = new ArrayList<>();
+        opcionesValidas.add(opcion1);
 
         Pregunta pregunta = mock(Pregunta.class);
-        when(pregunta.obtenerOpciones()).thenReturn(opciones);
 
         Jugador jugador = mock(Jugador.class);
         Jugada jugada = new Jugada(pregunta, jugador);
@@ -390,10 +387,10 @@ public class JugadaTest {
         jugada.deseleccionarOpcion(opcion1);
         jugada.seleccionarOpcion(opcion2);
 
-        ArrayList<Opcion> opcionesValidas = jugada.opcionesValidas();
+        when(pregunta.opcionesSeleccionables(jugada.opcionesSeleccionadas()))
+                .thenReturn(opcionesValidas);
 
-        assertEquals(1, opcionesValidas.size());
-        assertEquals(opcion1, opcionesValidas.get(0));
+        assertEquals(opcionesValidas, jugada.opcionesValidas());
     }
 
     // comodinesValidos

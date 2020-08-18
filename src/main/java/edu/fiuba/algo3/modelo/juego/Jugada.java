@@ -61,11 +61,7 @@ public class Jugada {
     public Comodin comodinSeleccionado() { return this.comodin; }
 
     public ArrayList<Opcion> opcionesValidas() {
-        ArrayList<Opcion> todasOpciones = this.opciones();
-        for (Opcion opcion: this.opcionesSeleccionadas()) {
-            todasOpciones.remove(opcion);
-        }
-        return todasOpciones;
+        return this.pregunta.opcionesSeleccionables(this.opcionesSeleccionadas());
     }
 
     public ArrayList<Comodin> comodinesValidos() {
