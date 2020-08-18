@@ -76,10 +76,11 @@ public class KahootJuego extends KahootModo {
             } else {
                 opciones.addAll(controlador.getVista().obtenerSeleccion());
             }
+            Respuesta respuesta = new Respuesta(jugada.obtenerPregunta(), jugada.obtenerJugador());
             for (Opcion opcion: opciones) {
-                System.out.println(opcion.obtenerTitulo());
+                respuesta.agregarOpcion(opcion);
             }
-            // Esto lo guardo en una respuesta o en la misma jugada
+            jugada.obtenerJugador().agregarRespuesta(respuesta);
 
             if (partida.existeTurno()){
                 this.proximaJugada(reproductor, partida);
