@@ -30,9 +30,7 @@ public abstract class BaseEscena extends Scene {
         ContenedorSonido botoneraSonido = new ContenedorSonido(reproductor);
         this.raiz.setBottom(botoneraSonido.obtenerNodo());
 
-        Image imagen = new Image("file:src/main/resources/iconos/fondo.jpg");
-        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.ROUND, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        this.raiz.setBackground(new Background(imagenDeFondo));
+        this.raiz.setStyle("-fx-background-image: url(" + "file:src/main/resources/iconos/fondo.png" + ");" + "-fx-background-size: cover");
     }
 
     public void eventoSiguiente(EventHandler<ActionEvent> evento) {

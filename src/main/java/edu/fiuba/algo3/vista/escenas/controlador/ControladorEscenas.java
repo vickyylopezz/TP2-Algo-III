@@ -46,9 +46,7 @@ public class ControladorEscenas extends BaseEscena {
         // LAYOUT BORDERPANE
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(40,40,40,40));
-        Image imagen = new Image("file:src/main/resources/iconos/fondo.jpg");
-        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.ROUND, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
-        borderPane.setBackground(new Background(imagenDeFondo));
+        borderPane.setStyle("-fx-background-image: url(" + "file:src/main/resources/iconos/fondo.png" + ");" + "-fx-background-size: cover");
 
         // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
         Label indicadorJugador = new Label("Jugador: " + jugador.nombre());
