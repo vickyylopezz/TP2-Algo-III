@@ -51,4 +51,6 @@ public abstract class Pregunta {
         for (Opcion opcion: seleccionadas) seleccionables.remove(opcion);
         return seleccionables;
     }
+
+    public abstract String obtenerTipo();
 }

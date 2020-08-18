@@ -31,4 +31,7 @@ public class MultipleChoiceParcial extends Pregunta {
         Opcion opcion = new Opcion(opcionTitulo, this.puntajeIncorrecto());
         this.opciones.add(opcion);
     }
+
+    @Override
+    public String obtenerTipo() { return "Multiple Choice Parcial"; }
 }

@@ -23,4 +23,7 @@ public class OrderedChoice extends Pregunta {
         }
         this.opciones.add(new Opcion(opcionTitulo, new PuntoNulo()));
     }
+
+    @Override
+    public String obtenerTipo() { return "Ordered Choice"; }
 }

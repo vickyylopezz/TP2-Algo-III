@@ -33,4 +33,7 @@ public class MultipleChoiceClasico extends Pregunta {
         Opcion opcion = new Opcion(titulo, this.puntajeCorrecto());
         this.opciones.add(opcion);
     }
+
+    @Override
+    public String obtenerTipo() { return "Multiple Choice Clasico"; }
 }

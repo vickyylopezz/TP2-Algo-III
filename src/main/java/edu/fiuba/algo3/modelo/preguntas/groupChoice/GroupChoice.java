@@ -65,4 +65,7 @@ public class GroupChoice extends Pregunta {
         opciones.add(opcionCorrecta);
         opciones.add(opcionIncorrecta);*/
     }
+
+    @Override
+    public String obtenerTipo() { return "Group Choice"; }
 }

@@ -27,4 +27,7 @@ public class VerdaderoFalsoClasico extends Pregunta {
     private void agregarOpcionIncorrecta(String opcionTitulo) {
         this.opciones.add(new Opcion(opcionTitulo, this.puntajeIncorrecto()));
     }
+
+    @Override
+    public String obtenerTipo() { return "Verdadero Falso Clasico"; }
 }
