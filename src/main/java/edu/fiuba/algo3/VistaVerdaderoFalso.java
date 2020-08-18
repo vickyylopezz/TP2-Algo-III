@@ -11,7 +11,7 @@ public class VistaVerdaderoFalso extends VistaPregunta{
 
         // COMPORTAMIENTO
         for (BotonOpcionClasica boton: botones){
-            boton.setOnAction(new BotonConfirmarEventHandler(controlador, this));
+            boton.setOnAction(controlador.getEvento());
         }
     }
 

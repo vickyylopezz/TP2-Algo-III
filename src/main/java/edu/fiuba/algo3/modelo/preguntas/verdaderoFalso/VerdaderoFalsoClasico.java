@@ -11,8 +11,8 @@ public class VerdaderoFalsoClasico extends Pregunta {
     public VerdaderoFalsoClasico(String titulo, String tituloCorrecta, String tiuloIncorrecta) {
         super(titulo, new SinPenalidad(new CalculadorPuntajeParcial()));
 
-        this.agregarOpcionCorrecta(tituloCorrecta);
-        this.agregarOpcionIncorrecta(tiuloIncorrecta);
+        //this.agregarOpcionCorrecta(tituloCorrecta);
+        //this.agregarOpcionIncorrecta(tiuloIncorrecta);
     }
 
     private void agregarOpcionCorrecta(String opcionTitulo) {
@@ -30,9 +30,9 @@ public class VerdaderoFalsoClasico extends Pregunta {
 
     @Override
     public void extraerOpciones(JsonObject object) {
-        boolean respuesta = object.get("respuesta").getAsBoolean();
+        String respuesta = object.get("respuesta").getAsString();
 
-        if (respuesta) {
+        if (respuesta.equals("Verdadero")) {
             agregarOpcionCorrecta("Verdadero");
             agregarOpcionIncorrecta("Falso");
         } else {

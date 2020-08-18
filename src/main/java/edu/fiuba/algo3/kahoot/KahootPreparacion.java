@@ -17,6 +17,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class KahootPreparacion extends KahootModo {
 
@@ -71,5 +72,6 @@ public class KahootPreparacion extends KahootModo {
         }
 
         this.preguntas.addAll(lector.obtenerPreguntas());
+        Collections.shuffle(this.preguntas);
     }
 }

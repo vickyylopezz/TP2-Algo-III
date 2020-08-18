@@ -36,9 +36,9 @@ public class BotonConfirmarEventHandler implements EventHandler<ActionEvent>{
         // TO-DO: a esta altura ya habría que mandarle las opciones a la jugada, respuesta o quien sea
 
         // crucial, avanzo el juego y los atributos. jugada no hará algo parecido?
-        controlador.actualizarAtributos();
+        //controlador.actualizarAtributos();
 
         // la funcion del cambio de escena la resolvería otra clase, pero por el mientras...
-        new Intermission(controlador);
+        //new Intermission(controlador);
     }
 }

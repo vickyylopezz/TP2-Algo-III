@@ -4,7 +4,6 @@ import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionGroupChoice;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -38,7 +37,8 @@ public class VistaGroupChoice extends VistaPregunta {
         grid.add(controles,1,0);
         grid.add(grupo2,2,0);
 
-        grid.setGridLinesVisible(true);
+        //grid.setGridLinesVisible(true);
+        grid.setStyle("-fx-background-color: lightgray");
     }
 
     @Override
@@ -133,14 +133,14 @@ public class VistaGroupChoice extends VistaPregunta {
         ArrayList<Opcion> opcionesSeleccionadas = new ArrayList<>();
 
         for (BotonOpcionGroup boton: seleccionIzquierda) {
-            if (((OpcionGroupChoice) boton.obtenerOpcionCorrecta()).obtenerGrupo() == grupos.get(0)) {
+            if (boton.obtenerOpcionCorrecta().agrupacion() == grupos.get(0)) {
                 opcionesSeleccionadas.add(boton.obtenerOpcionCorrecta());
             } else {
                 opcionesSeleccionadas.add(boton.obtenerOpcionIncorrecta());
             }
         }
         for (BotonOpcionGroup boton: seleccionDerecha) {
-            if (((OpcionGroupChoice) boton.obtenerOpcionCorrecta()).obtenerGrupo() == grupos.get(1)) {
+            if (boton.obtenerOpcionCorrecta().agrupacion() == grupos.get(1)) {
                 opcionesSeleccionadas.add(boton.obtenerOpcionCorrecta());
             } else {
                 opcionesSeleccionadas.add(boton.obtenerOpcionIncorrecta());

@@ -3,8 +3,10 @@ package edu.fiuba.algo3;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -20,7 +22,10 @@ public abstract class VistaPregunta extends VBox {
         super(20);
         this.controlador = controlador;
 
-        Text indicadorPregunta = new Text(pregunta.obtenerTitulo());
+        Label indicadorPregunta = new Label(pregunta.obtenerTitulo());
+        indicadorPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold");
+        indicadorPregunta.setWrapText(true);
+
         this.grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         grid.setVgap(20);

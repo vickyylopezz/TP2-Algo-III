@@ -1,6 +1,10 @@
 package edu.fiuba.algo3;
 
+import edu.fiuba.algo3.kahoot.KahootJuego;
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
+import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
+import edu.fiuba.algo3.modelo.juego.Partida;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
@@ -9,14 +13,19 @@ import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
+import edu.fiuba.algo3.vista.escenas.BaseEscena;
+import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaEscena;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -25,66 +34,55 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.ListIterator;
 
-public class ControladorEscenas {
-    private ArrayList<Jugador> jugadores;
-    private Jugador jugadorActual;
-    private Pregunta preguntaActual;
-    private ListIterator<Pregunta> iterador;
-    private ArrayList<Opcion> opciones;
+public class ControladorEscenas extends BaseEscena {
     private Stage stage;
+    private VistaPregunta vista;
+    private EventHandler<ActionEvent> evento;
 
-    public ControladorEscenas(Stage stage, Scene escenaResultados, Scene ultimaEscena) {
+    public ControladorEscenas(Stage stage, MediaPlayer reproductor, Jugada jugada) {
+        super(reproductor);
         this.stage = stage;
-        //
-        //
     }
 
-    public void cargarDatos (ArrayList<Jugador> jugadores, ArrayList<Pregunta> preguntas) {
-        this.jugadores = jugadores;
-        this.jugadorActual = jugadores.get(0);
 
-        Collections.shuffle(preguntas);
-        this.iterador = preguntas.listIterator();
-        this.preguntaActual = iterador.next();
-        this.opciones = obtenerOpciones(preguntaActual);
-    }
-
-    public void crearUnaEscena () {
-        //this.preguntaActual = iterador.next();
-        //cosas comunes a un escenario de preguntas
-        //jugador: nombre y puntaje
-        //comodines: botones
-        //pregunta: indicador
+    public void crearUnaEscena (Jugada jugada) throws PuntoError {
+        Pregunta pregunta = jugada.obtenerPregunta();
+        Jugador jugador = jugada.obtenerJugador();
 
         // LAYOUT BORDERPANE
         BorderPane borderPane = new BorderPane();
-        borderPane.setPadding(new Insets(20,20,20,20));
+        borderPane.setPadding(new Insets(40,40,40,40));
+        Image imagen = new Image("file:src/main/resources/iconos/fondo.jpg");
+        BackgroundImage imagenDeFondo = new BackgroundImage(imagen, BackgroundRepeat.ROUND, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT, BackgroundSize.DEFAULT);
+        borderPane.setBackground(new Background(imagenDeFondo));
 
         // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
-        Text indicadorJugador = new Text("Jugador: " + jugadorActual.nombre());
-        indicadorJugador.setFont(new Font(15));
-        Text indicadorPuntaje = new Text("Puntos: " + jugadorActual.puntajeTotal().obtenerValor());
-        indicadorPuntaje.setFont(new Font(15));
+        Label indicadorJugador = new Label("Jugador: " + jugador.nombre());
+        indicadorJugador.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold;");
+        Label indicadorPuntaje = new Label("Puntos: " + jugador.puntajeTotal().obtenerPunto().obtenerValor());
+        indicadorPuntaje.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold;");
         VBox datosJugador = new VBox(20, indicadorJugador, indicadorPuntaje);
         datosJugador.setAlignment(Pos.TOP_LEFT);
 
         // BOTON CONFIRMAR (abajo en el borderPane)
         Button confirmar = new Button("Confirmar");
 
+        // COMODINES (arriba-derecha del borderPane)
+        // ...
+        
         // PREGUNTA + OPCIONES (centro del borderPane)
-        VistaPregunta vista;
-        if (preguntaActual.getClass() == VerdaderoFalsoClasico.class || preguntaActual.getClass() == VerdaderoFalsoConPenalidad.class) {
-            vista = new VistaVerdaderoFalso(this.preguntaActual, this.opciones, this);
-            confirmar = null;
+        if (pregunta.getClass() == VerdaderoFalsoClasico.class || pregunta.getClass() == VerdaderoFalsoConPenalidad.class) {
+            vista = new VistaVerdaderoFalso(pregunta, pregunta.obtenerOpciones(), this);
+            confirmar= null;
 
-        } else if (preguntaActual.getClass() == OrderedChoice.class) {
-            vista = new VistaOrderedChoice(this.preguntaActual, this.opciones, this);
+        } else if (pregunta.getClass() == OrderedChoice.class) {
+            vista = new VistaOrderedChoice(pregunta, pregunta.obtenerOpciones(), this);
 
-        } else if (preguntaActual.getClass() == GroupChoice.class) {
-            vista = new VistaGroupChoice(this.preguntaActual, this.opciones, this);
+        } else if (pregunta.getClass() == GroupChoice.class) {
+            vista = new VistaGroupChoice(pregunta, pregunta.obtenerOpciones(), this);
 
         } else {
-            vista = new VistaMultipleChoice(this.preguntaActual, this.opciones, this);
+            vista = new VistaMultipleChoice(pregunta, pregunta.obtenerOpciones(), this);
         }
 
         borderPane.setTop(datosJugador);
@@ -92,10 +90,10 @@ public class ControladorEscenas {
         if (confirmar != null) {
             borderPane.setBottom(confirmar);
             BorderPane.setAlignment(confirmar, Pos.BOTTOM_CENTER);
-            confirmar.setOnAction(new BotonConfirmarEventHandler(this, vista));
+            confirmar.setOnAction(evento);
         }
 
-        stage.setScene(new Scene(borderPane, 1080,720));
+        stage.setScene(new Scene(borderPane, 1280,720));
     }
 
     public ArrayList<Opcion> obtenerOpciones(Pregunta pregunta) {
@@ -107,15 +105,21 @@ public class ControladorEscenas {
     }
 
     public Stage getStage() { return this.stage; }
-    public ListIterator<Pregunta> getIterador() { return this.iterador; }
+    public VistaPregunta getVista() { return this.vista; }
 
-    public void actualizarAtributos(){
-        if (jugadorActual.equals(jugadores.get(1))) {
-            jugadorActual = jugadores.get(0);
-            preguntaActual = iterador.next();
-            opciones = obtenerOpciones(preguntaActual);
-        } else {
-            jugadorActual = jugadores.get(1);
-        }
+    public void eventoSiguiente(EventHandler<ActionEvent> evento) {
+        this.evento = evento;
     }
+    public EventHandler<ActionEvent> getEvento() { return this.evento; }
+
+    public void procesarJugada(Object source) {
+        ArrayList<Opcion> opciones = new ArrayList<>();
+        if (source instanceof BotonOpcionClasica){
+            opciones.add(((BotonOpcionClasica) source).obtenerOpcion());
+        } else {
+            opciones.addAll(vista.obtenerSeleccion());
+        }
+        System.out.println(opciones);
+    }
+
 }
