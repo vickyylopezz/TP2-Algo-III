@@ -65,27 +65,4 @@ public class GroupChoice extends Pregunta {
         opciones.add(opcionCorrecta);
         opciones.add(opcionIncorrecta);*/
     }
-
-    @Override
-    public void extraerOpciones(JsonObject object) throws PreguntaError {
-        JsonArray nombresGrupos = object.getAsJsonArray("grupos");
-        if (nombresGrupos == null) { return; /* EXCEPCION */ }
-        JsonArray grupo1 = object.getAsJsonArray("grupo1");
-        if (grupo1 == null) { return; /* EXCEPCION */ }
-        JsonArray grupo2 = object.getAsJsonArray("grupo2");
-        if (grupo2 == null) { return; /* EXCEPCION */ }
-
-        definirGrupo(nombresGrupos.get(0).getAsString());
-        definirGrupo(nombresGrupos.get(1).getAsString());
-        ArrayList<Grupo> grupos = obtenerGrupos();
-
-        for (JsonElement opcion: grupo1){
-            agregarOpcion(grupos.get(0), opcion.getAsString());
-        }
-        for (JsonElement opcion: grupo2){
-            agregarOpcion(grupos.get(1), opcion.getAsString());
-        }
-
-        System.out.println(grupos.get(0).obtenerOpciones());
-    }
 }

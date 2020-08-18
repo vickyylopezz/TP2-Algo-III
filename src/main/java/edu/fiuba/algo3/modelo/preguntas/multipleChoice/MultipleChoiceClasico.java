@@ -33,19 +33,4 @@ public class MultipleChoiceClasico extends Pregunta {
         Opcion opcion = new Opcion(titulo, this.puntajeCorrecto());
         this.opciones.add(opcion);
     }
-
-    @Override
-    public void extraerOpciones(JsonObject object) throws PreguntaError {
-        JsonArray opcionesCorrectas = object.getAsJsonArray("opcionesCorrectas");
-        if (opcionesCorrectas == null) { return; /* EXCEPCION */ }
-        JsonArray opcionesIncorrectas = object.getAsJsonArray("opcionesIncorrectas");
-        if (opcionesIncorrectas == null) { return; /* LANZAR EXCEPCION */ }
-
-        for (JsonElement opcion: opcionesCorrectas){
-            agregarOpcionCorrecta(opcion.getAsString());
-        }
-        for (JsonElement opcion: opcionesIncorrectas){
-            agregarOpcionIncorrecta(opcion.getAsString());
-        }
-    }
 }

@@ -27,18 +27,4 @@ public class VerdaderoFalsoClasico extends Pregunta {
     private void agregarOpcionIncorrecta(String opcionTitulo) {
         this.opciones.add(new Opcion(opcionTitulo, this.puntajeIncorrecto()));
     }
-
-    @Override
-    public void extraerOpciones(JsonObject object) {
-        boolean respuesta = object.get("respuesta").getAsBoolean();
-
-        if (respuesta) {
-            agregarOpcionCorrecta("Verdadero");
-            agregarOpcionIncorrecta("Falso");
-        } else {
-            agregarOpcionCorrecta("Falso");
-            agregarOpcionIncorrecta("Verdadero");
-        }
-    }
-
 }

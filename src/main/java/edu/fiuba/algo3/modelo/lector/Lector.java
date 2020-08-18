@@ -1,9 +1,6 @@
 package edu.fiuba.algo3.modelo.lector;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
@@ -13,7 +10,6 @@ import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
 import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceConPenalidad;
 import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceParcial;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
@@ -22,92 +18,157 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Lector {
-    private ArrayList<Pregunta> preguntas = new ArrayList<>();
+
+    private final ArrayList<Pregunta> preguntas;
+
+    public Lector() { this.preguntas = new ArrayList<>(); }
+
+    public ArrayList<Pregunta> obtenerPreguntas(){
+        return new ArrayList<>(this.preguntas);
+    }
 
     public void extraerPreguntas(File archivo) throws IOException, PreguntaError {
-        //File file = new File(getClass().getClassLoader().getResource("Preguntas2.json").getFile());
-
         JsonReader reader = new JsonReader(new FileReader(archivo));
         JsonElement parser = JsonParser.parseReader(reader);
+        this.parsearPreguntas(parser);
+    }
 
-        JsonArray array = parser.getAsJsonArray();
+    public void extraerPreguntas(String cadenaJson) throws PreguntaError {
+        JsonElement parser = JsonParser.parseString(cadenaJson);
+        this.parsearPreguntas(parser);
+    }
+
+    private void parsearPreguntas(JsonElement arrayJson) throws PreguntaError {
+        JsonArray array = arrayJson.getAsJsonArray();
         for (JsonElement element: array) {
             JsonObject object = element.getAsJsonObject();
-            preguntas.add(crearPregunta(object));
+            this.preguntas.add(crearPregunta(object));
         }
-
-        //mostrarContenido(); // DEBUG
     }
 
     private Pregunta crearPregunta(JsonObject object) throws PreguntaError {
-        String titulo = object.get("pregunta").getAsString();
-        Pregunta pregunta;
-
         switch(object.get("tipo").getAsString()) {
-            case "VFClasico":
-                pregunta = new VerdaderoFalsoClasico(titulo, "", "");
-                break;
-
-            case "VFPenalidad":
-                pregunta = new VerdaderoFalsoConPenalidad(titulo, "", "");
-                break;
-
-            case "MCClasico":
-                pregunta = new MultipleChoiceClasico(titulo);
-                break;
-
-            case "MCParcial":
-                pregunta = new MultipleChoiceParcial(titulo);
-                break;
-
-            case "MCPenalidad":
-                pregunta = new MultipleChoiceConPenalidad(titulo);
-                break;
-
-            case "Ordered":
-                pregunta = new OrderedChoice(titulo);
-                break;
-
-            case "Group":
-                pregunta = new GroupChoice(titulo);
-                break;
-
-            default:
-                //System.out.println("No se reconoce el tipo de pregunta");
-                //alguna excepcion
-                return null;
-
+            case "VFClasico": return this.crearVerdaderoFalsoClasico(object);
+            case "VFPenalidad": return this.crearVerdaderoFalsoPenalidad(object);
+            case "MCClasico": return this.crearMultipleChoiceClasico(object);
+            case "MCParcial": return this.crearMultipleChoiceParcial(object);
+            case "MCPenalidad": return this.crearMultipleChoicePenalidad(object);
+            case "Ordered": return this.crearOrderedChoice(object);
+            case "Group": return this.crearGroupChoice(object);
         }
-        pregunta.extraerOpciones(object);
+        throw new JsonSyntaxException("Tipo de pregunta invalido");
+    }
+
+    private VerdaderoFalsoClasico crearVerdaderoFalsoClasico(JsonObject object) {
+        String tituloPregunta = object.get("pregunta").toString();
+        boolean respuesta = object.get("respuesta").getAsBoolean();
+
+        String opcionCorrecta = "Verdadero";
+        String opcionIncorrecta = "Falso";
+        if (!respuesta) {
+            opcionCorrecta = "Falso";
+            opcionIncorrecta = "Verdadero";
+        }
+
+        return new VerdaderoFalsoClasico(tituloPregunta, opcionCorrecta, opcionIncorrecta);
+    }
+
+    private VerdaderoFalsoConPenalidad crearVerdaderoFalsoPenalidad(JsonObject object) {
+        String tituloPregunta = object.get("pregunta").toString();
+        boolean respuesta = object.get("respuesta").getAsBoolean();
+
+        String opcionCorrecta = "Verdadero";
+        String opcionIncorrecta = "Falso";
+        if (!respuesta) {
+            opcionCorrecta = "Falso";
+            opcionIncorrecta = "Verdadero";
+        }
+
+        return new VerdaderoFalsoConPenalidad(tituloPregunta, opcionCorrecta, opcionIncorrecta);
+    }
+
+    private MultipleChoiceClasico crearMultipleChoiceClasico(JsonObject object) throws PreguntaError {
+        String nombrePregunta = object.get("pregunta").toString();
+        MultipleChoiceClasico pregunta = new MultipleChoiceClasico(nombrePregunta);
+
+        JsonArray opcionesCorrectas = object.getAsJsonArray("opcionesCorrectas");
+        JsonArray opcionesIncorrectas = object.getAsJsonArray("opcionesIncorrectas");
+
+        for (JsonElement opcion: opcionesCorrectas){
+            pregunta.agregarOpcionCorrecta(opcion.getAsString());
+        }
+        for (JsonElement opcion: opcionesIncorrectas){
+            pregunta.agregarOpcionIncorrecta(opcion.getAsString());
+        }
+
         return pregunta;
     }
 
-    // DEBUG
-    private void mostrarContenido(){
-        // permite navegar por las preguntas guardadas
-        // esto permite tener una lista de preguntas para usar durante el juego
-        for (Pregunta pregunta: preguntas) {
-            System.out.println("Q: "+pregunta.obtenerTitulo());
+    private MultipleChoiceParcial crearMultipleChoiceParcial(JsonObject object) throws PreguntaError {
+        String nombrePregunta = object.get("pregunta").toString();
+        MultipleChoiceParcial pregunta = new MultipleChoiceParcial(nombrePregunta);
 
-            ArrayList<Opcion> opciones = new ArrayList<>();
+        JsonArray opcionesCorrectas = object.getAsJsonArray("opcionesCorrectas");
+        JsonArray opcionesIncorrectas = object.getAsJsonArray("opcionesIncorrectas");
 
-            if (pregunta.getClass() == GroupChoice.class) {
-                ArrayList<Grupo> grupos= ((GroupChoice) pregunta).obtenerGrupos();
-                for (Grupo grupo: grupos) {
-                    opciones.addAll(grupo.obtenerOpciones());
-                }
-            } else {
-                opciones = pregunta.obtenerOpciones();
-            }
-
-            for (Opcion opcion: opciones){
-                System.out.println(opcion.obtenerTitulo());
-            }
+        for (JsonElement opcion: opcionesCorrectas){
+            pregunta.agregarOpcionCorrecta(opcion.getAsString());
         }
+        for (JsonElement opcion: opcionesIncorrectas){
+            pregunta.agregarOpcionIncorrecta(opcion.getAsString());
+        }
+
+        return pregunta;
     }
 
-    public ArrayList<Pregunta> obtenerPreguntas(){
-        return this.preguntas;
+    private MultipleChoiceConPenalidad crearMultipleChoicePenalidad(JsonObject object) throws PreguntaError {
+        String nombrePregunta = object.get("pregunta").toString();
+        MultipleChoiceConPenalidad pregunta = new MultipleChoiceConPenalidad(nombrePregunta);
+
+        JsonArray opcionesCorrectas = object.getAsJsonArray("opcionesCorrectas");
+        JsonArray opcionesIncorrectas = object.getAsJsonArray("opcionesIncorrectas");
+
+        for (JsonElement opcion: opcionesCorrectas){
+            pregunta.agregarOpcionCorrecta(opcion.getAsString());
+        }
+        for (JsonElement opcion: opcionesIncorrectas){
+            pregunta.agregarOpcionIncorrecta(opcion.getAsString());
+        }
+
+        return pregunta;
     }
 
+    private OrderedChoice crearOrderedChoice(JsonObject object) throws PreguntaError {
+        String nombrePregunta = object.get("pregunta").toString();
+        OrderedChoice pregunta = new OrderedChoice(nombrePregunta);
+
+        JsonArray orden = object.getAsJsonArray("orden");
+        for (JsonElement opcion: orden){
+            pregunta.agregarOpcion(opcion.getAsString());
+        }
+
+        return pregunta;
+    }
+
+    private GroupChoice crearGroupChoice(JsonObject object) throws PreguntaError {
+        String nombrePregunta = object.get("pregunta").toString();
+        GroupChoice pregunta = new GroupChoice(nombrePregunta);
+
+        JsonArray nombresGrupos = object.getAsJsonArray("grupos");
+        JsonArray grupo1 = object.getAsJsonArray("grupo1");
+        JsonArray grupo2 = object.getAsJsonArray("grupo2");
+
+        pregunta.definirGrupo(nombresGrupos.get(0).getAsString());
+        pregunta.definirGrupo(nombresGrupos.get(1).getAsString());
+        ArrayList<Grupo> grupos = pregunta.obtenerGrupos();
+
+        for (JsonElement opcion: grupo1){
+            pregunta.agregarOpcion(grupos.get(0), opcion.getAsString());
+        }
+        for (JsonElement opcion: grupo2){
+            pregunta.agregarOpcion(grupos.get(1), opcion.getAsString());
+        }
+
+        return pregunta;
+    }
 }

@@ -31,19 +31,4 @@ public class MultipleChoiceConPenalidad extends Pregunta {
         Opcion opcion = new Opcion(opcionTitulo, this.puntajeIncorrecto());
         this.opciones.add(opcion);
     }
-
-    @Override
-    public void extraerOpciones(JsonObject object) throws PreguntaError {
-        JsonArray opcionesCorrectas = object.getAsJsonArray("opcionesCorrectas");
-        if (opcionesCorrectas == null) { return; /* EXCEPCION */ }
-        JsonArray opcionesIncorrectas = object.getAsJsonArray("opcionesIncorrectas");
-        if (opcionesIncorrectas == null) { return; /* EXCEPCION */ }
-
-        for (JsonElement opcion: opcionesCorrectas){
-            agregarOpcionCorrecta(opcion.getAsString());
-        }
-        for (JsonElement opcion: opcionesIncorrectas){
-            agregarOpcionIncorrecta(opcion.getAsString());
-        }
-    }
 }

@@ -23,13 +23,4 @@ public class OrderedChoice extends Pregunta {
         }
         this.opciones.add(new Opcion(opcionTitulo, new PuntoNulo()));
     }
-
-    @Override
-    public void extraerOpciones(JsonObject object) throws PreguntaError {
-        JsonArray orden = object.getAsJsonArray("orden");
-        if (orden == null) { return; /* EXCEPCION */ }
-        for (JsonElement opcion: orden){
-            agregarOpcion(opcion.getAsString());
-        }
-    }
 }

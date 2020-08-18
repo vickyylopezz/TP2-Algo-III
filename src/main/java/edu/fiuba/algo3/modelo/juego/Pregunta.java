@@ -51,5 +51,4 @@ public abstract class Pregunta {
         for (Opcion opcion: seleccionadas) seleccionables.remove(opcion);
         return seleccionables;
     }
-    public void extraerOpciones(JsonObject object) throws PreguntaError {}
 }
