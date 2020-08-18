@@ -61,7 +61,7 @@ public class KahootJuego extends KahootModo {
         //ademas de guardar las respuestas de los jugadores y aplicar comodin
         //se puede hacer una clase que tenga el condicional y reciba la partida
 
-        System.out.println(jugada.obtenerPregunta().obtenerTitulo() + jugada.obtenerJugador().nombre());
+        System.out.println("Pregunta: " + jugada.obtenerPregunta().obtenerTitulo() + " Jugador:" +jugada.obtenerJugador().nombre());
 
         previaPregunta.eventoSiguiente((event) -> {
             try {
@@ -86,10 +86,8 @@ public class KahootJuego extends KahootModo {
             // Esto lo guardo en una respuesta o en la misma jugada
 
             if (partida.existeTurno()){
-                System.out.println("EXISTE TURNO, siguiente jugador");
                 this.proximaJugada(reproductor, partida);
             } else {
-                System.out.println("NO EXISTE TURNO, yendo a la proxima escena");
                 PuntajeParcialEscena puntajeParcial = null;
                 try {
                     puntajeParcial = new PuntajeParcialEscena(this.stage, reproductor, this.jugadores);
@@ -102,7 +100,6 @@ public class KahootJuego extends KahootModo {
                     puntajeParcial.eventoSiguiente(this.eventoSalida, "Continuar");
                 }
                 new CambioEscenaEventHandler(this.stage, puntajeParcial).handle(null);
-                System.out.println("NUEVA JUGADA");
             }
         });
         new CambioEscenaEventHandler(this.stage, previaPregunta).handle(null);
