@@ -62,6 +62,7 @@ public class ParserGroupChoiceTest {
         ParserGroupChoice parser = new ParserGroupChoice();
 
         String groupChoiceJson = "{\n" +
+                "  \"tipo\":\"Group\",\n" +
                 "  \"pregunta\":\"Agrupar en numero y letas\",\n" +
                 "  \"grupo1\":[\"1\", \"3\"],\n" +
                 "  \"grupo2\":[\"a\",\"k\"]\n" +
@@ -76,7 +77,7 @@ public class ParserGroupChoiceTest {
         ParserGroupChoice parser = new ParserGroupChoice();
 
         String groupChoiceJson = "{\n" +
-                "  \"tipo\":\"lskdnf\",\n" +
+                "  \"tipo\":\"Group\",\n" +
                 "  \"pregunta\":\"Agrupar en numero y letas\",\n" +
                 "  \"grupos\":true,\n" +
                 "  \"grupo1\":[\"1\", \"3\"],\n" +
@@ -92,7 +93,7 @@ public class ParserGroupChoiceTest {
         ParserGroupChoice parser = new ParserGroupChoice();
 
         String groupChoiceJson = "{\n" +
-                "  \"tipo\":\"lskdnf\",\n" +
+                "  \"tipo\":\"Group\",\n" +
                 "  \"pregunta\":\"Agrupar en numero y letas\",\n" +
                 "  \"grupos\":[\"Numeros\", \"Letras\", \"Colores\"],\n" +
                 "  \"grupo1\":[\"1\", \"3\"],\n" +
@@ -108,7 +109,7 @@ public class ParserGroupChoiceTest {
         ParserGroupChoice parser = new ParserGroupChoice();
 
         String groupChoiceJson = "{\n" +
-                "  \"tipo\":\"lskdnf\",\n" +
+                "  \"tipo\":\"Group\",\n" +
                 "  \"pregunta\":\"Agrupar en numero y letas\",\n" +
                 "  \"grupos\":[\"Numeros\"],\n" +
                 "  \"grupo1\":[\"1\", \"3\"],\n" +
