@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.modelo.preguntas.verdaderoFalso;
 
-import com.google.gson.JsonObject;
-import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
-import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcial;
 import edu.fiuba.algo3.modelo.preguntas.estados.ConPenalidad;
@@ -17,7 +14,7 @@ public class VerdaderoFalsoConPenalidad extends Pregunta {
         this.agregarOpcionIncorrecta(tiuloIncorrecta);
     }
 
-    public void agregarOpcionCorrecta(String opcionTitulo) {
+    private void agregarOpcionCorrecta(String opcionTitulo) {
         this.opciones.add(new Opcion(opcionTitulo, this.puntajeCorrecto()));
     }
 

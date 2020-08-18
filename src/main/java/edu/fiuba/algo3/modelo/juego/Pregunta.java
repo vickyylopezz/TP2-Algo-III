@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo.juego;
 
-import com.google.gson.JsonObject;
-import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.estados.EstadoPregunta;

@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.modelo.preguntas.groupChoice;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeGruposError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
