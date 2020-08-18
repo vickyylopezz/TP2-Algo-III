@@ -282,4 +282,25 @@ public class LectorTest {
         assertFalse(pregunta1.conPenalidad());
         assertTrue(pregunta2.conPenalidad());
     }
+
+    @Test
+    public void extraerPreguntasConUnElementoDelArregloInvalidoLanzaFormatoError() {
+        Lector lector = new Lector();
+
+        String cadenaJson = "[" +
+                "{" +
+                "\"tipo\":\"VFClasico\"," +
+                "\"pregunta\":\"¿Es True/False?\"," +
+                "\"respuesta\":\"False\"" +
+                "}," +
+                "5," +
+                "{" +
+                "\"tipo\":\"VFPenalidad\"," +
+                "\"pregunta\":\"¿Es True o False?\"," +
+                "\"respuesta\":\"False\"" +
+                "}" +
+                "]";
+
+        assertThrows(LectorFormatoDePreguntaError.class, () -> lector.extraerPreguntas(cadenaJson));
+    }
 }

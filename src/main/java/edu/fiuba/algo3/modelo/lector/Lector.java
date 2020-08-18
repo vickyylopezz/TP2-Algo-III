@@ -23,8 +23,9 @@ public class Lector {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
 
         for (JsonElement preguntaElement: preguntasArray) {
-            JsonObject preguntaObjeto = preguntaElement.getAsJsonObject();
-            if (preguntaObjeto == null) {
+            JsonObject preguntaObjeto;
+            try { preguntaObjeto = preguntaElement.getAsJsonObject(); }
+            catch (Exception e) {
                 throw new LectorFormatoDePreguntaError("Pregunta con formato invalido");
             }
 
