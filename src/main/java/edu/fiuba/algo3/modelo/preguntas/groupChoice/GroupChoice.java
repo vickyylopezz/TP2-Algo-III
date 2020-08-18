@@ -68,4 +68,27 @@ public class GroupChoice extends Pregunta {
 
     @Override
     public String obtenerTipo() { return "Group Choice"; }
+
+    @Override
+    public ArrayList<Opcion> opcionesSeleccionables(ArrayList<Opcion> seleccionadas) {
+        ArrayList<Opcion> seleccionables = this.obtenerOpciones();
+        for (Opcion opcion: seleccionadas) {
+            seleccionables.remove(opcion);
+            seleccionables.remove(this.buscarOpcionGrupoOpuesto(opcion));
+        }
+        return seleccionables;
+    }
+
+    private Opcion buscarOpcionGrupoOpuesto(Opcion opcion) {
+        Grupo grupoOpuesto = this.grupos.get(0);
+        if (opcion.agrupacion() == grupoOpuesto) grupoOpuesto = this.grupos.get(1);
+
+        for (Opcion opcionBuscada: grupoOpuesto.obtenerOpciones()) {
+            if (opcionBuscada.obtenerTitulo().equals(opcion.obtenerTitulo())) {
+                return opcionBuscada;
+            }
+        }
+
+        return null;
+    }
 }
