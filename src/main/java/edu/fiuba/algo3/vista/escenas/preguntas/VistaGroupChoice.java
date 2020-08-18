@@ -1,9 +1,11 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.vista.escenas.preguntas;
 
+import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionGroup;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
+import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;

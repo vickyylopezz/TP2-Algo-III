@@ -1,7 +1,9 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.vista.escenas.preguntas;
 
+import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
+import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
 
 import java.util.ArrayList;
 

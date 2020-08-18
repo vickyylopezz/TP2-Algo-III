@@ -1,21 +1,17 @@
 package edu.fiuba.algo3.kahoot;
 
-import edu.fiuba.algo3.BotonOpcionClasica;
-import edu.fiuba.algo3.ControladorEscenas;
+import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
+import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
 import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaEscena;
 import edu.fiuba.algo3.vista.escenas.juego.PuntajeParcialEscena;
-import javafx.scene.control.Button;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class KahootJuego extends KahootModo {
     private Juego juego;

@@ -1,4 +1,4 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.vista.componentes.botones;
 
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import javafx.geometry.Pos;
