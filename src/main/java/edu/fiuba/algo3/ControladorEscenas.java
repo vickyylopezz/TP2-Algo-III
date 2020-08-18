@@ -99,14 +99,10 @@ public class ControladorEscenas {
     }
 
     public ArrayList<Opcion> obtenerOpciones(Pregunta pregunta) {
-        ArrayList<Opcion> opciones = new ArrayList<>();
-        if (pregunta.getClass() == GroupChoice.class) {
-            ArrayList<Grupo> grupos= ((GroupChoice) pregunta).obtenerGrupos();
-            opciones.addAll(grupos.get(0).obtenerOpciones());
-        } else {
-            opciones = pregunta.obtenerOpciones();
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+        if (pregunta.getClass() != GroupChoice.class) {
+            Collections.shuffle(opciones);
         }
-        Collections.shuffle(opciones);
         return opciones;
     }
 

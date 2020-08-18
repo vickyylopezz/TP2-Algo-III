@@ -12,24 +12,18 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class VistaGroupChoice extends VistaPregunta {
-    private BotonOpcion botonActivo;
+    private BotonOpcionGroup botonActivo;
     private Button izquierda, derecha;
     private ArrayList<Grupo> grupos;
 
+    private ArrayList<BotonOpcionGroup> seleccionIzquierda = new ArrayList<>();
+    private ArrayList<BotonOpcionGroup> seleccionDerecha = new ArrayList<>();
+
     public VistaGroupChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorEscenas controlador){
         super(preguntaActual, opciones, controlador);
-
-        // COMPORTAMIENTO
-        for (BotonOpcion boton: botones){
-            boton.setPrefSize(300,50);
-            boton.setOnAction(e -> {
-                this.izquierda.setDisable(false);
-                this.derecha.setDisable(false);
-                opcionActivada(e.getSource());
-            });
-        }
 
         this.grupos = ((GroupChoice)preguntaActual).obtenerGrupos();
         Label grupo1 = new Label(grupos.get(0).obtenerTitulo());
@@ -49,7 +43,7 @@ public class VistaGroupChoice extends VistaPregunta {
 
     @Override
     public void rellenarGrilla(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcion> botones = obtenerBotones(opciones);
+        ArrayList<BotonOpcionGroup> botones = obtenerBotonesGroup(opciones);
 
         ColumnConstraints col1 = new ColumnConstraints(300);
         ColumnConstraints col2 = new ColumnConstraints(300);
@@ -62,27 +56,32 @@ public class VistaGroupChoice extends VistaPregunta {
             i++;
         }
 
-
-
-
     }
 
-    /*public ArrayList<BotonOpcion> obtenerBotones(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcion> botones = new ArrayList<>();
-        for (Opcion opcion : opciones) {
-            BotonOpcion boton = new BotonOpcion(opcion, 300, 50);
+    private ArrayList<BotonOpcionGroup> obtenerBotonesGroup(ArrayList<Opcion> opciones){
+        ArrayList<BotonOpcionGroup> botones = new ArrayList<>();
 
+        for (int i=0; i < opciones.size(); i = i+2) {
+            BotonOpcionGroup boton = new BotonOpcionGroup(opciones.get(i), opciones.get(i+1),300, 50);
+            boton.setOnAction(e -> {
+                this.izquierda.setDisable(false);
+                this.derecha.setDisable(false);
+                opcionActivada(e.getSource());
+            });
             botones.add(boton);
         }
+        Collections.shuffle(botones);
         return botones;
-    }*/
+    }
+
 
     private void opcionActivada(Object source) {
-        BotonOpcion boton  = (BotonOpcion)source;
+        BotonOpcionGroup boton  = (BotonOpcionGroup)source;
         if (GridPane.getColumnIndex(boton) != 1){
             grid.getChildren().remove(boton);
             grid.add(boton, 1, GridPane.getRowIndex(boton));
-            seleccion.remove(boton);
+            seleccionIzquierda.remove(boton);
+            seleccionDerecha.remove(boton);
             //System.out.println(botonesSeleccionados);
         }
         botonActivo = boton;
@@ -97,38 +96,23 @@ public class VistaGroupChoice extends VistaPregunta {
             boton.setPrefSize(100,50);
             boton.setDisable(true);
             controles.getChildren().add(boton);
-
-            int columnaDestino = i;
-            boton.setOnAction(e -> {
-                izquierda.setDisable(true);
-                derecha.setDisable(true);
-
-                int firstRow = GridPane.getRowIndex(botonActivo);
-                grid.getChildren().remove(botonActivo);
-                grid.add(botonActivo, columnaDestino*2, firstRow);
-                grid.requestFocus();
-
-                seleccion.add(botonActivo);
-            });
         }
         izquierda = (Button)controles.getChildren().get(0);
         izquierda.setText("<");
-
-        derecha = (Button)controles.getChildren().get(1);
-        derecha.setText(">");
-
-        /*izquierda.setOnAction(e -> {
+        izquierda.setOnAction(e -> {
             izquierda.setDisable(true);
             derecha.setDisable(true);
 
-            int firstRow = GridPane.getRowIndex(botonActivo);
+            int filaBoton = GridPane.getRowIndex(botonActivo);
             grid.getChildren().remove(botonActivo);
-            grid.add(botonActivo, 0, firstRow);
+            grid.add(botonActivo, 0, filaBoton);
             grid.requestFocus();
 
-            seleccion.add(botonActivo);
-            //System.out.println(botonesSeleccionados);
+            seleccionIzquierda.add(botonActivo);
         });
+
+        derecha = (Button)controles.getChildren().get(1);
+        derecha.setText(">");
         derecha.setOnAction(e -> {
             izquierda.setDisable(true);
             derecha.setDisable(true);
@@ -138,17 +122,29 @@ public class VistaGroupChoice extends VistaPregunta {
             grid.add(botonActivo, 2, firstRow);
             grid.requestFocus();
 
-            seleccion.add(botonActivo);
-            //System.out.println(botonesSeleccionados);
-        });*/
+            seleccionDerecha.add(botonActivo);
+        });
+
         return controles;
     }
 
     @Override
     public ArrayList<Opcion> obtenerSeleccion(){
         ArrayList<Opcion> opcionesSeleccionadas = new ArrayList<>();
-        for (BotonOpcion boton: seleccion) {
-            System.out.println(((OpcionGroupChoice)boton.obtenerOpcion()).obtenerGrupo());
+
+        for (BotonOpcionGroup boton: seleccionIzquierda) {
+            if (((OpcionGroupChoice) boton.obtenerOpcionCorrecta()).obtenerGrupo() == grupos.get(0)) {
+                opcionesSeleccionadas.add(boton.obtenerOpcionCorrecta());
+            } else {
+                opcionesSeleccionadas.add(boton.obtenerOpcionIncorrecta());
+            }
+        }
+        for (BotonOpcionGroup boton: seleccionDerecha) {
+            if (((OpcionGroupChoice) boton.obtenerOpcionCorrecta()).obtenerGrupo() == grupos.get(1)) {
+                opcionesSeleccionadas.add(boton.obtenerOpcionCorrecta());
+            } else {
+                opcionesSeleccionadas.add(boton.obtenerOpcionIncorrecta());
+            }
         }
         return opcionesSeleccionadas;
     }

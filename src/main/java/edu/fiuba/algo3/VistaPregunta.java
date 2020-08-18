@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public abstract class VistaPregunta extends VBox {
     protected ControladorEscenas controlador;
     protected GridPane grid;
-    protected ArrayList<BotonOpcion> seleccion = new ArrayList<>();
+    protected ArrayList<BotonOpcionClasica> seleccion = new ArrayList<>();
 
-    protected ArrayList<BotonOpcion> botones = new ArrayList<>();
+    protected ArrayList<BotonOpcionClasica> botones = new ArrayList<>();
 
     public VistaPregunta(Pregunta pregunta, ArrayList<Opcion> opciones, ControladorEscenas controlador) {
         super(20);
@@ -32,10 +32,10 @@ public abstract class VistaPregunta extends VBox {
 
     }
 
-    public ArrayList<BotonOpcion> obtenerBotones(ArrayList<Opcion> opciones) {
+    public ArrayList<BotonOpcionClasica> obtenerBotones(ArrayList<Opcion> opciones) {
         //ArrayList<BotonOpcion> botones = new ArrayList<>();
         for (Opcion opcion : opciones) {
-            BotonOpcion boton = new BotonOpcion(opcion, 250, 100);
+            BotonOpcionClasica boton = new BotonOpcionClasica(opcion, 250, 100);
             botones.add(boton);
         }
         return botones;
@@ -44,7 +44,7 @@ public abstract class VistaPregunta extends VBox {
     public ArrayList<Opcion> obtenerSeleccion() {
         //System.out.println(botonesSeleccionados);
         ArrayList<Opcion> opcionesSeleccionadas = new ArrayList<>();
-        for (BotonOpcion boton: seleccion){
+        for (BotonOpcionClasica boton: seleccion){
             //System.out.println(boton.obtenerOpcion().obtenerTitulo());
             opcionesSeleccionadas.add(boton.obtenerOpcion());
         }

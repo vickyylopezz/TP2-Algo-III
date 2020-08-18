@@ -10,7 +10,7 @@ public class VistaMultipleChoice extends VistaPregunta {
         super(preguntaActual, opciones, controlador);
 
         // COMPORTAMIENTO
-        for (BotonOpcion boton: botones){
+        for (BotonOpcionClasica boton: botones){
             boton.setOnAction(e -> {
                 if (seleccion.contains(boton)){
                     boton.setStyle(null);
@@ -25,7 +25,7 @@ public class VistaMultipleChoice extends VistaPregunta {
 
     @Override
     public void rellenarGrilla(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcion> botones = obtenerBotones(opciones);
+        ArrayList<BotonOpcionClasica> botones = obtenerBotones(opciones);
 
         for (int i = 0; i < botones.size(); i++){
             if ((i == (botones.size()-1)) && (i % 2 == 0)) {

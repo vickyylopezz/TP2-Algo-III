@@ -18,7 +18,7 @@ public class VistaOrderedChoice extends VistaPregunta {
 
         // COMPORTAMIENTO
         seleccion.addAll(botones);
-        for (BotonOpcion boton: botones){
+        for (BotonOpcionClasica boton: botones){
             boton.setPrefSize(500,50);
             boton.setOnAction(e -> botonPresionado(e.getSource()));
         }
@@ -26,7 +26,7 @@ public class VistaOrderedChoice extends VistaPregunta {
 
     @Override
     public void rellenarGrilla(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcion> botones = obtenerBotones(opciones);
+        ArrayList<BotonOpcionClasica> botones = obtenerBotones(opciones);
 
         int i = 0;
         for (Button boton: botones) {

@@ -3,7 +3,6 @@ package edu.fiuba.algo3;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -24,9 +23,9 @@ public class BotonConfirmarEventHandler implements EventHandler<ActionEvent>{
         // la funcion del iterador la resuelve la jugada
         // tomo los botones seleccionados de la vista
         ArrayList<Opcion> opcionesSeleccionadas = new ArrayList<>();
-        if (actionEvent.getSource() instanceof BotonOpcion){
+        if (actionEvent.getSource() instanceof BotonOpcionClasica){
             //Verdadero o Falso
-            opcionesSeleccionadas.add(((BotonOpcion) actionEvent.getSource()).obtenerOpcion());
+            opcionesSeleccionadas.add(((BotonOpcionClasica) actionEvent.getSource()).obtenerOpcion());
         } else {
             opcionesSeleccionadas = vista.obtenerSeleccion();
         }
