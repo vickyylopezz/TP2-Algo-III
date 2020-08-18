@@ -49,18 +49,6 @@ public class GroupChoice extends Pregunta {
             opciones.add(opcionCorrecta);
             opciones.add(opcionIncorrecta);
         }
-
-        // Iba a hacer cambios en group choice en el manejo de opciones
-        // Las opciones se guardan dos veces?
-        /*if (opciones.size() == 6){
-            throw new CantidadMaximaDeOpcionesError();
-        }
-        OpcionGroupChoice opcionIncorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeIncorrecto(),grupos.get(1));
-        OpcionGroupChoice opcionCorrecta = new OpcionGroupChoice(titulo,this.estado.puntajeCorrecto(),grupo);
-        grupo.agregarOpcion(opcionCorrecta);
-        grupos.get(1).agregarOpcion(opcionIncorrecta);
-        opciones.add(opcionCorrecta);
-        opciones.add(opcionIncorrecta);*/
     }
 
     @Override
