@@ -2,26 +2,39 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
+import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
+import edu.fiuba.algo3.modelo.preguntas.opcion.OpcionGroupChoice;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
 public class VistaGroupChoice extends VistaPregunta {
-    private Button botonActivo;
+    private BotonOpcion botonActivo;
     private Button izquierda, derecha;
+    private ArrayList<Grupo> grupos;
 
     public VistaGroupChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorEscenas controlador){
         super(preguntaActual, opciones, controlador);
 
-        Label grupo1 = new Label(((GroupChoice)preguntaActual).obtenerGrupos().get(0).obtenerTitulo());
+        // COMPORTAMIENTO
+        for (BotonOpcion boton: botones){
+            boton.setPrefSize(300,50);
+            boton.setOnAction(e -> {
+                this.izquierda.setDisable(false);
+                this.derecha.setDisable(false);
+                opcionActivada(e.getSource());
+            });
+        }
+
+        this.grupos = ((GroupChoice)preguntaActual).obtenerGrupos();
+        Label grupo1 = new Label(grupos.get(0).obtenerTitulo());
         GridPane.setHalignment(grupo1, HPos.CENTER);
-        Label grupo2 = new Label(((GroupChoice)preguntaActual).obtenerGrupos().get(1).obtenerTitulo());
+        Label grupo2 = new Label(grupos.get(1).obtenerTitulo());
         GridPane.setHalignment(grupo2, HPos.CENTER);
 
         HBox controles = obtenerControles();
@@ -32,16 +45,11 @@ public class VistaGroupChoice extends VistaPregunta {
         grid.add(grupo2,2,0);
 
         grid.setGridLinesVisible(true);
-        /*Text indicadorPregunta = new Text(preguntaActual.obtenerTitulo());
-        grid = obtenerGrilla(opciones);
-
-        this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(indicadorPregunta, grid);*/
     }
 
     @Override
     public void rellenarGrilla(ArrayList<Opcion> opciones) {
-        ArrayList<Button> botones = obtenerBotones(opciones);
+        ArrayList<BotonOpcion> botones = obtenerBotones(opciones);
 
         ColumnConstraints col1 = new ColumnConstraints(300);
         ColumnConstraints col2 = new ColumnConstraints(300);
@@ -55,49 +63,61 @@ public class VistaGroupChoice extends VistaPregunta {
         }
 
 
+
+
     }
 
-    public ArrayList<Button> obtenerBotones(ArrayList<Opcion> opciones) {
-        Button temp = null;
-        ArrayList<Button> botones = new ArrayList<>();
+    /*public ArrayList<BotonOpcion> obtenerBotones(ArrayList<Opcion> opciones) {
+        ArrayList<BotonOpcion> botones = new ArrayList<>();
         for (Opcion opcion : opciones) {
-            temp = new Button(opcion.obtenerTitulo());
-            temp.setPrefSize(300, 50);
-            temp.setAlignment(Pos.CENTER);
-            temp.setWrapText(true);
+            BotonOpcion boton = new BotonOpcion(opcion, 300, 50);
 
-            //temp.setOnAction(e -> opcionActivada(e.getSource()));
-            temp.setOnAction(e -> {
-                this.izquierda.setDisable(false);
-                this.derecha.setDisable(false);
-                opcionActivada(e.getSource());
-            });
-            botones.add(temp);
+            botones.add(boton);
         }
         return botones;
-    }
+    }*/
 
     private void opcionActivada(Object source) {
-        Button boton  = (Button)source;
+        BotonOpcion boton  = (BotonOpcion)source;
         if (GridPane.getColumnIndex(boton) != 1){
             grid.getChildren().remove(boton);
             grid.add(boton, 1, GridPane.getRowIndex(boton));
+            seleccion.remove(boton);
+            //System.out.println(botonesSeleccionados);
         }
         botonActivo = boton;
     }
 
     public HBox obtenerControles(){
         HBox controles = new HBox(20);
+        controles.setAlignment(Pos.CENTER);
 
-        izquierda = new Button("<");
-        izquierda.setPrefSize(100,50);
-        izquierda.setDisable(true);
+        for (int i=0; i<2; i++){
+            Button boton = new Button();
+            boton.setPrefSize(100,50);
+            boton.setDisable(true);
+            controles.getChildren().add(boton);
 
-        derecha = new Button(">");
-        derecha.setPrefSize(100,50);
-        derecha.setDisable(true);
+            int columnaDestino = i;
+            boton.setOnAction(e -> {
+                izquierda.setDisable(true);
+                derecha.setDisable(true);
 
-        izquierda.setOnAction(e -> {
+                int firstRow = GridPane.getRowIndex(botonActivo);
+                grid.getChildren().remove(botonActivo);
+                grid.add(botonActivo, columnaDestino*2, firstRow);
+                grid.requestFocus();
+
+                seleccion.add(botonActivo);
+            });
+        }
+        izquierda = (Button)controles.getChildren().get(0);
+        izquierda.setText("<");
+
+        derecha = (Button)controles.getChildren().get(1);
+        derecha.setText(">");
+
+        /*izquierda.setOnAction(e -> {
             izquierda.setDisable(true);
             derecha.setDisable(true);
 
@@ -105,6 +125,9 @@ public class VistaGroupChoice extends VistaPregunta {
             grid.getChildren().remove(botonActivo);
             grid.add(botonActivo, 0, firstRow);
             grid.requestFocus();
+
+            seleccion.add(botonActivo);
+            //System.out.println(botonesSeleccionados);
         });
         derecha.setOnAction(e -> {
             izquierda.setDisable(true);
@@ -114,10 +137,20 @@ public class VistaGroupChoice extends VistaPregunta {
             grid.getChildren().remove(botonActivo);
             grid.add(botonActivo, 2, firstRow);
             grid.requestFocus();
-        });
 
-        controles.getChildren().addAll(izquierda, derecha);
-        controles.setAlignment(Pos.CENTER);
+            seleccion.add(botonActivo);
+            //System.out.println(botonesSeleccionados);
+        });*/
         return controles;
-        }
     }
+
+    @Override
+    public ArrayList<Opcion> obtenerSeleccion(){
+        ArrayList<Opcion> opcionesSeleccionadas = new ArrayList<>();
+        for (BotonOpcion boton: seleccion) {
+            System.out.println(((OpcionGroupChoice)boton.obtenerOpcion()).obtenerGrupo());
+        }
+        return opcionesSeleccionadas;
+    }
+
+}

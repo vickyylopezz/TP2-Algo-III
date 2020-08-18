@@ -2,12 +2,12 @@ package edu.fiuba.algo3;
 
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class VistaOrderedChoice extends VistaPregunta {
     private int numeroClic = 0;
@@ -15,18 +15,18 @@ public class VistaOrderedChoice extends VistaPregunta {
 
     public VistaOrderedChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorEscenas controlador) {
         super(preguntaActual, opciones, controlador);
-        // Elementos del VBox
-        /*Text indicadorPregunta = new Text(preguntaActual.obtenerTitulo());
-        this.columna = obtenerBotones(opciones);
-        //Button confirmar = new Button("Confirmar");
 
-        this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(indicadorPregunta, columna);*/
+        // COMPORTAMIENTO
+        seleccion.addAll(botones);
+        for (BotonOpcion boton: botones){
+            boton.setPrefSize(500,50);
+            boton.setOnAction(e -> botonPresionado(e.getSource()));
+        }
     }
 
     @Override
     public void rellenarGrilla(ArrayList<Opcion> opciones) {
-        ArrayList<Button> botones = obtenerBotones(opciones);
+        ArrayList<BotonOpcion> botones = obtenerBotones(opciones);
 
         int i = 0;
         for (Button boton: botones) {
@@ -36,19 +36,16 @@ public class VistaOrderedChoice extends VistaPregunta {
         }
     }
 
-    public ArrayList<Button> obtenerBotones(ArrayList<Opcion> opciones) {
-        Button temp = null;
-        ArrayList<Button> botones = new ArrayList<>();
+    /*public ArrayList<BotonOpcion> obtenerBotones(ArrayList<Opcion> opciones) {
+        ArrayList<BotonOpcion> botones = new ArrayList<>();
         for (Opcion opcion : opciones) {
-            temp = new Button(opcion.obtenerTitulo());
-            temp.setPrefSize(500, 50);
-            temp.setAlignment(Pos.CENTER);
-            temp.setWrapText(true);
-            temp.setOnAction(e -> botonPresionado(e.getSource()));
-            botones.add(temp);
+            BotonOpcion boton = new BotonOpcion(opcion, 500, 50);
+
+            botones.add(boton);
         }
+        //seleccion.addAll(botones);
         return botones;
-    }
+    }*/
 
     private void botonPresionado(Object source) {
         //if(!(source instanceof Button)) return;
@@ -59,6 +56,7 @@ public class VistaOrderedChoice extends VistaPregunta {
         } else {
             segundo = button;
             swap();
+            //System.out.println(botonesSeleccionados);
         }
         numeroClic = (++numeroClic) % 2; // 0-1
     }
@@ -71,7 +69,10 @@ public class VistaOrderedChoice extends VistaPregunta {
             grid.getChildren().removeAll(primero, segundo);
             grid.add(primero, 1, segundaFila);
             grid.add(segundo, 1, primeraFila);
+
+            Collections.swap(seleccion, primeraFila, segundaFila);
         }
         grid.requestFocus();
     }
+
 }

@@ -56,7 +56,10 @@ public class ControladorEscenas {
         //comodines: botones
         //pregunta: indicador
 
-        // el layout general es un borderpane, y esta en esta altura
+        // LAYOUT BORDERPANE
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPadding(new Insets(20,20,20,20));
+
         // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
         Text indicadorJugador = new Text("Jugador: " + jugadorActual.nombre());
         indicadorJugador.setFont(new Font(15));
@@ -65,24 +68,11 @@ public class ControladorEscenas {
         VBox datosJugador = new VBox(20, indicadorJugador, indicadorPuntaje);
         datosJugador.setAlignment(Pos.TOP_LEFT);
 
-        // LAYOUT BORDERPANE
-        BorderPane borderPane = new BorderPane();
-        borderPane.setPadding(new Insets(20,20,20,20));
-
-        // BOTON CONFIRMAR (abajo del borderPane)
+        // BOTON CONFIRMAR (abajo en el borderPane)
         Button confirmar = new Button("Confirmar");
-        /*confirmar.setOnAction(e -> {
-            if (iterador.hasNext()) {
-                actualizarAtributos();
-                new Intermission(this);
-            } else {
-                System.exit(0);
-            }
-        });*/
-        confirmar.setOnAction(new BotonConfirmarEventHandler(this));
 
         // PREGUNTA + OPCIONES (centro del borderPane)
-        VBox vista;
+        VistaPregunta vista;
         if (preguntaActual.getClass() == VerdaderoFalsoClasico.class || preguntaActual.getClass() == VerdaderoFalsoConPenalidad.class) {
             vista = new VistaVerdaderoFalso(this.preguntaActual, this.opciones, this);
             confirmar = null;
@@ -102,6 +92,7 @@ public class ControladorEscenas {
         if (confirmar != null) {
             borderPane.setBottom(confirmar);
             BorderPane.setAlignment(confirmar, Pos.BOTTOM_CENTER);
+            confirmar.setOnAction(new BotonConfirmarEventHandler(this, vista));
         }
 
         stage.setScene(new Scene(borderPane, 1080,720));

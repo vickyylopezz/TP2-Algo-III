@@ -6,23 +6,40 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class BotonConfirmarEventHandler implements EventHandler<ActionEvent>{
     private ControladorEscenas controlador;
     private Stage stage;
+    private VistaPregunta vista;
 
-    public BotonConfirmarEventHandler(ControladorEscenas controlador) {
+    public BotonConfirmarEventHandler(ControladorEscenas controlador, VistaPregunta vista) {
         this.controlador = controlador;
         this.stage = controlador.getStage();
+        this.vista = vista;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        // OJO: en la ultima pregunta, solo esta jugando el jugador 1
-        if (controlador.getIterador().hasNext()) {
-            controlador.actualizarAtributos();
-            new Intermission(controlador);
+        // la funcion del iterador la resuelve la jugada
+        // tomo los botones seleccionados de la vista
+        ArrayList<Opcion> opcionesSeleccionadas = new ArrayList<>();
+        if (actionEvent.getSource() instanceof BotonOpcion){
+            //Verdadero o Falso
+            opcionesSeleccionadas.add(((BotonOpcion) actionEvent.getSource()).obtenerOpcion());
         } else {
-            System.exit(0);
+            opcionesSeleccionadas = vista.obtenerSeleccion();
         }
+        // DEBUG: muestro las opciones
+        for (Opcion opcion: opcionesSeleccionadas){
+            System.out.println(opcion.obtenerTitulo());
+        }
+        // TO-DO: a esta altura ya habría que mandarle las opciones a la jugada, respuesta o quien sea
+
+        // crucial, avanzo el juego y los atributos. jugada no hará algo parecido?
+        controlador.actualizarAtributos();
+
+        // la funcion del cambio de escena la resolvería otra clase, pero por el mientras...
+        new Intermission(controlador);
     }
 }
