@@ -32,21 +32,18 @@ public class PreviaPreguntaEscena extends BaseEscena {
         jLabelTipoPregunta.setAlignment(Pos.CENTER);
         jLabelTipoPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold");
 
-        Label jLabelTituloPregunta = new Label(jugada.tituloPregunta());
-        jLabelTituloPregunta.setAlignment(Pos.CENTER);
-        jLabelTituloPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 24; -fx-font-weight: bold; -fx-background-color: white; -fx-border-color: #9A31E1");
-        jLabelTituloPregunta.setPrefHeight(300);
-        jLabelTituloPregunta.setPrefWidth(600);
-
         TextArea tituloPregunta = new TextArea(jugada.tituloPregunta());
         tituloPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 24; -fx-font-weight: bold;");
         tituloPregunta.setWrapText(true);
         tituloPregunta.setEditable(false);
 
-        CajaVista cajaVista = new CajaVista();
-        cajaVista.setCenter(tituloPregunta);
+        CajaVista cajaVistaPregunta = new CajaVista();
+        cajaVistaPregunta.setCenter(tituloPregunta);
 
-        vbox.getChildren().addAll(jLabelTipoPregunta, cajaVista);
+        CajaVista cajaVistaTipo = new CajaVista();
+        cajaVistaTipo.setCenter(jLabelTipoPregunta);
+
+        vbox.getChildren().addAll(cajaVistaTipo, cajaVistaPregunta);
         vbox.setAlignment(Pos.CENTER);
 
         Label jLabelTurno = new Label("Turno de " + jugada.obtenerJugador().nombre());

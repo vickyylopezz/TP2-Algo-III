@@ -9,8 +9,10 @@ import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
+import edu.fiuba.algo3.vista.componentes.contenedores.CajaVista;
 import edu.fiuba.algo3.vista.escenas.BaseEscena;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -89,8 +91,16 @@ public class PuntajeParcialEscena extends BaseEscena {
         vbox2.getChildren().addAll(contenedorIcono2, jLabelNombreJugador2, jLabelPuntos2);
         vbox2.setAlignment(Pos.CENTER);
 
+        CajaVista caja1 = new CajaVista();
+        caja1.setCenter(vbox1);
+        caja1.setPadding(new Insets(50));
+
+        CajaVista caja2 = new CajaVista();
+        caja2.setCenter(vbox2);
+        caja2.setPadding(new Insets(50));
+
         HBox hbox = new HBox(200);
-        hbox.getChildren().addAll(vbox1, vbox2);
+        hbox.getChildren().addAll(caja1, caja2);
         hbox.setAlignment(Pos.CENTER);
 
         return hbox;
