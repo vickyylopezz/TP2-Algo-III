@@ -10,6 +10,7 @@ import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
+import edu.fiuba.algo3.vista.componentes.botones.BotonExclusividad;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.vista.escenas.BaseEscena;
 import edu.fiuba.algo3.vista.escenas.preguntas.*;
@@ -20,7 +21,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -46,7 +46,7 @@ public class ControladorEscenas extends BaseEscena {
         // LAYOUT BORDERPANE
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(40,40,40,40));
-        borderPane.setStyle("-fx-background-image: url(" + "file:src/main/resources/iconos/fondo.png" + ");" + "-fx-background-size: cover");
+        borderPane.setStyle("-fx-background-image: url(" + "file:src/main/resources/iconos/fondo_ladrillo.png" + ");" + "-fx-background-size: cover");
 
         // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
         Label indicadorJugador = new Label("Jugador: " + jugador.nombre());
@@ -60,6 +60,14 @@ public class ControladorEscenas extends BaseEscena {
         Button confirmar = new Button("Confirmar");
 
         // COMODINES (arriba-derecha del borderPane)
+        Button multiplicadorX2 = new Button("X2");
+        multiplicadorX2.setPrefSize(50,50);
+        Button multiplicadorX3 = new Button("X3");
+        multiplicadorX3.setPrefSize(50,50);
+        BotonExclusividad exclusividad = new BotonExclusividad();
+        VBox botoneraComodines = new VBox();
+        botoneraComodines.getChildren().addAll(multiplicadorX2,multiplicadorX3,exclusividad);
+        botoneraComodines.setSpacing(10);
         // ...
         
         // PREGUNTA + OPCIONES (centro del borderPane)
@@ -77,6 +85,7 @@ public class ControladorEscenas extends BaseEscena {
             vista = new VistaMultipleChoice(pregunta, pregunta.obtenerOpciones(), this);
         }
 
+        borderPane.setRight(botoneraComodines);
         borderPane.setTop(datosJugador);
         borderPane.setCenter(vista);
         if (confirmar != null) {
