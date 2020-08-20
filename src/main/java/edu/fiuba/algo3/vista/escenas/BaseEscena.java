@@ -1,5 +1,7 @@
 package edu.fiuba.algo3.vista.escenas;
 
+import edu.fiuba.algo3.vista.CargadorResources;
+import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.ContenedorSonido;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
@@ -30,7 +32,16 @@ public abstract class BaseEscena extends Scene {
         ContenedorSonido botoneraSonido = new ContenedorSonido(reproductor);
         this.raiz.setBottom(botoneraSonido.obtenerNodo());
 
-        this.raiz.setStyle("-fx-background-image: url(" + "file:src/main/resources/iconos/fondo.png" + ");" + "-fx-background-size: cover");
+        Image fondo = CargadorResources.obtenerImagen(Resources.FondoPrincipalRuta());
+        if (fondo != null) {
+            this.raiz.setBackground(new Background(new BackgroundImage(
+                    fondo,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.CENTER,
+                    new BackgroundSize(100, 100, true, true, true, true)
+            )));
+        }
     }
 
     public void eventoSiguiente(EventHandler<ActionEvent> evento) {
