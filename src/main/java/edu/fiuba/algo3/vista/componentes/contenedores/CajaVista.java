@@ -1,6 +1,8 @@
 package edu.fiuba.algo3.vista.componentes.contenedores;
 
+import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 
 public class CajaVista extends BorderPane {
 
@@ -9,11 +11,11 @@ public class CajaVista extends BorderPane {
     }
 
     private void cargarEstilo() {
-        String estilo = "-fx-border-radius: 2;";
-        estilo += "-fx-background-radius: 2;";
-        estilo += "-fx-border-width: 1;";
-        estilo += "-fx-border-color: #999;";
+        String estilo = "-fx-border-radius: 5;";
+        estilo += "-fx-background-radius: 5;";
+        estilo += "-fx-border-width: 0;";
         estilo += "-fx-background-color: white;";
         this.setStyle(estilo);
+        this.setEffect(new DropShadow(5, Color.GREY));
     }
 }
