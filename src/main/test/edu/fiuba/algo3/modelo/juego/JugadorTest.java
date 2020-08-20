@@ -419,7 +419,7 @@ public class JugadorTest {
 
         Punto puntaje = carlos.puntajeTotal();
 
-        assertEquals(puntaje.obtenerPunto().obtenerValor(), 0);
+        assertEquals(puntaje.obtenerValor(), 0);
     }
 
     // validarComodin

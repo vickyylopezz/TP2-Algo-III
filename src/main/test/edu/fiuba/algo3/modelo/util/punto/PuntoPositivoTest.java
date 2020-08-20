@@ -17,7 +17,7 @@ public class PuntoPositivoTest {
 
     // copiar
     @Test
-    public void copiarDevuelveUnPuntoConElMismoValor() throws PuntoError {
+    public void copiarDevuelveUnPuntoConElMismoValor(){
         PuntoPositivo punto = new PuntoPositivo();
 
         Punto copia = punto.copiar();
@@ -37,45 +37,39 @@ public class PuntoPositivoTest {
 
     // multiplicarPorFactor
     @Test
-    public void multiplicarPorFactorConFactorNegativoDevuelvePuntoConValorCero() throws PuntoError {
+    public void multiplicarPorFactorConFactorNegativoDevuelvePuntoConValorCero(){
         PuntoPositivo puntoPositivo = new PuntoPositivo();
 
         Punto punto = puntoPositivo.multiplicarPorFactor(-4);
 
-        assertEquals(0, punto.obtenerPunto().obtenerValor());
+        assertEquals(0, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConFactorCeroDevuelvePuntoConValorCero() throws PuntoError {
+    public void multiplicarPorFactorConFactorCeroDevuelvePuntoConValorCero(){
         PuntoPositivo puntoPositivo = new PuntoPositivo();
 
         Punto punto = puntoPositivo.multiplicarPorFactor(0);
 
-        assertEquals(0, punto.obtenerPunto().obtenerValor());
+        assertEquals(0, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConFactorDosDevuelveUnPuntoConElDobleDelValor() throws PuntoError {
+    public void multiplicarPorFactorConFactorDosDevuelveUnPuntoConElDobleDelValor(){
         PuntoPositivo puntoPositivo = new PuntoPositivo();
 
         Punto punto = puntoPositivo.multiplicarPorFactor(2);
 
-        assertEquals(2, punto.obtenerPunto().obtenerValor());
+        assertEquals(2, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConFactorGrandeDevuelveLoCorrecto() throws PuntoError {
+    public void multiplicarPorFactorConFactorGrandeDevuelveLoCorrecto(){
         PuntoPositivo puntoPositivo = new PuntoPositivo();
 
         Punto punto = puntoPositivo.multiplicarPorFactor(25);
 
-        assertEquals(25, punto.obtenerPunto().obtenerValor());
+        assertEquals(25, punto.obtenerValor());
     }
 
-    @Test
-    public void obtenerPuntoDevuelveElMismoPuntos(){
-        PuntoPositivo punto = new PuntoPositivo();
-
-        assertEquals(punto,punto.obtenerPunto());
-    }
 }

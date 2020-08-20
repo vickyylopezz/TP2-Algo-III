@@ -42,8 +42,8 @@ public class VerdaderoFalsoClasicoTest {
         Integer esperadoJugador1 = 1;
         Integer esperadoJugador2 = 0;
 
-        assertEquals(esperadoJugador1, preguntavf.puntajeConOpciones(opcionesElegidasJugador1).obtenerPunto().obtenerValor());
-        assertEquals(esperadoJugador2, preguntavf.puntajeConOpciones(opcionesElegidasJugador2).obtenerPunto().obtenerValor());
+        assertEquals(esperadoJugador1, preguntavf.puntajeConOpciones(opcionesElegidasJugador1).obtenerValor());
+        assertEquals(esperadoJugador2, preguntavf.puntajeConOpciones(opcionesElegidasJugador2).obtenerValor());
     }
 
     @Test
@@ -55,7 +55,7 @@ public class VerdaderoFalsoClasicoTest {
         );
         ArrayList<Opcion> opciones = new ArrayList<>();
 
-        assertEquals(0, preguntavf.puntajeConOpciones(opciones).obtenerPunto().obtenerValor());
+        assertEquals(0, preguntavf.puntajeConOpciones(opciones).obtenerValor());
     }
 }
 

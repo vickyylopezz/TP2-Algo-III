@@ -149,27 +149,27 @@ public class ExclusividadTest {
         verify(otraRespuestaIncorrecta, times(0)).aplicarComodin(exclusividad);
     }
     @Test
-    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError, PuntoError {
+    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError{
         Exclusividad exclusividad = new Exclusividad(2);
         Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoNulo());
 
-        assertEquals(0,puntoNuevo.obtenerPunto().obtenerValor());
+        assertEquals(0,puntoNuevo.obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
+    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError {
         Exclusividad exclusividad = new Exclusividad(2);
         Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoPositivo());
 
-        assertEquals(2,puntoNuevo.obtenerPunto().obtenerValor());
+        assertEquals(2,puntoNuevo.obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
+    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError{
         Exclusividad exclusividad = new Exclusividad(2);
         Punto puntoNuevo = exclusividad.aplicarComodinAPunto(new PuntoNegativo());
 
-        assertEquals(-2,puntoNuevo.obtenerPunto().obtenerValor());
+        assertEquals(-2,puntoNuevo.obtenerValor());
     }
 }
 

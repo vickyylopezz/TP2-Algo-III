@@ -64,9 +64,9 @@ public class MultipleChoiceParcialTest {
         Integer esperadoJugador2 = 0;
         Integer esperadoJugador3 = 1;
 
-        assertEquals(esperadoJugador1, preguntaMCP.puntajeConOpciones(opcionesElegidas1).obtenerPunto().obtenerValor());
-        assertEquals(esperadoJugador2, preguntaMCP.puntajeConOpciones(opcionesElegidas2).obtenerPunto().obtenerValor());
-        assertEquals(esperadoJugador3, preguntaMCP.puntajeConOpciones(opcionesElegidas3).obtenerPunto().obtenerValor());
+        assertEquals(esperadoJugador1, preguntaMCP.puntajeConOpciones(opcionesElegidas1).obtenerValor());
+        assertEquals(esperadoJugador2, preguntaMCP.puntajeConOpciones(opcionesElegidas2).obtenerValor());
+        assertEquals(esperadoJugador3, preguntaMCP.puntajeConOpciones(opcionesElegidas3).obtenerValor());
     }
 
     @Test
@@ -87,6 +87,6 @@ public class MultipleChoiceParcialTest {
         MultipleChoiceParcial preguntaMCP = new MultipleChoiceParcial("¿Cuál es el apellido de nuestro corrector?");
         ArrayList<Opcion> opciones = new ArrayList<>();
 
-        assertEquals(0, preguntaMCP.puntajeConOpciones(opciones).obtenerPunto().obtenerValor());
+        assertEquals(0, preguntaMCP.puntajeConOpciones(opciones).obtenerValor());
     }
 }

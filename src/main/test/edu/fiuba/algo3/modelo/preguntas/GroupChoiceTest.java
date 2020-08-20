@@ -38,7 +38,7 @@ public class GroupChoiceTest {
         opcionesElegidas.add(opciones.get(6));
         opcionesElegidas.add(opciones.get(9));
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerPunto().obtenerValor(),3);
+        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),3);
 
     }
 
@@ -126,8 +126,8 @@ public class GroupChoiceTest {
         opcionesJugador2.add(opciones.get(7));
         opcionesJugador2.add(opciones.get(8));
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesJugador1).obtenerPunto().obtenerValor(),3);
-        assertEquals(pregunta.puntajeConOpciones(opcionesJugador2).obtenerPunto().obtenerValor(),2);
+        assertEquals(pregunta.puntajeConOpciones(opcionesJugador1).obtenerValor(),3);
+        assertEquals(pregunta.puntajeConOpciones(opcionesJugador2).obtenerValor(),2);
 
     }
 
@@ -155,7 +155,7 @@ public class GroupChoiceTest {
         opcionesElegidas.add(opciones.get(7));
         opcionesElegidas.add(opciones.get(9));
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerPunto().obtenerValor(),0);
+        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),0);
 
     }
 
@@ -184,7 +184,7 @@ public class GroupChoiceTest {
         opcionesElegidas.add(opciones.get(6));
         opcionesElegidas.add(opciones.get(8));
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerPunto().obtenerValor(),5);
+        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),5);
 
     }
 

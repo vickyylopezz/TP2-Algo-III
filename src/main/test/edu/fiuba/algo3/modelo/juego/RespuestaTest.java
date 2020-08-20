@@ -3,8 +3,8 @@ package edu.fiuba.algo3.modelo.juego;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.util.punto.PuntoExacto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNulo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;
@@ -410,9 +410,9 @@ public class RespuestaTest {
     public void puntajeConOpcionesYUnComodinDevuelveLoCorrecto() throws PuntoError {
         Punto puntajeRespuestaSinComodines = new PuntoPositivo();
 
-        Puntaje puntajeRespuestaConComodin = new Puntaje();
-        puntajeRespuestaConComodin.agregarPunto(new PuntoPositivo());
-        puntajeRespuestaConComodin.agregarPunto(new PuntoPositivo());
+        PuntoExacto puntajeRespuestaConComodin = new PuntoExacto();
+        puntajeRespuestaConComodin.agregarValor(new PuntoPositivo());
+        puntajeRespuestaConComodin.agregarValor(new PuntoPositivo());
 
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
@@ -448,14 +448,14 @@ public class RespuestaTest {
     public void puntajeConOpcionesYVariosComodinesDevuelveLoCorrecto() throws PuntoError {
         Punto puntajeSinComodines = new PuntoPositivo();
 
-        Puntaje puntajeConComodin1 = new Puntaje();
-        for (int i = 0; i < 2; i++) puntajeConComodin1.agregarPunto(new PuntoPositivo());
+        PuntoExacto puntajeConComodin1 = new PuntoExacto();
+        for (int i = 0; i < 2; i++) puntajeConComodin1.agregarValor(new PuntoPositivo());
 
-        Puntaje puntajeConComodin2 = new Puntaje();
-        for (int i = 0; i < 4; i++) puntajeConComodin2.agregarPunto(new PuntoPositivo());
+        PuntoExacto puntajeConComodin2 = new PuntoExacto();
+        for (int i = 0; i < 4; i++) puntajeConComodin2.agregarValor(new PuntoPositivo());
 
-        Puntaje puntajeConComodin3 = new Puntaje();
-        for (int i = 0; i < 16; i++) puntajeConComodin3.agregarPunto(new PuntoPositivo());
+        PuntoExacto puntajeConComodin3 = new PuntoExacto();
+        for (int i = 0; i < 16; i++) puntajeConComodin3.agregarValor(new PuntoPositivo());
 
         Comodin comodin1 = mock(Comodin.class); // comodin que multiplica por 2 el puntaje
         when(comodin1.aplicarComodinAPunto(puntajeSinComodines)).thenReturn(puntajeConComodin1);

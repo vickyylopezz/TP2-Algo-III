@@ -158,26 +158,26 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError, PuntoError {
+    public void recibeUnPunToNuloYAplicaComodinAlPunto() throws ComodinError {
         Multiplicador multiplicador = new Multiplicador(2);
         Punto puntoNuevo = multiplicador.aplicarComodinAPunto(new PuntoNulo());
 
-        assertEquals(0,puntoNuevo.obtenerPunto().obtenerValor());
+        assertEquals(0,puntoNuevo.obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
+    public void recibeUnPuntoPositivoYAplicaComodinAlPunto() throws ComodinError{
         Multiplicador multiplicador = new Multiplicador(2);
         Punto puntoNuevo = multiplicador.aplicarComodinAPunto(new PuntoPositivo());
 
-        assertEquals(2,puntoNuevo.obtenerPunto().obtenerValor());
+        assertEquals(2,puntoNuevo.obtenerValor());
     }
 
     @Test
-    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError, PuntoError {
+    public void recibeUnPuntoNegativoYAplicaComodinAlPunto() throws ComodinError{
         Multiplicador multiplicador = new Multiplicador(2);
         Punto puntoNuevo = multiplicador.aplicarComodinAPunto(new PuntoNegativo());
 
-        assertEquals(-2,puntoNuevo.obtenerPunto().obtenerValor());
+        assertEquals(-2,puntoNuevo.obtenerValor());
     }
 }

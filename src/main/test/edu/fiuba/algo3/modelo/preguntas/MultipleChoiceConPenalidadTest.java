@@ -70,10 +70,10 @@ public class MultipleChoiceConPenalidadTest {
         Integer esperadoJugador3 = 1;
         Integer esperadoJugador4 = -2;
 
-        assertEquals(esperadoJugador1, preguntaMCCP.puntajeConOpciones(opcionesElegidas1).obtenerPunto().obtenerValor());
-        assertEquals(esperadoJugador2, preguntaMCCP.puntajeConOpciones(opcionesElegidas2).obtenerPunto().obtenerValor());
-        assertEquals(esperadoJugador3, preguntaMCCP.puntajeConOpciones(opcionesElegidas3).obtenerPunto().obtenerValor());
-        assertEquals(esperadoJugador4, preguntaMCCP.puntajeConOpciones(opcionesElegidas4).obtenerPunto().obtenerValor());
+        assertEquals(esperadoJugador1, preguntaMCCP.puntajeConOpciones(opcionesElegidas1).obtenerValor());
+        assertEquals(esperadoJugador2, preguntaMCCP.puntajeConOpciones(opcionesElegidas2).obtenerValor());
+        assertEquals(esperadoJugador3, preguntaMCCP.puntajeConOpciones(opcionesElegidas3).obtenerValor());
+        assertEquals(esperadoJugador4, preguntaMCCP.puntajeConOpciones(opcionesElegidas4).obtenerValor());
     }
 
     @Test
@@ -94,7 +94,7 @@ public class MultipleChoiceConPenalidadTest {
         MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Cuál es el apellido de nuestro corrector?");
         ArrayList<Opcion> opciones = new ArrayList<>();
 
-        assertEquals(0, preguntaMCCP.puntajeConOpciones(opciones).obtenerPunto().obtenerValor());
+        assertEquals(0, preguntaMCCP.puntajeConOpciones(opciones).obtenerValor());
     }
 
 }

@@ -8,11 +8,6 @@ public class PuntoPositivo extends Punto {
     private final Integer valor = 1;
 
     @Override
-    public Punto obtenerPunto() {
-        return this;
-    }
-
-    @Override
     public Integer obtenerValor() {
         return this.valor;
     }

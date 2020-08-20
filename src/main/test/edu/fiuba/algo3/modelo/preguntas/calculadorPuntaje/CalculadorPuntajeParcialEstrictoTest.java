@@ -16,7 +16,7 @@ import static org.mockito.Mockito.when;
 
 public class CalculadorPuntajeParcialEstrictoTest {
     @Test
-    public void calcularDevuelvePuntajeIncorrectoConDosOpcionesCorrectaYUnaIncorrecta() throws PuntoError {
+    public void calcularDevuelvePuntajeIncorrectoConDosOpcionesCorrectaYUnaIncorrecta(){
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -51,7 +51,7 @@ public class CalculadorPuntajeParcialEstrictoTest {
     }
 
     @Test
-    public void calcularDevuelvePuntajeUnoConUnaOpcionCorrectaSeleccionadaHabiendoDosCorrectas() throws PuntoError {
+    public void calcularDevuelvePuntajeUnoConUnaOpcionCorrectaSeleccionadaHabiendoDosCorrectas(){
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -80,11 +80,11 @@ public class CalculadorPuntajeParcialEstrictoTest {
 
         Punto punto = calc.calcular(pregunta, opcionesSeleccionadas);
 
-        assertEquals(1, punto.obtenerPunto().obtenerValor());
+        assertEquals(1, punto.obtenerValor());
     }
 
     @Test
-    public void calcularDevuelvePuntajeIncorrectoSeleccionandoUnaOpcionIncorrecta() throws PuntoError {
+    public void calcularDevuelvePuntajeIncorrectoSeleccionandoUnaOpcionIncorrecta(){
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);

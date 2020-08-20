@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntajeNoTieneValorError;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import org.junit.jupiter.api.Test;
 
@@ -10,194 +9,186 @@ public class PuntajeTest {
 
     // obtenerValor
     @Test
-    public void obtenerValorSinAgregarPuntoEsCero() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
+    public void obtenerValorSinAgregarPuntoEsCero(){
+        PuntoExacto puntaje = new PuntoExacto();
 
-        assertEquals(0, puntaje.obtenerPunto().obtenerValor());
+        assertEquals(0, puntaje.obtenerValor());
     }
 
     @Test
-    public void obtenerValorAgregandoPuntoPositivoValorDevuelveUno() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
+    public void obtenerValorAgregandoPuntoPositivoValorDevuelveUno(){
+        PuntoExacto puntaje = new PuntoExacto();
 
-        puntaje.agregarPunto(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoPositivo());
 
-        assertEquals(1, puntaje.obtenerPunto().obtenerValor());
+        assertEquals(1, puntaje.obtenerValor());
     }
 
     @Test
-    public void obtenerValorAgregandoVariosPuntosLosSuma() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
+    public void obtenerValorAgregandoVariosPuntosLosSuma(){
+        PuntoExacto puntaje = new PuntoExacto();
 
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNegativo());
 
-        assertEquals(-1, puntaje.obtenerPunto().obtenerValor());
+        assertEquals(-1, puntaje.obtenerValor());
     }
 
     // agregarPunto
-    @Test
-    public void agregarPuntoNuloNoHaceNada() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-
-        puntaje.agregarPunto(null);
-
-        assertEquals(0, puntaje.obtenerPunto().obtenerValor());
-    }
 
     @Test
-    public void agregarPuntoPositivoAumentaElValor() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
+    public void agregarPuntoPositivoAumentaElValor(){
+        PuntoExacto puntaje = new PuntoExacto();
 
-        puntaje.agregarPunto(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoPositivo());
 
-        assertEquals(1, puntaje.obtenerPunto().obtenerValor());
+        assertEquals(1, puntaje.obtenerValor());
     }
 
     // copiar
     @Test
-    public void copiarDevuelveUnPuntoConElMismoValor() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoPositivo());
+    public void copiarDevuelveUnPuntoConElMismoValor(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoPositivo());
 
         Punto copia = puntaje.copiar();
 
-        assertEquals(puntaje.obtenerPunto().obtenerValor(), copia.obtenerPunto().obtenerValor());
+        assertEquals(puntaje.obtenerValor(), copia.obtenerValor());
     }
 
     // clone
     @Test
-    public void cloneDevuelveUnPuntajeConElMismoValor() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoPositivo());
+    public void cloneDevuelveUnPuntajeConElMismoValor(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoPositivo());
 
-        Puntaje copia = puntaje.clone();
+        PuntoExacto copia = puntaje.clone();
 
-        assertEquals(puntaje.obtenerPunto().obtenerValor(), copia.obtenerPunto().obtenerValor());
+        assertEquals(puntaje.obtenerValor(), copia.obtenerValor());
     }
 
     // multiplicarPorFactor
     @Test
-    public void multiplicarPorFactorConPuntajePositivoConFactorNegativoDevuelvePuntoConValorCero() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoPositivo());
+    public void multiplicarPorFactorConPuntajePositivoConFactorNegativoDevuelvePuntoConValorCero(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoPositivo());
 
         Punto punto = puntaje.multiplicarPorFactor(-4);
 
-        assertEquals(0, punto.obtenerPunto().obtenerValor());
+        assertEquals(0, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajePositivoConFactorCeroDevuelvePuntoConValorCero() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoPositivo());
+    public void multiplicarPorFactorConPuntajePositivoConFactorCeroDevuelvePuntoConValorCero(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoPositivo());
 
         Punto punto = puntaje.multiplicarPorFactor(0);
 
-        assertEquals(0, punto.obtenerPunto().obtenerValor());
+        assertEquals(0, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajePositivoConFactorDosDevuelveUnPuntoConElDobleDelValor() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoPositivo());
+    public void multiplicarPorFactorConPuntajePositivoConFactorDosDevuelveUnPuntoConElDobleDelValor(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoPositivo());
 
         Punto punto = puntaje.multiplicarPorFactor(2);
 
-        assertEquals(4, punto.obtenerPunto().obtenerValor());
+        assertEquals(4, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajePositivoConFactorGrandeDevuelveLoCorrecto() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoPositivo());
+    public void multiplicarPorFactorConPuntajePositivoConFactorGrandeDevuelveLoCorrecto(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoPositivo());
 
         Punto punto = puntaje.multiplicarPorFactor(25);
 
-        assertEquals(50, punto.obtenerPunto().obtenerValor());
+        assertEquals(50, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajeNegativoConFactorNegativoDevuelvePuntoConValorCero() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
+    public void multiplicarPorFactorConPuntajeNegativoConFactorNegativoDevuelvePuntoConValorCero(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNegativo());
 
         Punto punto = puntaje.multiplicarPorFactor(-4);
 
-        assertEquals(0, punto.obtenerPunto().obtenerValor());
+        assertEquals(0, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajeNegativoConFactorCeroDevuelvePuntoConValorCero() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
+    public void multiplicarPorFactorConPuntajeNegativoConFactorCeroDevuelvePuntoConValorCero(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNegativo());
 
         Punto punto = puntaje.multiplicarPorFactor(0);
 
-        assertEquals(0, punto.obtenerPunto().obtenerValor());
+        assertEquals(0, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajeNegativoConFactorDosDevuelveUnPuntoConElDobleDelValor() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
+    public void multiplicarPorFactorConPuntajeNegativoConFactorDosDevuelveUnPuntoConElDobleDelValor(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNegativo());
 
         Punto punto = puntaje.multiplicarPorFactor(3);
 
-        assertEquals(-9, punto.obtenerPunto().obtenerValor());
+        assertEquals(-9, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConPuntajeNegativoConFactorGrandeDevuelveLoCorrecto() throws PuntoError {
-        Puntaje puntaje = new Puntaje();
-        puntaje.agregarPunto(new PuntoPositivo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNulo());
-        puntaje.agregarPunto(new PuntoNegativo());
-        puntaje.agregarPunto(new PuntoNegativo());
+    public void multiplicarPorFactorConPuntajeNegativoConFactorGrandeDevuelveLoCorrecto(){
+        PuntoExacto puntaje = new PuntoExacto();
+        puntaje.agregarValor(new PuntoPositivo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNulo());
+        puntaje.agregarValor(new PuntoNegativo());
+        puntaje.agregarValor(new PuntoNegativo());
 
         Punto punto = puntaje.multiplicarPorFactor(30);
 
-        assertEquals(-60, punto.obtenerPunto().obtenerValor());
+        assertEquals(-60, punto.obtenerValor());
     }
 }
