@@ -34,15 +34,6 @@ public class ContenedorSonido extends HBox {
 
     }
 
-    private void comenzarMusica(){
-        this.reproductor.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                reproductor.seek(Duration.ZERO);
-            }
-        });
-        this.reproductor.play();
-    }
-
     public Node obtenerNodo() {
         return this.nodo;
     }
