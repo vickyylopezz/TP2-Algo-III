@@ -38,7 +38,7 @@ public class Kahoot {
 
         modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego,reproductor));
         modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas,reproductor));
-        modoRespuestas.cuandoFinaliceEjecutar(new KahootSalirEventHandler(stage));
+        modoRespuestas.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoPreparacion,reproductor));
 
         modoPreparacion.iniciar(reproductor);
         this.comenzarMusica();
