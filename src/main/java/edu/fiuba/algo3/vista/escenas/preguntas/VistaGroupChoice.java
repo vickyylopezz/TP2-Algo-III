@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.vista.escenas.preguntas;
 
+import edu.fiuba.algo3.vista.CargadorResources;
+import edu.fiuba.algo3.vista.Resources;
+import edu.fiuba.algo3.vista.componentes.botones.BotonCircularVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionGroup;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
@@ -7,10 +10,14 @@ import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,7 +47,7 @@ public class VistaGroupChoice extends VistaPregunta {
         grid.add(grupo2,2,0);
 
         //grid.setGridLinesVisible(true);
-        grid.setStyle("-fx-background-color: lightgray");
+        //grid.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     @Override
@@ -90,17 +97,16 @@ public class VistaGroupChoice extends VistaPregunta {
     }
 
     public HBox obtenerControles(){
-        HBox controles = new HBox(20);
+        HBox controles = new HBox(50);
         controles.setAlignment(Pos.CENTER);
 
-        for (int i=0; i<2; i++){
-            Button boton = new Button();
-            boton.setPrefSize(100,50);
-            boton.setDisable(true);
-            controles.getChildren().add(boton);
-        }
-        izquierda = (Button)controles.getChildren().get(0);
-        izquierda.setText("<");
+        Image izq = CargadorResources.obtenerImagen(Resources.IconoFlechaIzquierdaRuta());
+        ImageView perfilIzquierdo = new ImageView(izq);
+        Image der = CargadorResources.obtenerImagen(Resources.IconoFlechaDerechaRuta());
+        ImageView perfilDerecho = new ImageView(der);
+
+        izquierda = new BotonCircularVista(perfilIzquierdo);
+        izquierda.setDisable(true);
         izquierda.setOnAction(e -> {
             izquierda.setDisable(true);
             derecha.setDisable(true);
@@ -113,8 +119,9 @@ public class VistaGroupChoice extends VistaPregunta {
             seleccionIzquierda.add(botonActivo);
         });
 
-        derecha = (Button)controles.getChildren().get(1);
-        derecha.setText(">");
+
+        derecha = new BotonCircularVista(perfilDerecho);
+        derecha.setDisable(true);
         derecha.setOnAction(e -> {
             izquierda.setDisable(true);
             derecha.setDisable(true);
@@ -127,6 +134,7 @@ public class VistaGroupChoice extends VistaPregunta {
             seleccionDerecha.add(botonActivo);
         });
 
+        controles.getChildren().addAll(izquierda, derecha);
         return controles;
     }
 

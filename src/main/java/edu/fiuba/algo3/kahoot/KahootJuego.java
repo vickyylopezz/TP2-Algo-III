@@ -51,7 +51,7 @@ public class KahootJuego extends KahootModo {
         partida.siguienteTurno();
 
         PreviaPreguntaEscena previaPregunta = new PreviaPreguntaEscena(reproductor, jugada);
-        ControladorEscenas controlador = new ControladorEscenas(stage, reproductor, jugada);
+        ControladorEscenas controlador = new ControladorEscenas(stage, reproductor);
 
         previaPregunta.eventoSiguiente((event) -> {
             try {
@@ -63,16 +63,20 @@ public class KahootJuego extends KahootModo {
 
         controlador.eventoSiguiente((event) -> {
             // Obtengo las respuestas del usuario
-            Object source = event.getSource();
+            controlador.procesarJugada(event.getSource(), jugada);
+
+            /*Object source = event.getSource();
             ArrayList<Opcion> opciones = new ArrayList<>();
             if (source instanceof BotonOpcionClasica){
                 opciones.add(((BotonOpcionClasica) source).obtenerOpcion());
             } else {
                 opciones.addAll(controlador.getVista().obtenerSeleccion());
             }
+            Respuesta respuesta = new Respuesta(jugada.obtenerPregunta(), jugada.obtenerJugador());
             for (Opcion opcion: opciones) {
                 jugada.seleccionarOpcion(opcion);
             }
+            jugada.obtenerJugador().agregarRespuesta(respuesta);*/
 
             if (partida.existeTurno()){
                 this.proximaJugada(reproductor, partida);
