@@ -8,8 +8,10 @@ import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.contenedores.CajaVista;
 import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;
 import edu.fiuba.algo3.vista.componentes.textos.SubTitulo;
+import edu.fiuba.algo3.vista.componentes.textos.Texto;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -17,7 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
-public class JugadorVista extends VBox {
+public class JugadorVista extends CajaVista {
 
     private MiniTexto notifiacion;
 
@@ -38,19 +40,15 @@ public class JugadorVista extends VBox {
     }
 
     private void crearEstructura(JugadorObservable jugador, Integer numeroJugador) {
-        SubTitulo subTitulo = new SubTitulo("JUGADOR " + numeroJugador);
-        subTitulo.setStyle("-fx-text-fill: #9463EB");
-
-        CajaVista caja = new CajaVista();
-        caja.setPadding(new Insets(20));
+        Texto titulo = Texto.Negrita("JUGADOR " + numeroJugador);
+        titulo.setStyle("-fx-text-fill: #9463EB");
 
         ImageView imagenJugador = new ImageView(
                 CargadorResources.obtenerImagen(Resources.IconoJugadorBlancoRuta())
         );
         imagenJugador.setPreserveRatio(true);
         imagenJugador.setFitWidth(100);
-
-        caja.setCenter(imagenJugador);
+        Group contenedorImagen = new Group(imagenJugador);
 
         TextField inputNombre = new TextField();
         inputNombre.setPromptText("Nombre del jugador ...");
@@ -60,17 +58,15 @@ public class JugadorVista extends VBox {
         this.notifiacion.setTextFill(Color.RED);
         this.notifiacion.setStyle("-fx-font-weight: bold;");
 
-        this.getChildren().addAll(
-                subTitulo,
-                caja,
-                inputNombre,
-                this.notifiacion
-        );
+        VBox contenedor = new VBox(titulo, contenedorImagen, inputNombre, this.notifiacion);
+        contenedor.setAlignment(Pos.CENTER);
+        contenedor.setSpacing(20);
+        contenedor.setPadding(new Insets(20));
+
+        this.setCenter(contenedor);
     }
 
     private void aplicarEstilo() {
-        this.setPadding(new Insets(30));
-        this.setSpacing(20);
-        this.setAlignment(Pos.CENTER);
+        this.setPadding(new Insets(5));
     }
 }

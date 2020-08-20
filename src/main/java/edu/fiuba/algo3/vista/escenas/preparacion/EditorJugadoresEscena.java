@@ -8,6 +8,7 @@ import edu.fiuba.algo3.vista.escenas.BaseEscena;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 
 import java.util.ArrayList;
@@ -38,10 +39,15 @@ public class EditorJugadoresEscena extends BaseEscena {
     private Node crearCuerpo(ArrayList<JugadorObservable> jugadores) {
         HBox contenedor = new HBox();
         contenedor.setAlignment(Pos.CENTER);
+        contenedor.setSpacing(40);
 
         for (JugadorObservable jugador: jugadores) {
             int numeroJugador = jugadores.indexOf(jugador) + 1;
-            contenedor.getChildren().add(new JugadorVista(jugador, numeroJugador));
+
+            JugadorVista jugadorVista = new JugadorVista(jugador, numeroJugador);
+            jugadorVista.setMaxHeight(300);
+
+            contenedor.getChildren().add(new StackPane(jugadorVista));
         }
 
         return contenedor;
