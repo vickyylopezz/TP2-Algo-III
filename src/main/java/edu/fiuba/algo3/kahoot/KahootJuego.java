@@ -96,10 +96,6 @@ public class KahootJuego extends KahootModo {
 
     }
 
-
-
-    // NO SE SI HACE FALTA ESTE METODO
-    // SI NO SE USA HABRIA QUE SACAR EL ELSE EN proximaPartida();
     private void finalizarJuego(MediaPlayer reproductor){
-}
+    }
 }

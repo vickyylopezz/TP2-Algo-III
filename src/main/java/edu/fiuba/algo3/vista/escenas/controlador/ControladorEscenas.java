@@ -10,8 +10,10 @@ import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
+import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonExclusividad;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
+import edu.fiuba.algo3.vista.componentes.contenedores.EtiquetaVista;
 import edu.fiuba.algo3.vista.escenas.BaseEscena;
 import edu.fiuba.algo3.vista.escenas.preguntas.*;
 import javafx.event.ActionEvent;
@@ -23,6 +25,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -53,11 +56,14 @@ public class ControladorEscenas extends BaseEscena {
         indicadorJugador.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold;");
         Label indicadorPuntaje = new Label("Puntos: " + jugador.puntajeTotal().obtenerPunto().obtenerValor());
         indicadorPuntaje.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold;");
-        VBox datosJugador = new VBox(20, indicadorJugador, indicadorPuntaje);
+        VBox pilaDatos = new VBox(20, indicadorJugador, indicadorPuntaje);
+        EtiquetaVista datosJugador = new EtiquetaVista(pilaDatos);
         datosJugador.setAlignment(Pos.TOP_LEFT);
 
         // BOTON CONFIRMAR (abajo en el borderPane)
-        Button confirmar = new Button("Confirmar");
+        BotonCuadradoVista confirmar = new BotonCuadradoVista("Confirmar");
+        confirmar.setStyle("-fx-font-weight: bold;");
+        confirmar.setPrefSize(250, 50);
 
         // COMODINES (arriba-derecha del borderPane)
         Button multiplicadorX2 = new Button("X2");
