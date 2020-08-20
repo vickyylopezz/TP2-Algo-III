@@ -52,11 +52,6 @@ public class KahootJuego extends KahootModo {
 
         PreviaPreguntaEscena previaPregunta = new PreviaPreguntaEscena(reproductor, jugada);
         ControladorEscenas controlador = new ControladorEscenas(stage, reproductor, jugada);
-        //el proximo evento hice para probar pero mas o menos esto tendria que hacer el confirmar de pregunta
-        //ademas de guardar las respuestas de los jugadores y aplicar comodin
-        //se puede hacer una clase que tenga el condicional y reciba la partida
-
-        System.out.println("Pregunta: " + jugada.obtenerPregunta().obtenerTitulo() + " Jugador:" +jugada.obtenerJugador().nombre());
 
         previaPregunta.eventoSiguiente((event) -> {
             try {
@@ -75,17 +70,16 @@ public class KahootJuego extends KahootModo {
             } else {
                 opciones.addAll(controlador.getVista().obtenerSeleccion());
             }
-            Respuesta respuesta = new Respuesta(jugada.obtenerPregunta(), jugada.obtenerJugador());
             for (Opcion opcion: opciones) {
-                respuesta.agregarOpcion(opcion);
+                jugada.seleccionarOpcion(opcion);
             }
-            jugada.obtenerJugador().agregarRespuesta(respuesta);
 
             if (partida.existeTurno()){
                 this.proximaJugada(reproductor, partida);
             } else {
                 PuntajeParcialEscena puntajeParcial = null;
                 try {
+                    partida.finalizarTurnos();
                     puntajeParcial = new PuntajeParcialEscena(this.stage, reproductor, this.jugadores);
                 } catch (PuntoError puntoError) {
                     puntoError.printStackTrace();
