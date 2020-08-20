@@ -31,7 +31,7 @@ public class KahootJuego extends KahootModo {
         if (this.juego.existePartida()){
             this.proximaPartida(reproductor);
         } else {
-            this.iniciar(reproductor);
+            this.finalizarJuego(reproductor);
         }
     }
 
@@ -95,4 +95,11 @@ public class KahootJuego extends KahootModo {
         new CambioEscenaEventHandler(this.stage, previaPregunta).handle(null);
 
     }
+
+
+
+    // NO SE SI HACE FALTA ESTE METODO
+    // SI NO SE USA HABRIA QUE SACAR EL ELSE EN proximaPartida();
+    private void finalizarJuego(MediaPlayer reproductor){
+}
 }
