@@ -5,23 +5,23 @@ import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.escenas.resultados.UltimaLayout;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class KahootResultados extends KahootModo {
-    private Juego juego;
-    public KahootResultados(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores) {
-        super(stage, preguntas, jugadores);
+
+    public KahootResultados(Stage stage, Pane panelPadre, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores) {
+        super(stage, panelPadre, preguntas, jugadores);
     }
 
     @Override
-    public void iniciar(MediaPlayer reproductor) {
-        this.juego = new Juego(this.preguntas, this.jugadores);
-        UltimaLayout finalizacion = new UltimaLayout(reproductor,this.jugadores,this.juego);
+    public void iniciar() {
+        Juego juego = new Juego(this.preguntas, this.jugadores);
+        UltimaLayout finalizacion = new UltimaLayout(this.jugadores, juego);
         finalizacion.eventoSiguiente(this.eventoSalida,"Volver a Jugar");
 
-        new CambioEscenaEventHandler(this.stage, finalizacion).handle(null);
+        new CambioEscenaEventHandler(this.panelPadre, finalizacion).handle(null);
     }
 }

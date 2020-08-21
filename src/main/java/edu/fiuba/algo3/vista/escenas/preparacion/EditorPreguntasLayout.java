@@ -20,8 +20,7 @@ import java.util.ArrayList;
 
 public class EditorPreguntasLayout extends BaseLayout {
 
-    public EditorPreguntasLayout(Stage stage, ArrayList<Pregunta> preguntas, MediaPlayer reproductor) {
-        super(reproductor);
+    public EditorPreguntasLayout(Stage stage, ArrayList<Pregunta> preguntas) {
         ObservableList<Pregunta> preguntasObserver = FXCollections.observableList(preguntas);
         preguntasObserver.addListener(new ActualizadorPreguntasListener(preguntas));
 

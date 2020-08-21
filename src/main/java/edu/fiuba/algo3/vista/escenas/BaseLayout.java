@@ -16,12 +16,9 @@ public abstract class BaseLayout extends BorderPane {
     protected BotonEtiquetaIzquierdaVista botonSigueinte;
     protected BotonEtiquetaDerechaVista botonAnterior;
 
-    public BaseLayout(MediaPlayer reproductor) {
+    public BaseLayout() {
         this.cabecera = new CabeceraKahootVista();
         this.setTop(this.cabecera);
-
-        ContenedorSonido botoneraSonido = new ContenedorSonido(reproductor);
-        this.setBottom(botoneraSonido.obtenerNodo());
 
         this.setStyle("-fx-background-image: url(" + Resources.FondoPrincipalRuta() + ");" + "-fx-background-size: cover");
     }

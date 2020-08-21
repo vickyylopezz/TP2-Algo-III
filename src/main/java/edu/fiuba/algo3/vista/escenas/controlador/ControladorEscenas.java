@@ -48,8 +48,7 @@ public class ControladorEscenas extends BaseLayout {
 
     private Timeline timeline;
 
-    public ControladorEscenas(Stage stage, MediaPlayer reproductor) {
-        super(reproductor);
+    public ControladorEscenas(Stage stage) {
         this.stage = stage;
     }
 

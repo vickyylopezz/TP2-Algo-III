@@ -16,9 +16,7 @@ public class BienvenidaLayout extends BaseLayout {
 
     private StackPane cuerpo;
 
-    public BienvenidaLayout(MediaPlayer reproductor) {
-        super(reproductor);
-
+    public BienvenidaLayout() {
         this.cuerpo = new StackPane();
         this.setCenter(this.cuerpo);
     }

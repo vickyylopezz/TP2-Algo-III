@@ -10,12 +10,6 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage)  {
-        stage.setMinHeight(800);
-        stage.setMinWidth(600);
-        Scene escenaPrincipal = new Scene(new Label(), 800, 600);
-        stage.setScene(escenaPrincipal);
-        stage.setMaximized(true);
-
         Kahoot app = new Kahoot(stage);
         app.iniciar();
     }

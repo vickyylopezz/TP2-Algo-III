@@ -14,8 +14,7 @@ import javafx.scene.media.MediaPlayer;
 
 public class PreviaPreguntaLayout extends BaseLayout {
 
-    public PreviaPreguntaLayout(MediaPlayer reproductor, Jugada jugada) {
-        super(reproductor);
+    public PreviaPreguntaLayout(Jugada jugada) {
         Node cuerpo = this.crearCuerpo(jugada);
         this.setCenter(cuerpo);
     }

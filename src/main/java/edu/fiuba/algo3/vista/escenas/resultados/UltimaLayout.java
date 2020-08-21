@@ -21,8 +21,7 @@ public class UltimaLayout extends BaseLayout {
 
     private StackPane cuerpo;
 
-    public UltimaLayout(MediaPlayer reproductor, ArrayList<Jugador> jugadores, Juego juego) {
-        super(reproductor);
+    public UltimaLayout(ArrayList<Jugador> jugadores, Juego juego) {
         Node cuerpo = this.crearCuerpo(jugadores,juego);
         this.setCenter(cuerpo);
     }

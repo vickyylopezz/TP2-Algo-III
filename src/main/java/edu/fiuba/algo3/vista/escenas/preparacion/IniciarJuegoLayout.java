@@ -11,9 +11,7 @@ public class IniciarJuegoLayout extends BaseLayout {
 
     private StackPane cuerpo;
 
-    public IniciarJuegoLayout(MediaPlayer reproductor) {
-        super(reproductor);
-
+    public IniciarJuegoLayout() {
         this.cuerpo = new StackPane();
         this.setCenter(this.cuerpo);
     }

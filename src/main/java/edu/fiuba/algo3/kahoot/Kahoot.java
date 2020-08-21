@@ -1,10 +1,15 @@
 package edu.fiuba.algo3.kahoot;
 
 import edu.fiuba.algo3.eventos.kahoot.KahootCambioModoEventHandler;
-import edu.fiuba.algo3.eventos.kahoot.KahootSalirEventHandler;
+import edu.fiuba.algo3.eventos.kahoot.KahootReiniciarEventHandler;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.Resources;
+import edu.fiuba.algo3.vista.componentes.ContenedorSonido;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -16,34 +21,61 @@ import java.util.ArrayList;
 public class Kahoot {
 
     private final Stage stage;
-    private final ArrayList<Pregunta> preguntas;
-    private final ArrayList<Jugador> jugadores;
+    private StackPane raiz;
+    private ArrayList<Pregunta> preguntas;
+    private ArrayList<Jugador> jugadores;
     private final MediaPlayer reproductor;
 
     public Kahoot(Stage stage) {
         this.stage = stage;
-        this.preguntas = new ArrayList<>();
-        this.jugadores = new ArrayList<>();
         this.reproductor = new MediaPlayer(
                 new Media(new File(Resources.MusicaKahootRuta()).toURI().toString())
         );
+        this.reproductor.setOnEndOfMedia(() -> reproductor.seek(Duration.ZERO));
+        this.raiz = this.crearEscena();
+
+        this.preguntas = new ArrayList<>();
+        this.jugadores = new ArrayList<>();
     }
 
     public void iniciar() {
-        KahootModo modoPreparacion = new KahootPreparacion(this.stage, this.preguntas, this.jugadores);
-        KahootModo modoJuego = new KahootJuego(this.stage, this.preguntas, this.jugadores);
-        KahootModo modoRespuestas = new KahootResultados(this.stage, this.preguntas, this.jugadores);
+        KahootModo modoPreparacion = new KahootPreparacion(
+                this.stage, this.raiz, this.preguntas, this.jugadores
+        );
+        KahootModo modoJuego = new KahootJuego(
+                this.stage, this.raiz, this.preguntas, this.jugadores
+        );
+        KahootModo modoRespuestas = new KahootResultados(
+                this.stage, this.raiz, this.preguntas, this.jugadores
+        );
 
-        modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego,reproductor));
-        modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas,reproductor));
-        modoRespuestas.cuandoFinaliceEjecutar(new KahootSalirEventHandler(stage,reproductor));
+        modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego));
+        modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas));
+        modoRespuestas.cuandoFinaliceEjecutar(new KahootReiniciarEventHandler(this));
 
-        modoPreparacion.iniciar(reproductor);
-        this.comenzarMusica();
+        modoPreparacion.iniciar();
+        this.reproductor.play();
+        this.stage.show();
     }
 
-    public void comenzarMusica(){
-        this.reproductor.setOnEndOfMedia(() -> reproductor.seek(Duration.ZERO));
-        this.reproductor.play();
+    private StackPane crearEscena() {
+        ContenedorSonido reproductorVista = new ContenedorSonido(this.reproductor);
+        reproductorVista.setAlignment(Pos.BOTTOM_RIGHT);
+        reproductorVista.setPickOnBounds(false);
+
+        StackPane raiz = new StackPane();
+
+        this.stage.setScene(new Scene(new StackPane(raiz, reproductorVista)));
+        this.stage.setMaximized(true);
+
+        return raiz;
+    }
+
+    public void reiniciar() {
+        this.reproductor.stop();
+        this.raiz = this.crearEscena();
+
+        this.preguntas = new ArrayList<>();
+        this.jugadores = new ArrayList<>();
     }
 }

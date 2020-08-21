@@ -15,9 +15,7 @@ import java.util.ArrayList;
 
 public class EditorJugadoresLayout extends BaseLayout {
 
-    public EditorJugadoresLayout(ArrayList<Jugador> jugadores, MediaPlayer reproductor) {
-        super(reproductor);
-
+    public EditorJugadoresLayout(ArrayList<Jugador> jugadores) {
         ArrayList<JugadorObservable> jugadoresObservables = this.crearJugadoresObservables(jugadores);
         this.setCenter(this.crearCuerpo(jugadoresObservables));
     }

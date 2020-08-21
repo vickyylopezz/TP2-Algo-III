@@ -5,50 +5,49 @@ import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaLayout;
 import edu.fiuba.algo3.vista.escenas.juego.PuntajeParcialLayout;
-import javafx.scene.media.MediaPlayer;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
 public class KahootJuego extends KahootModo {
+
     private Juego juego;
 
-    public KahootJuego(Stage stage, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores) {
-        super(stage, preguntas, jugadores);
+    public KahootJuego(Stage stage, Pane panelPadre, ArrayList<Pregunta> preguntas, ArrayList<Jugador> jugadores) {
+        super(stage, panelPadre, preguntas, jugadores);
     }
 
     @Override
-    public void iniciar(MediaPlayer reproductor) {
+    public void iniciar() {
         this.juego = new Juego(this.preguntas, this.jugadores);
         this.juego.iniciarPartidas();
-        this.siguienteEscena(reproductor);
+        this.siguienteEscena();
     }
 
-    private void siguienteEscena(MediaPlayer reproductor) {
+    private void siguienteEscena() {
         if (this.juego.existePartida()){
-            this.proximaPartida(reproductor);
-        } else {
-            this.finalizarJuego(reproductor);
+            this.proximaPartida();
         }
     }
 
-    private void proximaPartida(MediaPlayer reproductor) {
+    private void proximaPartida() {
         Partida partida = this.juego.obtenerPartida();
         partida.iniciarTurnos();
         this.juego.siguientePartida();
         if (partida.existeTurno()){
-            this.proximaJugada(reproductor, partida);
+            this.proximaJugada(partida);
         } else {
-            this.siguienteEscena(reproductor);
+            this.siguienteEscena();
         }
     }
 
-    private void proximaJugada(MediaPlayer reproductor, Partida partida) {
+    private void proximaJugada(Partida partida) {
         Jugada jugada = partida.obtenerJugada();
         partida.siguienteTurno();
 
-        PreviaPreguntaLayout previaPregunta = new PreviaPreguntaLayout(reproductor, jugada);
-        ControladorEscenas controlador = new ControladorEscenas(stage, reproductor);
+        PreviaPreguntaLayout previaPregunta = new PreviaPreguntaLayout(jugada);
+        ControladorEscenas controlador = new ControladorEscenas(stage);
 
         previaPregunta.eventoSiguiente((event) -> controlador.crearEscena(jugada));
 
@@ -57,23 +56,20 @@ public class KahootJuego extends KahootModo {
             controlador.procesarJugada(event.getSource(), jugada);
 
             if (partida.existeTurno()){
-                this.proximaJugada(reproductor, partida);
+                this.proximaJugada(partida);
             } else {
                 PuntajeParcialLayout puntajeParcial;
                 partida.finalizarTurnos();
-                puntajeParcial = new PuntajeParcialLayout(this.stage, reproductor, this.jugadores);
+                puntajeParcial = new PuntajeParcialLayout(this.stage, this.jugadores);
                 if (this.juego.existePartida()){
-                    puntajeParcial.eventoSiguiente((e) -> this.proximaPartida(reproductor), "Continuar");
+                    puntajeParcial.eventoSiguiente((e) -> this.proximaPartida(), "Continuar");
                 } else {
                     puntajeParcial.eventoSiguiente(this.eventoSalida, "Continuar");
                 }
-                new CambioEscenaEventHandler(this.stage, puntajeParcial).handle(null);
+                new CambioEscenaEventHandler(this.panelPadre, puntajeParcial).handle(null);
             }
         });
-        new CambioEscenaEventHandler(this.stage, previaPregunta).handle(null);
+        new CambioEscenaEventHandler(this.panelPadre, previaPregunta).handle(null);
 
-    }
-
-    private void finalizarJuego(MediaPlayer reproductor){
     }
 }

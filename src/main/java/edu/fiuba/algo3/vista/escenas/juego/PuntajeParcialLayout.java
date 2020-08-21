@@ -25,8 +25,7 @@ public class PuntajeParcialLayout extends BaseLayout {
 
     private final Stage escenario;
 
-    public PuntajeParcialLayout(Stage stage, MediaPlayer reproductor, ArrayList<Jugador> jugadores) {
-        super(reproductor);
+    public PuntajeParcialLayout(Stage stage, ArrayList<Jugador> jugadores) {
         this.escenario = stage;
         Jugador jugador1 = jugadores.get(0);
         Jugador jugador2 = jugadores.get(1);
