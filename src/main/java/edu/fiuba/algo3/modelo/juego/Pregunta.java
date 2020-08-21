@@ -10,17 +10,21 @@ import java.util.ArrayList;
 public abstract class Pregunta {
 
     private final String titulo;
+    private final String tipo;
     protected final ArrayList<Opcion> opciones = new ArrayList<>();
     protected final EstadoPregunta estado;
 
-    protected Pregunta(String titulo, EstadoPregunta estado){
+    protected Pregunta(String titulo, String tipo, EstadoPregunta estado){
         this.titulo = titulo;
+        this.tipo = tipo;
         this.estado = estado;
     }
 
     public String obtenerTitulo(){
         return this.titulo;
     }
+
+    public String obtenerTipo() { return this.tipo; }
 
     public Boolean conPenalidad() { return this.estado.conPenalidad(); }
 
@@ -49,6 +53,4 @@ public abstract class Pregunta {
         for (Opcion opcion: seleccionadas) seleccionables.remove(opcion);
         return seleccionables;
     }
-
-    public abstract String obtenerTipo();
 }

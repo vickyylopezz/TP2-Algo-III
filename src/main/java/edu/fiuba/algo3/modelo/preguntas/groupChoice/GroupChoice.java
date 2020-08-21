@@ -15,7 +15,7 @@ public class GroupChoice extends Pregunta {
     private final ArrayList<Grupo> grupos;
 
     public GroupChoice(String titulo) {
-        super(titulo, new SinPenalidad(new CalculadorPuntajeParcial()));
+        super(titulo, "Group Choice", new SinPenalidad(new CalculadorPuntajeParcial()));
 
         this.grupos = new ArrayList<>();
     }
@@ -50,9 +50,6 @@ public class GroupChoice extends Pregunta {
             opciones.add(opcionIncorrecta);
         }
     }
-
-    @Override
-    public String obtenerTipo() { return "Group Choice"; }
 
     @Override
     public ArrayList<Opcion> opcionesSeleccionables(ArrayList<Opcion> seleccionadas) {

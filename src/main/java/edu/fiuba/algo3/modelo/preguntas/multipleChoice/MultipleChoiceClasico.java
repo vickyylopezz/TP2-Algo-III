@@ -10,7 +10,7 @@ import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
 public class MultipleChoiceClasico extends Pregunta {
 
     public MultipleChoiceClasico(String titulo) {
-        super(titulo, new SinPenalidad(new CalculadorPuntajeClasico()));
+        super(titulo, "Multiple Choice Clasico", new SinPenalidad(new CalculadorPuntajeClasico()));
     }
 
     public void agregarOpcionIncorrecta(String titulo) throws PreguntaError {
@@ -30,7 +30,4 @@ public class MultipleChoiceClasico extends Pregunta {
         Opcion opcion = new Opcion(titulo, this.puntajeCorrecto());
         this.opciones.add(opcion);
     }
-
-    @Override
-    public String obtenerTipo() { return "Multiple Choice Clasico"; }
 }

@@ -10,7 +10,7 @@ import edu.fiuba.algo3.modelo.preguntas.estados.ConPenalidad;
 public class MultipleChoiceConPenalidad extends Pregunta {
 
     public MultipleChoiceConPenalidad(String titulo) {
-        super(titulo, new ConPenalidad(new CalculadorPuntajeParcial()));
+        super(titulo, "Multiple Choice Con Penalidad", new ConPenalidad(new CalculadorPuntajeParcial()));
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
@@ -28,7 +28,4 @@ public class MultipleChoiceConPenalidad extends Pregunta {
         Opcion opcion = new Opcion(opcionTitulo, this.puntajeIncorrecto());
         this.opciones.add(opcion);
     }
-
-    @Override
-    public String obtenerTipo() { return "Multiple Choice Con Penalidad"; }
 }

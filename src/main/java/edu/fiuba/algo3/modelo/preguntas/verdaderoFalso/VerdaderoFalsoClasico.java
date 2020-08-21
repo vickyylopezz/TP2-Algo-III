@@ -8,7 +8,7 @@ import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 public class VerdaderoFalsoClasico extends Pregunta {
 
     public VerdaderoFalsoClasico(String titulo, String tituloCorrecta, String tiuloIncorrecta) {
-        super(titulo, new SinPenalidad(new CalculadorPuntajeParcial()));
+        super(titulo, "Verdadero Falso Clasico", new SinPenalidad(new CalculadorPuntajeParcial()));
 
         this.agregarOpcionCorrecta(tituloCorrecta);
         this.agregarOpcionIncorrecta(tiuloIncorrecta);
@@ -21,7 +21,4 @@ public class VerdaderoFalsoClasico extends Pregunta {
     private void agregarOpcionIncorrecta(String opcionTitulo) {
         this.opciones.add(new Opcion(opcionTitulo, this.puntajeIncorrecto()));
     }
-
-    @Override
-    public String obtenerTipo() { return "Verdadero Falso Clasico"; }
 }

@@ -10,7 +10,7 @@ import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParci
 public class MultipleChoiceParcial extends Pregunta {
 
     public MultipleChoiceParcial(String titulo) {
-        super(titulo, new SinPenalidad(new CalculadorPuntajeParcialEstricto()));
+        super(titulo, "Multiple Choice Parcial", new SinPenalidad(new CalculadorPuntajeParcialEstricto()));
     }
 
     public void agregarOpcionCorrecta(String opcionTitulo) throws PreguntaError {
@@ -28,7 +28,4 @@ public class MultipleChoiceParcial extends Pregunta {
         Opcion opcion = new Opcion(opcionTitulo, this.puntajeIncorrecto());
         this.opciones.add(opcion);
     }
-
-    @Override
-    public String obtenerTipo() { return "Multiple Choice Parcial"; }
 }
