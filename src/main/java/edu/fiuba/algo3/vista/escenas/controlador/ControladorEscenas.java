@@ -1,17 +1,13 @@
 package edu.fiuba.algo3.vista.escenas.controlador;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.juego.Respuesta;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
+import edu.fiuba.algo3.modelo.preguntas.GroupChoice;
+import edu.fiuba.algo3.modelo.preguntas.OrderedChoice;
+import edu.fiuba.algo3.modelo.preguntas.VerdaderoFalso;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
-import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
-import edu.fiuba.algo3.vista.CargadorResources;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCircularVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
@@ -56,7 +52,7 @@ public class ControladorEscenas extends BaseEscena {
         this.stage = stage;
     }
 
-    public void crearUnaEscena (Jugada jugada) throws PuntoError {
+    public void crearUnaEscena (Jugada jugada) {
         Pregunta pregunta = jugada.obtenerPregunta();
         Jugador jugador = jugada.obtenerJugador();
 
@@ -68,7 +64,7 @@ public class ControladorEscenas extends BaseEscena {
         VBox topBar = new VBox();
         topBar.setPrefSize(Screen.getPrimary().getBounds().getWidth(), 150);
 
-        Label indicadorTipoPregunta = new Label(pregunta.mostrarTipoPregunta());
+        Label indicadorTipoPregunta = new Label(pregunta.obtenerTipo());
         indicadorTipoPregunta.setPadding(new Insets(10,50,10,50));
         indicadorTipoPregunta.setStyle("-fx-text-fill: #000000; -fx-font-size: 15; -fx-font-weight: bold;");
         indicadorTipoPregunta.setWrapText(true);
@@ -97,7 +93,7 @@ public class ControladorEscenas extends BaseEscena {
         indicadorJugador.setAlignment(Pos.CENTER);
         indicadorJugador.setPrefSize(150,50);
 
-        Label indicadorPuntaje = new Label(jugador.puntajeTotal().obtenerPunto().obtenerValor().toString());
+        Label indicadorPuntaje = new Label(jugador.puntajeTotal().obtenerValor().toString());
         indicadorPuntaje.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: black");
         indicadorPuntaje.setAlignment(Pos.CENTER);
         indicadorPuntaje.setPrefSize(150,50);
@@ -169,7 +165,7 @@ public class ControladorEscenas extends BaseEscena {
 
         // ---------------------- VISTA: opciones + confirmar (opcional)
         // PREGUNTA + OPCIONES (centro del borderPane)
-        if (pregunta.getClass() == VerdaderoFalsoClasico.class || pregunta.getClass() == VerdaderoFalsoConPenalidad.class) {
+        if (pregunta.getClass() == VerdaderoFalso.class) {
             vista = new VistaVerdaderoFalso(pregunta, pregunta.obtenerOpciones(), this);
 
         } else if (pregunta.getClass() == OrderedChoice.class) {

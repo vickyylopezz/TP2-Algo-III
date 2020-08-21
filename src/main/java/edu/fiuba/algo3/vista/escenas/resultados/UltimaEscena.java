@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.vista.escenas.resultados;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntajeIgualError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.vista.componentes.EmpateVista;
@@ -19,14 +17,15 @@ import static javafx.geometry.Pos.CENTER;
 
 public class UltimaEscena extends BaseEscena {
     private StackPane cuerpo;
-    public UltimaEscena(MediaPlayer reproductor, Jugador jugador1, Jugador jugador2, Juego juego) throws PuntoError {
+    public UltimaEscena(MediaPlayer reproductor, Jugador jugador1, Jugador jugador2, Juego juego) {
         super(reproductor);
         Node cuerpo = this.crearCuerpo(jugador1,jugador2,juego);
         this.raiz.setCenter(cuerpo);
 
     }
 
-    private Node crearCuerpo(Jugador jugador1, Jugador jugador2,Juego juego) throws PuntoError {
+    private Node crearCuerpo(Jugador jugador1, Jugador jugador2,Juego juego) {
+        /*
         try{
             //TituloGanador
             Label tituloGanador = new Label("G A N A D O R");
@@ -34,7 +33,7 @@ public class UltimaEscena extends BaseEscena {
             tituloGanador.setAlignment(Pos.TOP_CENTER);
 
             //JugadorGanador
-            GanadorVista ganador = new GanadorVista(juego.ganador(jugador1,jugador2).nombre());
+            GanadorVista ganador = new GanadorVista(juego.ganador(jugador1, jugador2).nombre());
 
             //XBox
             VBox vbox = new VBox(20);
@@ -57,6 +56,8 @@ public class UltimaEscena extends BaseEscena {
             return vbox;
         }
 
+         */
+        return null;
     }
     
 }

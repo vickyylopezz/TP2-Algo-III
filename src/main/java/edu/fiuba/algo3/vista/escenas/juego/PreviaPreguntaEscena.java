@@ -28,7 +28,7 @@ public class PreviaPreguntaEscena extends BaseEscena {
     private Node crearCuerpo(Jugada jugada) {
         VBox vbox = new VBox(100);
         vbox.setPadding(new Insets(70));
-        Label jLabelTipoPregunta = new Label(jugada.obtenerPregunta().mostrarTipoPregunta());
+        Label jLabelTipoPregunta = new Label(jugada.obtenerPregunta().obtenerTipo());
         jLabelTipoPregunta.setAlignment(Pos.CENTER);
         jLabelTipoPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold");
 

@@ -19,8 +19,6 @@ public abstract class Pregunta {
         this.estado = estado;
     }
 
-    public abstract String mostrarTipoPregunta();
-
     public String obtenerTitulo(){
         return this.titulo;
     }

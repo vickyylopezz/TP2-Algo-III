@@ -2,8 +2,6 @@ package edu.fiuba.algo3.kahoot;
 
 import edu.fiuba.algo3.eventos.kahoot.KahootCambioModoEventHandler;
 import edu.fiuba.algo3.eventos.kahoot.KahootSalirEventHandler;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
-import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.Resources;
@@ -31,7 +29,7 @@ public class Kahoot {
         this.reproductor = new MediaPlayer(this.musica);
     }
 
-    public void iniciar() throws PuntoError {
+    public void iniciar() {
         KahootModo modoPreparacion = new KahootPreparacion(this.stage, this.preguntas, this.jugadores);
         KahootModo modoJuego = new KahootJuego(this.stage, this.preguntas, this.jugadores);
         KahootModo modoRespuestas = new KahootResultados(this.stage, this.preguntas, this.jugadores);

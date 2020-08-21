@@ -1,11 +1,8 @@
 package edu.fiuba.algo3.kahoot;
 
-import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
 import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaEscena;
 import edu.fiuba.algo3.vista.escenas.juego.PuntajeParcialEscena;
 import javafx.scene.media.MediaPlayer;
@@ -53,13 +50,7 @@ public class KahootJuego extends KahootModo {
         PreviaPreguntaEscena previaPregunta = new PreviaPreguntaEscena(reproductor, jugada);
         ControladorEscenas controlador = new ControladorEscenas(stage, reproductor);
 
-        previaPregunta.eventoSiguiente((event) -> {
-            try {
-                controlador.crearUnaEscena(jugada);
-            } catch (PuntoError puntoError) {
-                puntoError.printStackTrace();
-            }
-        });
+        previaPregunta.eventoSiguiente((event) -> controlador.crearUnaEscena(jugada));
 
         controlador.eventoSiguiente((event) -> {
             // Obtengo las respuestas del usuario
@@ -81,13 +72,9 @@ public class KahootJuego extends KahootModo {
             if (partida.existeTurno()){
                 this.proximaJugada(reproductor, partida);
             } else {
-                PuntajeParcialEscena puntajeParcial = null;
-                try {
-                    partida.finalizarTurnos();
-                    puntajeParcial = new PuntajeParcialEscena(this.stage, reproductor, this.jugadores);
-                } catch (PuntoError puntoError) {
-                    puntoError.printStackTrace();
-                }
+                PuntajeParcialEscena puntajeParcial;
+                partida.finalizarTurnos();
+                puntajeParcial = new PuntajeParcialEscena(this.stage, reproductor, this.jugadores);
                 if (this.juego.existePartida()){
                     puntajeParcial.eventoSiguiente((e) -> this.proximaPartida(reproductor), "Continuar");
                 } else {

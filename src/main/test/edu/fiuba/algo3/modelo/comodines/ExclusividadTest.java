@@ -124,7 +124,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYNoSeGuardaEnListaDeComodinesDeLaRespuestaInorrecta() throws ComodinError, PuntoError {
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYNoSeGuardaEnListaDeComodinesDeLaRespuestaInorrecta() throws ComodinError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);

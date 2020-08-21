@@ -104,7 +104,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaConDistintoJugadorQueElComodin() throws ComodinError, PuntoError {
+    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaConDistintoJugadorQueElComodin() throws ComodinError {
         Multiplicador multiplicador = new Multiplicador(2);
 
         Jugador unJugador = mock(Jugador.class);
@@ -180,7 +180,7 @@ public class MultiplicadorTest {
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnLaRespuestaConDistintoJugadorQueElComodin() throws ComodinError, PuntoError {
+    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnLaRespuestaConDistintoJugadorQueElComodin() throws ComodinError {
         Multiplicador multiplicador = new Multiplicador(2);
 
         Jugador unJugador = mock(Jugador.class);

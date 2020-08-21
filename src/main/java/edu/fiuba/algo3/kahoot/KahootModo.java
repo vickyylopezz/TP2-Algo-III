@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.kahoot;
 
-
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
-import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import javafx.event.ActionEvent;
@@ -28,5 +25,5 @@ public abstract class KahootModo {
         this.eventoSalida = eventoDeSalida;
     }
 
-    abstract public void iniciar(MediaPlayer reproductor) throws PuntoError;
+    abstract public void iniciar(MediaPlayer reproductor);
 }

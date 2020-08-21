@@ -1,28 +1,18 @@
 package edu.fiuba.algo3.vista.escenas.juego;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
-import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.modelo.juego.Partida;
-import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.vista.Resources;
-import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
-import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
 import edu.fiuba.algo3.vista.componentes.contenedores.CajaVista;
 import edu.fiuba.algo3.vista.escenas.BaseEscena;
-import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -35,7 +25,7 @@ public class PuntajeParcialEscena extends BaseEscena {
 
     private final Stage escenario;
 
-    public PuntajeParcialEscena(Stage stage, MediaPlayer reproductor, ArrayList<Jugador> jugadores) throws PuntoError {
+    public PuntajeParcialEscena(Stage stage, MediaPlayer reproductor, ArrayList<Jugador> jugadores) {
         super(reproductor);
         this.escenario = stage;
         Jugador jugador1 = jugadores.get(0);
@@ -44,7 +34,7 @@ public class PuntajeParcialEscena extends BaseEscena {
         this.raiz.setCenter(cuerpo);
     }
 
-    private Node crearCuerpo(Jugador jugador1, Jugador jugador2) throws PuntoError {
+    private Node crearCuerpo(Jugador jugador1, Jugador jugador2) {
         VBox vbox1 = new VBox(50);
 
         Group contenedorIcono1 = new Group();
@@ -61,7 +51,7 @@ public class PuntajeParcialEscena extends BaseEscena {
         Label jLabelNombreJugador1 = new Label(jugador1.nombre());
         jLabelNombreJugador1.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 30; -fx-font-weight: bold");
         jLabelNombreJugador1.setAlignment(Pos.CENTER);
-        Punto puntaje1 = jugador1.puntajeTotal().obtenerPunto();
+        Punto puntaje1 = jugador1.puntajeTotal();
         Label jLabelPuntos1 = new Label(puntaje1.obtenerValor().toString());
         jLabelPuntos1.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 24; -fx-font-weight: bold");
         jLabelPuntos1.setAlignment(Pos.CENTER);
@@ -84,7 +74,7 @@ public class PuntajeParcialEscena extends BaseEscena {
         Label jLabelNombreJugador2 = new Label(jugador2.nombre());
         jLabelNombreJugador2.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 30; -fx-font-weight: bold");
         jLabelNombreJugador2.setAlignment(Pos.CENTER);
-        Punto puntaje2 = jugador2.puntajeTotal().obtenerPunto();
+        Punto puntaje2 = jugador2.puntajeTotal();
         Label jLabelPuntos2 = new Label(puntaje2.obtenerValor().toString());
         jLabelPuntos2.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 24; -fx-font-weight: bold");
         jLabelPuntos2.setAlignment(Pos.CENTER);

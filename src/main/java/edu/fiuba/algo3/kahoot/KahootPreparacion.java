@@ -79,6 +79,7 @@ public class KahootPreparacion extends KahootModo {
     }
 
     private void precargarPreguntas() {
+        /*
         Lector lector = new Lector();
         try {
             lector.extraerPreguntas(new File(Resources.RutaDataPreguntas()));
@@ -88,5 +89,7 @@ public class KahootPreparacion extends KahootModo {
 
         this.preguntas.addAll(lector.obtenerPreguntas());
         Collections.shuffle(this.preguntas);
+
+         */
     }
 }

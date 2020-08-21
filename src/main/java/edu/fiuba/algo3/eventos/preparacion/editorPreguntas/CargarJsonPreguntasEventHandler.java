@@ -28,7 +28,7 @@ public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent
                 new FileChooser.ExtensionFilter("Json Archivo", "*.json")
         );
         File archivo = seleccionadorArchivos.showOpenDialog(this.stage);
-
+        /*
         Lector lector = new Lector();
         try { lector.extraerPreguntas(archivo);
         } catch (Exception e) {
@@ -37,6 +37,8 @@ public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent
         }
 
         this.preguntas.addAll(lector.obtenerPreguntas());
+
+         */
     }
 
     public void mostrarAlertaDeCargaDeArchivo(String error) {
