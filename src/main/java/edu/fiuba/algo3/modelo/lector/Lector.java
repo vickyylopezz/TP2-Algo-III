@@ -7,6 +7,10 @@ import edu.fiuba.algo3.modelo.excepciones.lector.LectorSintaxisError;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserGroupChoice;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserMultipleChoice;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserOrderedChoice;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserVerdaderoFalso;
 
 import java.util.ArrayList;
 
