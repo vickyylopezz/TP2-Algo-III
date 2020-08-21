@@ -178,4 +178,11 @@ public class MultiplicadorTest {
 
         assertEquals(-2,puntoNuevo.obtenerValor());
     }
+
+    @Test
+    public void toStringDevuelveElNombreDelMultiplicador() throws ComodinError{
+        Multiplicador multiplicador = new Multiplicador(50);
+
+        assertEquals("x50", multiplicador.toString());
+    }
 }

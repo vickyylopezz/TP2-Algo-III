@@ -31,4 +31,7 @@ public class Exclusividad extends Comodin {
         if (respuestaCorrecta != null) respuestaCorrecta.aplicarComodin(this);
             //respuesta.eliminarComodin(this);
     }
+
+    @Override
+    public String toString() { return "EXC"; }
 }

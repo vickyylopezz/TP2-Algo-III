@@ -47,4 +47,6 @@ public abstract class Comodin {
     public Punto aplicarComodinAPunto(Punto puntaje) {
         return puntaje.multiplicarPorFactor(this.factor);
     }
+
+    public abstract String toString();
 }
