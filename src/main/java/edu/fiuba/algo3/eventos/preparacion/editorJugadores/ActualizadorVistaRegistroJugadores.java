@@ -1,16 +1,16 @@
 package edu.fiuba.algo3.eventos.preparacion.editorJugadores;
 
 import edu.fiuba.algo3.modelo.juego.Jugador;
-import edu.fiuba.algo3.vista.escenas.preparacion.EditorJugadoresEscena;
+import edu.fiuba.algo3.vista.escenas.preparacion.EditorJugadoresLayout;
 
 import java.util.ArrayList;
 
 public class ActualizadorVistaRegistroJugadores implements JugadorObservador {
 
     private final ArrayList<Jugador> jugadores;
-    private final EditorJugadoresEscena vista;
+    private final EditorJugadoresLayout vista;
 
-    public ActualizadorVistaRegistroJugadores(ArrayList<Jugador> jugadores, EditorJugadoresEscena vista) {
+    public ActualizadorVistaRegistroJugadores(ArrayList<Jugador> jugadores, EditorJugadoresLayout vista) {
         this.jugadores = jugadores;
         this.vista = vista;
     }

@@ -3,8 +3,8 @@ package edu.fiuba.algo3.kahoot;
 import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
 import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
 import edu.fiuba.algo3.modelo.juego.*;
-import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaEscena;
-import edu.fiuba.algo3.vista.escenas.juego.PuntajeParcialEscena;
+import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaLayout;
+import edu.fiuba.algo3.vista.escenas.juego.PuntajeParcialLayout;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
@@ -47,7 +47,7 @@ public class KahootJuego extends KahootModo {
         Jugada jugada = partida.obtenerJugada();
         partida.siguienteTurno();
 
-        PreviaPreguntaEscena previaPregunta = new PreviaPreguntaEscena(reproductor, jugada);
+        PreviaPreguntaLayout previaPregunta = new PreviaPreguntaLayout(reproductor, jugada);
         ControladorEscenas controlador = new ControladorEscenas(stage, reproductor);
 
         previaPregunta.eventoSiguiente((event) -> controlador.crearEscena(jugada));
@@ -59,9 +59,9 @@ public class KahootJuego extends KahootModo {
             if (partida.existeTurno()){
                 this.proximaJugada(reproductor, partida);
             } else {
-                PuntajeParcialEscena puntajeParcial;
+                PuntajeParcialLayout puntajeParcial;
                 partida.finalizarTurnos();
-                puntajeParcial = new PuntajeParcialEscena(this.stage, reproductor, this.jugadores);
+                puntajeParcial = new PuntajeParcialLayout(this.stage, reproductor, this.jugadores);
                 if (this.juego.existePartida()){
                     puntajeParcial.eventoSiguiente((e) -> this.proximaPartida(reproductor), "Continuar");
                 } else {

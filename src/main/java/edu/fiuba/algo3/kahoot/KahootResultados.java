@@ -4,7 +4,7 @@ import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.vista.escenas.resultados.UltimaEscena;
+import edu.fiuba.algo3.vista.escenas.resultados.UltimaLayout;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
@@ -19,7 +19,7 @@ public class KahootResultados extends KahootModo {
     @Override
     public void iniciar(MediaPlayer reproductor) {
         this.juego = new Juego(this.preguntas, this.jugadores);
-        UltimaEscena finalizacion = new UltimaEscena(reproductor,this.jugadores,this.juego);
+        UltimaLayout finalizacion = new UltimaLayout(reproductor,this.jugadores,this.juego);
         finalizacion.eventoSiguiente(this.eventoSalida,"Volver a Jugar");
 
         new CambioEscenaEventHandler(this.stage, finalizacion).handle(null);

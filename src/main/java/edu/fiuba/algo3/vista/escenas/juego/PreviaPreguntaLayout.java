@@ -1,28 +1,23 @@
 package edu.fiuba.algo3.vista.escenas.juego;
 
 import edu.fiuba.algo3.modelo.juego.Jugada;
-import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraCajaVista;
-import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
 import edu.fiuba.algo3.vista.componentes.contenedores.CajaVista;
 import edu.fiuba.algo3.vista.componentes.contenedores.EtiquetaVista;
-import edu.fiuba.algo3.vista.componentes.textos.Titulo;
-import edu.fiuba.algo3.vista.escenas.BaseEscena;
+import edu.fiuba.algo3.vista.escenas.BaseLayout;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 
-public class PreviaPreguntaEscena extends BaseEscena {
-    public PreviaPreguntaEscena(MediaPlayer reproductor, Jugada jugada) {
+public class PreviaPreguntaLayout extends BaseLayout {
+
+    public PreviaPreguntaLayout(MediaPlayer reproductor, Jugada jugada) {
         super(reproductor);
         Node cuerpo = this.crearCuerpo(jugada);
-        this.raiz.setCenter(cuerpo);
+        this.setCenter(cuerpo);
     }
 
     private Node crearCuerpo(Jugada jugada) {

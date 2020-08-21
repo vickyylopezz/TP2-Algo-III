@@ -6,20 +6,18 @@ import edu.fiuba.algo3.modelo.comodines.Multiplicador;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.lector.Lector;
 import edu.fiuba.algo3.vista.Resources;
-import edu.fiuba.algo3.vista.escenas.preparacion.BienvenidaEscena;
-import edu.fiuba.algo3.vista.escenas.preparacion.EditorJugadoresEscena;
-import edu.fiuba.algo3.vista.escenas.preparacion.EditorPreguntasEscena;
-import edu.fiuba.algo3.vista.escenas.preparacion.IniciarJuegoEscena;
+import edu.fiuba.algo3.vista.escenas.preparacion.BienvenidaLayout;
+import edu.fiuba.algo3.vista.escenas.preparacion.EditorJugadoresLayout;
+import edu.fiuba.algo3.vista.escenas.preparacion.EditorPreguntasLayout;
+import edu.fiuba.algo3.vista.escenas.preparacion.IniciarJuegoLayout;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -35,10 +33,10 @@ public class KahootPreparacion extends KahootModo {
 
     @Override
     public void iniciar(MediaPlayer reproductor) {
-        BienvenidaEscena bienvenida = new BienvenidaEscena(reproductor);
-        EditorPreguntasEscena editorPreguntas = new EditorPreguntasEscena(this.stage, this.preguntas,reproductor);
-        EditorJugadoresEscena editorJugadores = new EditorJugadoresEscena(this.jugadores, reproductor);
-        IniciarJuegoEscena iniciarJuego = new IniciarJuegoEscena(reproductor);
+        BienvenidaLayout bienvenida = new BienvenidaLayout(reproductor);
+        EditorPreguntasLayout editorPreguntas = new EditorPreguntasLayout(this.stage, this.preguntas,reproductor);
+        EditorJugadoresLayout editorJugadores = new EditorJugadoresLayout(this.jugadores, reproductor);
+        IniciarJuegoLayout iniciarJuego = new IniciarJuegoLayout(reproductor);
 
         bienvenida.eventoBotonPrincipal(new CambioEscenaEventHandler(this.stage, editorJugadores));
         bienvenida.eventoSiguiente(

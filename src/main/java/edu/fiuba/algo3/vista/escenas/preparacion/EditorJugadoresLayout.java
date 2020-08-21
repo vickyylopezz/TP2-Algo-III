@@ -4,7 +4,7 @@ import edu.fiuba.algo3.eventos.preparacion.editorJugadores.ActualizadorVistaRegi
 import edu.fiuba.algo3.eventos.preparacion.editorJugadores.JugadorObservable;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.vista.componentes.JugadorVista;
-import edu.fiuba.algo3.vista.escenas.BaseEscena;
+import edu.fiuba.algo3.vista.escenas.BaseLayout;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.layout.HBox;
@@ -13,13 +13,13 @@ import javafx.scene.media.MediaPlayer;
 
 import java.util.ArrayList;
 
-public class EditorJugadoresEscena extends BaseEscena {
+public class EditorJugadoresLayout extends BaseLayout {
 
-    public EditorJugadoresEscena(ArrayList<Jugador> jugadores, MediaPlayer reproductor) {
+    public EditorJugadoresLayout(ArrayList<Jugador> jugadores, MediaPlayer reproductor) {
         super(reproductor);
 
         ArrayList<JugadorObservable> jugadoresObservables = this.crearJugadoresObservables(jugadores);
-        this.raiz.setCenter(this.crearCuerpo(jugadoresObservables));
+        this.setCenter(this.crearCuerpo(jugadoresObservables));
     }
 
     private ArrayList<JugadorObservable> crearJugadoresObservables(ArrayList<Jugador> jugadores) {
@@ -58,5 +58,5 @@ public class EditorJugadoresEscena extends BaseEscena {
     public void deshabilitarEscenaSigueinte() { this.botonSigueinte.desactivar(); }
 
     @Override
-    protected void botonSigueinteDefinido() { this.botonSigueinte.desactivar(); }
+    protected void botonSiguienteDefinido() { this.botonSigueinte.desactivar(); }
 }

@@ -1,21 +1,21 @@
 package edu.fiuba.algo3.vista.escenas.preparacion;
 
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
-import edu.fiuba.algo3.vista.escenas.BaseEscena;
+import edu.fiuba.algo3.vista.escenas.BaseLayout;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.StackPane;
 import javafx.scene.media.MediaPlayer;
 
-public class IniciarJuegoEscena extends BaseEscena {
+public class IniciarJuegoLayout extends BaseLayout {
 
     private StackPane cuerpo;
 
-    public IniciarJuegoEscena(MediaPlayer reproductor) {
+    public IniciarJuegoLayout(MediaPlayer reproductor) {
         super(reproductor);
 
         this.cuerpo = new StackPane();
-        this.raiz.setCenter(this.cuerpo);
+        this.setCenter(this.cuerpo);
     }
 
     public void eventoBotonPrincipal(EventHandler<ActionEvent> evento) {

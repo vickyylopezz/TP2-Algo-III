@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.vista.escenas;
 
-import edu.fiuba.algo3.vista.CargadorResources;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.ContenedorSonido;
 import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaDerechaVista;
@@ -8,30 +7,23 @@ import edu.fiuba.algo3.vista.componentes.botones.BotonEtiquetaIzquierdaVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraKahootVista;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 
-public abstract class BaseEscena extends Scene {
+public abstract class BaseLayout extends BorderPane {
 
-    protected final BorderPane raiz;
     protected final CabeceraKahootVista cabecera;
     protected BotonEtiquetaIzquierdaVista botonSigueinte;
     protected BotonEtiquetaDerechaVista botonAnterior;
 
-    public BaseEscena(MediaPlayer reproductor) {
-        super(new Label("Loading"), 1280, 800);
-        this.raiz = new BorderPane();
+    public BaseLayout(MediaPlayer reproductor) {
         this.cabecera = new CabeceraKahootVista();
+        this.setTop(this.cabecera);
 
-        this.raiz.setTop(this.cabecera);
-        this.setRoot(this.raiz);
         ContenedorSonido botoneraSonido = new ContenedorSonido(reproductor);
-        this.raiz.setBottom(botoneraSonido.obtenerNodo());
+        this.setBottom(botoneraSonido.obtenerNodo());
 
-        this.raiz.setStyle("-fx-background-image: url(" + Resources.FondoPrincipalRuta() + ");" + "-fx-background-size: cover");
+        this.setStyle("-fx-background-image: url(" + Resources.FondoPrincipalRuta() + ");" + "-fx-background-size: cover");
     }
 
     public void eventoSiguiente(EventHandler<ActionEvent> evento) {
@@ -51,7 +43,7 @@ public abstract class BaseEscena extends Scene {
         this.botonSigueinte = new BotonEtiquetaIzquierdaVista(tituloBoton);
         this.botonSigueinte.setOnAction(evento);
         this.cabecera.definirPanelDerecho(this.botonSigueinte);
-        this.botonSigueinteDefinido();
+        this.botonSiguienteDefinido();
     }
 
     public void eventoAnterior(EventHandler<ActionEvent> evento, String titulo) {
@@ -66,7 +58,7 @@ public abstract class BaseEscena extends Scene {
         this.botonAnteriorDefinido();
     }
 
-    protected void botonSigueinteDefinido() { }
+    protected void botonSiguienteDefinido() { }
 
     protected void botonAnteriorDefinido() { }
 }

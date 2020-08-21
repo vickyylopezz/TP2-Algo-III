@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.contenedores.CajaVista;
-import edu.fiuba.algo3.vista.escenas.BaseEscena;
+import edu.fiuba.algo3.vista.escenas.BaseLayout;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
@@ -21,17 +21,17 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 
-public class PuntajeParcialEscena extends BaseEscena {
+public class PuntajeParcialLayout extends BaseLayout {
 
     private final Stage escenario;
 
-    public PuntajeParcialEscena(Stage stage, MediaPlayer reproductor, ArrayList<Jugador> jugadores) {
+    public PuntajeParcialLayout(Stage stage, MediaPlayer reproductor, ArrayList<Jugador> jugadores) {
         super(reproductor);
         this.escenario = stage;
         Jugador jugador1 = jugadores.get(0);
         Jugador jugador2 = jugadores.get(1);
         Node cuerpo = this.crearCuerpo(jugador1, jugador2);
-        this.raiz.setCenter(cuerpo);
+        this.setCenter(cuerpo);
     }
 
     private Node crearCuerpo(Jugador jugador1, Jugador jugador2) {

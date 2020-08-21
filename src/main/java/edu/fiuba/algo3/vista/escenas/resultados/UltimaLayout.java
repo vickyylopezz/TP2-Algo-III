@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.vista.componentes.EmpateVista;
 import edu.fiuba.algo3.vista.componentes.GanadorVista;
-import edu.fiuba.algo3.vista.escenas.BaseEscena;
+import edu.fiuba.algo3.vista.escenas.BaseLayout;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -17,13 +17,14 @@ import java.util.ArrayList;
 
 import static javafx.geometry.Pos.CENTER;
 
-public class UltimaEscena extends BaseEscena {
+public class UltimaLayout extends BaseLayout {
+
     private StackPane cuerpo;
-    public UltimaEscena(MediaPlayer reproductor, ArrayList<Jugador> jugadores, Juego juego) {
+
+    public UltimaLayout(MediaPlayer reproductor, ArrayList<Jugador> jugadores, Juego juego) {
         super(reproductor);
         Node cuerpo = this.crearCuerpo(jugadores,juego);
-        this.raiz.setCenter(cuerpo);
-
+        this.setCenter(cuerpo);
     }
 
     private Node crearCuerpo(ArrayList<Jugador> jugadores,Juego juego) {

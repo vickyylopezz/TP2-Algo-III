@@ -2,23 +2,19 @@ package edu.fiuba.algo3.vista.escenas.controlador;
 
 import edu.fiuba.algo3.eventos.juego.SeleccionarComodinEventHandler;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.comodines.Multiplicador;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.juego.Respuesta;
 import edu.fiuba.algo3.modelo.preguntas.VerdaderoFalso;
 import edu.fiuba.algo3.modelo.preguntas.OrderedChoice;
 import edu.fiuba.algo3.modelo.preguntas.GroupChoice;
-import edu.fiuba.algo3.modelo.preguntas.MultipleChoice;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 
 
-import edu.fiuba.algo3.vista.CargadorResources;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCircularVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
-import edu.fiuba.algo3.vista.escenas.BaseEscena;
+import edu.fiuba.algo3.vista.escenas.BaseLayout;
 import edu.fiuba.algo3.vista.escenas.preguntas.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -29,16 +25,12 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.scene.shape.Line;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
@@ -47,7 +39,7 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ControladorEscenas extends BaseEscena {
+public class ControladorEscenas extends BaseLayout {
     private Stage stage;
     private VBox topBar = new VBox();
     private BorderPane sideBar = new BorderPane();

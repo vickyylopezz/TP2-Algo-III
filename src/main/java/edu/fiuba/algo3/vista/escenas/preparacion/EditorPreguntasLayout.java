@@ -7,7 +7,7 @@ import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
 import edu.fiuba.algo3.vista.componentes.cabeceras.CabeceraCajaVista;
 import edu.fiuba.algo3.vista.componentes.contenedores.CajaVista;
 import edu.fiuba.algo3.vista.componentes.contenedores.ListadoPreguntasVista;
-import edu.fiuba.algo3.vista.escenas.BaseEscena;
+import edu.fiuba.algo3.vista.escenas.BaseLayout;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -18,15 +18,15 @@ import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class EditorPreguntasEscena extends BaseEscena {
+public class EditorPreguntasLayout extends BaseLayout {
 
-    public EditorPreguntasEscena(Stage stage, ArrayList<Pregunta> preguntas, MediaPlayer reproductor) {
+    public EditorPreguntasLayout(Stage stage, ArrayList<Pregunta> preguntas, MediaPlayer reproductor) {
         super(reproductor);
         ObservableList<Pregunta> preguntasObserver = FXCollections.observableList(preguntas);
         preguntasObserver.addListener(new ActualizadorPreguntasListener(preguntas));
 
         Node cuerpo = this.crearCuerpo(stage, preguntasObserver);
-        this.raiz.setCenter(cuerpo);
+        this.setCenter(cuerpo);
     }
 
     private Node crearCuerpo(Stage stage, ObservableList<Pregunta> preguntas) {
