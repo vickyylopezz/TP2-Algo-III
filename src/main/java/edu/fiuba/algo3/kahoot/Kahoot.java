@@ -38,18 +38,14 @@ public class Kahoot {
 
         modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego,reproductor));
         modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas,reproductor));
-        modoRespuestas.cuandoFinaliceEjecutar(new KahootSalirEventHandler(stage));
+        modoRespuestas.cuandoFinaliceEjecutar(new KahootSalirEventHandler(stage,reproductor));
 
         modoPreparacion.iniciar(reproductor);
         this.comenzarMusica();
     }
 
     public void comenzarMusica(){
-        this.reproductor.setOnEndOfMedia(new Runnable() {
-            public void run() {
-                reproductor.seek(Duration.ZERO);
-            }
-        });
+        this.reproductor.setOnEndOfMedia(() -> reproductor.seek(Duration.ZERO));
         this.reproductor.play();
     }
 }
