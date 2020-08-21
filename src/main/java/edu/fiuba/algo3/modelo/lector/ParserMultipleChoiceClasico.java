@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
+import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoice;
 
 public class ParserMultipleChoiceClasico implements ParserPregunta {
 
@@ -31,7 +31,7 @@ public class ParserMultipleChoiceClasico implements ParserPregunta {
         }
         String nombrePregunta = preguntaJson.getAsString();
 
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico(nombrePregunta);
+        MultipleChoice pregunta = MultipleChoice.Clasico(nombrePregunta);
 
         JsonArray opcionesCorrectas;
         try { opcionesCorrectas = objeto.getAsJsonArray("opcionesCorrectas"); }

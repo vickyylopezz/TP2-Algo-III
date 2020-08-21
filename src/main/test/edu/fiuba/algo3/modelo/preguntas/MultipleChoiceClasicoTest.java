@@ -2,8 +2,7 @@ package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
-import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
+import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoice;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import org.junit.jupiter.api.Test;
@@ -18,18 +17,10 @@ public class MultipleChoiceClasicoTest {
     // --------------------------- Test unitarios ---------------------------
     //
 
-    // Test implementacion
-    @Test
-    public void multipleChoiceClasicoImplementaInterfacePregunta() {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
-
-        assertTrue(pregunta instanceof Pregunta);
-    }
-
     // Test obtenerTitulo
     @Test
     public void creacionMultipleChoiceConTituloObtenerTituloLoDevuelve() {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         assertEquals("TITULO PREGUNTA", pregunta.obtenerTitulo());
     }
@@ -37,7 +28,7 @@ public class MultipleChoiceClasicoTest {
     // Test obtenerOpciones
     @Test
     public void obtenerOpcionesSinHaberAgregadoOpcionesDevuelveArrayVacio() {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         assertTrue(opciones.isEmpty());
@@ -45,7 +36,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void obtenerOpcionesDevuelveTodasLasOpcionesAgregadas() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("Si papa, Obiousli");
         pregunta.agregarOpcionIncorrecta("No lo se Rick");
@@ -60,7 +51,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void obtenerOpcionesLasDevuelveEnElOrdenGuardado() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
         pregunta.agregarOpcionIncorrecta("OPCINC2");
@@ -80,7 +71,7 @@ public class MultipleChoiceClasicoTest {
     // Test agregarOpcionIncorrecta
     @Test
     public void agregarOpcionIncorrectaGuardaLaOpcionEnLaPregunta() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionIncorrecta("OPCION INCORRECTA");
 
@@ -94,8 +85,8 @@ public class MultipleChoiceClasicoTest {
     }
 
     @Test
-    public void agregarOpcionIncorrectaGuardaLaOpcionEnLaPreguntaConValorCero() throws PreguntaError, PuntoError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+    public void agregarOpcionIncorrectaGuardaLaOpcionEnLaPreguntaConValorCero() throws PreguntaError {
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionIncorrecta("OPCION INCORRECTA");
 
@@ -108,7 +99,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void agregarVariasOpcionesIncorrectasGuardaTodasLasOpcionesEnLaPregunta() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionIncorrecta("OPCINC1");
         pregunta.agregarOpcionIncorrecta("OPCINC2");
@@ -121,7 +112,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void agregarMasDeCincoOpcionesIncorrectasLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionIncorrecta("OPCINC1");
         pregunta.agregarOpcionIncorrecta("OPCINC2");
@@ -135,7 +126,7 @@ public class MultipleChoiceClasicoTest {
     // Test agregarOpcionCorrecta
     @Test
     public void agregarOpcionCorrectaGuardaLaOpcionEnLaPregunta() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
 
@@ -149,8 +140,8 @@ public class MultipleChoiceClasicoTest {
     }
 
     @Test
-    public void agregarOpcionCorrectaGuardaLaOpcionEnLaPreguntaConValorUno() throws PreguntaError, PuntoError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+    public void agregarOpcionCorrectaGuardaLaOpcionEnLaPreguntaConValorUno() throws PreguntaError {
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
 
@@ -163,7 +154,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void agregarVariasOpcionesCorrectasGuardaTodasLasOpcionesEnLaPregunta() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
         pregunta.agregarOpcionCorrecta("OPCCOR2");
@@ -176,7 +167,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void agregarMasDeCincoOpcionesCorrectasLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
         pregunta.agregarOpcionCorrecta("OPCCOR2");
@@ -190,7 +181,7 @@ public class MultipleChoiceClasicoTest {
     // Test agregarOpcionesCorrecta y agregarOpcionesIncorrecta
     @Test
     public void agregarVariasOpcionesCorrectasEIncorrectasGuardaTodasLasOpcionesEnLaPregunta() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
         pregunta.agregarOpcionIncorrecta("OPCINC2");
@@ -204,7 +195,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void agregarMasDeCincoOpcionesSextaOpcionCorrectaLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
         pregunta.agregarOpcionIncorrecta("OPCINC2");
@@ -217,7 +208,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void agregarMasDeCincoOpcionesSextaOpcionIncorrectaLanzaPreguntaError() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
         pregunta.agregarOpcionIncorrecta("OPCINC2");
@@ -231,7 +222,7 @@ public class MultipleChoiceClasicoTest {
     // Test puntajeConOpciones
     @Test
     public void puntajeSeleccionandoTodasLasOpcionesCorrectasPuntajeUno() throws PreguntaError, PuntoError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
         pregunta.agregarOpcionIncorrecta("OPCINC2");
@@ -252,7 +243,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void puntajeSeleccionandoTodasLasOpcionesCorrectasYUnaIncorrectaDevuelveCero() throws PreguntaError, PuntoError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
         pregunta.agregarOpcionIncorrecta("OPCINC2");
@@ -274,7 +265,7 @@ public class MultipleChoiceClasicoTest {
 
     @Test
     public void puntajeSeleccionandoUnaSolaOpcionCorrectaDevueveCero() throws PreguntaError, PuntoError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
+        MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
         pregunta.agregarOpcionIncorrecta("OPCINC2");
@@ -291,34 +282,4 @@ public class MultipleChoiceClasicoTest {
 
         assertEquals(0, puntaje.obtenerValor());
     }
-
-    /*
-    // Test constructor
-    @Test
-    public void creacionMultipleChoiceConSegundosNegativosLanzaMultipleChoiceError() {
-        assertThrows(PreguntaError.class, () -> new MultipleChoiceClasico("¿Estamos en Algo 3?", -1));
-    }
-
-    @Test
-    public void creacionMultipleChoiceConSegundosCeroNoLanzaMultipleChoiceError() {
-        assertDoesNotThrow(() -> {
-            new MultipleChoiceClasico("¿Estamos en Algo 3?", 0);
-        });
-    }
-
-    @Test
-    public void creacionMultipleChoiceConSegundosMayoresACeroNoLanzaMultipleChoiceError() {
-        assertDoesNotThrow(() -> {
-            new MultipleChoiceClasico("¿Estamos en Algo 3?", 5);
-        });
-    }
-
-    // Test obtenerSegundos
-    @Test
-    public void creacionMultipleChoiceConSegundosObtenerSegundosLoDevuelve() throws PreguntaError {
-        MultipleChoiceClasico pregunta = new MultipleChoiceClasico("¿Estamos en Algo 3?", 5);
-
-        assertEquals(5, pregunta.obtenerSegundos());
-    }
-    */
 }
