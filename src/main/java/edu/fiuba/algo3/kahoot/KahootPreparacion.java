@@ -1,6 +1,9 @@
 package edu.fiuba.algo3.kahoot;
 
 import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
+import edu.fiuba.algo3.modelo.comodines.Exclusividad;
+import edu.fiuba.algo3.modelo.comodines.Multiplicador;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
@@ -26,6 +29,7 @@ public class KahootPreparacion extends KahootModo {
 
         this.precargarPreguntas();
         this.crearJugadores();
+        this.agregarComodines();
     }
 
     @Override
@@ -54,6 +58,17 @@ public class KahootPreparacion extends KahootModo {
         iniciarJuego.eventoBotonPrincipal(this.eventoSalida);
 
         new CambioEscenaEventHandler(this.stage, bienvenida).handle(null);
+    }
+
+    private void agregarComodines() {
+        for(Jugador jugador: this.jugadores) {
+            try {
+                jugador.agregarComodin(new Multiplicador(2));
+                jugador.agregarComodin(new Multiplicador(3));
+                jugador.agregarComodin(new Exclusividad(2));
+                jugador.agregarComodin(new Exclusividad(2));
+            } catch (ComodinError comodinError) { comodinError.printStackTrace(); }
+        }
     }
 
     private void crearJugadores() {
