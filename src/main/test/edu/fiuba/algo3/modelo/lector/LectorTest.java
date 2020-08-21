@@ -173,13 +173,6 @@ public class LectorTest {
 
     // extraerPreguntas
     @Test
-    public void extraerPreguntasTextoNuloDevuelveNull() throws LectorError, PreguntaError {
-        Lector lector = new Lector();
-
-        assertNull(lector.extraerPreguntas(null));
-    }
-
-    @Test
     public void extraerPreguntasTextoConFormatoJsonInvalidoLanzaLectorErrorSintaxisError() {
         Lector lector = new Lector();
 

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.lector;
 
 import com.google.gson.*;
 
+import com.google.gson.stream.JsonReader;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorError;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorSintaxisError;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
@@ -12,9 +13,27 @@ import edu.fiuba.algo3.modelo.lector.parsers.ParserMultipleChoice;
 import edu.fiuba.algo3.modelo.lector.parsers.ParserOrderedChoice;
 import edu.fiuba.algo3.modelo.lector.parsers.ParserVerdaderoFalso;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Lector {
+
+    public ArrayList<Pregunta> extraerPreguntas(File archivo) throws LectorError, PreguntaError {
+        JsonElement preguntasJson;
+        try {
+            JsonReader reader = new JsonReader(new FileReader(archivo));
+            preguntasJson = JsonParser.parseReader(reader);
+        }
+        catch (FileNotFoundException e) {
+            throw new LectorError("Error al leer el archivo");
+        } catch (JsonSyntaxException e) {
+            throw new LectorSintaxisError(e.toString());
+        }
+
+        return this.extraerPreguntas(preguntasJson);
+    }
 
     public ArrayList<Pregunta> extraerPreguntas(String cadenaJson) throws LectorError, PreguntaError {
         if (cadenaJson == null) return null;
@@ -22,10 +41,14 @@ public class Lector {
         JsonElement preguntasJson;
         try { preguntasJson = JsonParser.parseString(cadenaJson); }
         catch (JsonSyntaxException e) { throw new LectorSintaxisError(e.toString()); }
-        JsonArray preguntasArray = preguntasJson.getAsJsonArray();
 
+        return this.extraerPreguntas(preguntasJson);
+    }
+
+    public ArrayList<Pregunta> extraerPreguntas(JsonElement preguntasJson) throws LectorFormatoDePreguntaError, PreguntaError {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
 
+        JsonArray preguntasArray = preguntasJson.getAsJsonArray();
         for (JsonElement preguntaElement: preguntasArray) {
             JsonObject preguntaObjeto;
             try { preguntaObjeto = preguntaElement.getAsJsonObject(); }
