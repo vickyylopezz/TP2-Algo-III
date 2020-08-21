@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
+import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalso;
 
 public class ParserVerdaderoFalsoConPenalidad implements ParserPregunta {
 
@@ -42,6 +42,6 @@ public class ParserVerdaderoFalsoConPenalidad implements ParserPregunta {
             opcionIncorrecta = "Verdadero";
         }
 
-        return new VerdaderoFalsoConPenalidad(tituloPregunta, opcionCorrecta, opcionIncorrecta);
+        return VerdaderoFalso.ConPenalidad(tituloPregunta, opcionCorrecta, opcionIncorrecta);
     }
 }
