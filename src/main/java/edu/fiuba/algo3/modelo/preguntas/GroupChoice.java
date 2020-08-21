@@ -8,6 +8,7 @@ import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParci
 import edu.fiuba.algo3.modelo.preguntas.opcion.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.estados.SinPenalidad;
+import edu.fiuba.algo3.modelo.util.punto.Punto;
 
 import java.util.ArrayList;
 
@@ -21,7 +22,7 @@ public class GroupChoice extends Pregunta {
         this.grupos = new ArrayList<>();
     }
 
-    public ArrayList<Grupo> obtenerGrupos() { return this.grupos; }
+    public ArrayList<Grupo> obtenerGrupos() { return new ArrayList<>(this.grupos); }
 
     public void definirGrupo(String titulo) throws PreguntaError {
         if(this.grupos.size() == 2){
@@ -31,24 +32,19 @@ public class GroupChoice extends Pregunta {
         this.grupos.add(grupo);
     }
 
-    public void agregarOpcion(Grupo grupo, String titulo) throws PreguntaError{
-        if(opciones.size() == 12){
+    public void agregarOpcion(Grupo grupoCorrecto, String titulo) throws PreguntaError{
+        if(opciones.size() == 12) {
             throw new CantidadMaximaDeOpcionesError();
         }
-        if(grupo.equals(grupos.get(0))){
-            Opcion opcionIncorrecta = new Opcion(titulo,this.estado.puntajeIncorrecto(),grupos.get(1));
-            Opcion opcionCorrecta = new Opcion(titulo,this.estado.puntajeCorrecto(),grupo);
-            grupo.agregarOpcion(opcionCorrecta);
-            grupos.get(1).agregarOpcion(opcionIncorrecta);
-            opciones.add(opcionCorrecta);
-            opciones.add(opcionIncorrecta);
-        }else{
-            Opcion opcionIncorrecta = new Opcion(titulo,this.estado.puntajeIncorrecto(),grupos.get(0));
-            Opcion opcionCorrecta = new Opcion(titulo,this.estado.puntajeCorrecto(),grupo);
-            grupo.agregarOpcion(opcionCorrecta);
-            grupos.get(0).agregarOpcion(opcionIncorrecta);
-            opciones.add(opcionCorrecta);
-            opciones.add(opcionIncorrecta);
+
+        Punto puntaje;
+        for (Grupo grupo: this.grupos) {
+            if (grupo == grupoCorrecto) { puntaje = this.estado.puntajeCorrecto(); }
+            else { puntaje = this.estado.puntajeIncorrecto(); }
+
+            Opcion opcion = new Opcion(titulo, puntaje, grupo);
+            grupo.agregarOpcion(opcion);
+            this.opciones.add(opcion);
         }
     }
 
