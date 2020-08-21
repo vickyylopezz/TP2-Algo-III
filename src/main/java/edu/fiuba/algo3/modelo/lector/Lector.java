@@ -59,9 +59,10 @@ public class Lector {
             case "VFClasico":
             case "VFPenalidad":
                 return new ParserVerdaderoFalso();
-            case "MCClasico": return new ParserMultipleChoiceClasico();
-            case "MCParcial": return new ParserMultipleChoiceParcial();
-            case "MCPenalidad": return new ParserMultipleChoiceConPenalidad();
+            case "MCClasico":
+            case "MCParcial":
+            case "MCPenalidad":
+                return new ParserMultipleChoice();
         }
 
         throw new LectorFormatoDePreguntaError("tipo de objeto " + tipoPregunta + " invalido");
