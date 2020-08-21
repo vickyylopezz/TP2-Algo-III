@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.preguntas.orderedChoice;
+package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.CantidadMaximaDeOpcionesError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;

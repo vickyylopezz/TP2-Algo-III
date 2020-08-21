@@ -6,7 +6,7 @@ import com.google.gson.JsonObject;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
+import edu.fiuba.algo3.modelo.preguntas.OrderedChoice;
 
 public class ParserOrderedChoice implements ParserPregunta {
     @Override

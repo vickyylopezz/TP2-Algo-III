@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.preguntas.verdaderoFalso;
+package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje.CalculadorPuntajeParcial;
