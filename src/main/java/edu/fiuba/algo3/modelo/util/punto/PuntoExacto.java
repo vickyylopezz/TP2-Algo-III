@@ -1,10 +1,5 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntajeNoTieneValorError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
-
-import java.util.ArrayList;
-
 //Compuesto
 public class PuntoExacto extends Punto {
 
