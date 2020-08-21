@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
-//Compuesto
+
 public class PuntoExacto extends Punto {
 
     public PuntoExacto() {
@@ -18,11 +18,9 @@ public class PuntoExacto extends Punto {
     @Override
     public Punto copiar() { return this.clone(); }
 
-
     @Override
     public PuntoExacto clone() {
-        PuntoExacto clonado = new PuntoExacto();
-        clonado.agregarValor(this);
-        return clonado;
+        try { return (PuntoExacto) super.clone(); }
+        catch (CloneNotSupportedException e) { return null; }
     }
 }

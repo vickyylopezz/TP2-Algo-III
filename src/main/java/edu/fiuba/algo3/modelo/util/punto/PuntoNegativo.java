@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
-//Hoja
 public class PuntoNegativo extends Punto {
 
     @Override
@@ -10,5 +9,8 @@ public class PuntoNegativo extends Punto {
     public Punto copiar() { return this.clone(); }
 
     @Override
-    public PuntoNegativo clone() { return new PuntoNegativo(); }
+    public PuntoNegativo clone() {
+        try { return (PuntoNegativo) super.clone(); }
+        catch (CloneNotSupportedException e) { return null; }
+    }
 }

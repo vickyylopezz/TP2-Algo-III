@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
-//Componente
-public abstract class Punto {
+public abstract class Punto implements Cloneable {
     protected Integer valor;
 
     abstract public Integer obtenerValor();
@@ -13,7 +12,5 @@ public abstract class Punto {
         for (int i = 0; i < factor; i++) puntaje.agregarValor(this.copiar());
         return puntaje;
     }
-
-
 }
 
