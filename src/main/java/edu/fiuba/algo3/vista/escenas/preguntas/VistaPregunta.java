@@ -4,14 +4,17 @@ import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public abstract class VistaPregunta extends VBox {
+public abstract class VistaPregunta extends BorderPane {
     protected ControladorEscenas controlador;
     protected GridPane grid;
     protected ArrayList<BotonOpcionClasica> seleccion = new ArrayList<>();
@@ -19,12 +22,8 @@ public abstract class VistaPregunta extends VBox {
     protected ArrayList<BotonOpcionClasica> botones = new ArrayList<>();
 
     public VistaPregunta(Pregunta pregunta, ArrayList<Opcion> opciones, ControladorEscenas controlador) {
-        super(20);
+        super();
         this.controlador = controlador;
-
-        Label indicadorPregunta = new Label(pregunta.obtenerTitulo());
-        indicadorPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold");
-        indicadorPregunta.setWrapText(true);
 
         this.grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
@@ -32,17 +31,17 @@ public abstract class VistaPregunta extends VBox {
         grid.setHgap(50);
         rellenarGrilla(opciones);
 
-        this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(indicadorPregunta, grid);
-
+        this.setPadding(new Insets(25,25,25,25));
+        this.setCenter(grid);
     }
 
-    public ArrayList<BotonOpcionClasica> obtenerBotones(ArrayList<Opcion> opciones) {
+    public ArrayList<BotonOpcionClasica> obtenerBotones(ArrayList<Opcion> opciones, int ancho, int altura) {
         //ArrayList<BotonOpcion> botones = new ArrayList<>();
         for (Opcion opcion : opciones) {
-            BotonOpcionClasica boton = new BotonOpcionClasica(opcion, 250, 100);
+            BotonOpcionClasica boton = new BotonOpcionClasica(opcion, ancho, altura);
             botones.add(boton);
         }
+        Collections.shuffle(botones);
         return botones;
     }
 

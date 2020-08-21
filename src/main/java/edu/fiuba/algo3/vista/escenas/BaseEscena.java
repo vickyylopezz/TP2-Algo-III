@@ -22,7 +22,7 @@ public abstract class BaseEscena extends Scene {
     protected BotonEtiquetaDerechaVista botonAnterior;
 
     public BaseEscena(MediaPlayer reproductor) {
-        super(new Label("Loading"), 1280, 720);
+        super(new Label("Loading"), 1600, 900);
 
         this.raiz = new BorderPane();
         this.cabecera = new CabeceraKahootVista();

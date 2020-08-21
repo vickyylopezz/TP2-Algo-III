@@ -4,6 +4,9 @@ import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 
 import java.util.ArrayList;
 
@@ -15,19 +18,26 @@ public class VistaMultipleChoice extends VistaPregunta {
         for (BotonOpcionClasica boton: botones){
             boton.setOnAction(e -> {
                 if (seleccion.contains(boton)){
-                    boton.setStyle(null);
+                    boton.setStyle("-fx-font-size: 18px");
                     seleccion.remove(boton);
                 } else {
-                    boton.setStyle("-fx-background-color: lightskyblue");
+                    boton.setStyle("-fx-background-color: lightskyblue; -fx-font-size: 18px;");
                     seleccion.add(boton);
                 }
             });
         }
+
+        Button confirmar = new Button("Confirmar");
+        confirmar.setPrefSize(200,50);
+        confirmar.setStyle("-fx-background-color: green; -fx-text-fill: white; -fx-font-size: 18px");
+        confirmar.setOnAction(controlador.getEvento());
+        this.setBottom(confirmar);
+        BorderPane.setAlignment(confirmar, Pos.BOTTOM_CENTER);
     }
 
     @Override
     public void rellenarGrilla(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcionClasica> botones = obtenerBotones(opciones);
+        ArrayList<BotonOpcionClasica> botones = obtenerBotones(opciones, 400, 150);
 
         for (int i = 0; i < botones.size(); i++){
             if ((i == (botones.size()-1)) && (i % 2 == 0)) {
@@ -38,16 +48,4 @@ public class VistaMultipleChoice extends VistaPregunta {
             }
         }
     }
-
-    /*private ArrayList<BotonOpcion> obtenerBotones(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcion> botones = new ArrayList<>();
-
-        for (Opcion opcion : opciones) {
-            BotonOpcion boton = new BotonOpcion(opcion, 250, 100);
-
-            botones.add(boton);
-        }
-        return botones;
-    }*/
-
 }

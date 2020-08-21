@@ -17,19 +17,9 @@ public class VistaVerdaderoFalso extends VistaPregunta{
         }
     }
 
-    /*private ArrayList<BotonOpcion> obtenerBotones(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcion> botones = new ArrayList<>();
-        for (Opcion opcion : opciones) {
-            BotonOpcion boton = new BotonOpcion(opcion, 250, 100);
-
-            botones.add(boton);
-        }
-        return botones;
-    }*/
-
     @Override
     public void rellenarGrilla(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcionClasica> botones = obtenerBotones(opciones);
+        ArrayList<BotonOpcionClasica> botones = obtenerBotones(opciones, 350, 300);
 
         for (int i = 0; i < botones.size(); i++){
             if ((i == (botones.size()-1)) && (i % 2 == 0)) {

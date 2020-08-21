@@ -12,6 +12,7 @@ import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import edu.fiuba.algo3.vista.Resources;
+import edu.fiuba.algo3.vista.componentes.botones.BotonCircularVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.vista.escenas.BaseEscena;
 import edu.fiuba.algo3.vista.escenas.preguntas.*;
@@ -30,6 +31,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Line;
+import javafx.scene.text.TextAlignment;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -52,45 +57,94 @@ public class ControladorEscenas extends BaseEscena {
         Pregunta pregunta = jugada.obtenerPregunta();
         Jugador jugador = jugada.obtenerJugador();
 
-        // LAYOUT BORDERPANE
-        BorderPane borderPane = new BorderPane();
-        borderPane.setPadding(new Insets(40,40,40,40));
-        borderPane.setStyle("-fx-background-image: url(" + Resources.FondoRuta() + ");" + "-fx-background-size: cover");
+        // LAYOUT ANCHORPANE
+        AnchorPane anchorPane = new AnchorPane();
+        anchorPane.setStyle("-fx-background-image: url(" + Resources.FondoRuta() + ");" + "-fx-background-size: cover");
+
+        // ---------------------- SIDE-BAR: indicadores, tiempo, comodines
+        BorderPane sideBar = new BorderPane();
+        sideBar.setPrefSize(200, Screen.getPrimary().getVisualBounds().getHeight());
+        sideBar.setPadding(new Insets(10,25,0,25));
+        setBackgroundColor(sideBar, Color.WHITE);
 
         // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
-        Label indicadorJugador = new Label("Jugador: " + jugador.nombre());
+        Label indicadorJugador = new Label(jugador.nombre());
         indicadorJugador.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold;");
-        Label indicadorPuntaje = new Label("Puntos: " + jugador.puntajeTotal().obtenerPunto().obtenerValor());
-        indicadorPuntaje.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold;");
-        VBox datosJugador = new VBox(20, indicadorJugador, indicadorPuntaje);
-        datosJugador.setAlignment(Pos.TOP_LEFT);
+        indicadorJugador.setAlignment(Pos.CENTER);
+        indicadorJugador.setPrefSize(150,50);
 
-        // BOTON CONFIRMAR (abajo en el borderPane)
-        Button confirmar = new Button("Confirmar");
+        Label indicadorPuntaje = new Label(jugador.puntajeTotal().obtenerPunto().obtenerValor().toString());
+        indicadorPuntaje.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: black");
+        indicadorPuntaje.setAlignment(Pos.CENTER);
+        indicadorPuntaje.setPrefSize(150,50);
 
-        // COMODINES (arriba-derecha del borderPane)
-        // ...
+        VBox datosJugador = new VBox(10, indicadorJugador, indicadorPuntaje);
 
         // TIMER
+        StackPane timer = new StackPane();
         Label timerLabel = new Label();
-        IntegerProperty timeSeconds = new SimpleIntegerProperty(15);
+        IntegerProperty timeSeconds = new SimpleIntegerProperty(30);
         timerLabel.textProperty().bind(timeSeconds.asString());
-        timerLabel.setTextFill(Color.RED);
+        timerLabel.setTextFill(Color.BLACK);
         timerLabel.setAlignment(Pos.CENTER);
-        timerLabel.setPrefWidth(200);
+        timerLabel.setPrefWidth(150);
         timerLabel.setStyle("-fx-font-size: 4em;");
+
+        Circle circulo = new Circle(50);
+        circulo.setFill(Color.WHITE);
+
+        timer.getChildren().addAll(circulo, timerLabel);
 
         timeline = new Timeline();
         timeline.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(15 + 1),
+                new KeyFrame(Duration.seconds(30 + 1),
                         new KeyValue(timeSeconds, 0)));
         timeline.playFromStart();
         timeline.setOnFinished(eventoConfirmar);
-        
+
+        // COMODINES
+        VBox comodines = new VBox(20);
+        BotonCircularVista boton1 = new BotonCircularVista("EX");
+        BotonCircularVista boton2 = new BotonCircularVista("x2");
+        BotonCircularVista boton3 = new BotonCircularVista("x3");
+        comodines.getChildren().addAll(boton1, boton2, boton3);
+        comodines.setPadding(new Insets(0,50,25,50));
+
+        sideBar.setTop(datosJugador);
+        sideBar.setCenter(timer);
+        sideBar.setBottom(comodines);
+        BorderPane.setAlignment(comodines, Pos.BOTTOM_CENTER);
+        // ---------------------------------------------------
+
+        // ---------------------- TOP-BAR: pregunta
+        VBox topBar = new VBox();
+        topBar.setPrefSize(Screen.getPrimary().getBounds().getWidth(), 150);
+
+        Label indicadorTipoPregunta = new Label(pregunta.mostrarTipoPregunta());
+        indicadorTipoPregunta.setPadding(new Insets(10,50,10,50));
+        indicadorTipoPregunta.setStyle("-fx-text-fill: #000000; -fx-font-size: 15; -fx-font-weight: bold;");
+        indicadorTipoPregunta.setWrapText(true);
+        indicadorTipoPregunta.setTextAlignment(TextAlignment.CENTER);
+
+        Label indicadorPregunta = new Label(pregunta.obtenerTitulo());
+        indicadorPregunta.setPadding(new Insets(10,50,10,50));
+        indicadorPregunta.setStyle("-fx-text-fill: #000000; -fx-font-size: 20; -fx-font-weight: bold;");
+        indicadorPregunta.setWrapText(true);
+        indicadorPregunta.setTextAlignment(TextAlignment.CENTER);
+
+        topBar.getChildren().addAll(indicadorTipoPregunta, indicadorPregunta);
+        topBar.setAlignment(Pos.CENTER);
+        setBackgroundColor(topBar, Color.WHITE);
+        // ---------------------------------------------------
+
+        // ---------------------- MAIN-AREA: opciones + confirmar (opcional)
+        // LAYOUT BORDERPANE
+        BorderPane mainArea = new BorderPane();
+        mainArea.setPadding(new Insets(40,40,40,40));
+
         // PREGUNTA + OPCIONES (centro del borderPane)
         if (pregunta.getClass() == VerdaderoFalsoClasico.class || pregunta.getClass() == VerdaderoFalsoConPenalidad.class) {
             vista = new VistaVerdaderoFalso(pregunta, pregunta.obtenerOpciones(), this);
-            confirmar= null;
 
         } else if (pregunta.getClass() == OrderedChoice.class) {
             vista = new VistaOrderedChoice(pregunta, pregunta.obtenerOpciones(), this);
@@ -102,16 +156,25 @@ public class ControladorEscenas extends BaseEscena {
             vista = new VistaMultipleChoice(pregunta, pregunta.obtenerOpciones(), this);
         }
 
-        borderPane.setTop(datosJugador);
-        datosJugador.getChildren().add(timerLabel);
-        borderPane.setCenter(vista);
-        if (confirmar != null) {
-            borderPane.setBottom(confirmar);
-            BorderPane.setAlignment(confirmar, Pos.BOTTOM_CENTER);
-            confirmar.setOnAction(eventoConfirmar);
-        }
+        mainArea.setCenter(vista);
+        // ---------------------------------------------------
 
-        stage.setScene(new Scene(borderPane, 1280,720));
+        // ASIGNACIONES DEL ANCHORPANE
+        AnchorPane.setLeftAnchor(sideBar, 0d);
+        AnchorPane.setBottomAnchor(sideBar, 0d);
+        AnchorPane.setTopAnchor(sideBar, 0d);
+
+        AnchorPane.setRightAnchor(topBar, 0d);
+        AnchorPane.setLeftAnchor(topBar, 200d);
+
+        AnchorPane.setTopAnchor(vista, 150d);
+        AnchorPane.setRightAnchor(vista, 0d);
+        AnchorPane.setBottomAnchor(vista, 0d);
+        AnchorPane.setLeftAnchor(vista, 200d);
+
+        anchorPane.getChildren().addAll(sideBar, topBar, vista);
+
+        stage.setScene(new Scene(anchorPane, 1600,900));
     }
 
     public ArrayList<Opcion> obtenerOpciones(Pregunta pregunta) {
@@ -143,6 +206,12 @@ public class ControladorEscenas extends BaseEscena {
             respuesta.agregarOpcion(opcion);
         }
         jugada.obtenerJugador().agregarRespuesta(respuesta);
+    }
+
+    public static void setBackgroundColor(Region region, Color color) {
+        // change to 50% opacity
+        color = color.deriveColor(0, 1, 1, 0.25);
+        region.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
 }

@@ -4,8 +4,10 @@ import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 
 import java.util.ArrayList;
@@ -24,30 +26,30 @@ public class VistaOrderedChoice extends VistaPregunta {
             boton.setPrefSize(500,50);
             boton.setOnAction(e -> botonPresionado(e.getSource()));
         }
+
+        Button confirmar = new Button("Confirmar");
+        confirmar.setPrefSize(200,50);
+        confirmar.setStyle("-fx-background-color: green; -fx-text-fill: white; -fx-font-size: 18px");
+        confirmar.setOnAction(controlador.getEvento());
+        this.setBottom(confirmar);
+        BorderPane.setAlignment(confirmar, Pos.BOTTOM_CENTER);
+
+        this.grid.setVgap(40);
     }
 
     @Override
     public void rellenarGrilla(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcionClasica> botones = obtenerBotones(opciones);
+        ArrayList<BotonOpcionClasica> botones = obtenerBotones(opciones, 550, 200);
 
         int i = 0;
         for (Button boton: botones) {
-            grid.add(new Label(String.valueOf(i+1)),0, i);
+            Label posicion = new Label(String.valueOf(i+1));
+            posicion.setStyle("-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bolder");
+            grid.add(posicion,0, i);
             grid.add(boton,1, i);
             i++;
         }
     }
-
-    /*public ArrayList<BotonOpcion> obtenerBotones(ArrayList<Opcion> opciones) {
-        ArrayList<BotonOpcion> botones = new ArrayList<>();
-        for (Opcion opcion : opciones) {
-            BotonOpcion boton = new BotonOpcion(opcion, 500, 50);
-
-            botones.add(boton);
-        }
-        //seleccion.addAll(botones);
-        return botones;
-    }*/
 
     private void botonPresionado(Object source) {
         //if(!(source instanceof Button)) return;

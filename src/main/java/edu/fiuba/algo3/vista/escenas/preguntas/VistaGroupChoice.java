@@ -34,9 +34,17 @@ public class VistaGroupChoice extends VistaPregunta {
         super(preguntaActual, opciones, controlador);
 
         this.grupos = ((GroupChoice)preguntaActual).obtenerGrupos();
+
         Label grupo1 = new Label(grupos.get(0).obtenerTitulo());
+        grupo1.setStyle("-fx-background-color: blue; -fx-text-fill: white; -fx-font-size: 18px");
+        grupo1.setPrefSize(200,50);
+        grupo1.setAlignment(Pos.CENTER);
         GridPane.setHalignment(grupo1, HPos.CENTER);
+
         Label grupo2 = new Label(grupos.get(1).obtenerTitulo());
+        grupo2.setStyle("-fx-background-color: red; -fx-text-fill: white; -fx-font-size: 18px");
+        grupo2.setPrefSize(200,50);
+        grupo2.setAlignment(Pos.CENTER);
         GridPane.setHalignment(grupo2, HPos.CENTER);
 
         HBox controles = obtenerControles();
@@ -46,8 +54,12 @@ public class VistaGroupChoice extends VistaPregunta {
         grid.add(controles,1,0);
         grid.add(grupo2,2,0);
 
-        //grid.setGridLinesVisible(true);
-        //grid.setBackground(new Background(new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY)));
+        Button confirmar = new Button("Confirmar");
+        confirmar.setPrefSize(200,50);
+        confirmar.setStyle("-fx-background-color: green; -fx-text-fill: white; -fx-font-size: 18px");
+        confirmar.setOnAction(controlador.getEvento());
+        this.setBottom(confirmar);
+        BorderPane.setAlignment(confirmar, Pos.BOTTOM_CENTER);
     }
 
     @Override
@@ -71,7 +83,7 @@ public class VistaGroupChoice extends VistaPregunta {
         ArrayList<BotonOpcionGroup> botones = new ArrayList<>();
 
         for (int i=0; i < opciones.size(); i = i+2) {
-            BotonOpcionGroup boton = new BotonOpcionGroup(opciones.get(i), opciones.get(i+1),300, 50);
+            BotonOpcionGroup boton = new BotonOpcionGroup(opciones.get(i), opciones.get(i+1),300, 75);
             boton.setOnAction(e -> {
                 this.izquierda.setDisable(false);
                 this.derecha.setDisable(false);
@@ -80,6 +92,11 @@ public class VistaGroupChoice extends VistaPregunta {
             botones.add(boton);
         }
         Collections.shuffle(botones);
+
+        Button confirmar = new Button("Confirmar");
+        confirmar.setOnAction(controlador.getEvento());
+        this.setBottom(confirmar);
+
         return botones;
     }
 
