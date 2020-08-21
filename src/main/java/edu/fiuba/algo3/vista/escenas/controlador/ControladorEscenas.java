@@ -132,11 +132,7 @@ public class ControladorEscenas extends BaseEscena {
         // COMODINES
         VBox comodines = new VBox(20);
         for (Comodin comodin: jugada.comodines()) {
-            String tituloComodin = "comodin";
-            if (comodin instanceof Multiplicador) { tituloComodin = "x" + comodin.obtenerFactor();
-            } else if (comodin instanceof Exclusividad) { tituloComodin = "EX"; }
-
-            BotonCircularVista boton = new BotonCircularVista(tituloComodin, Color.INDIANRED);
+            BotonCircularVista boton = new BotonCircularVista(comodin.toString(), Color.INDIANRED);
             comodines.getChildren().add(boton);
 
             boton.setOnAction(new SeleccionarComodinEventHandler(
