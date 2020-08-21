@@ -1,7 +1,10 @@
 package edu.fiuba.algo3.eventos.preparacion.editorPreguntas;
 
+import edu.fiuba.algo3.modelo.excepciones.lector.LectorError;
+import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.lector.Lector;
+import edu.fiuba.algo3.vista.Resources;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +13,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent> {
 
@@ -28,17 +33,18 @@ public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent
                 new FileChooser.ExtensionFilter("Json Archivo", "*.json")
         );
         File archivo = seleccionadorArchivos.showOpenDialog(this.stage);
-        /*
+
+        ArrayList<Pregunta> preguntasNuevas;
+
         Lector lector = new Lector();
-        try { lector.extraerPreguntas(archivo);
-        } catch (Exception e) {
+        try { preguntasNuevas = lector.extraerPreguntas(archivo);
+        } catch (LectorError | PreguntaError e) {
             this.mostrarAlertaDeCargaDeArchivo(e.toString());
             return;
         }
 
-        this.preguntas.addAll(lector.obtenerPreguntas());
-
-         */
+        this.preguntas.addAll(preguntasNuevas);
+        Collections.shuffle(this.preguntas);
     }
 
     public void mostrarAlertaDeCargaDeArchivo(String error) {

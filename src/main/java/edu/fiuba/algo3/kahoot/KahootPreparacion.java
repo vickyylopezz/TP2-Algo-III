@@ -4,6 +4,7 @@ import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
 import edu.fiuba.algo3.modelo.comodines.Exclusividad;
 import edu.fiuba.algo3.modelo.comodines.Multiplicador;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.lector.LectorError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
@@ -79,17 +80,19 @@ public class KahootPreparacion extends KahootModo {
     }
 
     private void precargarPreguntas() {
-        /*
+        ArrayList<Pregunta> preguntasNuevas;
+
         Lector lector = new Lector();
         try {
-            lector.extraerPreguntas(new File(Resources.RutaDataPreguntas()));
-        } catch (IOException | PreguntaError e) {
+            preguntasNuevas = lector.extraerPreguntas(
+                    new File(Resources.RutaDataPreguntas())
+            );
+        } catch (LectorError | PreguntaError e) {
             e.printStackTrace();
+            return;
         }
 
-        this.preguntas.addAll(lector.obtenerPreguntas());
+        this.preguntas.addAll(preguntasNuevas);
         Collections.shuffle(this.preguntas);
-
-         */
     }
 }
