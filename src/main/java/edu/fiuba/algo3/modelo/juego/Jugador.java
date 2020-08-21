@@ -3,17 +3,16 @@ package edu.fiuba.algo3.modelo.juego;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorNoTieneAlComodinError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
-import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.util.punto.PuntoExacto;
 
 import java.util.ArrayList;
 
 public class Jugador {
 
     private String nombre;
-    private ArrayList<Respuesta> respuestas;
-    private ArrayList<Comodin> comodines;
+    private final ArrayList<Respuesta> respuestas;
+    private final ArrayList<Comodin> comodines;
 
     public Jugador(String nombre) {
         this.nombre = nombre;
@@ -49,10 +48,10 @@ public class Jugador {
         this.comodines.remove(comodin);
     }
 
-    public Punto puntajeTotal() throws PuntoError {
-        Puntaje puntajeTotal = new Puntaje();
+    public Punto puntajeTotal() {
+        PuntoExacto puntajeTotal = new PuntoExacto();
         for (Respuesta respuesta : this.respuestas){
-            puntajeTotal.agregarPunto(respuesta.puntaje());
+            puntajeTotal.agregarValor(respuesta.puntaje());
         }
         return puntajeTotal;
     }

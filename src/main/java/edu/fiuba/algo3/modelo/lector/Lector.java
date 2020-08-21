@@ -1,106 +1,74 @@
 package edu.fiuba.algo3.modelo.lector;
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
 
+import edu.fiuba.algo3.modelo.excepciones.lector.LectorError;
+import edu.fiuba.algo3.modelo.excepciones.lector.LectorSintaxisError;
+import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceConPenalidad;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceParcial;
-import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserGroupChoice;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserMultipleChoice;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserOrderedChoice;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserVerdaderoFalso;
 
-import java.io.*;
 import java.util.ArrayList;
 
 public class Lector {
-    private ArrayList<Pregunta> preguntas = new ArrayList<>();
 
-    public void extraerPreguntas(File archivo) throws IOException, JsonSyntaxException, PreguntaError {
-        JsonReader reader = new JsonReader(new FileReader(archivo));
-        JsonElement parser = JsonParser.parseReader(reader);
+    public ArrayList<Pregunta> extraerPreguntas(String cadenaJson) throws LectorError, PreguntaError {
+        if (cadenaJson == null) return null;
 
-        JsonArray array = parser.getAsJsonArray();
-        for (JsonElement element: array) {
-            JsonObject object = element.getAsJsonObject();
-            preguntas.add(crearPregunta(object));
+        JsonElement preguntasJson;
+        try { preguntasJson = JsonParser.parseString(cadenaJson); }
+        catch (JsonSyntaxException e) { throw new LectorSintaxisError(e.toString()); }
+        JsonArray preguntasArray = preguntasJson.getAsJsonArray();
+
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+
+        for (JsonElement preguntaElement: preguntasArray) {
+            JsonObject preguntaObjeto;
+            try { preguntaObjeto = preguntaElement.getAsJsonObject(); }
+            catch (Exception e) {
+                throw new LectorFormatoDePreguntaError("Pregunta con formato invalido");
+            }
+
+            preguntas.add(this.clasificadorPregunta(preguntaObjeto).parsear(preguntaObjeto));
         }
+
+        return preguntas;
     }
 
-    private Pregunta crearPregunta(JsonObject object) throws PreguntaError {
-        String titulo = object.get("pregunta").getAsString();
-        Pregunta pregunta;
+    public Pregunta extraerPregunta(String cadenaJson) throws LectorError, PreguntaError {
+        if (cadenaJson == null) return null;
 
-        switch(object.get("tipo").getAsString()) {
+        JsonElement preguntaJson;
+        try { preguntaJson = JsonParser.parseString(cadenaJson); }
+        catch (JsonSyntaxException e) {
+            throw new LectorSintaxisError(e.toString());
+        }
+        JsonObject preguntaObjeto = preguntaJson.getAsJsonObject();
+
+        return this.clasificadorPregunta(preguntaObjeto).parsear(preguntaObjeto);
+    }
+
+    private ParserPregunta clasificadorPregunta(JsonObject preguntaObjeto) throws LectorFormatoDePreguntaError {
+        JsonElement tipoJson = preguntaObjeto.get("tipo");
+        if (tipoJson == null) throw new LectorFormatoDePreguntaError("Tipo de pregunta invalido");
+
+        String tipoPregunta = tipoJson.getAsString();
+        switch (tipoPregunta) {
+            case "Ordered": return new ParserOrderedChoice();
+            case "Group": return new ParserGroupChoice();
             case "VFClasico":
-                pregunta = new VerdaderoFalsoClasico(titulo, "", "");
-                break;
-
             case "VFPenalidad":
-                pregunta = new VerdaderoFalsoConPenalidad(titulo, "", "");
-                break;
-
+                return new ParserVerdaderoFalso();
             case "MCClasico":
-                pregunta = new MultipleChoiceClasico(titulo);
-                break;
-
             case "MCParcial":
-                pregunta = new MultipleChoiceParcial(titulo);
-                break;
-
             case "MCPenalidad":
-                pregunta = new MultipleChoiceConPenalidad(titulo);
-                break;
-
-            case "Ordered":
-                pregunta = new OrderedChoice(titulo);
-                break;
-
-            case "Group":
-                pregunta = new GroupChoice(titulo);
-                break;
-
-            default:
-                //System.out.println("No se reconoce el tipo de pregunta");
-                //alguna excepcion
-                return null;
-
+                return new ParserMultipleChoice();
         }
-        pregunta.extraerOpciones(object);
-        return pregunta;
+
+        throw new LectorFormatoDePreguntaError("tipo de objeto " + tipoPregunta + " invalido");
     }
-
-    // DEBUG
-    private void mostrarContenido(){
-        // permite navegar por las preguntas guardadas
-        // esto permite tener una lista de preguntas para usar durante el juego
-        for (Pregunta pregunta: preguntas) {
-            System.out.println("Q: "+pregunta.obtenerTitulo());
-
-            ArrayList<Opcion> opciones = new ArrayList<>();
-
-            if (pregunta.getClass() == GroupChoice.class) {
-                ArrayList<Grupo> grupos= ((GroupChoice) pregunta).obtenerGrupos();
-                for (Grupo grupo: grupos) {
-                    opciones.addAll(grupo.obtenerOpciones());
-                }
-            } else {
-                opciones = pregunta.obtenerOpciones();
-            }
-
-            for (Opcion opcion: opciones){
-                System.out.println(opcion.obtenerTitulo());
-            }
-        }
-    }
-
-    public ArrayList<Pregunta> obtenerPreguntas(){
-        return this.preguntas;
-    }
-
 }

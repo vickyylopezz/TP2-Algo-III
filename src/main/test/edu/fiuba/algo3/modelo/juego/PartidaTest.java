@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.juego;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -251,7 +250,7 @@ public class PartidaTest {
 
     // finalizarTurnos
     @Test
-    public void finalizarTurnosConTurnosExistentesNoHaceNada() throws PuntoError {
+    public void finalizarTurnosConTurnosExistentesNoHaceNada() {
         Pregunta pregunta = mock(Pregunta.class);
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -271,7 +270,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void finalizarTurnosAgregaLasRespuestasALosJugadores() throws PuntoError {
+    public void finalizarTurnosAgregaLasRespuestasALosJugadores() {
         Pregunta pregunta = mock(Pregunta.class);
 
         Jugador jugador1 = mock(Jugador.class);
@@ -300,7 +299,7 @@ public class PartidaTest {
     }
 
     @Test
-    public void finalizarTurnosAplicaLosComodinesALasRespuestas() throws JugadorError, ComodinError, PuntoError {
+    public void finalizarTurnosAplicaLosComodinesALasRespuestas() throws JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodin1 = mock(Comodin.class);
@@ -325,14 +324,19 @@ public class PartidaTest {
         jugadores.add(jugador2);
         jugadores.add(jugador3);
 
+        ArrayList<Respuesta> respuestasGeneradas = new ArrayList<>();
+
         Partida partida = new Partida(pregunta, jugadores);
         partida.iniciarTurnos();
+        respuestasGeneradas.add(partida.obtenerJugada().obtenerRespuesta());
 
         partida.obtenerJugada().seleccionarComodin(comodin1);
         partida.siguienteTurno();
+        respuestasGeneradas.add(partida.obtenerJugada().obtenerRespuesta());
 
         // no aplica ningun comodin
         partida.siguienteTurno();
+        respuestasGeneradas.add(partida.obtenerJugada().obtenerRespuesta());
 
         partida.obtenerJugada().seleccionarComodin(comodin2);
         partida.siguienteTurno();
@@ -341,12 +345,12 @@ public class PartidaTest {
 
         int invocaciones = 1;
 
-        verify(comodin1, times(invocaciones)).aplicarARespuestas(any(ArrayList.class));
-        verify(comodin2, times(invocaciones)).aplicarARespuestas(any(ArrayList.class));
+        verify(comodin1, times(invocaciones)).aplicarARespuestas(respuestasGeneradas);
+        verify(comodin2, times(invocaciones)).aplicarARespuestas(respuestasGeneradas);
     }
 
     @Test
-    public void finalizarTurnosSacaElComodinAplicadoDelJugador() throws JugadorError, ComodinError, PuntoError {
+    public void finalizarTurnosSacaElComodinAplicadoDelJugador() throws JugadorError, ComodinError {
         Pregunta pregunta = mock(Pregunta.class);
 
         Comodin comodin1 = mock(Comodin.class);

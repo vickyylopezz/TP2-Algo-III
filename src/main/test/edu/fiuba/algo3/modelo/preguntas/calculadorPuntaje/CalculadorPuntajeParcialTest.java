@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
@@ -16,7 +15,7 @@ import static org.mockito.Mockito.when;
 
 public class CalculadorPuntajeParcialTest {
     @Test
-    public void calcularDevuelvePuntajeUnoConDosOpcionesCorrectaYUnaIncorrecta() throws PuntoError {
+    public void calcularDevuelvePuntajeUnoConDosOpcionesCorrectaYUnaIncorrecta(){
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -47,11 +46,11 @@ public class CalculadorPuntajeParcialTest {
 
         Punto punto = calc.calcular(pregunta, opcionesSeleccionadas);
 
-        assertEquals(1, punto.obtenerPunto().obtenerValor());
+        assertEquals(1, punto.obtenerValor());
     }
 
     @Test
-    public void calcularDevuelvePuntajeUnoConUnaOpcionCorrectaSeleccionadaHabiendoDosCorrectas() throws PuntoError {
+    public void calcularDevuelvePuntajeUnoConUnaOpcionCorrectaSeleccionadaHabiendoDosCorrectas(){
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -80,11 +79,11 @@ public class CalculadorPuntajeParcialTest {
 
         Punto punto = calc.calcular(pregunta, opcionesSeleccionadas);
 
-        assertEquals(1, punto.obtenerPunto().obtenerValor());
+        assertEquals(1, punto.obtenerValor());
     }
 
     @Test
-    public void calcularDevuelvePuntajeMenosUnoSeleccionandoUnaOpcionIncorrecta() throws PuntoError {
+    public void calcularDevuelvePuntajeMenosUnoSeleccionandoUnaOpcionIncorrecta(){
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -113,11 +112,11 @@ public class CalculadorPuntajeParcialTest {
 
         Punto punto = calc.calcular(pregunta, opcionesSeleccionadas);
 
-        assertEquals(-1, punto.obtenerPunto().obtenerValor());
+        assertEquals(-1, punto.obtenerValor());
     }
 
     @Test
-    public void calcularDevuelvePuntajeMenosDosSeleccionandoDosOpcionIncorrecta() throws PuntoError {
+    public void calcularDevuelvePuntajeMenosDosSeleccionandoDosOpcionIncorrecta(){
         Opcion opcion1 = mock(Opcion.class);
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
@@ -147,7 +146,7 @@ public class CalculadorPuntajeParcialTest {
 
         Punto punto = calc.calcular(pregunta, opcionesSeleccionadas);
 
-        assertEquals(-2, punto.obtenerPunto().obtenerValor());
+        assertEquals(-2, punto.obtenerValor());
     }
 
 }

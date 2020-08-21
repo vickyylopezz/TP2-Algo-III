@@ -1,17 +1,11 @@
 package edu.fiuba.algo3.modelo.juego;
 
-import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
+import edu.fiuba.algo3.modelo.preguntas.VerdaderoFalso;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 public class JuegoTest {
 
@@ -259,5 +253,77 @@ public class JuegoTest {
 
         Partida partida2 = juego.obtenerPartida();
         assertEquals(partida2, juego.obtenerPartida());
+    }
+
+    @Test
+    public void ganadarDevuelveElJugadorConMayorPuntaje() {
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        VerdaderoFalso pregunta = VerdaderoFalso.ConPenalidad("¿Estamos en el año 2020?","Verdadero","Falso");
+        preguntas.add(pregunta);
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        Jugador jugador1 = new Jugador("Carlos");
+        Jugador jugador2 = new Jugador("Marcos");
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Juego juego = new Juego(preguntas,jugadores);
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        Respuesta respuestaJugador1 = new Respuesta(pregunta,jugador1);
+        respuestaJugador1.agregarOpcion(opciones.get(0));
+        jugador1.agregarRespuesta(respuestaJugador1);
+
+        Respuesta respuestaJugador2 = new Respuesta(pregunta,jugador2);
+        respuestaJugador2.agregarOpcion(opciones.get(1));
+        jugador2.agregarRespuesta(respuestaJugador2);
+
+        assertEquals(juego.ganador(jugadores).get(0),jugador1);
+    }
+
+    @Test
+    public void jugadoresNoRespondenEsEmpate(){
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        Jugador jugador1 = new Jugador("Marta");
+        Jugador jugador2 = new Jugador("Carla");
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        preguntas.add(mock(Pregunta.class));
+        preguntas.add(mock(Pregunta.class));
+        preguntas.add(mock(Pregunta.class));
+
+        Juego juego = new Juego(preguntas, jugadores);
+
+        assertEquals(juego.ganador(jugadores),jugadores);
+    }
+
+    @Test
+    public void jugadoresRespondenLoMismoEsEmpate(){
+        ArrayList<Pregunta> preguntas = new ArrayList<>();
+        VerdaderoFalso pregunta = VerdaderoFalso.ConPenalidad("¿Estamos en el año 2020?","Verdadero","Falso");
+        preguntas.add(pregunta);
+
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        Jugador jugador1 = new Jugador("Carlos");
+        Jugador jugador2 = new Jugador("Marcos");
+        jugadores.add(jugador1);
+        jugadores.add(jugador2);
+
+        Juego juego = new Juego(preguntas,jugadores);
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        Respuesta respuestaJugador1 = new Respuesta(pregunta,jugador1);
+        respuestaJugador1.agregarOpcion(opciones.get(0));
+        jugador1.agregarRespuesta(respuestaJugador1);
+
+        Respuesta respuestaJugador2 = new Respuesta(pregunta,jugador2);
+        respuestaJugador2.agregarOpcion(opciones.get(0));
+        jugador2.agregarRespuesta(respuestaJugador2);
+
+        assertEquals(juego.ganador(jugadores),jugadores);
     }
 }

@@ -1,8 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -13,7 +11,7 @@ public class VerdaderoFalsoClasicoTest {
 
     @Test
     public void CreacionDeVerdaderoFalsoIndicandoRespuestaCorrecta() {
-        VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico(
+        VerdaderoFalso preguntavf = VerdaderoFalso.Clasico(
                 "¿Estamos en Algoritmos y programcion 3?",
                 "Verdadero",
                 "Falso"
@@ -24,8 +22,8 @@ public class VerdaderoFalsoClasicoTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PuntoError {
-        VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico(
+    public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() {
+        VerdaderoFalso preguntavf = VerdaderoFalso.Clasico(
                 "¿Estamos en Algoritmos y programcion 3?",
                 "Verdadero",
                 "Falso"
@@ -42,20 +40,20 @@ public class VerdaderoFalsoClasicoTest {
         Integer esperadoJugador1 = 1;
         Integer esperadoJugador2 = 0;
 
-        assertEquals(esperadoJugador1, preguntavf.puntajeConOpciones(opcionesElegidasJugador1).obtenerPunto().obtenerValor());
-        assertEquals(esperadoJugador2, preguntavf.puntajeConOpciones(opcionesElegidasJugador2).obtenerPunto().obtenerValor());
+        assertEquals(esperadoJugador1, preguntavf.puntajeConOpciones(opcionesElegidasJugador1).obtenerValor());
+        assertEquals(esperadoJugador2, preguntavf.puntajeConOpciones(opcionesElegidasJugador2).obtenerValor());
     }
 
     @Test
-    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PuntoError {
-        VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico(
+    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() {
+        VerdaderoFalso preguntavf = VerdaderoFalso.Clasico(
                 "¿Estamos en Algoritmos y programcion 3?",
                 "Verdader",
                 "Falso"
         );
         ArrayList<Opcion> opciones = new ArrayList<>();
 
-        assertEquals(0, preguntavf.puntajeConOpciones(opciones).obtenerPunto().obtenerValor());
+        assertEquals(0, preguntavf.puntajeConOpciones(opciones).obtenerValor());
     }
 }
 
