@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
 
@@ -38,7 +37,7 @@ public class MultipleChoiceConPenalidadTest {
     }
 
     @Test
-    public void MultipleChoiceConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError, PuntoError {
+    public void MultipleChoiceConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError {
         MultipleChoice preguntaMCCP = MultipleChoice.ConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
@@ -88,7 +87,7 @@ public class MultipleChoiceConPenalidadTest {
     }
 
     @Test
-    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PuntoError {
+    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() {
         MultipleChoice preguntaMCCP = MultipleChoice.ConPenalidad("¿Cuál es el apellido de nuestro corrector?");
         ArrayList<Opcion> opciones = new ArrayList<>();
 

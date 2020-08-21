@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import org.junit.jupiter.api.Test;
@@ -219,7 +218,7 @@ public class MultipleChoiceClasicoTest {
 
     // Test puntajeConOpciones
     @Test
-    public void puntajeSeleccionandoTodasLasOpcionesCorrectasPuntajeUno() throws PreguntaError, PuntoError {
+    public void puntajeSeleccionandoTodasLasOpcionesCorrectasPuntajeUno() throws PreguntaError {
         MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
@@ -240,7 +239,7 @@ public class MultipleChoiceClasicoTest {
     }
 
     @Test
-    public void puntajeSeleccionandoTodasLasOpcionesCorrectasYUnaIncorrectaDevuelveCero() throws PreguntaError, PuntoError {
+    public void puntajeSeleccionandoTodasLasOpcionesCorrectasYUnaIncorrectaDevuelveCero() throws PreguntaError {
         MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
@@ -262,7 +261,7 @@ public class MultipleChoiceClasicoTest {
     }
 
     @Test
-    public void puntajeSeleccionandoUnaSolaOpcionCorrectaDevueveCero() throws PreguntaError, PuntoError {
+    public void puntajeSeleccionandoUnaSolaOpcionCorrectaDevueveCero() throws PreguntaError {
         MultipleChoice pregunta = MultipleChoice.Clasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");

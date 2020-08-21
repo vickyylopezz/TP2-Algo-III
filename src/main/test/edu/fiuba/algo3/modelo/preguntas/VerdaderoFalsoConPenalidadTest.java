@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
 
@@ -30,7 +29,7 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeCorrectamente() throws PuntoError {
+    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeCorrectamente() {
         VerdaderoFalso pregunta = VerdaderoFalso.ConPenalidad(
                 "¿Estamos en el año 2020?",
                 "Verdadero",
@@ -45,7 +44,7 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeIncorrectamente() throws PuntoError {
+    public void VerdaderoFalsoAsignaPuntosAJugadorQueRespondeIncorrectamente() {
         VerdaderoFalso pregunta = VerdaderoFalso.ConPenalidad(
                 "¿Estamos en el año 2020?",
                 "Falso",
@@ -60,7 +59,7 @@ public class VerdaderoFalsoConPenalidadTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosAJugadores() throws PuntoError {
+    public void VerdaderoFalsoAsignaPuntosAJugadores() {
         VerdaderoFalso pregunta = VerdaderoFalso.ConPenalidad(
                 "¿Estamos en el año 2020?",
                 "Verdadero",

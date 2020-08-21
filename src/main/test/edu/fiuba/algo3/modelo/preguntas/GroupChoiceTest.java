@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
@@ -13,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class GroupChoiceTest {
 
     @Test
-    public void GroupChoiceAsignaPuntosAJugador() throws PreguntaError, PuntoError {
+    public void GroupChoiceAsignaPuntosAJugador() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Nombres");
@@ -94,7 +93,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void GroupChoiceAsignaPuntosAJugadores() throws PreguntaError, PuntoError {
+    public void GroupChoiceAsignaPuntosAJugadores() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Colores");
@@ -130,7 +129,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void GroupChoiceNoSeAsignanPuntosAJugadorQueRespondeTodasMal() throws PreguntaError, PuntoError {
+    public void GroupChoiceNoSeAsignanPuntosAJugadorQueRespondeTodasMal() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Flores");
@@ -158,7 +157,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void GroupChoiceAsignanTodosLosPuntosAJugadorQueRespondeTodasBien() throws PreguntaError, PuntoError {
+    public void GroupChoiceAsignanTodosLosPuntosAJugadorQueRespondeTodasBien() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Flores");
@@ -194,7 +193,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void GroupChoiceOpcionesCorrectasSonLasAgregadas() throws PreguntaError, PuntoError {
+    public void GroupChoiceOpcionesCorrectasSonLasAgregadas() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Flores");

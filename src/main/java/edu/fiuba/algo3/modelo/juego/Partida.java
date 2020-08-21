@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 
 import java.util.ArrayList;
 
@@ -31,7 +30,7 @@ public class Partida {
         return this.jugadas.get(this.indiceJugada);
     }
 
-    public void finalizarTurnos() throws PuntoError {
+    public void finalizarTurnos() {
         if (this.existeTurno()) return;
         aplicarComodines();
         agregarRespuestas();
@@ -43,7 +42,7 @@ public class Partida {
         }
     }
 
-    private void aplicarComodines() throws PuntoError {
+    private void aplicarComodines() {
         ArrayList<Respuesta> respuestas = this.respuestasJugadas();
 
         for (Comodin comodin: this.comodinesJugadas()) {

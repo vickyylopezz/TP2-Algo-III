@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.juego;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorNoTieneAlComodinError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import edu.fiuba.algo3.modelo.util.punto.PuntoExacto;
 
@@ -49,7 +48,7 @@ public class Jugador {
         this.comodines.remove(comodin);
     }
 
-    public Punto puntajeTotal() throws PuntoError {
+    public Punto puntajeTotal() {
         PuntoExacto puntajeTotal = new PuntoExacto();
         for (Respuesta respuesta : this.respuestas){
             puntajeTotal.agregarValor(respuesta.puntaje());
