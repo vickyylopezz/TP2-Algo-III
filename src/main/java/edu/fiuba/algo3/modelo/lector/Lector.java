@@ -54,13 +54,14 @@ public class Lector {
 
         String tipoPregunta = tipoJson.getAsString();
         switch (tipoPregunta) {
-            case "VFClasico": return new ParserVerdaderoFalsoClasico();
-            case "VFPenalidad": return new ParserVerdaderoFalsoConPenalidad();
+            case "Ordered": return new ParserOrderedChoice();
+            case "Group": return new ParserGroupChoice();
+            case "VFClasico":
+            case "VFPenalidad":
+                return new ParserVerdaderoFalso();
             case "MCClasico": return new ParserMultipleChoiceClasico();
             case "MCParcial": return new ParserMultipleChoiceParcial();
             case "MCPenalidad": return new ParserMultipleChoiceConPenalidad();
-            case "Ordered": return new ParserOrderedChoice();
-            case "Group": return new ParserGroupChoice();
         }
 
         throw new LectorFormatoDePreguntaError("tipo de objeto " + tipoPregunta + " invalido");

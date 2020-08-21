@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ParserVerdaderoFalsoPenalidadTest {
     @Test
     public void parsearConJsonSinTipoLanzaFormatoInvalidoError() {
-        ParserVerdaderoFalsoConPenalidad parser = new ParserVerdaderoFalsoConPenalidad();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"pregunta\":\"¿Esto es un verdadero Falso?\"," +
@@ -24,7 +24,7 @@ public class ParserVerdaderoFalsoPenalidadTest {
 
     @Test
     public void parsearConJsonTipoInvalidoLanzaFormatoInvalidoError() {
-        ParserVerdaderoFalsoConPenalidad parser = new ParserVerdaderoFalsoConPenalidad();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"tipo\":\"VFPenali\"," +
@@ -38,7 +38,7 @@ public class ParserVerdaderoFalsoPenalidadTest {
 
     @Test
     public void parsearConJsonSinPreguntaLanzaFormatoInvalidoError() {
-        ParserVerdaderoFalsoConPenalidad parser = new ParserVerdaderoFalsoConPenalidad();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"tipo\":\"VFPenalidad\"," +
@@ -51,7 +51,7 @@ public class ParserVerdaderoFalsoPenalidadTest {
 
     @Test
     public void parsearConJsonSinRespuesLanzaFormatoInvalidoError() {
-        ParserVerdaderoFalsoConPenalidad parser = new ParserVerdaderoFalsoConPenalidad();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"tipo\":\"VFPenalidad\"," +
@@ -64,7 +64,7 @@ public class ParserVerdaderoFalsoPenalidadTest {
 
     @Test
     public void parserDevuelveLaPreguntaCorrecta() throws LectorFormatoDePreguntaError {
-        ParserVerdaderoFalsoConPenalidad parser = new ParserVerdaderoFalsoConPenalidad();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"tipo\":\"VFPenalidad\"," +
