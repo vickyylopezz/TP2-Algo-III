@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.juego;
 
+import edu.fiuba.algo3.modelo.preguntas.VerdaderoFalso;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
@@ -259,7 +259,7 @@ public class JuegoTest {
     @Test
     public void ganadarDevuelveElJugadorConMayorPuntaje() {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?","Verdadero","Falso");
+        VerdaderoFalso pregunta = VerdaderoFalso.ConPenalidad("¿Estamos en el año 2020?","Verdadero","Falso");
         preguntas.add(pregunta);
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
@@ -304,7 +304,7 @@ public class JuegoTest {
     @Test
     public void jugadoresRespondenLoMismoEsEmpate(){
         ArrayList<Pregunta> preguntas = new ArrayList<>();
-        VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?","Verdadero","Falso");
+        VerdaderoFalso pregunta = VerdaderoFalso.ConPenalidad("¿Estamos en el año 2020?","Verdadero","Falso");
         preguntas.add(pregunta);
 
         ArrayList<Jugador> jugadores = new ArrayList<>();
