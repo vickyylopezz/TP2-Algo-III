@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 public class ExclusividadTest {
 
@@ -103,7 +102,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError{
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);

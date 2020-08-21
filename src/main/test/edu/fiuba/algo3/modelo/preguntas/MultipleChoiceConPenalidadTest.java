@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceConPenalidad;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
 
@@ -9,13 +8,12 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.Mockito.mock;
 
 public class MultipleChoiceConPenalidadTest {
 
     @Test
     public void CreacionDeMultipleChoiceConPenalidadIndicandoRespuestaCorrecta() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
+        MultipleChoice preguntaMCCP = MultipleChoice.ConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
         preguntaMCCP.agregarOpcionIncorrecta("Fernando");
@@ -27,7 +25,7 @@ public class MultipleChoiceConPenalidadTest {
 
     @Test
     public void obtenerOpcionesDevuelveTodasLasOpcionesAgregadas() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
+        MultipleChoice preguntaMCCP = MultipleChoice.ConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
         preguntaMCCP.agregarOpcionIncorrecta("Fernando");
@@ -40,7 +38,7 @@ public class MultipleChoiceConPenalidadTest {
 
     @Test
     public void MultipleChoiceConPenalidadAsignaPuntosCorrectamenteADiferentesRespuestas() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
+        MultipleChoice preguntaMCCP = MultipleChoice.ConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
         preguntaMCCP.agregarOpcionIncorrecta("Fernando");
@@ -77,7 +75,7 @@ public class MultipleChoiceConPenalidadTest {
 
     @Test
     public void AgregarMasDeCincoOpcionesLanzaUnPreguntaError() throws PreguntaError {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Quienes son integrantes del grupo PM3?");
+        MultipleChoice preguntaMCCP = MultipleChoice.ConPenalidad("¿Quienes son integrantes del grupo PM3?");
         preguntaMCCP.agregarOpcionCorrecta("Francisco");
         preguntaMCCP.agregarOpcionCorrecta("Victoria");
         preguntaMCCP.agregarOpcionIncorrecta("Fernando");
@@ -90,7 +88,7 @@ public class MultipleChoiceConPenalidadTest {
 
     @Test
     public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() {
-        MultipleChoiceConPenalidad preguntaMCCP = new MultipleChoiceConPenalidad("¿Cuál es el apellido de nuestro corrector?");
+        MultipleChoice preguntaMCCP = MultipleChoice.ConPenalidad("¿Cuál es el apellido de nuestro corrector?");
         ArrayList<Opcion> opciones = new ArrayList<>();
 
         assertEquals(0, preguntaMCCP.puntajeConOpciones(opciones).obtenerValor());

@@ -11,8 +11,8 @@ import java.util.ArrayList;
 public class Jugador {
 
     private String nombre;
-    private ArrayList<Respuesta> respuestas;
-    private ArrayList<Comodin> comodines;
+    private final ArrayList<Respuesta> respuestas;
+    private final ArrayList<Comodin> comodines;
 
     public Jugador(String nombre) {
         this.nombre = nombre;

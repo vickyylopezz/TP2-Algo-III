@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
-public abstract class Punto {
+public abstract class Punto implements Cloneable {
     protected Integer valor;
 
     abstract public Integer obtenerValor();

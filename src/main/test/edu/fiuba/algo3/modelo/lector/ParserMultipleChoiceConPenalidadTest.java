@@ -5,15 +5,15 @@ import com.google.gson.JsonParser;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserMultipleChoice;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class ParserMultipleChoiceConPenalidadTest {
     @Test
     public void parsearConJsonSinTipoLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"pregunta\":\"¿Es True/False con penalidad?\",\n" +
@@ -27,7 +27,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parsearConJsonTipoInvalidoLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"caramelo\",\n" +
@@ -42,7 +42,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parsearConJsonSinPreguntaLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCPenalidad\",\n" +
@@ -56,7 +56,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parsearConJsonSinOpcionesCorrectasLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCPenalidad\",\n" +
@@ -70,7 +70,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parsearConJsonConOpcionesCorrectasQueNoSonArrayLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCPenalidad\",\n" +
@@ -85,7 +85,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parsearConJsonSinOpcionesIncorrectasLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCPenalidad\",\n" +
@@ -99,7 +99,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parsearConJsonConOpcionesIncorrectasQueNoSonArrayLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCPenalidad\",\n" +
@@ -114,7 +114,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parserDevuelveLaPreguntaCorrecta() throws PreguntaError, LectorFormatoDePreguntaError {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCPenalidad\",\n" +
@@ -133,7 +133,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parserConCantidadDePreguntasCeroLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCPenalidad\",\n" +
@@ -148,7 +148,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parserConCantidadDePreguntasUnoEnIncorrectaLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCPenalidad\",\n" +
@@ -163,7 +163,7 @@ public class ParserMultipleChoiceConPenalidadTest {
 
     @Test
     public void parserConCantidadDePreguntasUnoEnCorrectaLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceConPenalidad parser = new ParserMultipleChoiceConPenalidad();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCPenalidad\",\n" +

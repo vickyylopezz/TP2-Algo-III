@@ -4,6 +4,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserVerdaderoFalso;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ParserVerdaderoFalsoClasicoTest {
     @Test
     public void parsearConJsonSinTipoLanzaFormatoInvalidoError() {
-        ParserVerdaderoFalsoClasico parser = new ParserVerdaderoFalsoClasico();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"pregunta\":\"¿Esto es un verdadero Falso?\"," +
@@ -24,7 +25,7 @@ public class ParserVerdaderoFalsoClasicoTest {
 
     @Test
     public void parsearConJsonTipoInvalidoLanzaFormatoInvalidoError() {
-        ParserVerdaderoFalsoClasico parser = new ParserVerdaderoFalsoClasico();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"tipo\":\"VFClasicoooo\"," +
@@ -38,7 +39,7 @@ public class ParserVerdaderoFalsoClasicoTest {
 
     @Test
     public void parsearConJsonSinPreguntaLanzaFormatoInvalidoError() {
-        ParserVerdaderoFalsoClasico parser = new ParserVerdaderoFalsoClasico();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"tipo\":\"VFClasico\"," +
@@ -51,7 +52,7 @@ public class ParserVerdaderoFalsoClasicoTest {
 
     @Test
     public void parsearConJsonSinRespuesLanzaFormatoInvalidoError() {
-        ParserVerdaderoFalsoClasico parser = new ParserVerdaderoFalsoClasico();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"tipo\":\"VFClasico\"," +
@@ -64,7 +65,7 @@ public class ParserVerdaderoFalsoClasicoTest {
 
     @Test
     public void parserDevuelveLaPreguntaCorrecta() throws LectorFormatoDePreguntaError {
-        ParserVerdaderoFalsoClasico parser = new ParserVerdaderoFalsoClasico();
+        ParserVerdaderoFalso parser = new ParserVerdaderoFalso();
 
         String verdaderoFalso = "{" +
                 "  \"tipo\":\"VFClasico\"," +

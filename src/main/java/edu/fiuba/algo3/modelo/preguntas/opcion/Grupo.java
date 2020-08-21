@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.preguntas.groupChoice;
+package edu.fiuba.algo3.modelo.preguntas.opcion;
 
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import java.util.ArrayList;

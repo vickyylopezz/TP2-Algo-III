@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Grupo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoNegativo;
 import edu.fiuba.algo3.modelo.util.punto.PuntoPositivo;
 import org.junit.jupiter.api.Test;

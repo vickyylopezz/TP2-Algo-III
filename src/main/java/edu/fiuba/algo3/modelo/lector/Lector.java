@@ -7,6 +7,10 @@ import edu.fiuba.algo3.modelo.excepciones.lector.LectorSintaxisError;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserGroupChoice;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserMultipleChoice;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserOrderedChoice;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserVerdaderoFalso;
 
 import java.util.ArrayList;
 
@@ -54,13 +58,15 @@ public class Lector {
 
         String tipoPregunta = tipoJson.getAsString();
         switch (tipoPregunta) {
-            case "VFClasico": return new ParserVerdaderoFalsoClasico();
-            case "VFPenalidad": return new ParserVerdaderoFalsoConPenalidad();
-            case "MCClasico": return new ParserMultipleChoiceClasico();
-            case "MCParcial": return new ParserMultipleChoiceParcial();
-            case "MCPenalidad": return new ParserMultipleChoiceConPenalidad();
             case "Ordered": return new ParserOrderedChoice();
             case "Group": return new ParserGroupChoice();
+            case "VFClasico":
+            case "VFPenalidad":
+                return new ParserVerdaderoFalso();
+            case "MCClasico":
+            case "MCParcial":
+            case "MCPenalidad":
+                return new ParserMultipleChoice();
         }
 
         throw new LectorFormatoDePreguntaError("tipo de objeto " + tipoPregunta + " invalido");

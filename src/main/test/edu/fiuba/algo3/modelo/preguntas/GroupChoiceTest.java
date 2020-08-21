@@ -1,20 +1,18 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GroupChoiceTest {
 
     @Test
-    public void GroupChoiceAsignaPuntosAJugador() throws PreguntaError{
+    public void GroupChoiceAsignaPuntosAJugador() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Nombres");
@@ -95,7 +93,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void GroupChoiceAsignaPuntosAJugadores() throws PreguntaError{
+    public void GroupChoiceAsignaPuntosAJugadores() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Colores");
@@ -112,18 +110,18 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         ArrayList<Opcion> opcionesJugador1 = new ArrayList<>();
-        opcionesJugador1.add(opciones.get(0));
-        opcionesJugador1.add(opciones.get(2));
-        opcionesJugador1.add(opciones.get(5));
-        opcionesJugador1.add(opciones.get(6));
-        opcionesJugador1.add(opciones.get(9));
+        opcionesJugador1.add(opciones.get(0)); // correcta
+        opcionesJugador1.add(opciones.get(2)); // correcta
+        opcionesJugador1.add(opciones.get(4)); // incorrecta
+        opcionesJugador1.add(opciones.get(7)); // correcta
+        opcionesJugador1.add(opciones.get(8)); // incorrecta
 
         ArrayList<Opcion> opcionesJugador2 = new ArrayList<>();
-        opcionesJugador2.add(opciones.get(1));
-        opcionesJugador2.add(opciones.get(3));
-        opcionesJugador2.add(opciones.get(4));
-        opcionesJugador2.add(opciones.get(7));
-        opcionesJugador2.add(opciones.get(8));
+        opcionesJugador2.add(opciones.get(1)); // incorrecta
+        opcionesJugador2.add(opciones.get(3)); // incorrecta
+        opcionesJugador2.add(opciones.get(5)); // correcta
+        opcionesJugador2.add(opciones.get(6)); // incorrecta
+        opcionesJugador2.add(opciones.get(9)); // correcta
 
         assertEquals(pregunta.puntajeConOpciones(opcionesJugador1).obtenerValor(),3);
         assertEquals(pregunta.puntajeConOpciones(opcionesJugador2).obtenerValor(),2);
@@ -131,7 +129,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void GroupChoiceNoSeAsignanPuntosAJugadorQueRespondeTodasMal() throws PreguntaError{
+    public void GroupChoiceNoSeAsignanPuntosAJugadorQueRespondeTodasMal() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Flores");
@@ -148,11 +146,11 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
-        opcionesElegidas.add(opciones.get(1));
-        opcionesElegidas.add(opciones.get(3));
-        opcionesElegidas.add(opciones.get(5));
-        opcionesElegidas.add(opciones.get(7));
-        opcionesElegidas.add(opciones.get(9));
+        opcionesElegidas.add(opciones.get(1)); // incorrecta
+        opcionesElegidas.add(opciones.get(3)); // incorrecta
+        opcionesElegidas.add(opciones.get(4)); // incorrecta
+        opcionesElegidas.add(opciones.get(6)); // incorrecta
+        opcionesElegidas.add(opciones.get(8)); // incorrecta
 
         assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),0);
 
@@ -177,11 +175,11 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
-        opcionesElegidas.add(opciones.get(0));
-        opcionesElegidas.add(opciones.get(2));
-        opcionesElegidas.add(opciones.get(4));
-        opcionesElegidas.add(opciones.get(6));
-        opcionesElegidas.add(opciones.get(8));
+        opcionesElegidas.add(opciones.get(0)); // correcta
+        opcionesElegidas.add(opciones.get(2)); // correcta
+        opcionesElegidas.add(opciones.get(4)); // correcta
+        opcionesElegidas.add(opciones.get(7)); // correcta
+        opcionesElegidas.add(opciones.get(9)); // correcta
 
         assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),5);
 
@@ -212,12 +210,12 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
-        opcionesCorrectas.add(opciones.get(0));
-        opcionesCorrectas.add(opciones.get(2));
-        opcionesCorrectas.add(opciones.get(4));
-        opcionesCorrectas.add(opciones.get(6));
-        opcionesCorrectas.add(opciones.get(8));
-        opcionesCorrectas.add(opciones.get(10));
+        opcionesCorrectas.add(opciones.get(0)); // correcta
+        opcionesCorrectas.add(opciones.get(2)); // correcta
+        opcionesCorrectas.add(opciones.get(4)); // correcta
+        opcionesCorrectas.add(opciones.get(7)); // correcta
+        opcionesCorrectas.add(opciones.get(9)); // correcta
+        opcionesCorrectas.add(opciones.get(11)); // correcta
 
         assertTrue(pregunta.opcionesCorrectas(opcionesCorrectas));
 

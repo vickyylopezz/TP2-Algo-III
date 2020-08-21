@@ -1,17 +1,13 @@
-package edu.fiuba.algo3.modelo.lector;
+package edu.fiuba.algo3.modelo.lector.parsers;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
+import edu.fiuba.algo3.modelo.lector.ParserPregunta;
+import edu.fiuba.algo3.modelo.preguntas.VerdaderoFalso;
 
-public class ParserVerdaderoFalsoClasico implements ParserPregunta {
-
-    /* Posible refactor unificar clases ParserVerdadoFalsoClasico con
-    *  ParserVerdaderoFalsoConPenalidad.
-    * */
-
+public class ParserVerdaderoFalso implements ParserPregunta {
     @Override
     public Pregunta parsear(JsonObject objeto) throws LectorFormatoDePreguntaError {
         JsonElement tipoJson = objeto.get("tipo");
@@ -19,7 +15,7 @@ public class ParserVerdaderoFalsoClasico implements ParserPregunta {
             throw new LectorFormatoDePreguntaError("Tipo de pregunta no definido");
         }
         String tipo = tipoJson.getAsString();
-        if (!tipo.equals("VFClasico")) {
+        if (!tipo.equals("VFClasico") && !tipo.equals("VFPenalidad")) {
             throw new LectorFormatoDePreguntaError("Tipo pregunta invalido");
         }
 
@@ -42,6 +38,9 @@ public class ParserVerdaderoFalsoClasico implements ParserPregunta {
             opcionIncorrecta = "Verdadero";
         }
 
-        return new VerdaderoFalsoClasico(tituloPregunta, opcionCorrecta, opcionIncorrecta);
+        if (tipo.equals("VFClasico")) {
+            return VerdaderoFalso.Clasico(tituloPregunta, opcionCorrecta, opcionIncorrecta);
+        }
+        return VerdaderoFalso.ConPenalidad(tituloPregunta, opcionCorrecta, opcionIncorrecta);
     }
 }

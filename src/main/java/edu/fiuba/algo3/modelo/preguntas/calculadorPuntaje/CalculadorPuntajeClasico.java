@@ -17,7 +17,7 @@ public class CalculadorPuntajeClasico implements CalculadorPuntaje {
     * */
 
     @Override
-    public Punto calcular(Pregunta pregunta, ArrayList<Opcion> opciones){
+    public Punto calcular(Pregunta pregunta, ArrayList<Opcion> opciones) {
         for (Opcion opcion: opciones) {
             if (opcion.obtenerPunto().obtenerValor() != 1) return pregunta.puntajeIncorrecto();
         }

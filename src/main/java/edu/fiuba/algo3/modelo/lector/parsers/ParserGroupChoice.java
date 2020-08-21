@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.modelo.lector;
+package edu.fiuba.algo3.modelo.lector.parsers;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -6,9 +6,9 @@ import com.google.gson.JsonObject;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
-import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
+import edu.fiuba.algo3.modelo.lector.ParserPregunta;
+import edu.fiuba.algo3.modelo.preguntas.GroupChoice;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Grupo;
 
 import java.util.ArrayList;
 

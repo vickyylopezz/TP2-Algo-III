@@ -5,6 +5,7 @@ import com.google.gson.JsonParser;
 import edu.fiuba.algo3.modelo.excepciones.lector.LectorFormatoDePreguntaError;
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
+import edu.fiuba.algo3.modelo.lector.parsers.ParserMultipleChoice;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class ParserMultipleChoiceClasicoTest {
     @Test
     public void parsearConJsonSinTipoLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"pregunta\":\"¿Es True/False con penalidad?\",\n" +
@@ -26,7 +27,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parsearConJsonTipoInvalidoLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"caramelo\",\n" +
@@ -41,7 +42,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parsearConJsonSinPreguntaLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCClasico\",\n" +
@@ -55,7 +56,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parsearConJsonSinOpcionesCorrectasLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCClasico\",\n" +
@@ -69,7 +70,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parsearConJsonConOpcionesCorrectasQueNoSonArrayLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCClasico\",\n" +
@@ -84,7 +85,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parsearConJsonSinOpcionesIncorrectasLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCClasico\",\n" +
@@ -98,7 +99,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parsearConJsonConOpcionesIncorrectasQueNoSonArrayLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCClasico\",\n" +
@@ -113,7 +114,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parserDevuelveLaPreguntaCorrecta() throws PreguntaError, LectorFormatoDePreguntaError {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCClasico\",\n" +
@@ -132,7 +133,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parserConCantidadDePreguntasCeroLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCClasico\",\n" +
@@ -147,7 +148,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parserConCantidadDePreguntasUnoEnIncorrectaLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCClasico\",\n" +
@@ -162,7 +163,7 @@ public class ParserMultipleChoiceClasicoTest {
 
     @Test
     public void parserConCantidadDePreguntasUnoEnCorrectaLanzaFormatoInvalidoError() {
-        ParserMultipleChoiceClasico parser = new ParserMultipleChoiceClasico();
+        ParserMultipleChoice parser = new ParserMultipleChoice();
 
         String multipleChoiceJson = "{\n" +
                 "  \"tipo\":\"MCClasico\",\n" +
