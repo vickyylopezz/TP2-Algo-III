@@ -15,7 +15,7 @@ public class Resources {
     static public String musicaKahoot = "Kahoot.wav";
     static public String IconoMute = "mute.png";
     static public String IconoSonido = "sonido.png";
-    static public String FondoLadrillo = "fondo_ladrillo.png";
+    static public String FondoLadrillo = "fondo.png";
     static public String IconoCorona = "corona.png";
 
     public static String IconoFlechaDerechaRuta() { return Ruta + Iconos + IconoFlechaDerecha; }
@@ -29,5 +29,5 @@ public class Resources {
     public static String DataPreguntas = "Preguntas.json";
     public static String RutaDataPreguntas() { return Ruta + DataPreguntas; }
 
-    public static String FondoPrincipalRuta() { return Ruta + Iconos + FondoLadrillo; }
+    public static String FondoPrincipalRuta() { return "file:" + Ruta + FondoLadrillo; }
 }

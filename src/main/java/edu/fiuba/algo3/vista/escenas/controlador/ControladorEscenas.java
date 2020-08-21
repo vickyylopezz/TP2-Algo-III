@@ -11,6 +11,7 @@ import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
+import edu.fiuba.algo3.vista.CargadorResources;
 import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCircularVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
@@ -25,9 +26,11 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -59,62 +62,7 @@ public class ControladorEscenas extends BaseEscena {
 
         // LAYOUT ANCHORPANE
         AnchorPane anchorPane = new AnchorPane();
-        anchorPane.setStyle("-fx-background-image: url(" + Resources.FondoRuta() + ");" + "-fx-background-size: cover");
-
-        // ---------------------- SIDE-BAR: indicadores, tiempo, comodines
-        BorderPane sideBar = new BorderPane();
-        sideBar.setPrefSize(200, Screen.getPrimary().getVisualBounds().getHeight());
-        sideBar.setPadding(new Insets(10,25,0,25));
-        setBackgroundColor(sideBar, Color.WHITE);
-
-        // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
-        Label indicadorJugador = new Label(jugador.nombre());
-        indicadorJugador.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold;");
-        indicadorJugador.setAlignment(Pos.CENTER);
-        indicadorJugador.setPrefSize(150,50);
-
-        Label indicadorPuntaje = new Label(jugador.puntajeTotal().obtenerPunto().obtenerValor().toString());
-        indicadorPuntaje.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: black");
-        indicadorPuntaje.setAlignment(Pos.CENTER);
-        indicadorPuntaje.setPrefSize(150,50);
-
-        VBox datosJugador = new VBox(10, indicadorJugador, indicadorPuntaje);
-
-        // TIMER
-        StackPane timer = new StackPane();
-        Label timerLabel = new Label();
-        IntegerProperty timeSeconds = new SimpleIntegerProperty(30);
-        timerLabel.textProperty().bind(timeSeconds.asString());
-        timerLabel.setTextFill(Color.BLACK);
-        timerLabel.setAlignment(Pos.CENTER);
-        timerLabel.setPrefWidth(150);
-        timerLabel.setStyle("-fx-font-size: 4em;");
-
-        Circle circulo = new Circle(50);
-        circulo.setFill(Color.WHITE);
-
-        timer.getChildren().addAll(circulo, timerLabel);
-
-        timeline = new Timeline();
-        timeline.getKeyFrames().add(
-                new KeyFrame(Duration.seconds(30 + 1),
-                        new KeyValue(timeSeconds, 0)));
-        timeline.playFromStart();
-        timeline.setOnFinished(eventoConfirmar);
-
-        // COMODINES
-        VBox comodines = new VBox(20);
-        BotonCircularVista boton1 = new BotonCircularVista("EX");
-        BotonCircularVista boton2 = new BotonCircularVista("x2");
-        BotonCircularVista boton3 = new BotonCircularVista("x3");
-        comodines.getChildren().addAll(boton1, boton2, boton3);
-        comodines.setPadding(new Insets(0,50,25,50));
-
-        sideBar.setTop(datosJugador);
-        sideBar.setCenter(timer);
-        sideBar.setBottom(comodines);
-        BorderPane.setAlignment(comodines, Pos.BOTTOM_CENTER);
-        // ---------------------------------------------------
+        anchorPane.setStyle("-fx-background-image: url(" + Resources.FondoPrincipalRuta() + ");" + "-fx-background-size: cover");
 
         // ---------------------- TOP-BAR: pregunta
         VBox topBar = new VBox();
@@ -137,11 +85,89 @@ public class ControladorEscenas extends BaseEscena {
         setBackgroundColor(topBar, Color.WHITE);
         // ---------------------------------------------------
 
-        // ---------------------- MAIN-AREA: opciones + confirmar (opcional)
-        // LAYOUT BORDERPANE
-        BorderPane mainArea = new BorderPane();
-        mainArea.setPadding(new Insets(40,40,40,40));
+        // ---------------------- SIDE-BAR: indicadores, tiempo, comodines
+        BorderPane sideBar = new BorderPane();
+        sideBar.setPrefSize(200, Screen.getPrimary().getVisualBounds().getHeight());
+        sideBar.setPadding(new Insets(10,25,0,25));
+        setBackgroundColor(sideBar, Color.WHITE);
 
+        // JUGADOR ACTUAL + PUNTAJE (arriba-izquierda del borderPane)
+        Label indicadorJugador = new Label(jugador.nombre());
+        indicadorJugador.setStyle("-fx-text-fill: #000000; -fx-font-size: 18; -fx-font-weight: bold;");
+        indicadorJugador.setAlignment(Pos.CENTER);
+        indicadorJugador.setPrefSize(150,50);
+
+        Label indicadorPuntaje = new Label(jugador.puntajeTotal().obtenerPunto().obtenerValor().toString());
+        indicadorPuntaje.setStyle("-fx-text-fill: #FFFFFF; -fx-font-size: 18; -fx-font-weight: bold; -fx-background-color: black");
+        indicadorPuntaje.setAlignment(Pos.CENTER);
+        indicadorPuntaje.setPrefSize(150,50);
+
+        VBox datosJugador = new VBox(10, indicadorJugador, indicadorPuntaje);
+
+        // TIMER
+        StackPane timer = new StackPane();
+        Label timerLabel = new Label();
+        IntegerProperty timeSeconds = new SimpleIntegerProperty(30);
+        timerLabel.textProperty().bind(timeSeconds.asString());
+        timerLabel.setTextFill(Color.BLACK);
+        timerLabel.setAlignment(Pos.CENTER);
+        timerLabel.setPrefWidth(150);
+        timerLabel.setStyle("-fx-font-size: 4em;");
+
+        Circle circulo = new Circle(75);
+        circulo.setFill(Color.WHITE);
+
+        timer.getChildren().addAll(circulo, timerLabel);
+
+        timeline = new Timeline();
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(30 + 1),
+                        new KeyValue(timeSeconds, 0)));
+        timeline.playFromStart();
+        timeline.setOnFinished(eventoConfirmar);
+
+        // COMODINES
+        VBox comodines = new VBox(20);
+        BotonCircularVista boton1 = new BotonCircularVista("EX", Color.INDIANRED);
+        BotonCircularVista boton2 = new BotonCircularVista("x2", Color.DEEPSKYBLUE);
+        BotonCircularVista boton3 = new BotonCircularVista("x3", Color.ORANGE);
+        comodines.getChildren().addAll(boton1, boton2, boton3);
+
+        boton1.setOnAction(e -> {
+            for (Node boton: comodines.getChildren()){
+                boton.setDisable(true);
+            }
+            boton1.setDisable(false);
+            setBackgroundColor(sideBar, Color.INDIANRED);
+            setBackgroundColor(topBar, Color.INDIANRED);
+        });
+        boton2.setOnAction(e -> {
+            for (Node boton: comodines.getChildren()){
+                boton.setDisable(true);
+            }
+            boton2.setDisable(false);
+            setBackgroundColor(sideBar, Color.DEEPSKYBLUE);
+            setBackgroundColor(topBar, Color.DEEPSKYBLUE);
+        });
+        boton3.setOnAction(e -> {
+            for (Node boton: comodines.getChildren()){
+                boton.setDisable(true);
+            }
+            boton3.setDisable(false);
+            setBackgroundColor(sideBar, Color.ORANGE);
+            setBackgroundColor(topBar, Color.ORANGE);
+        });
+
+        comodines.setPadding(new Insets(0,50,25,50));
+
+        sideBar.setTop(datosJugador);
+        sideBar.setCenter(timer);
+        sideBar.setBottom(comodines);
+        BorderPane.setAlignment(comodines, Pos.BOTTOM_CENTER);
+        // ---------------------------------------------------
+
+
+        // ---------------------- VISTA: opciones + confirmar (opcional)
         // PREGUNTA + OPCIONES (centro del borderPane)
         if (pregunta.getClass() == VerdaderoFalsoClasico.class || pregunta.getClass() == VerdaderoFalsoConPenalidad.class) {
             vista = new VistaVerdaderoFalso(pregunta, pregunta.obtenerOpciones(), this);
@@ -155,8 +181,6 @@ public class ControladorEscenas extends BaseEscena {
         } else {
             vista = new VistaMultipleChoice(pregunta, pregunta.obtenerOpciones(), this);
         }
-
-        mainArea.setCenter(vista);
         // ---------------------------------------------------
 
         // ASIGNACIONES DEL ANCHORPANE
@@ -174,7 +198,7 @@ public class ControladorEscenas extends BaseEscena {
 
         anchorPane.getChildren().addAll(sideBar, topBar, vista);
 
-        stage.setScene(new Scene(anchorPane, 1600,900));
+        stage.setScene(new Scene(anchorPane, 1280,800));
     }
 
     public ArrayList<Opcion> obtenerOpciones(Pregunta pregunta) {
@@ -201,16 +225,14 @@ public class ControladorEscenas extends BaseEscena {
         } else {
             opciones.addAll(vista.obtenerSeleccion());
         }
-        Respuesta respuesta = new Respuesta(jugada.obtenerPregunta(), jugada.obtenerJugador());
         for (Opcion opcion: opciones) {
-            respuesta.agregarOpcion(opcion);
+            jugada.seleccionarOpcion(opcion);
         }
-        jugada.obtenerJugador().agregarRespuesta(respuesta);
     }
 
     public static void setBackgroundColor(Region region, Color color) {
         // change to 50% opacity
-        color = color.deriveColor(0, 1, 1, 0.25);
+        color = color.deriveColor(0, 1, 1, 0.5);
         region.setBackground(new Background(new BackgroundFill(color, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 

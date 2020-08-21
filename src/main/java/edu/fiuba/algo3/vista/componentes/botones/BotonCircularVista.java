@@ -16,6 +16,19 @@ public class BotonCircularVista extends Button {
         this.cargarEstilo();
     }
 
+    public BotonCircularVista(String t, Color color) {
+        super(t);
+        this.cargarEstilo();
+        this.setBackground(new Background(
+                new BackgroundFill(
+                        color,
+                        new CornerRadii(50, true),
+                        Insets.EMPTY
+                )
+        ));
+        this.setStyle("-fx-font-weight: bold");
+    }
+
     public BotonCircularVista(ImageView img) {
         img.setPreserveRatio(true);
         img.setFitWidth(25);

@@ -22,8 +22,7 @@ public abstract class BaseEscena extends Scene {
     protected BotonEtiquetaDerechaVista botonAnterior;
 
     public BaseEscena(MediaPlayer reproductor) {
-        super(new Label("Loading"), 1600, 900);
-
+        super(new Label("Loading"), 1280, 800);
         this.raiz = new BorderPane();
         this.cabecera = new CabeceraKahootVista();
 
@@ -32,16 +31,7 @@ public abstract class BaseEscena extends Scene {
         ContenedorSonido botoneraSonido = new ContenedorSonido(reproductor);
         this.raiz.setBottom(botoneraSonido.obtenerNodo());
 
-        Image fondo = CargadorResources.obtenerImagen(Resources.FondoPrincipalRuta());
-        if (fondo != null) {
-            this.raiz.setBackground(new Background(new BackgroundImage(
-                    fondo,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.CENTER,
-                    new BackgroundSize(100, 100, true, true, true, true)
-            )));
-        }
+        this.raiz.setStyle("-fx-background-image: url(" + Resources.FondoPrincipalRuta() + ");" + "-fx-background-size: cover");
     }
 
     public void eventoSiguiente(EventHandler<ActionEvent> evento) {

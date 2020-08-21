@@ -83,7 +83,7 @@ public class VistaGroupChoice extends VistaPregunta {
         ArrayList<BotonOpcionGroup> botones = new ArrayList<>();
 
         for (int i=0; i < opciones.size(); i = i+2) {
-            BotonOpcionGroup boton = new BotonOpcionGroup(opciones.get(i), opciones.get(i+1),300, 75);
+            BotonOpcionGroup boton = new BotonOpcionGroup(opciones.get(i), opciones.get(i+1),300, 50);
             boton.setOnAction(e -> {
                 this.izquierda.setDisable(false);
                 this.derecha.setDisable(false);
