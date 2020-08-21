@@ -1,11 +1,12 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
+import edu.fiuba.algo3.modelo.excepciones.punto.PuntajeIgualError;
 import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class PuntajeTest {
+public class PuntoExactoTest {
 
     // obtenerValor
     @Test
@@ -190,5 +191,30 @@ public class PuntajeTest {
         Punto punto = puntaje.multiplicarPorFactor(30);
 
         assertEquals(-60, punto.obtenerValor());
+    }
+
+    @Test
+    public void mayorDevuelveTrueSiElPuntajeEsMayorAlRecibido() throws PuntoError {
+        PuntoExacto puntaje = new PuntoExacto();
+
+        puntaje.agregarValor(new PuntoPositivo());
+
+        assertTrue(puntaje.mayor(new PuntoNulo()));
+    }
+
+    @Test
+    public void mayorDevuelveFalseSiElPuntajeEsMenorAlRecibido() throws PuntoError {
+        PuntoExacto puntaje = new PuntoExacto();
+
+        puntaje.agregarValor(new PuntoNegativo());
+
+        assertFalse(puntaje.mayor(new PuntoNulo()));
+    }
+
+    @Test
+    public void mayorLanzaExcepcionSiElPuntajeEsIgualAlRecibido() {
+        PuntoExacto puntaje = new PuntoExacto();
+
+        assertThrows(PuntajeIgualError.class, ()->puntaje.mayor(new PuntoNulo()));
     }
 }
