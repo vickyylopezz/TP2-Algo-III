@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.multipleChoice.MultipleChoiceClasico;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
@@ -94,7 +93,7 @@ public class MultipleChoiceClasicoTest {
     }
 
     @Test
-    public void agregarOpcionIncorrectaGuardaLaOpcionEnLaPreguntaConValorCero() throws PreguntaError, PuntoError {
+    public void agregarOpcionIncorrectaGuardaLaOpcionEnLaPreguntaConValorCero() throws PreguntaError {
         MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionIncorrecta("OPCION INCORRECTA");
@@ -149,7 +148,7 @@ public class MultipleChoiceClasicoTest {
     }
 
     @Test
-    public void agregarOpcionCorrectaGuardaLaOpcionEnLaPreguntaConValorUno() throws PreguntaError, PuntoError {
+    public void agregarOpcionCorrectaGuardaLaOpcionEnLaPreguntaConValorUno() throws PreguntaError{
         MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
@@ -230,7 +229,7 @@ public class MultipleChoiceClasicoTest {
 
     // Test puntajeConOpciones
     @Test
-    public void puntajeSeleccionandoTodasLasOpcionesCorrectasPuntajeUno() throws PreguntaError, PuntoError {
+    public void puntajeSeleccionandoTodasLasOpcionesCorrectasPuntajeUno() throws PreguntaError {
         MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
@@ -251,7 +250,7 @@ public class MultipleChoiceClasicoTest {
     }
 
     @Test
-    public void puntajeSeleccionandoTodasLasOpcionesCorrectasYUnaIncorrectaDevuelveCero() throws PreguntaError, PuntoError {
+    public void puntajeSeleccionandoTodasLasOpcionesCorrectasYUnaIncorrectaDevuelveCero() throws PreguntaError {
         MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");
@@ -273,7 +272,7 @@ public class MultipleChoiceClasicoTest {
     }
 
     @Test
-    public void puntajeSeleccionandoUnaSolaOpcionCorrectaDevueveCero() throws PreguntaError, PuntoError {
+    public void puntajeSeleccionandoUnaSolaOpcionCorrectaDevueveCero() throws PreguntaError {
         MultipleChoiceClasico pregunta = new MultipleChoiceClasico("TITULO PREGUNTA");
 
         pregunta.agregarOpcionCorrecta("OPCCOR1");

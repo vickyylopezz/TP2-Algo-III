@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import org.junit.jupiter.api.Test;
 
@@ -414,7 +413,7 @@ public class JugadorTest {
 
     // puntajeTotal
     @Test
-    public void calcularPuntajeTotalSinRespuestasEsCero() throws PuntoError {
+    public void calcularPuntajeTotalSinRespuestasEsCero() {
         Jugador carlos = new Jugador("Carlos");
 
         Punto puntaje = carlos.puntajeTotal();

@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoClasico;
 import org.junit.jupiter.api.Test;
@@ -24,7 +23,7 @@ public class VerdaderoFalsoClasicoTest {
     }
 
     @Test
-    public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() throws PuntoError {
+    public void VerdaderoFalsoAsignaPuntosCorrectamenteAUnaListaDeRespuestas() {
         VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico(
                 "¿Estamos en Algoritmos y programcion 3?",
                 "Verdadero",
@@ -47,7 +46,7 @@ public class VerdaderoFalsoClasicoTest {
     }
 
     @Test
-    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() throws PuntoError {
+    public void ObtenerPuntajeConOpcionesDeUnArregloVacioDevuelveCero() {
         VerdaderoFalsoClasico preguntavf = new VerdaderoFalsoClasico(
                 "¿Estamos en Algoritmos y programcion 3?",
                 "Verdader",

@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
@@ -81,7 +80,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
+    public void seAplicaARespuestasCorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -104,7 +103,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
+    public void seAplicaAUnaRespuestaCorrectaYAOtraIncorrectaYSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError{
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);
@@ -127,7 +126,7 @@ public class ExclusividadTest {
     }
 
     @Test
-    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError, PuntoError {
+    public void seAplicaARespuestasIncorrectasYNoSeGuardaEnListaDeComodinesDeLaRespuestaCorrecta() throws ComodinError {
         Exclusividad exclusividad = new Exclusividad(2);
 
         Jugador jugador = mock(Jugador.class);

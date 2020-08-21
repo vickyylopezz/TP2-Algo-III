@@ -1,21 +1,12 @@
 package edu.fiuba.algo3.modelo.juego;
 
-import edu.fiuba.algo3.modelo.comodines.Comodin;
-import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntajeIgualError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.verdaderoFalso.VerdaderoFalsoConPenalidad;
 import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.times;
 
 public class JuegoTest {
 
@@ -266,7 +257,7 @@ public class JuegoTest {
     }
 
     @Test
-    public void ganadarDevuelveElJugadorConMayorPuntaje() throws PuntoError {
+    public void ganadarDevuelveElJugadorConMayorPuntaje() {
         ArrayList<Pregunta> preguntas = new ArrayList<>();
         VerdaderoFalsoConPenalidad pregunta = new VerdaderoFalsoConPenalidad("¿Estamos en el año 2020?","Verdadero","Falso");
         preguntas.add(pregunta);
@@ -289,7 +280,7 @@ public class JuegoTest {
         respuestaJugador2.agregarOpcion(opciones.get(1));
         jugador2.agregarRespuesta(respuestaJugador2);
 
-        assertEquals(juego.ganador(jugador1,jugador2),jugador1);
+        assertEquals(juego.ganador(jugadores).get(0),jugador1);
     }
 
     @Test
@@ -307,7 +298,7 @@ public class JuegoTest {
 
         Juego juego = new Juego(preguntas, jugadores);
 
-        assertThrows(PuntajeIgualError.class, ()->juego.ganador(jugador1,jugador2));
+        assertEquals(juego.ganador(jugadores),jugadores);
     }
 
     @Test
@@ -334,6 +325,6 @@ public class JuegoTest {
         respuestaJugador2.agregarOpcion(opciones.get(0));
         jugador2.agregarRespuesta(respuestaJugador2);
 
-        assertThrows(PuntajeIgualError.class, ()-> juego.ganador(jugador1,jugador2));
+        assertEquals(juego.ganador(jugadores),jugadores);
     }
 }

@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
-
-//Hoja
 public class PuntoNegativo extends Punto {
 
     private final Integer valor = -1;

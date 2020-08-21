@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import edu.fiuba.algo3.modelo.preguntas.orderedChoice.OrderedChoice;
 import org.junit.jupiter.api.Test;
@@ -27,7 +26,7 @@ public class OrderedChoiceTest {
     }
 
     @Test
-    public void FlujoNormalDePreguntaOrderedChoiceConRespuestaOrdenadaOtorga1Punto() throws PreguntaError, PuntoError {
+    public void FlujoNormalDePreguntaOrderedChoiceConRespuestaOrdenadaOtorga1Punto() throws PreguntaError {
         OrderedChoice pregunta = new OrderedChoice("Ordenar de menor a mayor");
         pregunta.agregarOpcion("Uno");
         pregunta.agregarOpcion("Dos");
@@ -49,7 +48,7 @@ public class OrderedChoiceTest {
     }
 
     @Test
-    public void FlujoNormalDePreguntaOrderedChoiceConRespuestaDesordenadaNoOtorgaPuntos() throws PreguntaError, PuntoError {
+    public void FlujoNormalDePreguntaOrderedChoiceConRespuestaDesordenadaNoOtorgaPuntos() throws PreguntaError {
         OrderedChoice pregunta = new OrderedChoice("Ordenar de menor a mayor");
         pregunta.agregarOpcion("Uno");
         pregunta.agregarOpcion("Dos");
@@ -71,7 +70,7 @@ public class OrderedChoiceTest {
     }
 
     @Test
-    public void ConfirmarUnaRespuestaOrdenadaPeroSinIncluirTodosLosElementosNoOtorgaPuntos() throws PreguntaError, PuntoError {
+    public void ConfirmarUnaRespuestaOrdenadaPeroSinIncluirTodosLosElementosNoOtorgaPuntos() throws PreguntaError {
         OrderedChoice pregunta = new OrderedChoice("Ordenar de menor a mayor");
         pregunta.agregarOpcion("Uno");
         pregunta.agregarOpcion("Dos");
