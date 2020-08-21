@@ -191,5 +191,12 @@ public class ExclusividadTest {
 
         assertEquals(-2,puntoNuevo.obtenerValor());
     }
+
+    @Test
+    public void toStringDevuelveElNombreDeLaExclusividad() throws ComodinError{
+        Exclusividad exclusividad = new Exclusividad(2);
+
+        assertEquals("EXC", exclusividad.toString());
+    }
 }
 

@@ -27,4 +27,7 @@ public class Multiplicador extends Comodin{
                 respuesta.aplicarComodin(this);
             }
     }
+
+    @Override
+    public String toString() { return "x" + this.factor; }
 }
