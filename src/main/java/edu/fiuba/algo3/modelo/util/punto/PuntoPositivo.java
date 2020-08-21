@@ -3,11 +3,9 @@ package edu.fiuba.algo3.modelo.util.punto;
 //Hoja
 public class PuntoPositivo extends Punto {
 
-    private final Integer valor = 1;
-
     @Override
     public Integer obtenerValor() {
-        return this.valor;
+        return 1;
     }
 
     @Override
