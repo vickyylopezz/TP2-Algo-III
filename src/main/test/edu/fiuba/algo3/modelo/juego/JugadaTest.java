@@ -370,10 +370,6 @@ public class JugadaTest {
         Opcion opcion2 = mock(Opcion.class);
         Opcion opcion3 = mock(Opcion.class);
 
-        ArrayList<Opcion> opcionesASeleccionar = new ArrayList<>();
-        opcionesASeleccionar.add(opcion2);
-        opcionesASeleccionar.add(opcion3);
-
         ArrayList<Opcion> opcionesValidas = new ArrayList<>();
         opcionesValidas.add(opcion1);
 
