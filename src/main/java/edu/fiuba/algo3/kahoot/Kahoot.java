@@ -19,14 +19,14 @@ public class Kahoot {
     private final ArrayList<Pregunta> preguntas;
     private final ArrayList<Jugador> jugadores;
     private final MediaPlayer reproductor;
-    private final Media musica;
 
     public Kahoot(Stage stage) {
         this.stage = stage;
         this.preguntas = new ArrayList<>();
         this.jugadores = new ArrayList<>();
-        this.musica = new Media(new File(Resources.MusicaKahootRuta()).toURI().toString());
-        this.reproductor = new MediaPlayer(this.musica);
+        this.reproductor = new MediaPlayer(
+                new Media(new File(Resources.MusicaKahootRuta()).toURI().toString())
+        );
     }
 
     public void iniciar() {
