@@ -1,5 +1,11 @@
 package edu.fiuba.algo3.vista.escenas.controlador;
 
+import edu.fiuba.algo3.eventos.juego.SeleccionarComodinEventHandler;
+import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.comodines.Exclusividad;
+import edu.fiuba.algo3.modelo.comodines.Multiplicador;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
+import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
@@ -24,6 +30,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -124,35 +131,21 @@ public class ControladorEscenas extends BaseEscena {
 
         // COMODINES
         VBox comodines = new VBox(20);
-        BotonCircularVista boton1 = new BotonCircularVista("EX", Color.INDIANRED);
-        BotonCircularVista boton2 = new BotonCircularVista("x2", Color.DEEPSKYBLUE);
-        BotonCircularVista boton3 = new BotonCircularVista("x3", Color.ORANGE);
-        comodines.getChildren().addAll(boton1, boton2, boton3);
+        for (Comodin comodin: jugada.comodines()) {
+            String tituloComodin = "comodin";
+            if (comodin instanceof Multiplicador) { tituloComodin = "x" + comodin.obtenerFactor();
+            } else if (comodin instanceof Exclusividad) { tituloComodin = "EX"; }
 
-        boton1.setOnAction(e -> {
-            for (Node boton: comodines.getChildren()){
-                boton.setDisable(true);
-            }
-            boton1.setDisable(false);
-            setBackgroundColor(sideBar, Color.INDIANRED);
-            setBackgroundColor(topBar, Color.INDIANRED);
-        });
-        boton2.setOnAction(e -> {
-            for (Node boton: comodines.getChildren()){
-                boton.setDisable(true);
-            }
-            boton2.setDisable(false);
-            setBackgroundColor(sideBar, Color.DEEPSKYBLUE);
-            setBackgroundColor(topBar, Color.DEEPSKYBLUE);
-        });
-        boton3.setOnAction(e -> {
-            for (Node boton: comodines.getChildren()){
-                boton.setDisable(true);
-            }
-            boton3.setDisable(false);
-            setBackgroundColor(sideBar, Color.ORANGE);
-            setBackgroundColor(topBar, Color.ORANGE);
-        });
+            BotonCircularVista boton = new BotonCircularVista(tituloComodin, Color.INDIANRED);
+            comodines.getChildren().add(boton);
+
+            boton.setOnAction(new SeleccionarComodinEventHandler(
+                    jugada,
+                    comodin,
+                    comodines.getChildren(),
+                    boton
+            ));
+        }
 
         comodines.setPadding(new Insets(0,50,25,50));
 
