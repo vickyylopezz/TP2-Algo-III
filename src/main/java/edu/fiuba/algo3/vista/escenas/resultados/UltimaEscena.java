@@ -13,27 +13,28 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
 
 
+import java.util.ArrayList;
+
 import static javafx.geometry.Pos.CENTER;
 
 public class UltimaEscena extends BaseEscena {
     private StackPane cuerpo;
-    public UltimaEscena(MediaPlayer reproductor, Jugador jugador1, Jugador jugador2, Juego juego) {
+    public UltimaEscena(MediaPlayer reproductor, ArrayList<Jugador> jugadores, Juego juego) {
         super(reproductor);
-        Node cuerpo = this.crearCuerpo(jugador1,jugador2,juego);
+        Node cuerpo = this.crearCuerpo(jugadores,juego);
         this.raiz.setCenter(cuerpo);
 
     }
 
-    private Node crearCuerpo(Jugador jugador1, Jugador jugador2,Juego juego) {
-        /*
-        try{
+    private Node crearCuerpo(ArrayList<Jugador> jugadores,Juego juego) {
+        if(juego.ganador(jugadores).size() < 2){
             //TituloGanador
             Label tituloGanador = new Label("G A N A D O R");
             tituloGanador.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 50; -fx-font-weight: bold");
             tituloGanador.setAlignment(Pos.TOP_CENTER);
 
             //JugadorGanador
-            GanadorVista ganador = new GanadorVista(juego.ganador(jugador1, jugador2).nombre());
+            GanadorVista ganador = new GanadorVista(jugadores.get(0).nombre());
 
             //XBox
             VBox vbox = new VBox(20);
@@ -41,12 +42,12 @@ public class UltimaEscena extends BaseEscena {
             vbox.setAlignment(CENTER);
 
             return vbox;
-        }catch(PuntajeIgualError empateExcepcion){
+        }else{
             Label tituloEmpate = new Label("E M P A T E");
             tituloEmpate.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 50; -fx-font-weight: bold");
             tituloEmpate.setAlignment(Pos.TOP_CENTER);
 
-            EmpateVista empate = new EmpateVista(jugador1,jugador2);
+            EmpateVista empate = new EmpateVista(jugadores.get(0),jugadores.get(1));
 
             VBox vbox = new VBox(20);
 
@@ -55,9 +56,6 @@ public class UltimaEscena extends BaseEscena {
 
             return vbox;
         }
-
-         */
-        return null;
-    }
+     }
     
 }

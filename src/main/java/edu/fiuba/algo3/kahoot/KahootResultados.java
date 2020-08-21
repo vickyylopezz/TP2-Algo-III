@@ -19,7 +19,7 @@ public class KahootResultados extends KahootModo {
     @Override
     public void iniciar(MediaPlayer reproductor) {
         this.juego = new Juego(this.preguntas, this.jugadores);
-        UltimaEscena finalizacion = new UltimaEscena(reproductor,this.jugadores.get(0),this.jugadores.get(1),this.juego);
+        UltimaEscena finalizacion = new UltimaEscena(reproductor,this.jugadores,this.juego);
         finalizacion.eventoSiguiente(this.eventoSalida,"Volver a Jugar");
 
         new CambioEscenaEventHandler(this.stage, finalizacion).handle(null);
