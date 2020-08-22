@@ -33,13 +33,14 @@ public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent
                 new FileChooser.ExtensionFilter("Json Archivo", "*.json")
         );
         File archivo = seleccionadorArchivos.showOpenDialog(this.stage);
+        if (archivo == null) return;
 
         ArrayList<Pregunta> preguntasNuevas;
 
         Lector lector = new Lector();
         try { preguntasNuevas = lector.extraerPreguntas(archivo);
-        } catch (LectorError | PreguntaError e) {
-            this.mostrarAlertaDeCargaDeArchivo(e.toString());
+        } catch (LectorError | PreguntaError error) {
+            this.mostrarAlertaDeCargaDeArchivo(error.getMessage());
             return;
         }
 
@@ -49,7 +50,7 @@ public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent
 
     public void mostrarAlertaDeCargaDeArchivo(String error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Error de carga");
+        alert.setTitle("Error al cargar Preguntas");
         alert.setHeaderText("Hubo un error al cargar las pregunas");
         alert.setContentText(error);
         alert.showAndWait();
