@@ -44,8 +44,8 @@ public class CargarJsonPreguntasEventHandler implements EventHandler<ActionEvent
             return;
         }
 
+        Collections.shuffle(preguntasNuevas);
         this.preguntas.addAll(preguntasNuevas);
-        Collections.shuffle(this.preguntas);
     }
 
     public void mostrarAlertaDeCargaDeArchivo(String error) {
