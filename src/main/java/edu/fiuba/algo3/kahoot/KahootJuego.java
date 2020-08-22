@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.kahoot;
 
 import edu.fiuba.algo3.vista.escenas.controlador.ControladorVistaJuego;
-import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
+import edu.fiuba.algo3.eventos.kahoot.CambioLayoutEventHandler;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaLayout;
 import edu.fiuba.algo3.vista.escenas.juego.PuntajeParcialLayout;
@@ -66,10 +66,10 @@ public class KahootJuego extends KahootModo {
                 } else {
                     puntajeParcial.eventoSiguiente(this.eventoSalida, "Continuar");
                 }
-                new CambioEscenaEventHandler(this.panelPadre, puntajeParcial).handle(null);
+                new CambioLayoutEventHandler(this.panelPadre, puntajeParcial).handle(null);
             }
         });
-        new CambioEscenaEventHandler(this.panelPadre, previaPregunta).handle(null);
+        new CambioLayoutEventHandler(this.panelPadre, previaPregunta).handle(null);
 
     }
 }
