@@ -51,7 +51,7 @@ public class Kahoot {
 
         modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego));
         modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas));
-        modoRespuestas.cuandoFinaliceEjecutar(new KahootReiniciarEventHandler(this));
+        modoRespuestas.cuandoFinaliceEjecutar(new KahootReiniciarEventHandler(this, reproductor));
 
         modoPreparacion.iniciar();
         this.reproductor.play();
