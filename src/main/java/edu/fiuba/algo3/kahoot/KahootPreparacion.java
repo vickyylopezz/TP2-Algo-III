@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.kahoot;
 
-import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
+import edu.fiuba.algo3.eventos.kahoot.CambioLayoutEventHandler;
 import edu.fiuba.algo3.modelo.comodines.Exclusividad;
 import edu.fiuba.algo3.modelo.comodines.Multiplicador;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
@@ -15,7 +15,6 @@ import edu.fiuba.algo3.vista.escenas.preparacion.EditorJugadoresLayout;
 import edu.fiuba.algo3.vista.escenas.preparacion.EditorPreguntasLayout;
 import edu.fiuba.algo3.vista.escenas.preparacion.IniciarJuegoLayout;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -39,22 +38,22 @@ public class KahootPreparacion extends KahootModo {
         EditorJugadoresLayout editorJugadores = new EditorJugadoresLayout(this.jugadores);
         IniciarJuegoLayout iniciarJuego = new IniciarJuegoLayout();
 
-        bienvenida.eventoBotonPrincipal(new CambioEscenaEventHandler(this.panelPadre, editorJugadores));
+        bienvenida.eventoBotonPrincipal(new CambioLayoutEventHandler(this.panelPadre, editorJugadores));
         bienvenida.eventoSiguiente(
-                new CambioEscenaEventHandler(this.panelPadre, editorPreguntas),
+                new CambioLayoutEventHandler(this.panelPadre, editorPreguntas),
                 "Preguntas"
         );
 
-        editorPreguntas.eventoAnterior(new CambioEscenaEventHandler(this.panelPadre, bienvenida));
-        editorPreguntas.eventoSiguiente(new CambioEscenaEventHandler(this.panelPadre, editorJugadores));
+        editorPreguntas.eventoAnterior(new CambioLayoutEventHandler(this.panelPadre, bienvenida));
+        editorPreguntas.eventoSiguiente(new CambioLayoutEventHandler(this.panelPadre, editorJugadores));
 
-        editorJugadores.eventoAnterior(new CambioEscenaEventHandler(this.panelPadre, bienvenida));
-        editorJugadores.eventoSiguiente(new CambioEscenaEventHandler(this.panelPadre, iniciarJuego));
+        editorJugadores.eventoAnterior(new CambioLayoutEventHandler(this.panelPadre, bienvenida));
+        editorJugadores.eventoSiguiente(new CambioLayoutEventHandler(this.panelPadre, iniciarJuego));
 
-        iniciarJuego.eventoAnterior(new CambioEscenaEventHandler(this.panelPadre, editorJugadores));
+        iniciarJuego.eventoAnterior(new CambioLayoutEventHandler(this.panelPadre, editorJugadores));
         iniciarJuego.eventoBotonPrincipal(this.eventoSalida);
 
-        new CambioEscenaEventHandler(this.panelPadre, bienvenida).handle(null);
+        new CambioLayoutEventHandler(this.panelPadre, bienvenida).handle(null);
     }
 
     private void agregarComodines() {

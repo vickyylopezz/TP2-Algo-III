@@ -7,12 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-public class CambioEscenaEventHandler implements EventHandler<ActionEvent> {
+public class CambioLayoutEventHandler implements EventHandler<ActionEvent> {
 
     private final Pane panelPadre;
     private final BaseLayout layout;
 
-    public CambioEscenaEventHandler(Pane panelPadre, BaseLayout layout) {
+    public CambioLayoutEventHandler(Pane panelPadre, BaseLayout layout) {
         this.panelPadre = panelPadre;
         this.layout = layout;
     }

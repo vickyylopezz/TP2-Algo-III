@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.kahoot;
 
-import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
+import edu.fiuba.algo3.eventos.kahoot.CambioLayoutEventHandler;
 import edu.fiuba.algo3.modelo.juego.Juego;
 import edu.fiuba.algo3.modelo.juego.Jugador;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
@@ -22,6 +22,6 @@ public class KahootResultados extends KahootModo {
         UltimaLayout finalizacion = new UltimaLayout(this.jugadores, juego);
         finalizacion.eventoSiguiente(this.eventoSalida,"Volver a Jugar");
 
-        new CambioEscenaEventHandler(this.panelPadre, finalizacion).handle(null);
+        new CambioLayoutEventHandler(this.panelPadre, finalizacion).handle(null);
     }
 }

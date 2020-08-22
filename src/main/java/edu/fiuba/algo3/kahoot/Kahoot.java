@@ -65,6 +65,7 @@ public class Kahoot {
 
         StackPane raiz = new StackPane();
 
+        this.stage.setTitle("Kahoot");
         this.stage.setMinWidth(1280);
         this.stage.setMinHeight(720);
         this.stage.setScene(new Scene(new StackPane(raiz, reproductorVista)));
@@ -75,9 +76,13 @@ public class Kahoot {
 
     public void reiniciar() {
         this.reproductor.stop();
+        this.stage.close();
         this.raiz = this.crearEscena();
+        this.stage.setFullScreenExitHint("");
 
         this.preguntas = new ArrayList<>();
         this.jugadores = new ArrayList<>();
+
+        this.iniciar();
     }
 }
