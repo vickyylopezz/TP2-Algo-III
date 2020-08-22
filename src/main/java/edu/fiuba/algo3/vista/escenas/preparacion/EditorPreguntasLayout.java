@@ -33,6 +33,7 @@ public class EditorPreguntasLayout extends BaseLayout {
         CajaVista caja = new CajaVista();
 
         CabeceraCajaVista cabecera = new CabeceraCajaVista("Seleccionar las Preguntas");
+        cabecera.setPadding(new Insets(0, 50, 0, 50));
 
         BotonCuadradoVista botonCargarJson = new BotonCuadradoVista("Cargar Json");
         botonCargarJson.setOnAction(new CargarJsonPreguntasEventHandler(stage, preguntas));
