@@ -12,8 +12,8 @@ public class ContenedorSonido extends HBox {
         BotonMutearVista botonMutear = new BotonMutearVista(reproductor);
         BotonDesmutearVista botonDesmutear = new BotonDesmutearVista(reproductor);
 
-        botonMutear.setOnAction(e-> reproductor.stop());
-        botonDesmutear.setOnAction(e-> reproductor.play());
+        botonMutear.setOnAction(e-> reproductor.setMute(true));
+        botonDesmutear.setOnAction(e-> reproductor.setMute(false));
 
         this.setSpacing(10);
         this.setPadding(new Insets(20));

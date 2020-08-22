@@ -13,6 +13,8 @@ public class Resources {
     static public String IconoFlechaIzquierda = "atras.png";
     static public String IconoJugadorBlanco = "jugador.png";
     static public String musicaKahoot = "Kahoot.wav";
+    static public String musicaPregunta = "pregunta1.wav";
+    static public String musicaRespuesta = "gong.wav";
     static public String IconoMute = "mute.png";
     static public String IconoSonido = "sonido.png";
     static public String FondoLadrillo = "fondo.png";
@@ -22,6 +24,8 @@ public class Resources {
     public static String IconoFlechaIzquierdaRuta() { return Ruta + Iconos + IconoFlechaIzquierda; }
     public static String IconoJugadorBlancoRuta() { return Ruta + Iconos + IconoJugadorBlanco; }
     public static String MusicaKahootRuta(){return Ruta + musicaKahoot;}
+    public static String MusicaPreguntaRuta(){return Ruta + musicaPregunta;}
+    public static String MusicaRespuestaRuta(){return Ruta + musicaRespuesta;}
     public static String IconoMuteRuta(){return Ruta + Iconos + IconoMute;}
     public static String IconoSonidoRuta(){return Ruta + Iconos + IconoSonido;}
     public static String IconoCoronaRuta(){return Ruta + Iconos + IconoCorona;}

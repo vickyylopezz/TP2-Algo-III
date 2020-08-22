@@ -43,7 +43,7 @@ public class Kahoot {
                 this.stage, this.raiz, this.preguntas, this.jugadores
         );
         KahootModo modoJuego = new KahootJuego(
-                this.stage, this.raiz, this.preguntas, this.jugadores
+                this.stage, this.raiz, this.preguntas, this.jugadores, this.reproductor
         );
         KahootModo modoRespuestas = new KahootResultados(
                 this.stage, this.raiz, this.preguntas, this.jugadores
