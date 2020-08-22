@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.vista.escenas.controlador;
 
 import edu.fiuba.algo3.eventos.juego.SeleccionarComodinEventHandler;
+import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
 import edu.fiuba.algo3.modelo.comodines.Comodin;
 import edu.fiuba.algo3.modelo.juego.Jugada;
 import edu.fiuba.algo3.modelo.juego.Jugador;
@@ -40,7 +41,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class ControladorEscenas extends BaseLayout {
-    private Stage stage;
+    private Pane panelPadre;
     private VBox topBar = new VBox();
     private BorderPane sideBar = new BorderPane();
     private VistaPregunta vista;
@@ -48,8 +49,8 @@ public class ControladorEscenas extends BaseLayout {
 
     private Timeline timeline;
 
-    public ControladorEscenas(Stage stage) {
-        this.stage = stage;
+    public ControladorEscenas(Pane panelPadre) {
+        this.panelPadre = panelPadre;
     }
 
     public void crearEscena(Jugada jugada) {
@@ -106,9 +107,8 @@ public class ControladorEscenas extends BaseLayout {
 
         anchorPane.getChildren().addAll(sideBar, topBar, vista);
 
-        //stage.setScene(new Scene(anchorPane, 1280,800));
-        Scene escenaPrincipal = stage.getScene();
-        escenaPrincipal.setRoot(anchorPane);
+        this.panelPadre.getChildren().clear();
+        this.panelPadre.getChildren().add(anchorPane);
     }
 
     public ArrayList<Opcion> obtenerOpciones(Pregunta pregunta) {
@@ -119,7 +119,6 @@ public class ControladorEscenas extends BaseLayout {
         return opciones;
     }
 
-    public Stage getStage() { return this.stage; }
     public VistaPregunta getVista() { return this.vista; }
 
     public void eventoSiguiente(EventHandler<ActionEvent> evento) {

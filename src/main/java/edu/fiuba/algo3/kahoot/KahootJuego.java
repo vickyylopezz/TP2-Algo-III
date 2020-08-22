@@ -47,7 +47,7 @@ public class KahootJuego extends KahootModo {
         partida.siguienteTurno();
 
         PreviaPreguntaLayout previaPregunta = new PreviaPreguntaLayout(jugada);
-        ControladorEscenas controlador = new ControladorEscenas(stage);
+        ControladorEscenas controlador = new ControladorEscenas(this.panelPadre);
 
         previaPregunta.eventoSiguiente((event) -> controlador.crearEscena(jugada));
 
