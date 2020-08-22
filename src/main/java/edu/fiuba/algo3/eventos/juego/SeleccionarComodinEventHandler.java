@@ -32,14 +32,19 @@ public class SeleccionarComodinEventHandler implements EventHandler<ActionEvent>
     public void handle(ActionEvent actionEvent) {
         try { this.jugada.seleccionarComodin(this.comodin);
         } catch (JugadorError | ComodinError error) {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Comodín Inválido");
-            alert.setHeaderText("El comodín no puede aplicarse a esta pregunta");
-            alert.getDialogPane().setPrefWidth(500);
-            alert.showAndWait();
+            this.mensajeAlerta(error.getMessage());
             return;
         }
         for (Node bot: this.botones){ bot.setDisable(false); }
         boton.setDisable(true);
+    }
+
+    private void mensajeAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING);
+        alert.setTitle("Movimiento invalido de comodin");
+        alert.setHeaderText("El comodín no puede aplicarse a esta pregunta");
+        alert.setContentText(mensaje);
+        alert.getDialogPane().setPrefWidth(500);
+        alert.showAndWait();
     }
 }
