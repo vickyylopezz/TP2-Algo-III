@@ -59,12 +59,15 @@ public class KahootJuego extends KahootModo {
         ControladorVistaJuego controlador = new ControladorVistaJuego(this.panelPadre);
 
         previaPregunta.eventoSiguiente((event) -> {
-            cambiarCancion(Resources.MusicaPreguntaRuta(), false);
+            if (partida.existeTurno()) {
+                cambiarCancion(Resources.MusicaPreguntaJ1Ruta(), false);
+            } else {
+                cambiarCancion(Resources.MusicaPreguntaJ2Ruta(), false);
+            }
             controlador.crearEscena(jugada);
         });
 
         controlador.eventoSiguiente((event) -> {
-            // Obtengo las respuestas del usuario
             cambiarCancion(Resources.MusicaRespuestaRuta(), false);
             controlador.procesarJugada(event.getSource(), jugada);
 
@@ -90,12 +93,13 @@ public class KahootJuego extends KahootModo {
     public void cambiarCancion(String resource, boolean loop){
         ((StackPane)stage.getScene().getRoot()).getChildren().remove(1);
 
-        boolean playback = reproductor.isMute();
+        boolean mute = reproductor.isMute();
 
         reproductor.stop();
         reproductor = new MediaPlayer(new Media(new File(resource).toURI().toString()));
         if (loop) { reproductor.setOnEndOfMedia(() -> reproductor.seek(Duration.ZERO)); }
-        if (!playback) { reproductor.play(); } else { reproductor.setMute(true); }
+        if (mute) { reproductor.setMute(true); }
+        reproductor.play();
 
         ContenedorSonido nuevoContenedor = new ContenedorSonido(reproductor);
         nuevoContenedor.setPickOnBounds(false);

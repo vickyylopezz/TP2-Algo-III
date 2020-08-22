@@ -12,7 +12,7 @@ public class CajaVista extends BorderPane {
 
     private void cargarEstilo() {
         String estilo = "-fx-border-radius: 5;";
-        estilo += "-fx-background-radius: 50;";
+        estilo += "-fx-background-radius: 20;";
         estilo += "-fx-border-width: 0;";
         estilo += "-fx-background-color: white;";
         this.setStyle(estilo);
