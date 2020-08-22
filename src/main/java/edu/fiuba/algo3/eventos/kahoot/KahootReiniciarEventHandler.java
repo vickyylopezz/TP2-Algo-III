@@ -8,17 +8,13 @@ import javafx.scene.media.MediaPlayer;
 public class KahootReiniciarEventHandler implements EventHandler<ActionEvent> {
 
     private final Kahoot kahoot;
-    private final MediaPlayer reproductor;
 
-    public KahootReiniciarEventHandler(Kahoot kahoot, MediaPlayer reproductor) {
-        this.reproductor = reproductor;
+    public KahootReiniciarEventHandler(Kahoot kahoot) {
         this.kahoot = kahoot;
     }
 
     @Override
     public void handle(ActionEvent actionEvent) {
-        this.reproductor.setMute(true);
-        this.reproductor.stop();
         this.kahoot.reiniciar();
     }
 }

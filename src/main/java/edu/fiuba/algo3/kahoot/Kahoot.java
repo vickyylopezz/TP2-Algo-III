@@ -44,7 +44,7 @@ public class Kahoot {
         KahootModo modoPreparacion = new KahootPreparacion(
                 this.stage, this.raiz, this.preguntas, this.jugadores
         );
-        KahootModo modoJuego = new KahootJuego(
+        KahootJuego modoJuego = new KahootJuego(
                 this.stage, this.raiz, this.preguntas, this.jugadores, this.reproductor
         );
         KahootModo modoRespuestas = new KahootResultados(
@@ -54,7 +54,7 @@ public class Kahoot {
         modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego));
         modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas));
         modoRespuestas.cuandoFinaliceEjecutar(e -> {
-            this.reproductor = ((KahootJuego) modoJuego).getReproductor();
+            this.reproductor = modoJuego.getReproductor();
             new KahootReiniciarEventHandler(this).handle(null);
         });
 
@@ -79,7 +79,6 @@ public class Kahoot {
     }
 
     public void reiniciar() {
-
         this.preguntas = new ArrayList<>();
         this.jugadores = new ArrayList<>();
 
