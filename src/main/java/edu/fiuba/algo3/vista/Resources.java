@@ -18,8 +18,7 @@ public class Resources {
     static public String musicaRespuesta = "gong.wav";
     static public String IconoMute = "mute.png";
     static public String IconoSonido = "sonido.png";
-    static public String FondoLadrillo = "fondo.png";
-    static public String IconoCorona = "corona.png";
+    static public String FondoPrincipal = "fondo.png";
 
     public static String IconoFlechaDerechaRuta() { return Ruta + Iconos + IconoFlechaDerecha; }
     public static String IconoFlechaIzquierdaRuta() { return Ruta + Iconos + IconoFlechaIzquierda; }
@@ -30,10 +29,9 @@ public class Resources {
     public static String MusicaRespuestaRuta(){return Ruta + musicaRespuesta;}
     public static String IconoMuteRuta(){return Ruta + Iconos + IconoMute;}
     public static String IconoSonidoRuta(){return Ruta + Iconos + IconoSonido;}
-    public static String IconoCoronaRuta(){return Ruta + Iconos + IconoCorona;}
 
     public static String DataPreguntas = "Preguntas.json";
     public static String RutaDataPreguntas() { return Ruta + DataPreguntas; }
 
-    public static String FondoPrincipalRuta() { return "file:" + Ruta + FondoLadrillo; }
+    public static String FondoPrincipalRuta() { return "file:" + Ruta + FondoPrincipal; }
 }
