@@ -1,9 +1,21 @@
 package edu.fiuba.algo3.vista.componentes.textos;
 
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
-public class SubTitulo extends Texto {
+public class SubTitulo extends Label {
+
+    public static SubTitulo Negrita(String titulo) {
+        SubTitulo texto = new SubTitulo(titulo);
+        texto.setFont(Font.font(
+                texto.getFont().getName(),
+                FontWeight.BOLD,
+                texto.getFont().getSize()
+        ));
+        return texto;
+    }
 
     public SubTitulo() {
         super();
@@ -21,6 +33,6 @@ public class SubTitulo extends Texto {
     }
 
     private void cargarEstilo() {
-        this.setFont(new Font(this.getFont().getName(), 18));
+        this.setFont(new Font("Open Sans", 20));
     }
 }

@@ -1,116 +1,72 @@
 package edu.fiuba.algo3.vista.componentes;
 
+import edu.fiuba.algo3.eventos.preparacion.editorJugadores.ActualizadorVistaJugador;
+import edu.fiuba.algo3.eventos.preparacion.editorJugadores.CambiarNombreJugadorListener;
+import edu.fiuba.algo3.eventos.preparacion.editorJugadores.JugadorObservable;
+import edu.fiuba.algo3.vista.CargadorResources;
 import edu.fiuba.algo3.vista.Resources;
+import edu.fiuba.algo3.vista.componentes.contenedores.CajaVista;
+import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;
+import edu.fiuba.algo3.vista.componentes.textos.SubTitulo;
+import edu.fiuba.algo3.vista.componentes.textos.Texto;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
-import javafx.scene.Node;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+public class JugadorVista extends CajaVista {
 
-public class JugadorVista {
+    private MiniTexto notifiacion;
 
-    private final String titulo;
-    private Node nodo;
-    private TextField texto;
-    private Label etiqueta = new Label();
+    public JugadorVista(JugadorObservable jugador, Integer numeroJugador) {
+        jugador.agregarObservador(new ActualizadorVistaJugador(this));
 
-    public JugadorVista(String titulo) {
-        this.titulo = titulo;
-
+        this.crearEstructura(jugador, numeroJugador);
         this.aplicarEstilo();
+
+        this.desactivarNotificacion();
+    }
+
+    public void desactivarNotificacion() { this.notifiacion.setVisible(false); }
+
+    public void activarNorificacion(String mensaje) {
+        this.notifiacion.setText(mensaje);
+        this.notifiacion.setVisible(true);
+    }
+
+    private void crearEstructura(JugadorObservable jugador, Integer numeroJugador) {
+        Texto titulo = Texto.Negrita("JUGADOR " + numeroJugador);
+        titulo.setStyle("-fx-text-fill: #9463EB");
+
+        ImageView imagenJugador = new ImageView(
+                CargadorResources.obtenerImagen(Resources.IconoJugadorBlancoRuta())
+        );
+        imagenJugador.setPreserveRatio(true);
+        imagenJugador.setFitWidth(100);
+        Group contenedorImagen = new Group(imagenJugador);
+
+        TextField inputNombre = new TextField();
+        inputNombre.setPromptText("Nombre del jugador ...");
+        inputNombre.textProperty().addListener(new CambiarNombreJugadorListener(jugador));
+
+        this.notifiacion = new MiniTexto();
+        this.notifiacion.setTextFill(Color.RED);
+        this.notifiacion.setStyle("-fx-font-weight: bold;");
+
+        VBox contenedor = new VBox(titulo, contenedorImagen, inputNombre, this.notifiacion);
+        contenedor.setAlignment(Pos.CENTER);
+        contenedor.setSpacing(20);
+        contenedor.setPadding(new Insets(20));
+
+        this.setCenter(contenedor);
     }
 
     private void aplicarEstilo() {
-        VBox contenedor = new VBox();
-        contenedor.setPadding(new Insets(30));
-        contenedor.setSpacing(20);
-        contenedor.setAlignment(Pos.CENTER);
-
-        contenedor.getChildren().addAll(
-                this.etiqueta(),
-                this.texto()
-        );
-
-        this.nodo = contenedor;
-    }
-
-    private Node texto() {
-        this.texto = new TextField();
-        texto.setPromptText("Ingresar nombre..");
-        texto.setStyle("-fx-font-size: 18");
-
-        this.etiqueta = new Label();
-        etiqueta.setStyle("-fx-font-size: 14");
-
-        VBox vbox = new VBox(10);
-
-        vbox.getChildren().addAll(texto, etiqueta);
-        vbox.setAlignment(Pos.CENTER_LEFT);
-
-        return vbox;
-    }
-
-    public boolean esInvalido() {
-        return (this.texto.getText().trim().equals(""));
-    }
-
-    public TextField obtenerTexto(){
-        return this.texto;
-    }
-
-    private Node etiqueta() {
-        VBox boxJugador = new VBox();
-        String estilo = "-fx-border-radius: 2;";
-        estilo += "-fx-border-color: grey;";
-        estilo += "-fx-background-radius: 2;";
-        estilo += "-fx-background-color: white;";
-        boxJugador.setStyle(estilo);
-
-        Group contenedorIcono = new Group();
-        try {
-            FileInputStream stream = new FileInputStream(Resources.IconoJugadorBlancoRuta());
-            ImageView icono = new ImageView(new Image(stream));
-            icono.setPreserveRatio(true);
-            icono.setFitHeight(150);
-
-            contenedorIcono.getChildren().add(icono);
-        } catch (FileNotFoundException e) { e.printStackTrace(); }
-
-        boxJugador.getChildren().add(contenedorIcono);
-        boxJugador.setAlignment(Pos.BOTTOM_CENTER);
-        boxJugador.setMaxHeight(60);
-        boxJugador.setMaxWidth(90);
-        boxJugador.setPadding(new Insets(10));
-
-        Label texto = new Label(this.titulo);
-        texto.setStyle("-fx-text-fill: #9463EB; -fx-font-size: 25; -fx-font-weight: bold");
-
-        VBox vbox = new VBox(10);
-
-        vbox.getChildren().addAll(texto, boxJugador);
-        vbox.setAlignment(Pos.CENTER);
-        return vbox;
-    }
-
-    public Node obtenerNodo() {
-        return this.nodo;
-    }
-
-    public void validarJugadorVista() {
-        this.etiqueta.setText("Debe ingresar un nombre");
-        this.etiqueta.setTextFill(Color.web("#FF0000"));
-        this.obtenerTexto().requestFocus();
-    }
-
-    public void confirmarJugadorVista() {
-        this.etiqueta.setText("");
+        this.setPadding(new Insets(5));
     }
 }

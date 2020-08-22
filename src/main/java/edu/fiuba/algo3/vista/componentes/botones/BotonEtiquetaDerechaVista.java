@@ -5,12 +5,14 @@ import edu.fiuba.algo3.vista.Resources;
 import edu.fiuba.algo3.vista.Tema;
 import edu.fiuba.algo3.vista.componentes.contenedores.EtiquetaVista;
 import edu.fiuba.algo3.vista.componentes.textos.MiniTexto;
+import edu.fiuba.algo3.vista.componentes.textos.Texto;
 import javafx.beans.property.ObjectProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 public class BotonEtiquetaDerechaVista extends StackPane {
 
@@ -18,7 +20,7 @@ public class BotonEtiquetaDerechaVista extends StackPane {
     private BotonCircularVista boton;
 
     public BotonEtiquetaDerechaVista(String titulo) {
-        this.etiqueta = new EtiquetaVista(new MiniTexto(titulo));
+        this.etiqueta = new EtiquetaVista(Texto.Negrita(titulo));
         this.boton = new BotonCircularVista(new ImageView(
                 CargadorResources.obtenerImagen(Resources.IconoFlechaIzquierdaRuta())
         ));
@@ -40,4 +42,14 @@ public class BotonEtiquetaDerechaVista extends StackPane {
     public EventHandler<ActionEvent> getOnAction() { return this.boton.getOnAction(); }
 
     public void setOnAction(EventHandler<ActionEvent> evento) { this.boton.setOnAction(evento); }
+
+    public void activar() {
+        this.boton.activar();
+        this.etiqueta.setVisible(true);
+    }
+
+    public void desactivar() {
+        this.boton.desactivar();
+        this.etiqueta.setVisible(false);
+    }
 }

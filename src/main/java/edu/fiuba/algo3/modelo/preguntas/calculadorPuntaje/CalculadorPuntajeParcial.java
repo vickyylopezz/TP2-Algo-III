@@ -2,8 +2,8 @@ package edu.fiuba.algo3.modelo.preguntas.calculadorPuntaje;
 
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.modelo.util.punto.Puntaje;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
+import edu.fiuba.algo3.modelo.util.punto.PuntoExacto;
 
 import java.util.ArrayList;
 
@@ -18,9 +18,9 @@ public class CalculadorPuntajeParcial implements CalculadorPuntaje {
 
     @Override
     public Punto calcular(Pregunta pregunta, ArrayList<Opcion> opciones) {
-        Puntaje puntaje = new Puntaje();
+        PuntoExacto puntaje = new PuntoExacto();
         for (Opcion opcion: opciones) {
-            puntaje.agregarPunto(opcion.obtenerPunto());
+            puntaje.agregarValor(opcion.obtenerPunto());
         }
         return puntaje;
     }

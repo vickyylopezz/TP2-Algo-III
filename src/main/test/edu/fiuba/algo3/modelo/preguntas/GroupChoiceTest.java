@@ -1,21 +1,18 @@
 package edu.fiuba.algo3.modelo.preguntas;
 
 import edu.fiuba.algo3.modelo.excepciones.preguntas.PreguntaError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.GroupChoice;
-import edu.fiuba.algo3.modelo.preguntas.groupChoice.Grupo;
+import edu.fiuba.algo3.modelo.preguntas.opcion.Grupo;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class GroupChoiceTest {
 
     @Test
-    public void GroupChoiceAsignaPuntosAJugador() throws PreguntaError, PuntoError {
+    public void GroupChoiceAsignaPuntosAJugador() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Nombres");
@@ -38,7 +35,7 @@ public class GroupChoiceTest {
         opcionesElegidas.add(opciones.get(6));
         opcionesElegidas.add(opciones.get(9));
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerPunto().obtenerValor(),3);
+        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),3);
 
     }
 
@@ -96,7 +93,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void GroupChoiceAsignaPuntosAJugadores() throws PreguntaError, PuntoError {
+    public void GroupChoiceAsignaPuntosAJugadores() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Colores");
@@ -113,26 +110,26 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         ArrayList<Opcion> opcionesJugador1 = new ArrayList<>();
-        opcionesJugador1.add(opciones.get(0));
-        opcionesJugador1.add(opciones.get(2));
-        opcionesJugador1.add(opciones.get(5));
-        opcionesJugador1.add(opciones.get(6));
-        opcionesJugador1.add(opciones.get(9));
+        opcionesJugador1.add(opciones.get(0)); // correcta
+        opcionesJugador1.add(opciones.get(2)); // correcta
+        opcionesJugador1.add(opciones.get(4)); // incorrecta
+        opcionesJugador1.add(opciones.get(7)); // correcta
+        opcionesJugador1.add(opciones.get(8)); // incorrecta
 
         ArrayList<Opcion> opcionesJugador2 = new ArrayList<>();
-        opcionesJugador2.add(opciones.get(1));
-        opcionesJugador2.add(opciones.get(3));
-        opcionesJugador2.add(opciones.get(4));
-        opcionesJugador2.add(opciones.get(7));
-        opcionesJugador2.add(opciones.get(8));
+        opcionesJugador2.add(opciones.get(1)); // incorrecta
+        opcionesJugador2.add(opciones.get(3)); // incorrecta
+        opcionesJugador2.add(opciones.get(5)); // correcta
+        opcionesJugador2.add(opciones.get(6)); // incorrecta
+        opcionesJugador2.add(opciones.get(9)); // correcta
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesJugador1).obtenerPunto().obtenerValor(),3);
-        assertEquals(pregunta.puntajeConOpciones(opcionesJugador2).obtenerPunto().obtenerValor(),2);
+        assertEquals(pregunta.puntajeConOpciones(opcionesJugador1).obtenerValor(),3);
+        assertEquals(pregunta.puntajeConOpciones(opcionesJugador2).obtenerValor(),2);
 
     }
 
     @Test
-    public void GroupChoiceNoSeAsignanPuntosAJugadorQueRespondeTodasMal() throws PreguntaError, PuntoError {
+    public void GroupChoiceNoSeAsignanPuntosAJugadorQueRespondeTodasMal() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Flores");
@@ -149,18 +146,18 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
-        opcionesElegidas.add(opciones.get(1));
-        opcionesElegidas.add(opciones.get(3));
-        opcionesElegidas.add(opciones.get(5));
-        opcionesElegidas.add(opciones.get(7));
-        opcionesElegidas.add(opciones.get(9));
+        opcionesElegidas.add(opciones.get(1)); // incorrecta
+        opcionesElegidas.add(opciones.get(3)); // incorrecta
+        opcionesElegidas.add(opciones.get(4)); // incorrecta
+        opcionesElegidas.add(opciones.get(6)); // incorrecta
+        opcionesElegidas.add(opciones.get(8)); // incorrecta
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerPunto().obtenerValor(),0);
+        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),0);
 
     }
 
     @Test
-    public void GroupChoiceAsignanTodosLosPuntosAJugadorQueRespondeTodasBien() throws PreguntaError, PuntoError {
+    public void GroupChoiceAsignanTodosLosPuntosAJugadorQueRespondeTodasBien() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Flores");
@@ -178,13 +175,13 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         ArrayList<Opcion> opcionesElegidas = new ArrayList<>();
-        opcionesElegidas.add(opciones.get(0));
-        opcionesElegidas.add(opciones.get(2));
-        opcionesElegidas.add(opciones.get(4));
-        opcionesElegidas.add(opciones.get(6));
-        opcionesElegidas.add(opciones.get(8));
+        opcionesElegidas.add(opciones.get(0)); // correcta
+        opcionesElegidas.add(opciones.get(2)); // correcta
+        opcionesElegidas.add(opciones.get(4)); // correcta
+        opcionesElegidas.add(opciones.get(7)); // correcta
+        opcionesElegidas.add(opciones.get(9)); // correcta
 
-        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerPunto().obtenerValor(),5);
+        assertEquals(pregunta.puntajeConOpciones(opcionesElegidas).obtenerValor(),5);
 
     }
 
@@ -196,7 +193,7 @@ public class GroupChoiceTest {
     }
 
     @Test
-    public void GroupChoiceOpcionesCorrectasSonLasAgregadas() throws PreguntaError, PuntoError {
+    public void GroupChoiceOpcionesCorrectasSonLasAgregadas() throws PreguntaError {
         GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
 
         pregunta.definirGrupo("Flores");
@@ -213,15 +210,99 @@ public class GroupChoiceTest {
         ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
 
         ArrayList<Opcion> opcionesCorrectas = new ArrayList<>();
-        opcionesCorrectas.add(opciones.get(0));
-        opcionesCorrectas.add(opciones.get(2));
-        opcionesCorrectas.add(opciones.get(4));
-        opcionesCorrectas.add(opciones.get(6));
-        opcionesCorrectas.add(opciones.get(8));
-        opcionesCorrectas.add(opciones.get(10));
+        opcionesCorrectas.add(opciones.get(0)); // correcta
+        opcionesCorrectas.add(opciones.get(2)); // correcta
+        opcionesCorrectas.add(opciones.get(4)); // correcta
+        opcionesCorrectas.add(opciones.get(7)); // correcta
+        opcionesCorrectas.add(opciones.get(9)); // correcta
+        opcionesCorrectas.add(opciones.get(11)); // correcta
 
         assertTrue(pregunta.opcionesCorrectas(opcionesCorrectas));
 
+    }
+
+    @Test
+    public void opcionesSeleccionablesSinSeleccionarNingunaDevuelveTodasLasOpciones() throws PreguntaError {
+        GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
+
+        pregunta.definirGrupo("Flores");
+        pregunta.definirGrupo("Animales");
+
+        ArrayList<Grupo> grupos = pregunta.obtenerGrupos();
+
+        pregunta.agregarOpcion(grupos.get(0),"Margarita");
+        pregunta.agregarOpcion(grupos.get(0),"Rosa");
+        pregunta.agregarOpcion(grupos.get(0),"Jazmin");
+
+        pregunta.agregarOpcion(grupos.get(1),"Perro");
+        pregunta.agregarOpcion(grupos.get(1),"Gato");
+        pregunta.agregarOpcion(grupos.get(1),"Conejo");
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        assertEquals(opciones, pregunta.opcionesSeleccionables(new ArrayList<>()));
+    }
+
+    @Test
+    public void opcionesSeleccionablesSeleccionandoUnaDevuelveTodasLasOpcionesMenosDos() throws PreguntaError {
+        GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
+
+        pregunta.definirGrupo("Flores");
+        pregunta.definirGrupo("Animales");
+
+        ArrayList<Grupo> grupos = pregunta.obtenerGrupos();
+
+        pregunta.agregarOpcion(grupos.get(0),"Margarita");
+        pregunta.agregarOpcion(grupos.get(0),"Rosa");
+        pregunta.agregarOpcion(grupos.get(0),"Jazmin");
+
+        pregunta.agregarOpcion(grupos.get(1),"Perro");
+        pregunta.agregarOpcion(grupos.get(1),"Gato");
+        pregunta.agregarOpcion(grupos.get(1),"Conejo");
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        ArrayList<Opcion> seleccionadas = new ArrayList<>();
+        seleccionadas.add(opciones.get(0));
+
+        ArrayList<Opcion> opcionesValidas = pregunta.opcionesSeleccionables(seleccionadas);
+
+        // 10 = (6 opciones - 1 seleccionada) * 2 grupos
+        assertEquals(10, opcionesValidas.size());
+        assertFalse(opcionesValidas.contains(opciones.get(0)));
+        assertFalse(opcionesValidas.contains(opciones.get(1)));
+    }
+
+    @Test
+    public void opcionesSeleccionablesSeleccionandoTodasDevuelveArrayVacio() throws PreguntaError {
+        GroupChoice pregunta = new GroupChoice("Seleecione la opcion correcta de cada grupo");
+
+        pregunta.definirGrupo("Flores");
+        pregunta.definirGrupo("Animales");
+
+        ArrayList<Grupo> grupos = pregunta.obtenerGrupos();
+
+        pregunta.agregarOpcion(grupos.get(0),"Margarita");
+        pregunta.agregarOpcion(grupos.get(0),"Rosa");
+        pregunta.agregarOpcion(grupos.get(0),"Jazmin");
+
+        pregunta.agregarOpcion(grupos.get(1),"Perro");
+        pregunta.agregarOpcion(grupos.get(1),"Gato");
+        pregunta.agregarOpcion(grupos.get(1),"Conejo");
+
+        ArrayList<Opcion> opciones = pregunta.obtenerOpciones();
+
+        ArrayList<Opcion> seleccionadas = new ArrayList<>();
+        seleccionadas.add(opciones.get(0));
+        seleccionadas.add(opciones.get(3));
+        seleccionadas.add(opciones.get(4));
+        seleccionadas.add(opciones.get(6));
+        seleccionadas.add(opciones.get(9));
+        seleccionadas.add(opciones.get(10));
+
+        ArrayList<Opcion> opcionesValidas = pregunta.opcionesSeleccionables(seleccionadas);
+
+        assertEquals(0, opcionesValidas.size());
     }
 
 }

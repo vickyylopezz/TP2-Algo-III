@@ -11,8 +11,8 @@ public class Tema {
     static public Color ColorBotonPrincipalTexto = Tema.blanco;
     static public Color colorBotonPrincipalDesactivado = Tema.gris;
 
-    static public Color colorBotonSegundario = Tema.violeta;
-    static public Color ColorBotonSegundarioTexto = Tema.blanco;
+    static public Color colorBotonSegundario = Tema.blanco;
+    static public Color ColorBotonSegundarioTexto = Tema.violeta;
     static public Color colorBotonSegundarioDesactivado = Tema.gris;
 
     static public Color colorBotonTerceario = Tema.violeta;

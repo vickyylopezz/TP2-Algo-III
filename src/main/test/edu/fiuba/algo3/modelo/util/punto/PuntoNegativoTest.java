@@ -1,9 +1,7 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PuntoNegativoTest {
 
@@ -17,7 +15,7 @@ public class PuntoNegativoTest {
 
     // copiar
     @Test
-    public void copiarDevuelveUnPuntoConElMismoValor() throws PuntoError {
+    public void copiarDevuelveUnPuntoConElMismoValor(){
         PuntoNegativo punto = new PuntoNegativo();
 
         Punto copia = punto.copiar();
@@ -37,45 +35,38 @@ public class PuntoNegativoTest {
 
     // multiplicarPorFactor
     @Test
-    public void multiplicarPorFactorConFactorNegativoDevuelvePuntoConValorCero() throws PuntoError {
+    public void multiplicarPorFactorConFactorNegativoDevuelvePuntoConValorCero(){
         PuntoNegativo puntoNegativo = new PuntoNegativo();
 
         Punto punto = puntoNegativo.multiplicarPorFactor(-4);
 
-        assertEquals(0, punto.obtenerPunto().obtenerValor());
+        assertEquals(0, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConFactorCeroDevuelvePuntoConValorCero() throws PuntoError {
+    public void multiplicarPorFactorConFactorCeroDevuelvePuntoConValorCero(){
         PuntoNegativo puntoNegativo = new PuntoNegativo();
 
         Punto punto = puntoNegativo.multiplicarPorFactor(0);
 
-        assertEquals(0, punto.obtenerPunto().obtenerValor());
+        assertEquals(0, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConFactorDosDevuelveUnPuntoConElDobleDelValor() throws PuntoError {
+    public void multiplicarPorFactorConFactorDosDevuelveUnPuntoConElDobleDelValor(){
         PuntoNegativo puntoNegativo = new PuntoNegativo();
 
         Punto punto = puntoNegativo.multiplicarPorFactor(2);
 
-        assertEquals(-2, punto.obtenerPunto().obtenerValor());
+        assertEquals(-2, punto.obtenerValor());
     }
 
     @Test
-    public void multiplicarPorFactorConFactorGrandeDevuelveLoCorrecto() throws PuntoError {
+    public void multiplicarPorFactorConFactorGrandeDevuelveLoCorrecto(){
         PuntoNegativo puntoNegativo = new PuntoNegativo();
 
         Punto punto = puntoNegativo.multiplicarPorFactor(25);
 
-        assertEquals(-25, punto.obtenerPunto().obtenerValor());
-    }
-
-    @Test
-    public void obtenerPuntoDevuelveElMismoPuntos(){
-        PuntoNegativo punto = new PuntoNegativo();
-
-        assertEquals(punto,punto.obtenerPunto());
+        assertEquals(-25, punto.obtenerValor());
     }
 }

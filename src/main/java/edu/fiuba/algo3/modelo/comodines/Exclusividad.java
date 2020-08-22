@@ -2,7 +2,6 @@ package edu.fiuba.algo3.modelo.comodines;
 
 import edu.fiuba.algo3.modelo.excepciones.comodin.AplicacionDeComodinInvalidaError;
 import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.juego.Respuesta;
 
@@ -22,7 +21,7 @@ public class Exclusividad extends Comodin {
     }
 
     @Override
-    public void aplicarARespuestas(ArrayList<Respuesta> respuestas) throws PuntoError {
+    public void aplicarARespuestas(ArrayList<Respuesta> respuestas) {
         Respuesta respuestaCorrecta = null;
         for (Respuesta respuesta : respuestas) {
             if (!respuesta.esCorrecta()) continue;
@@ -32,4 +31,7 @@ public class Exclusividad extends Comodin {
         if (respuestaCorrecta != null) respuestaCorrecta.aplicarComodin(this);
             //respuesta.eliminarComodin(this);
     }
+
+    @Override
+    public String toString() { return "EXC"; }
 }

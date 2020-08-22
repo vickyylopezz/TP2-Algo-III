@@ -1,15 +1,15 @@
 package edu.fiuba.algo3.modelo.juego;
 
 import edu.fiuba.algo3.modelo.comodines.Comodin;
+import edu.fiuba.algo3.modelo.excepciones.comodin.ComodinError;
 import edu.fiuba.algo3.modelo.excepciones.jugador.JugadorError;
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
 import edu.fiuba.algo3.modelo.util.punto.Punto;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class JugadorTest {
 
@@ -23,6 +23,18 @@ public class JugadorTest {
         String nombre = carlos.nombre();
 
         assertEquals(nombre, "Carlos");
+    }
+
+    // cambiarNombre
+    @Test
+    public void cambiarNombreLeCambiaElNombreAlJugador() {
+        Jugador jugador = new Jugador("Carlos");
+
+        assertEquals("Carlos", jugador.nombre());
+
+        jugador.cambiarNombre("Maria");
+
+        assertEquals("Maria", jugador.nombre());
     }
 
     // obtenerRespuestas
@@ -220,7 +232,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void obtenerComodinesDevuelveUnArregloCopiadoDelQueContineElJugador() {
+    public void obtenerComodinesDevuelveUnArregloCopiadoDelQueContineElJugador() throws ComodinError {
         Comodin comodin1 = mock(Comodin.class);
         Comodin comodin2 = mock(Comodin.class);
         Comodin comodin3 = mock(Comodin.class);
@@ -241,7 +253,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void obtenerComodinesDevuelveLosComodinesAgregados() {
+    public void obtenerComodinesDevuelveLosComodinesAgregados() throws ComodinError {
         Comodin comodin1 = mock(Comodin.class);
         Comodin comodin2 = mock(Comodin.class);
         Comodin comodin3 = mock(Comodin.class);
@@ -261,7 +273,7 @@ public class JugadorTest {
 
     // agregarComodin
     @Test
-    public void agregarComodinGuardaElComodin() {
+    public void agregarComodinGuardaElComodin() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin = mock(Comodin.class);
@@ -273,7 +285,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarComodinQueYaFueAgregadoNoHaceNada() {
+    public void agregarComodinQueYaFueAgregadoNoHaceNada() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
         Comodin comodin = mock(Comodin.class);
 
@@ -291,7 +303,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarComodinNuloNoHaceNada() {
+    public void agregarComodinNuloNoHaceNada() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
         Comodin comodin = mock(Comodin.class);
 
@@ -309,7 +321,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void agregarVariosComodinesSeGuardanTodos() {
+    public void agregarVariosComodinesSeGuardanTodos() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
         Comodin comodin1 = mock(Comodin.class);
         Comodin comodin2 = mock(Comodin.class);
@@ -327,9 +339,19 @@ public class JugadorTest {
         assertTrue(comodines.contains(comodin3));
     }
 
+    @Test
+    public void agregarComodinDefinieElJugadorDelComodin() throws ComodinError {
+        Jugador carlos = new Jugador("Carlos");
+        Comodin comodin1 = mock(Comodin.class);
+
+        carlos.agregarComodin(comodin1);
+
+        verify(comodin1, times(1)).definirJugador(carlos);
+    }
+
     // sacarComodin
     @Test
-    public void sacarComodinSacaElComoinDeLosComodinesDelJugador() {
+    public void sacarComodinSacaElComoinDeLosComodinesDelJugador() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin = mock(Comodin.class);
@@ -342,7 +364,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void sacarComodinQueNoEstaEnLosComodinesDelJugadorNoHaceNada() {
+    public void sacarComodinQueNoEstaEnLosComodinesDelJugadorNoHaceNada() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin = mock(Comodin.class);
@@ -361,7 +383,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void sacarComodinNuloNoHaceNada() {
+    public void sacarComodinNuloNoHaceNada() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin = mock(Comodin.class);
@@ -379,7 +401,7 @@ public class JugadorTest {
     }
 
     @Test
-    public void sacarComodinSacaElComodinCorrecto() {
+    public void sacarComodinSacaElComodinCorrecto() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin1 = mock(Comodin.class);
@@ -402,17 +424,17 @@ public class JugadorTest {
 
     // puntajeTotal
     @Test
-    public void calcularPuntajeTotalSinRespuestasEsCero() throws PuntoError {
+    public void calcularPuntajeTotalSinRespuestasEsCero() {
         Jugador carlos = new Jugador("Carlos");
 
         Punto puntaje = carlos.puntajeTotal();
 
-        assertEquals(puntaje.obtenerPunto().obtenerValor(), 0);
+        assertEquals(puntaje.obtenerValor(), 0);
     }
 
     // validarComodin
     @Test
-    public void validarComodinLanzaExcepcionSiElComodinNoEstaDentroDeLosComodinesAgregados() {
+    public void validarComodinLanzaExcepcionSiElComodinNoEstaDentroDeLosComodinesAgregados() throws ComodinError {
         Jugador carlos = new Jugador("Carlos");
 
         Comodin comodin1 = mock(Comodin.class);

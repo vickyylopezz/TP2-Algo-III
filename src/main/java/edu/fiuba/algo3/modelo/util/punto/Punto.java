@@ -1,21 +1,20 @@
 package edu.fiuba.algo3.modelo.util.punto;
 
-import edu.fiuba.algo3.modelo.excepciones.punto.PuntoError;
+public abstract class Punto implements Cloneable {
+    protected Integer valor;
 
-//Componente
-public abstract class Punto {
-    abstract public Punto obtenerPunto() throws PuntoError;
-
-    abstract public Integer obtenerValor() throws PuntoError;
+    abstract public Integer obtenerValor();
 
     abstract public Punto copiar();
 
     public Punto multiplicarPorFactor(Integer factor) {
-        Puntaje puntaje = new Puntaje();
-        for (int i = 0; i < factor; i++) puntaje.agregarPunto(this.copiar());
+        PuntoExacto puntaje = new PuntoExacto();
+        for (int i = 0; i < factor; i++) puntaje.agregarValor(this.copiar());
         return puntaje;
     }
 
-
+    public boolean igual(Punto puntajeTotal)  {
+        return puntajeTotal.obtenerValor().equals(this.valor);
+    }
 }
 
