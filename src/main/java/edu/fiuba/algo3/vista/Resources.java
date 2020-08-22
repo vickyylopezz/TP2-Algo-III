@@ -12,10 +12,10 @@ public class Resources {
     static public String IconoFlechaDerecha = "adelante.png";
     static public String IconoFlechaIzquierda = "atras.png";
     static public String IconoJugadorBlanco = "jugador.png";
-    static public String musicaKahoot = "Kahoot.wav";
-    static public String musicaPreguntaJ1 = "pregunta1.wav";
-    static public String musicaPreguntaJ2 = "pregunta2.wav";
-    static public String musicaRespuesta = "gong.wav";
+    static public String musicaKahoot = "sonidos/Kahoot.wav";
+    static public String musicaPreguntaJ1 = "sonidos/pregunta1.wav";
+    static public String musicaPreguntaJ2 = "sonidos/pregunta2.wav";
+    static public String musicaRespuesta = "sonidos/gong.wav";
     static public String IconoMute = "mute.png";
     static public String IconoSonido = "sonido.png";
     static public String FondoPrincipal = "fondo.png";
