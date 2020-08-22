@@ -40,7 +40,7 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class ControladorEscenas extends BaseLayout {
+public class ControladorVistaJuego extends BaseLayout {
     private Pane panelPadre;
     private VBox topBar = new VBox();
     private BorderPane sideBar = new BorderPane();
@@ -49,7 +49,7 @@ public class ControladorEscenas extends BaseLayout {
 
     private Timeline timeline;
 
-    public ControladorEscenas(Pane panelPadre) {
+    public ControladorVistaJuego(Pane panelPadre) {
         this.panelPadre = panelPadre;
     }
 

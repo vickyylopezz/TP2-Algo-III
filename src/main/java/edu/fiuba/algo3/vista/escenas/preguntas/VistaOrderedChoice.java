@@ -3,7 +3,7 @@ package edu.fiuba.algo3.vista.escenas.preguntas;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
+import edu.fiuba.algo3.vista.escenas.controlador.ControladorVistaJuego;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -17,7 +17,7 @@ public class VistaOrderedChoice extends VistaPregunta {
     private int numeroClic = 0;
     private Button primero, segundo;
 
-    public VistaOrderedChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorEscenas controlador) {
+    public VistaOrderedChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorVistaJuego controlador) {
         super(preguntaActual, opciones, controlador);
 
         // COMPORTAMIENTO

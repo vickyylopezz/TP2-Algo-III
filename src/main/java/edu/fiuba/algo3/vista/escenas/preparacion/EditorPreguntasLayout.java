@@ -32,7 +32,7 @@ public class EditorPreguntasLayout extends BaseLayout {
         StackPane cuerpo = new StackPane();
         CajaVista caja = new CajaVista();
 
-        CabeceraCajaVista cabecera = new CabeceraCajaVista("Seleccione las Preguntas");
+        CabeceraCajaVista cabecera = new CabeceraCajaVista("Seleccionar las Preguntas");
 
         BotonCuadradoVista botonCargarJson = new BotonCuadradoVista("Cargar Json");
         botonCargarJson.setOnAction(new CargarJsonPreguntasEventHandler(stage, preguntas));
@@ -43,7 +43,7 @@ public class EditorPreguntasLayout extends BaseLayout {
         caja.setTop(cabecera);
         caja.setCenter(listadoPreguntas);
 
-        StackPane.setMargin(caja, new Insets(20));
+        StackPane.setMargin(caja, new Insets(50,50,100,50));
         cuerpo.getChildren().add(caja);
 
         return cuerpo;

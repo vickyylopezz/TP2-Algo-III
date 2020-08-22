@@ -91,6 +91,7 @@ public class PuntajeParcialLayout extends BaseLayout {
         HBox hbox = new HBox(200);
         hbox.getChildren().addAll(caja1, caja2);
         hbox.setAlignment(Pos.CENTER);
+        hbox.setPadding(new Insets(50));
 
         return hbox;
     }

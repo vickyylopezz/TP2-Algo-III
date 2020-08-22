@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.text.TextAlignment;
 
 public class PreviaPreguntaLayout extends BaseLayout {
 
@@ -22,20 +23,29 @@ public class PreviaPreguntaLayout extends BaseLayout {
     private Node crearCuerpo(Jugada jugada) {
         VBox vbox = new VBox(100);
         vbox.setPadding(new Insets(70));
+
         Label jLabelTipoPregunta = new Label(jugada.obtenerPregunta().obtenerTipo());
         jLabelTipoPregunta.setAlignment(Pos.CENTER);
+        jLabelTipoPregunta.setPrefSize(400,100);
         jLabelTipoPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 18; -fx-font-weight: bold");
 
-        TextArea tituloPregunta = new TextArea(jugada.tituloPregunta());
+        Label tituloPregunta = new Label(jugada.tituloPregunta());
         tituloPregunta.setStyle("-fx-text-fill: #9A31E1; -fx-font-size: 24; -fx-font-weight: bold;");
+        tituloPregunta.setPrefSize(1000,500);
+        tituloPregunta.setAlignment(Pos.CENTER);
+        tituloPregunta.setTextAlignment(TextAlignment.CENTER);
+        tituloPregunta.setPadding(new Insets(50));
         tituloPregunta.setWrapText(true);
-        tituloPregunta.setEditable(false);
-
-        CajaVista cajaVistaPregunta = new CajaVista();
-        cajaVistaPregunta.setCenter(tituloPregunta);
 
         CajaVista cajaVistaTipo = new CajaVista();
         cajaVistaTipo.setCenter(jLabelTipoPregunta);
+        cajaVistaTipo.setMaxSize(400, 100);
+
+        CajaVista cajaVistaPregunta = new CajaVista();
+        cajaVistaPregunta.setCenter(tituloPregunta);
+        cajaVistaPregunta.setMaxSize(1000, 500);
+
+
 
         vbox.getChildren().addAll(cajaVistaTipo, cajaVistaPregunta);
         vbox.setAlignment(Pos.CENTER);

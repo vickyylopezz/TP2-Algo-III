@@ -25,6 +25,8 @@ public class BienvenidaLayout extends BaseLayout {
         if (evento == null) this.cuerpo.getChildren().clear();
 
         BotonCuadradoVista boton = new BotonCuadradoVista("Crear Jugadores");
+        boton.setPrefSize(300,150);
+        boton.setStyle("-fx-font-size: 25px; -fx-font-weight: bolder");
         boton.setTextFill(Tema.ColorBotonSegundarioTexto);
         boton.setBackground(new Background(new BackgroundFill(
                 Tema.colorBotonSegundario,

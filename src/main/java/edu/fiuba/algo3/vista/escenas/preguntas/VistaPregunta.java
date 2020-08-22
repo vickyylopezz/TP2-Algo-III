@@ -3,25 +3,23 @@ package edu.fiuba.algo3.vista.escenas.preguntas;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
+import edu.fiuba.algo3.vista.escenas.controlador.ControladorVistaJuego;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.Collections;
 
 public abstract class VistaPregunta extends BorderPane {
-    protected ControladorEscenas controlador;
+    protected ControladorVistaJuego controlador;
     protected GridPane grid;
     protected ArrayList<BotonOpcionClasica> seleccion = new ArrayList<>();
 
     protected ArrayList<BotonOpcionClasica> botones = new ArrayList<>();
 
-    public VistaPregunta(Pregunta pregunta, ArrayList<Opcion> opciones, ControladorEscenas controlador) {
+    public VistaPregunta(Pregunta pregunta, ArrayList<Opcion> opciones, ControladorVistaJuego controlador) {
         super();
         this.controlador = controlador;
 

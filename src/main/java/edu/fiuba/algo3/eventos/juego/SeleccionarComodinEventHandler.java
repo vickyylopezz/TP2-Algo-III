@@ -33,8 +33,9 @@ public class SeleccionarComodinEventHandler implements EventHandler<ActionEvent>
         try { this.jugada.seleccionarComodin(this.comodin);
         } catch (JugadorError | ComodinError error) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Comodin Invalido");
-            alert.setHeaderText("El comodin no se puede aplicar a la pregunta");
+            alert.setTitle("Comodín Inválido");
+            alert.setHeaderText("El comodín no puede aplicarse a esta pregunta");
+            alert.getDialogPane().setPrefWidth(500);
             alert.showAndWait();
             return;
         }

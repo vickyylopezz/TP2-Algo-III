@@ -65,6 +65,8 @@ public class Kahoot {
 
         StackPane raiz = new StackPane();
 
+        this.stage.setMinWidth(1280);
+        this.stage.setMinHeight(720);
         this.stage.setScene(new Scene(new StackPane(raiz, reproductorVista)));
         this.stage.setMaximized(true);
 

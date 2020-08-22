@@ -3,12 +3,12 @@ package edu.fiuba.algo3.vista.escenas.preguntas;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionClasica;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
+import edu.fiuba.algo3.vista.escenas.controlador.ControladorVistaJuego;
 
 import java.util.ArrayList;
 
 public class VistaVerdaderoFalso extends VistaPregunta{
-    public VistaVerdaderoFalso(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorEscenas controlador) {
+    public VistaVerdaderoFalso(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorVistaJuego controlador) {
         super(preguntaActual, opciones, controlador);
 
         // COMPORTAMIENTO

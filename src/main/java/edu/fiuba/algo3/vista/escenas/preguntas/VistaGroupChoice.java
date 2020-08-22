@@ -8,7 +8,7 @@ import edu.fiuba.algo3.vista.componentes.botones.BotonCircularVista;
 import edu.fiuba.algo3.vista.componentes.botones.BotonOpcionGroup;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.modelo.preguntas.opcion.Opcion;
-import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
+import edu.fiuba.algo3.vista.escenas.controlador.ControladorVistaJuego;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -28,7 +28,7 @@ public class VistaGroupChoice extends VistaPregunta {
     private ArrayList<BotonOpcionGroup> seleccionIzquierda = new ArrayList<>();
     private ArrayList<BotonOpcionGroup> seleccionDerecha = new ArrayList<>();
 
-    public VistaGroupChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorEscenas controlador){
+    public VistaGroupChoice(Pregunta preguntaActual, ArrayList<Opcion> opciones, ControladorVistaJuego controlador){
         super(preguntaActual, opciones, controlador);
 
         this.grupos = ((GroupChoice)preguntaActual).obtenerGrupos();

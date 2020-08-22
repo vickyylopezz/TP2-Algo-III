@@ -21,6 +21,8 @@ public class IniciarJuegoLayout extends BaseLayout {
 
         String tituloBoton = "Iniciar Juego";
         BotonCuadradoVista boton = new BotonCuadradoVista(tituloBoton);
+        boton.setPrefSize(300,150);
+        boton.setStyle("-fx-font-size: 25px; -fx-font-weight: bolder");
         boton.setOnAction(evento);
 
         this.cuerpo.getChildren().add(boton);

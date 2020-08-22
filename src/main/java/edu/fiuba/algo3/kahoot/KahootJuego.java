@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.kahoot;
 
-import edu.fiuba.algo3.vista.escenas.controlador.ControladorEscenas;
+import edu.fiuba.algo3.vista.escenas.controlador.ControladorVistaJuego;
 import edu.fiuba.algo3.eventos.kahoot.CambioEscenaEventHandler;
 import edu.fiuba.algo3.modelo.juego.*;
 import edu.fiuba.algo3.vista.escenas.juego.PreviaPreguntaLayout;
@@ -47,7 +47,7 @@ public class KahootJuego extends KahootModo {
         partida.siguienteTurno();
 
         PreviaPreguntaLayout previaPregunta = new PreviaPreguntaLayout(jugada);
-        ControladorEscenas controlador = new ControladorEscenas(this.panelPadre);
+        ControladorVistaJuego controlador = new ControladorVistaJuego(this.panelPadre);
 
         previaPregunta.eventoSiguiente((event) -> controlador.crearEscena(jugada));
 
