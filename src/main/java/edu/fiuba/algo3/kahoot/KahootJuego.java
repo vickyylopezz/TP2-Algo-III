@@ -106,4 +106,8 @@ public class KahootJuego extends KahootModo {
 
         ((StackPane)stage.getScene().getRoot()).getChildren().add(1, nuevoContenedor);
     }
+
+    public MediaPlayer getReproductor() {
+        return reproductor;
+    }
 }

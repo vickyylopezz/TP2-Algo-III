@@ -24,16 +24,18 @@ public class Kahoot {
     private StackPane raiz;
     private ArrayList<Pregunta> preguntas;
     private ArrayList<Jugador> jugadores;
-    private final MediaPlayer reproductor;
+    private MediaPlayer reproductor;
 
     public Kahoot(Stage stage) {
         this.stage = stage;
+
         this.reproductor = new MediaPlayer(
                 new Media(new File(Resources.MusicaKahootRuta()).toURI().toString())
         );
         this.reproductor.setOnEndOfMedia(() -> reproductor.seek(Duration.ZERO));
-        this.raiz = this.crearEscena();
+        this.reproductor.play();
 
+        this.raiz = this.crearEscena();
         this.preguntas = new ArrayList<>();
         this.jugadores = new ArrayList<>();
     }
@@ -42,7 +44,7 @@ public class Kahoot {
         KahootModo modoPreparacion = new KahootPreparacion(
                 this.stage, this.raiz, this.preguntas, this.jugadores
         );
-        KahootModo modoJuego = new KahootJuego(
+        KahootJuego modoJuego = new KahootJuego(
                 this.stage, this.raiz, this.preguntas, this.jugadores, this.reproductor
         );
         KahootModo modoRespuestas = new KahootResultados(
@@ -51,10 +53,12 @@ public class Kahoot {
 
         modoPreparacion.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoJuego));
         modoJuego.cuandoFinaliceEjecutar(new KahootCambioModoEventHandler(modoRespuestas));
-        modoRespuestas.cuandoFinaliceEjecutar(new KahootReiniciarEventHandler(this));
+        modoRespuestas.cuandoFinaliceEjecutar(e -> {
+            this.reproductor = modoJuego.getReproductor();
+            new KahootReiniciarEventHandler(this).handle(null);
+        });
 
         modoPreparacion.iniciar();
-        this.reproductor.play();
         this.stage.show();
     }
 
@@ -75,11 +79,6 @@ public class Kahoot {
     }
 
     public void reiniciar() {
-        this.reproductor.stop();
-        this.stage.close();
-        this.raiz = this.crearEscena();
-        this.stage.setFullScreenExitHint("");
-
         this.preguntas = new ArrayList<>();
         this.jugadores = new ArrayList<>();
 

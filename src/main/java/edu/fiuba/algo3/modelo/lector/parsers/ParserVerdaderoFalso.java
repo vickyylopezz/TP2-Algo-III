@@ -29,11 +29,11 @@ public class ParserVerdaderoFalso implements ParserPregunta {
         if (opcionJson == null) {
             throw new LectorFormatoDePreguntaError("Falta atributo respuesta");
         }
-        boolean repuesta = opcionJson.getAsBoolean();
+        String respuesta = opcionJson.getAsString();
 
         String opcionCorrecta = "Verdadero";
         String opcionIncorrecta = "Falso";
-        if (!repuesta) {
+        if (respuesta.equals("Falso")) {
             opcionCorrecta = "Falso";
             opcionIncorrecta = "Verdadero";
         }
