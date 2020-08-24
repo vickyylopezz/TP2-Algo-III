@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.vista.escenas.preparacion;
 
-import edu.fiuba.algo3.eventos.preparacion.editorPreguntas.ActualizadorPreguntasListener;
 import edu.fiuba.algo3.eventos.preparacion.editorPreguntas.CargarJsonPreguntasEventHandler;
 import edu.fiuba.algo3.modelo.juego.Pregunta;
 import edu.fiuba.algo3.vista.componentes.botones.BotonCuadradoVista;
@@ -13,7 +12,6 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.layout.*;
-import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -22,7 +20,6 @@ public class EditorPreguntasLayout extends BaseLayout {
 
     public EditorPreguntasLayout(Stage stage, ArrayList<Pregunta> preguntas) {
         ObservableList<Pregunta> preguntasObserver = FXCollections.observableList(preguntas);
-        preguntasObserver.addListener(new ActualizadorPreguntasListener(preguntas));
 
         Node cuerpo = this.crearCuerpo(stage, preguntasObserver);
         this.setCenter(cuerpo);
